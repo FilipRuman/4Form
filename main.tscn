@@ -1,0 +1,71 @@
+[gd_scene load_steps=5 format=3 uid="uid://cobwm3cgpu0d0"]
+
+[ext_resource type="Script" uid="uid://naawr1uq2pqg" path="res://TCP/Tcp.cs" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://buux5h8054hrj" path="res://TCP/TcpParser.cs" id="2_1bvp3"]
+[ext_resource type="Script" uid="uid://dxjjdf3pa84ri" path="res://BikeController/BikeInput.cs" id="2_h2yge"]
+[ext_resource type="Script" uid="uid://cr18yvp41idcf" path="res://BikeUI/BikeUIMain.cs" id="3_1bvp3"]
+
+[node name="scene" type="Node3D"]
+
+[node name="Bike" type="Node3D" parent="."]
+
+[node name="Tcp" type="Node" parent="Bike" node_paths=PackedStringArray("tcpParser")]
+script = ExtResource("1_ig7tw")
+tcpParser = NodePath("TcpParser")
+
+[node name="TcpParser" type="Node" parent="Bike/Tcp" node_paths=PackedStringArray("bikeInput")]
+script = ExtResource("2_1bvp3")
+bikeInput = NodePath("../../BikeInput")
+
+[node name="BikeInput" type="Node" parent="Bike"]
+script = ExtResource("2_h2yge")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Bike"]
+
+[node name="BikeUIMain" type="Node" parent="Bike/CanvasLayer" node_paths=PackedStringArray("bikeInput", "cadenceLabel", "powerLabel", "fpsLabel")]
+script = ExtResource("3_1bvp3")
+bikeInput = NodePath("../../BikeInput")
+cadenceLabel = NodePath("../Panel/Main stats layout/Cadence")
+powerLabel = NodePath("../Panel/Main stats layout/Power")
+fpsLabel = NodePath("../FPS")
+
+[node name="FPS" type="Label" parent="Bike/CanvasLayer"]
+offset_right = 116.0
+offset_bottom = 28.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 20
+text = "FPS:"
+
+[node name="Panel" type="Panel" parent="Bike/CanvasLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -183.0
+offset_top = -40.0
+offset_right = 183.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 3
+
+[node name="Main stats layout" type="HBoxContainer" parent="Bike/CanvasLayer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Cadence" type="Label" parent="Bike/CanvasLayer/Panel/Main stats layout"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.913725, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "Cadence: 90"
+
+[node name="Power" type="Label" parent="Bike/CanvasLayer/Panel/Main stats layout"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.917647, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "Power: 150"

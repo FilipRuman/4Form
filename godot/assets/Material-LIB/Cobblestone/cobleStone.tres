@@ -1,0 +1,18 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://b8eum2mg7jl7r"]
+
+[ext_resource type="Shader" uid="uid://uby8kyedgpi8" path="res://shaders/triplanar texture.gdshader" id="1_h3oid"]
+[ext_resource type="Texture2D" uid="uid://uihlxu6qbhwg" path="res://assets/Material-LIB/Gravel/Gravel-B.png" id="2_2dfft"]
+[ext_resource type="Texture2D" uid="uid://djf5yqxs7qm1y" path="res://assets/Material-LIB/Gravel/Gravel-M.png" id="3_3svx8"]
+[ext_resource type="Texture2D" uid="uid://dd5qbidiv55mc" path="res://assets/Material-LIB/Gravel/Gravel-N.png" id="4_vpdvq"]
+[ext_resource type="Texture2D" uid="uid://cufcjstfuxoax" path="res://assets/Material-LIB/Gravel/Gravel-R.png" id="5_wr2wg"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_h3oid")
+shader_parameter/scale = 0.53
+shader_parameter/brightness = 1.44
+shader_parameter/saturation = 0.2
+shader_parameter/albedo = ExtResource("2_2dfft")
+shader_parameter/normal = ExtResource("4_vpdvq")
+shader_parameter/roughness = ExtResource("5_wr2wg")
+shader_parameter/metallic = ExtResource("3_3svx8")

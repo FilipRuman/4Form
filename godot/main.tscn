@@ -1,0 +1,284 @@
+[gd_scene load_steps=14 format=3 uid="uid://cobwm3cgpu0d0"]
+
+[ext_resource type="Script" uid="uid://jxi7cxvrgke2" path="res://Bike/BikePhysics.cs" id="1_7mycd"]
+[ext_resource type="Script" uid="uid://naawr1uq2pqg" path="res://TCP/Tcp.cs" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://buux5h8054hrj" path="res://TCP/TcpParser.cs" id="2_1bvp3"]
+[ext_resource type="Script" uid="uid://cgsqqemtrbivg" path="res://Bike/BikeStats.cs" id="2_272bh"]
+[ext_resource type="Script" uid="uid://hvnau3ci4qqp" path="res://Bike/BikePath.cs" id="3_5vw27"]
+[ext_resource type="Script" uid="uid://bqdo3og8xp122" path="res://Bike/BikeInput.cs" id="6_kek77"]
+[ext_resource type="Script" uid="uid://ue850mqjokbo" path="res://Bike/BikeUIMain.cs" id="7_272bh"]
+[ext_resource type="PackedScene" uid="uid://dcyashkyaw7d6" path="res://assets/gravel bike model/road_bike.fbx" id="8_4c57u"]
+[ext_resource type="Theme" uid="uid://regixqqcydb8" path="res://theme.tres" id="10_4c57u"]
+[ext_resource type="Script" uid="uid://dopjxbwujlkwf" path="res://Menu/PeripheralDisplay.cs" id="11_dg77c"]
+[ext_resource type="PackedScene" uid="uid://b3prul5dd2nbn" path="res://Menu/peripherial_display.tscn" id="11_efxa6"]
+[ext_resource type="Material" uid="uid://b8eum2mg7jl7r" path="res://assets/Material-LIB/Cobblestone/cobleStone.tres" id="13_ycdy4"]
+
+[sub_resource type="Curve3D" id="Curve3D_1bvp3"]
+closed = true
+_data = {
+"points": PackedVector3Array(0.0475698, 1.07048, 3.12417, -0.0475698, -1.07048, -3.12417, 3.06513, 0.741913, 0, 1.89343, -0.541371, 0.832845, -1.89343, 0.541371, -0.832845, -2.71565, -1.00385, -7.14329, -2.32442, -1.31791, -3.15105, 2.32442, 1.31791, 3.15105, -8.22744, 2.06493, -2.90255, -1.66897, 0.522409, -0.685542, 1.66897, -0.522409, 0.685542, -2.40986, 1.6685, 2.55152),
+"tilts": PackedFloat32Array(0, 0, 0, 0)
+}
+point_count = 4
+
+[node name="scene" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.537866, 0.419072, -0.731491, 0.452779, 0.875526, 0.168661, 0.71112, -0.240486, -0.660662, -4.90347, 2.61159, 0.84468)
+
+[node name="Path3D" type="Path3D" parent="."]
+curve = SubResource("Curve3D_1bvp3")
+
+[node name="Bike" type="PathFollow3D" parent="Path3D" node_paths=PackedStringArray("path", "input", "stats")]
+transform = Transform3D(-0.405073, 0.454563, -0.793269, 0.396349, 0.869179, 0.295671, 0.823898, -0.194644, -0.532251, -3.64499, 2.21579, 1.84005)
+progress = 26.05
+v_offset = 0.095
+script = ExtResource("1_7mycd")
+path = NodePath("Bike path")
+input = NodePath("BikeInput")
+stats = NodePath("Bike stats")
+speed = 36.23
+gravity = 9.8
+
+[node name="Bike stats" type="Node" parent="Path3D/Bike"]
+script = ExtResource("2_272bh")
+bikeMass = 10.0
+userMass = 60.0
+whealFrictionCoefficient = 0.165
+whealRadius = 0.5
+frontalArea = 2.0
+dragCoefficient = 1.365
+
+[node name="Bike path" type="Node" parent="Path3D/Bike" node_paths=PackedStringArray("bikePhysics", "pathFollow")]
+script = ExtResource("3_5vw27")
+bikePhysics = NodePath("..")
+pathFollow = NodePath("..")
+
+[node name="Tcp" type="Node" parent="Path3D/Bike" node_paths=PackedStringArray("tcpParser")]
+script = ExtResource("1_ig7tw")
+tcpParser = NodePath("TcpParser")
+
+[node name="TcpParser" type="Node" parent="Path3D/Bike/Tcp" node_paths=PackedStringArray("bikeInput")]
+script = ExtResource("2_1bvp3")
+bikeInput = NodePath("../../BikeInput")
+
+[node name="BikeInput" type="Node" parent="Path3D/Bike"]
+script = ExtResource("6_kek77")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Path3D/Bike"]
+
+[node name="BikeUIMain" type="Node" parent="Path3D/Bike/CanvasLayer" node_paths=PackedStringArray("bikeInput", "bikePhysics", "cadenceLabel", "powerLabel", "speedLabel", "fpsLabel")]
+script = ExtResource("7_272bh")
+bikeInput = NodePath("../../BikeInput")
+bikePhysics = NodePath("../..")
+cadenceLabel = NodePath("../Panel/Main stats layout/Cadence")
+powerLabel = NodePath("../Panel/Main stats layout/Power")
+speedLabel = NodePath("../Panel/Main stats layout/Speed")
+fpsLabel = NodePath("../FPS")
+
+[node name="FPS" type="Label" parent="Path3D/Bike/CanvasLayer"]
+offset_right = 116.0
+offset_bottom = 28.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 20
+text = "FPS:"
+
+[node name="Panel" type="Panel" parent="Path3D/Bike/CanvasLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -227.0
+offset_top = -40.0
+offset_right = 227.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 3
+theme = ExtResource("10_4c57u")
+
+[node name="Main stats layout" type="HBoxContainer" parent="Path3D/Bike/CanvasLayer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Cadence" type="Label" parent="Path3D/Bike/CanvasLayer/Panel/Main stats layout"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.913725, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "Cadence: 90"
+
+[node name="Power" type="Label" parent="Path3D/Bike/CanvasLayer/Panel/Main stats layout"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.917647, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "Power: 150"
+
+[node name="Speed" type="Label" parent="Path3D/Bike/CanvasLayer/Panel/Main stats layout"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.119761, 0.443755, 1, 1)
+theme_override_font_sizes/font_size = 20
+text = "Speed: 150"
+
+[node name="Camera3D" type="Camera3D" parent="Path3D/Bike"]
+transform = Transform3D(1.00001, 0, 0, 0, 1.00001, 0, 0, 0, 1.00001, 0.106, 0.306, 0.8)
+
+[node name="road_bike" parent="Path3D/Bike" instance=ExtResource("8_4c57u")]
+transform = Transform3D(-4.37114e-09, 0, 0.1, 0, 0.1, 0, -0.1, 0, -4.37114e-09, 0, 0, 0)
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="Path3D"]
+material_override = ExtResource("13_ycdy4")
+polygon = PackedVector2Array(-0.5, -0.15, -0.5, 0, 0.5, 0, 0.5, -0.15)
+mode = 2
+path_node = NodePath("..")
+path_interval_type = 0
+path_interval = 0.13
+path_simplify_angle = 0.0
+path_rotation = 2
+path_rotation_accurate = true
+path_local = false
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = true
+smooth_faces = true
+material = ExtResource("13_ycdy4")
+
+[node name="menu" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="menu"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -366.0
+offset_top = -278.0
+offset_right = 350.0
+offset_bottom = 265.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(550, 300)
+theme = ExtResource("10_4c57u")
+
+[node name="tabs" type="Panel" parent="menu/Panel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 39.0
+grow_horizontal = 2
+theme = ExtResource("10_4c57u")
+theme_type_variation = &"lightPanel"
+
+[node name="TabBar" type="TabBar" parent="menu/Panel/tabs"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 5.0
+offset_right = -2.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("10_4c57u")
+current_tab = 0
+tab_alignment = 1
+clip_tabs = false
+tab_count = 4
+tab_0/title = "device connection "
+tab_1/title = "Mode selection"
+tab_2/title = "Settings"
+tab_3/title = "More things"
+
+[node name="device connection" type="Control" parent="menu/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 15.0
+offset_top = 45.0
+offset_right = -15.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HSplitContainer" type="HSplitContainer" parent="menu/Panel/device connection"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+split_offset = 300
+
+[node name="device types" type="Panel" parent="menu/Panel/device connection/HSplitContainer"]
+layout_mode = 2
+theme_type_variation = &"lightborderPanel"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="menu/Panel/device connection/HSplitContainer/device types"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = -3.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("10_4c57u")
+script = ExtResource("11_dg77c")
+
+[node name="Smart bike trainer 󰂣" parent="menu/Panel/device connection/HSplitContainer/device types/VBoxContainer2" node_paths=PackedStringArray("icon") instance=ExtResource("11_efxa6")]
+layout_mode = 2
+icon = Object(Label,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":false,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(0, 0),"layout_direction":0,"layout_mode":1,"anchors_preset":-1,"anchor_left":0.992,"anchor_top":0.5,"anchor_right":1.0,"anchor_bottom":0.5,"offset_left":-24.056,"offset_top":-12.5,"offset_right":-3.0,"offset_bottom":12.5,"grow_horizontal":0,"grow_vertical":2,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":4,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"mouse_filter":2,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"theme":null,"theme_type_variation":&"","text":"󰂣 ","label_settings":null,"horizontal_alignment":2,"vertical_alignment":0,"autowrap_mode":0,"justification_flags":163,"paragraph_separator":"\\n","clip_text":false,"text_overrun_behavior":0,"ellipsis_char":"…","uppercase":false,"tab_stops":PackedFloat32Array(),"lines_skipped":0,"max_lines_visible":-1,"visible_characters":-1,"visible_characters_behavior":0,"visible_ratio":1.0,"text_direction":0,"language":"","structured_text_bidi_override":0,"structured_text_bidi_override_options":[],"script":null)
+
+icon = NodePath("icon")
+
+[node name="icon" parent="menu/Panel/device connection/HSplitContainer/device types/VBoxContainer2/Smart bike trainer 󰂣" index="0"]
+visible = false
+
+[node name="heart rate tracker " parent="menu/Panel/device connection/HSplitContainer/device types/VBoxContainer2" node_paths=PackedStringArray("icon") instance=ExtResource("11_efxa6")]
+layout_mode = 2
+text = "heart rate tracker "
+icon = Object(Label,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":false,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(0, 0),"layout_direction":0,"layout_mode":1,"anchors_preset":-1,"anchor_left":0.992,"anchor_top":0.5,"anchor_right":1.0,"anchor_bottom":0.5,"offset_left":-24.056,"offset_top":-12.5,"offset_right":-3.0,"offset_bottom":12.5,"grow_horizontal":0,"grow_vertical":2,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":4,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"mouse_filter":2,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"theme":null,"theme_type_variation":&"","text":"󰂣 ","label_settings":null,"horizontal_alignment":2,"vertical_alignment":0,"autowrap_mode":0,"justification_flags":163,"paragraph_separator":"\\n","clip_text":false,"text_overrun_behavior":0,"ellipsis_char":"…","uppercase":false,"tab_stops":PackedFloat32Array(),"lines_skipped":0,"max_lines_visible":-1,"visible_characters":-1,"visible_characters_behavior":0,"visible_ratio":1.0,"text_direction":0,"language":"","structured_text_bidi_override":0,"structured_text_bidi_override_options":[],"script":null)
+
+icon = NodePath("icon")
+
+[node name="icon" parent="menu/Panel/device connection/HSplitContainer/device types/VBoxContainer2/heart rate tracker " index="0"]
+visible = false
+
+[node name="other device type 󰤟" parent="menu/Panel/device connection/HSplitContainer/device types/VBoxContainer2" node_paths=PackedStringArray("icon") instance=ExtResource("11_efxa6")]
+layout_mode = 2
+text = "other device type 󰤟"
+icon = Object(Label,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":false,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(0, 0),"layout_direction":0,"layout_mode":1,"anchors_preset":-1,"anchor_left":0.992,"anchor_top":0.5,"anchor_right":1.0,"anchor_bottom":0.5,"offset_left":-24.056,"offset_top":-12.5,"offset_right":-3.0,"offset_bottom":12.5,"grow_horizontal":0,"grow_vertical":2,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":4,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"mouse_filter":2,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"theme":null,"theme_type_variation":&"","text":"󰂣 ","label_settings":null,"horizontal_alignment":2,"vertical_alignment":0,"autowrap_mode":0,"justification_flags":163,"paragraph_separator":"\\n","clip_text":false,"text_overrun_behavior":0,"ellipsis_char":"…","uppercase":false,"tab_stops":PackedFloat32Array(),"lines_skipped":0,"max_lines_visible":-1,"visible_characters":-1,"visible_characters_behavior":0,"visible_ratio":1.0,"text_direction":0,"language":"","structured_text_bidi_override":0,"structured_text_bidi_override_options":[],"script":null)
+
+icon = NodePath("icon")
+
+[node name="icon" parent="menu/Panel/device connection/HSplitContainer/device types/VBoxContainer2/other device type 󰤟" index="0"]
+visible = false
+
+[node name="peripheral to connect" type="Panel" parent="menu/Panel/device connection/HSplitContainer"]
+layout_mode = 2
+theme_type_variation = &"lightborderPanel"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="menu/Panel/device connection/HSplitContainer/peripheral to connect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = -3.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("10_4c57u")
+
+[editable path="menu/Panel/device connection/HSplitContainer/device types/VBoxContainer2/Smart bike trainer 󰂣"]
+[editable path="menu/Panel/device connection/HSplitContainer/device types/VBoxContainer2/heart rate tracker "]
+[editable path="menu/Panel/device connection/HSplitContainer/device types/VBoxContainer2/other device type 󰤟"]

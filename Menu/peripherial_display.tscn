@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://b3prul5dd2nbn"]
+
+[ext_resource type="Theme" uid="uid://regixqqcydb8" path="res://theme.tres" id="1_mwem0"]
+[ext_resource type="Script" uid="uid://dopjxbwujlkwf" path="res://Menu/PeripheralDisplay.cs" id="2_0nv0j"]
+
+[node name="peripherial display" type="Button" node_paths=PackedStringArray("icon")]
+theme = ExtResource("1_mwem0")
+theme_type_variation = &"buttonDefault"
+toggle_mode = true
+text = "Smart bike trainer 󰂣"
+icon = null
+script = ExtResource("2_0nv0j")
+icon = NodePath("icon")
+
+[node name="icon" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.992
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -24.056
+offset_top = -12.5
+offset_right = -3.0
+offset_bottom = 12.5
+grow_horizontal = 0
+grow_vertical = 2
+text = "󰂣 "
+horizontal_alignment = 2

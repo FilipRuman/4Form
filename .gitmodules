@@ -1,0 +1,6 @@
+[submodule "4Form-BluetoothHandler"]
+	path = 4Form-BluetoothHandler
+	url = https://github.com/FilipRuman/4Form-BluetoothHandler
+[submodule "subomdules/4Form-BluetoothHandler"]
+	path = subomdules/4Form-BluetoothHandler
+	url = https://github.com/FilipRuman/4Form-BluetoothHandler

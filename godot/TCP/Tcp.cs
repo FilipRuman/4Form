@@ -2,6 +2,8 @@ namespace ForForm.Tcp
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.IO;
     using System.Net.Sockets;
     using System.Text;
     using System.Threading.Tasks;
@@ -18,21 +20,30 @@ namespace ForForm.Tcp
 
         float tcpConnectionCreationTimer = 0;
         const float TcpConnectionTimeout = .5f; //S
-private static readonly string[] possibleRustAppFilePaths  = { "./../",  };
-        public override void _Ready()
-
+        private static readonly string[] possibleRustBleHandlerAppFilePaths =
         {
-		foreach( path in possibleRustAppFilePaths){
+            "./../BleHandler.exe",
+            "./../BleHandler",
+        };
 
-		}
-rustProcess = new Process();
-        rustProcess.StartInfo.FileName = "target/release/my_rust_app"; // Adjust for full path if needed
-        rustProcess.StartInfo.UseShellExecute = false;
-        rustProcess.StartInfo.RedirectStandardInput = true;
-        rustProcess.StartInfo.RedirectStandardOutput = true;
-        rustProcess.StartInfo.CreateNoWindow = true;
+        public override void _Ready() {
+            var working_path = "none of the paths works!";
+            foreach (string path in possibleRustBleHandlerAppFilePaths) {
+                if (File.Exists(path)) {
+                    working_path = path;
+                    break;
+                }
+            }
+            GD.Print($"working file path to rust Ble handler:{working_path}");
 
-        rustProcess.Start();
+            var rustProcess = new Process();
+            rustProcess.StartInfo.FileName = working_path;
+            rustProcess.StartInfo.UseShellExecute = false;
+            // for debugging
+            rustProcess.StartInfo.CreateNoWindow = false;
+
+            rustProcess.Start();
+
             base._Ready();
         }
 

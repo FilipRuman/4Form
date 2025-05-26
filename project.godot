@@ -18,3 +18,12 @@ config/icon="res://icon.svg"
 [dotnet]
 
 project/assembly_name="4Form"
+
+[filesystem]
+
+import/blender/enabled=false
+
+[gui]
+
+theme/custom="uid://regixqqcydb8"
+theme/custom_font="uid://cjv70l87rkx5t"

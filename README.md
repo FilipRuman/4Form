@@ -8,4 +8,4 @@
 
 
 
-colors palete https://coolors.co/e3170a-a9e5bb-fcf6b1-f7b32b-25c141-297038-2d1e2f-403242
+[colors palete](https://coolors.co/ffcc85-ff9f1c-7a4700-9fb1bc-6e8898-2e5266-233a46-172126-62732f-ad1717)

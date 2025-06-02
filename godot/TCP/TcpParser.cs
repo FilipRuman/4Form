@@ -26,6 +26,7 @@ namespace ForForm.Tcp
             {
                 case 'c':
                 {
+                    // skips first char because it is used for data type
                     uint.TryParse(data[1..data.Length], out bikeInput.currentCadence);
                     break;
                 }

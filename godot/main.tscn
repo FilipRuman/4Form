@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cobwm3cgpu0d0"]
+[gd_scene load_steps=15 format=3 uid="uid://cobwm3cgpu0d0"]
 
 [ext_resource type="Script" uid="uid://jxi7cxvrgke2" path="res://Bike/BikePhysics.cs" id="1_7mycd"]
 [ext_resource type="Script" uid="uid://naawr1uq2pqg" path="res://TCP/Tcp.cs" id="1_ig7tw"]
@@ -9,8 +9,9 @@
 [ext_resource type="Script" uid="uid://ue850mqjokbo" path="res://Bike/BikeUIMain.cs" id="7_272bh"]
 [ext_resource type="PackedScene" uid="uid://dcyashkyaw7d6" path="res://assets/gravel bike model/road_bike.fbx" id="8_4c57u"]
 [ext_resource type="Theme" uid="uid://regixqqcydb8" path="res://theme.tres" id="10_4c57u"]
-[ext_resource type="Script" uid="uid://dopjxbwujlkwf" path="res://Menu/PeripheralDisplay.cs" id="11_dg77c"]
 [ext_resource type="PackedScene" uid="uid://b3prul5dd2nbn" path="res://Menu/peripherial_display.tscn" id="11_efxa6"]
+[ext_resource type="Script" uid="uid://cninou2cus8fu" path="res://Menu/PeripheralsMenu.cs" id="11_ycdy4"]
+[ext_resource type="Script" uid="uid://d3apq1nnkijj3" path="res://Menu/DeviceType.cs" id="13_w48qg"]
 [ext_resource type="Material" uid="uid://b8eum2mg7jl7r" path="res://assets/Material-LIB/Cobblestone/cobleStone.tres" id="13_ycdy4"]
 
 [sub_resource type="Curve3D" id="Curve3D_1bvp3"]
@@ -58,8 +59,10 @@ pathFollow = NodePath("..")
 script = ExtResource("1_ig7tw")
 tcpParser = NodePath("TcpParser")
 
-[node name="TcpParser" type="Node" parent="Path3D/Bike/Tcp" node_paths=PackedStringArray("bikeInput")]
+[node name="TcpParser" type="Node" parent="Path3D/Bike/Tcp" node_paths=PackedStringArray("tcp", "peripheralsMenu", "bikeInput")]
 script = ExtResource("2_1bvp3")
+tcp = NodePath("..")
+peripheralsMenu = NodePath("../../../../menu/Panel/device connection/PeripherialsMenu")
 bikeInput = NodePath("../../BikeInput")
 
 [node name="BikeInput" type="Node" parent="Path3D/Bike"]
@@ -206,6 +209,13 @@ offset_bottom = -5.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="PeripherialsMenu" type="Node" parent="menu/Panel/device connection" node_paths=PackedStringArray("peripheralsDisplaysLayout", "tcpParser", "deviceTypes")]
+script = ExtResource("11_ycdy4")
+peripheralsDisplaysLayout = NodePath("../HSplitContainer/peripheral to connect/VBoxContainer2")
+tcpParser = NodePath("../../../../Path3D/Bike/Tcp/TcpParser")
+peripheralDisplayPrefab = ExtResource("11_efxa6")
+deviceTypes = [NodePath("../HSplitContainer/device types/VBoxContainer2/Smart bike trainer 󰂣/trainer device type"), NodePath("../HSplitContainer/device types/VBoxContainer2/heart rate tracker /heart rate device type")]
+
 [node name="HSplitContainer" type="HSplitContainer" parent="menu/Panel/device connection"]
 layout_mode = 1
 anchors_preset = 15
@@ -231,7 +241,6 @@ offset_bottom = -3.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("10_4c57u")
-script = ExtResource("11_dg77c")
 
 [node name="Smart bike trainer 󰂣" parent="menu/Panel/device connection/HSplitContainer/device types/VBoxContainer2" node_paths=PackedStringArray("icon") instance=ExtResource("11_efxa6")]
 layout_mode = 2
@@ -242,6 +251,12 @@ icon = NodePath("icon")
 [node name="icon" parent="menu/Panel/device connection/HSplitContainer/device types/VBoxContainer2/Smart bike trainer 󰂣" index="0"]
 visible = false
 
+[node name="trainer device type" type="Node" parent="menu/Panel/device connection/HSplitContainer/device types/VBoxContainer2/Smart bike trainer 󰂣" node_paths=PackedStringArray("display")]
+script = ExtResource("13_w48qg")
+display = NodePath("..")
+name = "smart trainer"
+glyphIcon = "󰂣 "
+
 [node name="heart rate tracker " parent="menu/Panel/device connection/HSplitContainer/device types/VBoxContainer2" node_paths=PackedStringArray("icon") instance=ExtResource("11_efxa6")]
 layout_mode = 2
 text = "heart rate tracker "
@@ -251,6 +266,12 @@ icon = NodePath("icon")
 
 [node name="icon" parent="menu/Panel/device connection/HSplitContainer/device types/VBoxContainer2/heart rate tracker " index="0"]
 visible = false
+
+[node name="heart rate device type" type="Node" parent="menu/Panel/device connection/HSplitContainer/device types/VBoxContainer2/heart rate tracker " node_paths=PackedStringArray("display")]
+script = ExtResource("13_w48qg")
+display = NodePath("..")
+name = "heart rate"
+glyphIcon = " "
 
 [node name="other device type 󰤟" parent="menu/Panel/device connection/HSplitContainer/device types/VBoxContainer2" node_paths=PackedStringArray("icon") instance=ExtResource("11_efxa6")]
 layout_mode = 2

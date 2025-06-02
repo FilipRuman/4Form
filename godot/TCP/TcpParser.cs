@@ -12,23 +12,21 @@ namespace ForForm.Tcp
 
         [Export]
         Bike.BikeInput bikeInput;
-        RegEx peripheralsNameRegex = new RegEx();
-        RegEx peripheralsIndexRegex = new RegEx();
+        RegEx standardIndexNameRegex = new RegEx();
 
         public override void _Ready() {
-            // match all symbols inside []
-            peripheralsNameRegex.Compile("\\[.*\\]");
-            // match all symbols inside ||
-            peripheralsIndexRegex.Compile("\\|.*\\|");
+            standardIndexNameRegex.Compile("""\|(?<name>.*)\|\[(?<index>.*)\]""");
             base._Ready();
         }
 
         public void ParseTcpDataString(string data) {
             // c# switch statements are UGLY compered to rust...
+            GD.Print($"ParseTcpDataString '{data}'");
             switch (data[0])
             {
                 case 'c':
                 {
+                    // skips first char because it is used for data type
                     uint.TryParse(data[1..data.Length], out bikeInput.currentCadence);
                     break;
                 }
@@ -39,14 +37,21 @@ namespace ForForm.Tcp
                 }
                 case 'i':
                 {
-                    var nameRough = peripheralsNameRegex.Search(data[1..data.Length]).Strings[0];
-
-                    var indexRough = peripheralsIndexRegex.Search(data[1..data.Length]).Strings[0];
-
-                    peripheralsMenu.HandlePeripheralsConnection(
-                        nameRough[1..(nameRough.Length - 1)],
-                        uint.Parse(indexRough[1..(indexRough.Length - 1)])
+                    var regexOutput = standardIndexNameRegex.Search(data[1..data.Length]);
+                    peripheralsMenu.DisplayNewPeripheral(
+                        regexOutput.GetString("name"),
+                        uint.Parse(regexOutput.GetString("index"))
                     );
+                    break;
+                }
+                case 'o':
+                {
+                    var regexOutput = standardIndexNameRegex.Search(data[1..data.Length]);
+                    peripheralsMenu.OnPeripheralConnection(
+                        regexOutput.GetString("name"),
+                        uint.Parse(regexOutput.GetString("index"))
+                    );
+
                     break;
                 }
             }

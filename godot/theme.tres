@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=17 format=3 uid="uid://regixqqcydb8"]
+[gd_resource type="Theme" load_steps=18 format=3 uid="uid://regixqqcydb8"]
 
 [ext_resource type="FontFile" uid="uid://cjv70l87rkx5t" path="res://assets/Meslo/MesloLGLDZNerdFont-Regular.ttf" id="1_e1x85"]
 
@@ -14,6 +14,20 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 corner_detail = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ndmpe"]
+content_margin_left = 10.0
+content_margin_top = 4.0
+content_margin_right = 10.0
+content_margin_bottom = 4.0
+bg_color = Color(0.431373, 0.533333, 0.596078, 1)
+border_width_top = 2
+border_color = Color(0.623529, 0.694118, 0.737255, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+corner_detail = 4
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vj6dk"]
 content_margin_left = 10.0
@@ -159,7 +173,7 @@ TabBar/styles/button_highlight = null
 TabBar/styles/button_pressed = null
 TabBar/styles/tab_disabled = null
 TabBar/styles/tab_focus = null
-TabBar/styles/tab_hovered = null
+TabBar/styles/tab_hovered = SubResource("StyleBoxFlat_ndmpe")
 TabBar/styles/tab_selected = SubResource("StyleBoxFlat_vj6dk")
 TabBar/styles/tab_unselected = SubResource("StyleBoxFlat_110ce")
 buttonDefault/base_type = &"Button"

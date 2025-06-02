@@ -37,10 +37,9 @@ namespace ForForm.Tcp
                 case 'i':
                 {
                     var regexOutput = standardIndexNameRegex.Search(data[1..data.Length]);
-                    peripheralsMenu.HandlePeripheralsConnection(
-regexOutput.GetString("name"),
-
-uint.Parse( regexOutput.GetString("index") )
+                    peripheralsMenu.DisplayNewPeripheral(
+                        regexOutput.GetString("name"),
+                        uint.Parse(regexOutput.GetString("index"))
                     );
                     break;
                 }

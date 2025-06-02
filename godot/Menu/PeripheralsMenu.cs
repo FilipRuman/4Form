@@ -1,88 +1,95 @@
 namespace ForForm.Menu
 {
-    using System.Collections.Generic;
-    using Godot;
+	using System.Collections.Generic;
+	using Godot;
 
-    public partial class PeripheralsMenu : Node {
-        private HashSet<string> peripherals = new();
+	public partial class PeripheralsMenu : Node {
+		private HashSet<string> peripherals = new();
 
-        [Export]
-        private Tcp.TcpParser tcpParser;
+		[Export]
+		private Control peripheralsDisplaysLayout;
 
-        [Export]
-        private PackedScene peripheralDisplayPrefab;
+		[Export]
+		private Tcp.TcpParser tcpParser;
 
-        [Export]
-        private DeviceType smartTrainerDeviceType;
+		[Export]
+		private PackedScene peripheralDisplayPrefab;
+		private DeviceType currentDeviceType;
 
-        private DeviceType currentDeviceType;
+		[Export]
+		private DeviceType[] deviceTypes;
 
-        // I have to use dictionary for this because unknowns are skipped
-        private Dictionary<uint, PeripheralDisplay> peripheralDisplaysIndexesDictionary;
-        private const string SmartTrainerDeviceTypeName = "SmartTrainer";
+		// I have to use dictionary for this because unknowns are skipped
+		private Dictionary<uint, PeripheralDisplay> peripheralDisplaysIndexesDictionary = new();
 
-        public override void _Ready() {
-            smartTrainerDeviceType.display.onClick = () =>
-            {
-                currentDeviceType = smartTrainerDeviceType;
-            };
-            base._Ready();
-        }
+		public override void _Ready() {
+			foreach (var _deviceType in deviceTypes) {
+				_deviceType.display.onClick = () =>
+				{
+					TurnOffAllDeviceTypeSelection();
 
-        public void HandlePeripheralsConnection(string name, uint index) {
-            if (name == "unknown") {
-                return;
-            }
-            if (peripherals.Add(name)) {
-                AddPeripheralDisplay(index, name);
-            }
-        }
+					_deviceType.display.ButtonPressed = true;
+					currentDeviceType = _deviceType;
+				};
+			}
 
-        private void AddPeripheralDisplay(uint index, string name) {
-            var peripheralDisplay = peripheralDisplayPrefab.Instantiate() as PeripheralDisplay;
-            peripheralDisplaysIndexesDictionary.Add(index, peripheralDisplay);
-            peripheralDisplay.Setup(
-                onClick: () =>
-                {
-                    OnPeripheralSelection(index);
-                },
-                "",
-                name,
-                false
-            );
-        }
+			base._Ready();
+		}
 
-        private void OnPeripheralSelection(uint index) {
-            var deviceTypeName =
-                currentDeviceType == smartTrainerDeviceType ? SmartTrainerDeviceTypeName : "";
+		private void TurnOffAllDeviceTypeSelection() {
+			foreach (DeviceType deviceType in deviceTypes) {
+				deviceType.display.ButtonPressed = false;
+			}
+		}
 
-            tcpParser.SendPeripheralConnectionRequest(index, deviceTypeName);
-        }
+		public void HandlePeripheralsConnection(string name, uint index) {
+			GD.Print("HandlePeripheralsConnection");
+			if (name == "unknown") {
+				return;
+			}
+			if (peripherals.Add(name)) {
+				AddPeripheralDisplay(index, name);
+			}
+		}
 
-        private void OnPeripheralConnection(string deviceTypeName, uint index) {
-            var glyph = "device type not found!:Peripherals menu 52";
-            var deviceType = currentDeviceType;
-            switch (deviceTypeName)
-            {
-                case SmartTrainerDeviceTypeName:
-                {
-                    glyph = "󰂣 ";
-                    deviceType = smartTrainerDeviceType;
-                    break;
-                }
-            }
-            ;
-            PeripheralDisplay peripheralDisplay = peripheralDisplaysIndexesDictionary[index];
-            peripheralDisplay.Highlight();
-            peripheralDisplay.icon.Text = glyph;
+		private void AddPeripheralDisplay(uint index, string name) {
+			var peripheralDisplay = peripheralDisplayPrefab.Instantiate() as PeripheralDisplay;
+			peripheralsDisplaysLayout.AddChild(peripheralDisplay);
 
-            deviceType.display.Highlight();
-        }
+			peripheralDisplaysIndexesDictionary.Add(index, peripheralDisplay);
+			peripheralDisplay.Setup(
+				_onClick: () =>
+				{
+					OnPeripheralSelection(index);
+				},
+				"",
+				name,
+				false
+			);
+		}
 
-        public class DeviceType {
-            [Export]
-            public PeripheralDisplay display;
-            public uint peripheralConnectedToIt;
-        }
-    }
+		private void OnPeripheralSelection(uint index) {
+			var deviceTypeName = currentDeviceType.name;
+
+			tcpParser.SendPeripheralConnectionRequest(index, deviceTypeName);
+		}
+
+		private void OnPeripheralConnection(string deviceTypeName, uint index) {
+			var glyph = "device type not found!:Peripherals menu 52";
+			var matchingDeviceType = currentDeviceType;
+			// switch or dictionary would be faster but this  is cleaner
+			foreach (var _deviceType in deviceTypes) {
+				if (_deviceType.name != deviceTypeName)
+					return;
+				matchingDeviceType = _deviceType;
+				glyph = _deviceType.glyphIcon;
+			}
+
+			PeripheralDisplay peripheralDisplay = peripheralDisplaysIndexesDictionary[index];
+			peripheralDisplay.Highlight(true);
+			peripheralDisplay.icon.Text = glyph;
+
+			matchingDeviceType.display.Highlight(true);
+		}
+	}
 }

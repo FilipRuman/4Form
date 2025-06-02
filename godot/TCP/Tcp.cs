@@ -54,18 +54,22 @@ rustProcess = new Process();
                 readDataTask?.Dispose();
                 readDataTask = ReadDataAsync();
             }
+
             base._Process(delta);
         }
 
         private async Task ReadDataAsync() {
             byte[] buffer = new byte[1024];
             int bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length);
-            string data = Encoding.UTF8.GetString(buffer, 0, bytesRead);
-            // GD.Print("Received: " + message);
-            tcpParser.ParseTcpDataString(data);
+            string data_raw = Encoding.UTF8.GetString(buffer, 0, bytesRead);
+            var splittedData = data_raw.Split('\n', 1000000);
+            foreach (string data in splittedData) {
+                tcpParser.ParseTcpDataString(data_raw);
+            }
         }
 
         public async Task SendDataAsync(String stringToSend) {
+            stringToSend += "\n";
             var bytesToSend = Encoding.UTF8.GetBytes(stringToSend);
             await stream.WriteAsync(bytesToSend);
         }

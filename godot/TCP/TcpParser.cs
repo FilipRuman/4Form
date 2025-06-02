@@ -43,6 +43,16 @@ namespace ForForm.Tcp
                     );
                     break;
                 }
+                case 'o':
+                {
+                    var regexOutput = standardIndexNameRegex.Search(data[1..data.Length]);
+                    peripheralsMenu.OnPeripheralConnection(
+                        regexOutput.GetString("name"),
+                        uint.Parse(regexOutput.GetString("index"))
+                    );
+
+                    break;
+                }
             }
         }
 

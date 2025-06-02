@@ -79,7 +79,7 @@ namespace ForForm.Menu
             // switch or dictionary would be faster but this  is cleaner
             foreach (var _deviceType in deviceTypes) {
                 if (_deviceType.name != deviceTypeName)
-                    return;
+                    continue;
                 matchingDeviceType = _deviceType;
                 glyph = _deviceType.glyphIcon;
             }

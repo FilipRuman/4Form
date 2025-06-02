@@ -16,8 +16,10 @@ namespace ForForm.Tcp
         RegEx peripheralsIndexRegex = new RegEx();
 
         public override void _Ready() {
-            peripheralsNameRegex.Compile("|.*|");
-            peripheralsIndexRegex.Compile("[.*]");
+            // match all symbols inside []
+            peripheralsNameRegex.Compile("\\[.*\\]");
+            // match all symbols inside ||
+            peripheralsIndexRegex.Compile("\\|.*\\|");
             base._Ready();
         }
 
@@ -38,7 +40,9 @@ namespace ForForm.Tcp
                 case 'i':
                 {
                     var nameRough = peripheralsNameRegex.Search(data[1..data.Length]).Strings[0];
+
                     var indexRough = peripheralsIndexRegex.Search(data[1..data.Length]).Strings[0];
+
                     peripheralsMenu.HandlePeripheralsConnection(
                         nameRough[1..(nameRough.Length - 1)],
                         uint.Parse(indexRough[1..(indexRough.Length - 1)])

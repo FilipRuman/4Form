@@ -42,8 +42,7 @@ namespace ForForm.Menu
             }
         }
 
-        public void HandlePeripheralsConnection(string name, uint index) {
-            GD.Print("HandlePeripheralsConnection");
+        public void DisplayNewPeripheral(string name, uint index) {
             if (name == "unknown") {
                 return;
             }

@@ -1,0 +1,102 @@
+[gd_scene load_steps=8 format=3 uid="uid://w67eox52c1g"]
+
+[ext_resource type="Script" uid="uid://jxi7cxvrgke2" path="res://Bike/BikePhysics.cs" id="1_k7cyb"]
+[ext_resource type="Script" uid="uid://cgsqqemtrbivg" path="res://Bike/BikeStats.cs" id="2_ijeuo"]
+[ext_resource type="Script" uid="uid://hvnau3ci4qqp" path="res://Bike/BikePath.cs" id="3_upywu"]
+[ext_resource type="Script" uid="uid://bqdo3og8xp122" path="res://Bike/BikeInput.cs" id="6_4ial8"]
+[ext_resource type="Script" uid="uid://ue850mqjokbo" path="res://Bike/BikeUIMain.cs" id="7_ogdi3"]
+[ext_resource type="Theme" uid="uid://regixqqcydb8" path="res://theme.tres" id="8_4xn5f"]
+[ext_resource type="PackedScene" uid="uid://dcyashkyaw7d6" path="res://assets/gravel bike model/road_bike.fbx" id="9_lxdhe"]
+
+[node name="Bike" type="PathFollow3D" node_paths=PackedStringArray("path", "input", "stats")]
+transform = Transform3D(-0.405073, 0.454563, -0.793269, 0.396349, 0.869179, 0.295671, 0.823898, -0.194644, -0.532251, 0, 0, 0)
+progress = 26.05
+v_offset = 0.095
+script = ExtResource("1_k7cyb")
+path = NodePath("Bike path")
+input = NodePath("BikeInput")
+stats = NodePath("Bike stats")
+speed = 36.23
+gravity = 9.8
+
+[node name="Bike stats" type="Node" parent="."]
+script = ExtResource("2_ijeuo")
+bikeMass = 10.0
+userMass = 60.0
+whealFrictionCoefficient = 0.165
+whealRadius = 0.5
+frontalArea = 2.0
+dragCoefficient = 1.365
+
+[node name="Bike path" type="Node" parent="." node_paths=PackedStringArray("bikePhysics", "pathFollow")]
+script = ExtResource("3_upywu")
+bikePhysics = NodePath("..")
+pathFollow = NodePath("..")
+
+[node name="BikeInput" type="Node" parent="."]
+script = ExtResource("6_4ial8")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="BikeUIMain" type="Node" parent="CanvasLayer" node_paths=PackedStringArray("bikeInput", "bikePhysics", "cadenceLabel", "powerLabel", "speedLabel", "fpsLabel")]
+script = ExtResource("7_ogdi3")
+bikeInput = NodePath("../../BikeInput")
+bikePhysics = NodePath("../..")
+cadenceLabel = NodePath("../Panel/Main stats layout/Cadence")
+powerLabel = NodePath("../Panel/Main stats layout/Power")
+speedLabel = NodePath("../Panel/Main stats layout/Speed")
+fpsLabel = NodePath("../FPS")
+
+[node name="FPS" type="Label" parent="CanvasLayer"]
+offset_right = 116.0
+offset_bottom = 28.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 20
+text = "FPS:"
+
+[node name="Panel" type="Panel" parent="CanvasLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -227.0
+offset_top = -40.0
+offset_right = 227.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 3
+theme = ExtResource("8_4xn5f")
+
+[node name="Main stats layout" type="HBoxContainer" parent="CanvasLayer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Cadence" type="Label" parent="CanvasLayer/Panel/Main stats layout"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.913725, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "Cadence: 90"
+
+[node name="Power" type="Label" parent="CanvasLayer/Panel/Main stats layout"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.917647, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "Power: 150"
+
+[node name="Speed" type="Label" parent="CanvasLayer/Panel/Main stats layout"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.119761, 0.443755, 1, 1)
+theme_override_font_sizes/font_size = 20
+text = "Speed: 150"
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1.00001, 0, 0, 0, 1.00001, 0, 0, 0, 1.00001, 0.106, 0.306, 0.8)
+
+[node name="road_bike" parent="." instance=ExtResource("9_lxdhe")]
+transform = Transform3D(-4.37114e-09, 0, 0.1, 0, 0.1, 0, -0.1, 0, -4.37114e-09, 0, 0, 0)

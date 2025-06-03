@@ -1,10 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://w67eox52c1g"]
+[gd_scene load_steps=8 format=3 uid="uid://w67eox52c1g"]
 
 [ext_resource type="Script" uid="uid://jxi7cxvrgke2" path="res://Bike/BikePhysics.cs" id="1_k7cyb"]
 [ext_resource type="Script" uid="uid://cgsqqemtrbivg" path="res://Bike/BikeStats.cs" id="2_ijeuo"]
 [ext_resource type="Script" uid="uid://hvnau3ci4qqp" path="res://Bike/BikePath.cs" id="3_upywu"]
-[ext_resource type="Script" uid="uid://naawr1uq2pqg" path="res://TCP/Tcp.cs" id="4_uqj57"]
-[ext_resource type="Script" uid="uid://buux5h8054hrj" path="res://TCP/TcpParser.cs" id="5_360mi"]
 [ext_resource type="Script" uid="uid://bqdo3og8xp122" path="res://Bike/BikeInput.cs" id="6_4ial8"]
 [ext_resource type="Script" uid="uid://ue850mqjokbo" path="res://Bike/BikeUIMain.cs" id="7_ogdi3"]
 [ext_resource type="Theme" uid="uid://regixqqcydb8" path="res://theme.tres" id="8_4xn5f"]
@@ -34,15 +32,6 @@ dragCoefficient = 1.365
 script = ExtResource("3_upywu")
 bikePhysics = NodePath("..")
 pathFollow = NodePath("..")
-
-[node name="Tcp" type="Node" parent="." node_paths=PackedStringArray("tcpParser")]
-script = ExtResource("4_uqj57")
-tcpParser = NodePath("TcpParser")
-
-[node name="TcpParser" type="Node" parent="Tcp" node_paths=PackedStringArray("tcp", "bikeInput")]
-script = ExtResource("5_360mi")
-tcp = NodePath("..")
-bikeInput = NodePath("../../BikeInput")
 
 [node name="BikeInput" type="Node" parent="."]
 script = ExtResource("6_4ial8")

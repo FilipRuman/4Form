@@ -1,6 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://cobwm3cgpu0d0"]
+[gd_scene load_steps=11 format=3 uid="uid://cobwm3cgpu0d0"]
 
-[ext_resource type="PackedScene" uid="uid://w67eox52c1g" path="res://Bike/bike.tscn" id="3_272bh"]
+[ext_resource type="Script" uid="uid://naawr1uq2pqg" path="res://TCP/Tcp.cs" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://buux5h8054hrj" path="res://TCP/TcpParser.cs" id="2_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://w67eox52c1g" path="res://Bike/player.tscn" id="3_272bh"]
 [ext_resource type="Theme" uid="uid://regixqqcydb8" path="res://theme.tres" id="10_4c57u"]
 [ext_resource type="PackedScene" uid="uid://b3prul5dd2nbn" path="res://Menu/DeviceConnection/peripherial_display.tscn" id="11_efxa6"]
 [ext_resource type="Script" uid="uid://basdgtr0ivql5" path="res://Menu/MenuMain.cs" id="11_w48qg"]
@@ -41,7 +43,7 @@ path_joined = true
 smooth_faces = true
 material = ExtResource("13_ycdy4")
 
-[node name="menu main" type="Control" parent="." node_paths=PackedStringArray("playerSpawnPoint", "tabBar", "tabContents", "startGameButton")]
+[node name="menu main" type="Control" parent="." node_paths=PackedStringArray("tcpParser", "playerSpawnPoint", "tabBar", "tabContents", "startGameButton")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -49,7 +51,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("11_w48qg")
-player = ExtResource("3_272bh")
+tcpParser = NodePath("../Tcp/TcpParser")
+playerPrefab = ExtResource("3_272bh")
 playerSpawnPoint = NodePath("../Path3D")
 tabBar = NodePath("Panel/tabs/TabBar")
 tabContents = [NodePath("Panel/contents/device connection"), NodePath("Panel/contents/Load game")]
@@ -121,9 +124,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PeripherialsMenu" type="Node" parent="menu main/Panel/contents/device connection" node_paths=PackedStringArray("peripheralsDisplaysLayout", "deviceTypes")]
+[node name="PeripherialsMenu" type="Node" parent="menu main/Panel/contents/device connection" node_paths=PackedStringArray("peripheralsDisplaysLayout", "tcpParser", "deviceTypes")]
 script = ExtResource("11_ycdy4")
 peripheralsDisplaysLayout = NodePath("../HSplitContainer/peripheral to connect/VBoxContainer2")
+tcpParser = NodePath("../../../../../Tcp/TcpParser")
 peripheralDisplayPrefab = ExtResource("11_efxa6")
 deviceTypes = [NodePath("../HSplitContainer/device types/VBoxContainer2/Smart bike trainer 󰂣/trainer device type"), NodePath("../HSplitContainer/device types/VBoxContainer2/heart rate tracker /heart rate device type")]
 
@@ -246,6 +250,15 @@ theme = ExtResource("10_4c57u")
 theme_type_variation = &"buttonHighlight"
 theme_override_font_sizes/font_size = 23
 text = "Start game!"
+
+[node name="Tcp" type="Node" parent="." node_paths=PackedStringArray("tcpParser")]
+script = ExtResource("1_ig7tw")
+tcpParser = NodePath("TcpParser")
+
+[node name="TcpParser" type="Node" parent="Tcp" node_paths=PackedStringArray("tcp", "peripheralsMenu")]
+script = ExtResource("2_1bvp3")
+tcp = NodePath("..")
+peripheralsMenu = NodePath("../../menu main/Panel/contents/device connection/PeripherialsMenu")
 
 [editable path="menu main/Panel/contents/device connection/HSplitContainer/device types/VBoxContainer2/Smart bike trainer 󰂣"]
 [editable path="menu main/Panel/contents/device connection/HSplitContainer/device types/VBoxContainer2/heart rate tracker "]

@@ -1,10 +1,13 @@
-using Godot;
 
 namespace ForForm.Menu
 {
+
+using Godot;
+	using Tcp; 
     public partial class MenuMain : Control {
+	    [Export]TcpParser tcpParser;
         [Export]
-        PackedScene player;
+        PackedScene playerPrefab;
 
         [Export]
         Node3D playerSpawnPoint;
@@ -41,7 +44,9 @@ namespace ForForm.Menu
 
         public void StartGame() {
             Visible = false;
-            playerSpawnPoint.AddChild(player.Instantiate());
+	    var playerNode = playerPrefab.Instantiate();
+	    tcpParser.bikePhysics = ((Bike.BikePhysics) playerNode  );
+            playerSpawnPoint.AddChild(playerNode);
         }
     }
 }

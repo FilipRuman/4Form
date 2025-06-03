@@ -9,9 +9,7 @@ namespace ForForm.Tcp
 
         [Export]
         Menu.PeripheralsMenu peripheralsMenu;
-
-        [Export]
-        Bike.BikeInput bikeInput;
+        public Bike.BikePhysics bikePhysics;
         RegEx standardIndexNameRegex = new RegEx();
 
         public override void _Ready() {
@@ -26,13 +24,18 @@ namespace ForForm.Tcp
             {
                 case 'c':
                 {
+                    if (bikePhysics == null)
+                        return;
                     // skips first char because it is used for data type
-                    uint.TryParse(data[1..data.Length], out bikeInput.currentCadence);
+                    uint.TryParse(data[1..data.Length], out bikePhysics.input.currentCadence);
                     break;
                 }
                 case 'p':
                 {
-                    uint.TryParse(data[1..data.Length], out bikeInput.currentPower);
+                    if (bikePhysics == null)
+                        return;
+
+                    uint.TryParse(data[1..data.Length], out bikePhysics.input.currentPower);
                     break;
                 }
                 case 'i':

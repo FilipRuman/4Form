@@ -14,7 +14,7 @@ namespace ForForm.Bike
         BikePath path;
 
         [Export]
-        BikeInput input;
+        public BikeInput input;
 
         [Export]
         BikeStats stats;

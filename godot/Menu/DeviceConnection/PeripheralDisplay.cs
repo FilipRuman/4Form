@@ -1,5 +1,10 @@
+
+namespace ForForm.Menu
+ {
+
 using System;
 using Godot;
+
 
 public partial class PeripheralDisplay : Button {
 	[Export]
@@ -22,3 +27,5 @@ public partial class PeripheralDisplay : Button {
 		base._Pressed();
 	}
 }
+
+ }

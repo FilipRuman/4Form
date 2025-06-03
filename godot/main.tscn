@@ -1,15 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://cobwm3cgpu0d0"]
+[gd_scene load_steps=9 format=3 uid="uid://cobwm3cgpu0d0"]
 
-[ext_resource type="Script" uid="uid://jxi7cxvrgke2" path="res://Bike/BikePhysics.cs" id="1_7mycd"]
-[ext_resource type="Script" uid="uid://naawr1uq2pqg" path="res://TCP/Tcp.cs" id="1_ig7tw"]
-[ext_resource type="Script" uid="uid://buux5h8054hrj" path="res://TCP/TcpParser.cs" id="2_1bvp3"]
-[ext_resource type="Script" uid="uid://cgsqqemtrbivg" path="res://Bike/BikeStats.cs" id="2_272bh"]
-[ext_resource type="Script" uid="uid://hvnau3ci4qqp" path="res://Bike/BikePath.cs" id="3_5vw27"]
-[ext_resource type="Script" uid="uid://bqdo3og8xp122" path="res://Bike/BikeInput.cs" id="6_kek77"]
-[ext_resource type="Script" uid="uid://ue850mqjokbo" path="res://Bike/BikeUIMain.cs" id="7_272bh"]
-[ext_resource type="PackedScene" uid="uid://dcyashkyaw7d6" path="res://assets/gravel bike model/road_bike.fbx" id="8_4c57u"]
+[ext_resource type="PackedScene" uid="uid://w67eox52c1g" path="res://Bike/bike.tscn" id="3_272bh"]
 [ext_resource type="Theme" uid="uid://regixqqcydb8" path="res://theme.tres" id="10_4c57u"]
 [ext_resource type="PackedScene" uid="uid://b3prul5dd2nbn" path="res://Menu/DeviceConnection/peripherial_display.tscn" id="11_efxa6"]
+[ext_resource type="Script" uid="uid://basdgtr0ivql5" path="res://Menu/MenuMain.cs" id="11_w48qg"]
 [ext_resource type="Script" uid="uid://cninou2cus8fu" path="res://Menu/DeviceConnection/PeripheralsMenu.cs" id="11_ycdy4"]
 [ext_resource type="Script" uid="uid://d3apq1nnkijj3" path="res://Menu/DeviceConnection/DeviceType.cs" id="13_w48qg"]
 [ext_resource type="Material" uid="uid://b8eum2mg7jl7r" path="res://assets/Material-LIB/Cobblestone/cobleStone.tres" id="13_ycdy4"]
@@ -30,109 +24,6 @@ transform = Transform3D(-0.537866, 0.419072, -0.731491, 0.452779, 0.875526, 0.16
 [node name="Path3D" type="Path3D" parent="."]
 curve = SubResource("Curve3D_1bvp3")
 
-[node name="Bike" type="PathFollow3D" parent="Path3D" node_paths=PackedStringArray("path", "input", "stats")]
-transform = Transform3D(-0.405073, 0.454563, -0.793269, 0.396349, 0.869179, 0.295671, 0.823898, -0.194644, -0.532251, -3.64499, 2.21579, 1.84005)
-progress = 26.05
-v_offset = 0.095
-script = ExtResource("1_7mycd")
-path = NodePath("Bike path")
-input = NodePath("BikeInput")
-stats = NodePath("Bike stats")
-speed = 36.23
-gravity = 9.8
-
-[node name="Bike stats" type="Node" parent="Path3D/Bike"]
-script = ExtResource("2_272bh")
-bikeMass = 10.0
-userMass = 60.0
-whealFrictionCoefficient = 0.165
-whealRadius = 0.5
-frontalArea = 2.0
-dragCoefficient = 1.365
-
-[node name="Bike path" type="Node" parent="Path3D/Bike" node_paths=PackedStringArray("bikePhysics", "pathFollow")]
-script = ExtResource("3_5vw27")
-bikePhysics = NodePath("..")
-pathFollow = NodePath("..")
-
-[node name="Tcp" type="Node" parent="Path3D/Bike" node_paths=PackedStringArray("tcpParser")]
-script = ExtResource("1_ig7tw")
-tcpParser = NodePath("TcpParser")
-
-[node name="TcpParser" type="Node" parent="Path3D/Bike/Tcp" node_paths=PackedStringArray("tcp", "peripheralsMenu", "bikeInput")]
-script = ExtResource("2_1bvp3")
-tcp = NodePath("..")
-peripheralsMenu = NodePath("../../../../menu/Panel/device connection/PeripherialsMenu")
-bikeInput = NodePath("../../BikeInput")
-
-[node name="BikeInput" type="Node" parent="Path3D/Bike"]
-script = ExtResource("6_kek77")
-
-[node name="CanvasLayer" type="CanvasLayer" parent="Path3D/Bike"]
-
-[node name="BikeUIMain" type="Node" parent="Path3D/Bike/CanvasLayer" node_paths=PackedStringArray("bikeInput", "bikePhysics", "cadenceLabel", "powerLabel", "speedLabel", "fpsLabel")]
-script = ExtResource("7_272bh")
-bikeInput = NodePath("../../BikeInput")
-bikePhysics = NodePath("../..")
-cadenceLabel = NodePath("../Panel/Main stats layout/Cadence")
-powerLabel = NodePath("../Panel/Main stats layout/Power")
-speedLabel = NodePath("../Panel/Main stats layout/Speed")
-fpsLabel = NodePath("../FPS")
-
-[node name="FPS" type="Label" parent="Path3D/Bike/CanvasLayer"]
-offset_right = 116.0
-offset_bottom = 28.0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 20
-text = "FPS:"
-
-[node name="Panel" type="Panel" parent="Path3D/Bike/CanvasLayer"]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -227.0
-offset_top = -40.0
-offset_right = 227.0
-grow_horizontal = 2
-grow_vertical = 0
-size_flags_horizontal = 3
-theme = ExtResource("10_4c57u")
-
-[node name="Main stats layout" type="HBoxContainer" parent="Path3D/Bike/CanvasLayer/Panel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-alignment = 1
-
-[node name="Cadence" type="Label" parent="Path3D/Bike/CanvasLayer/Panel/Main stats layout"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0.913725, 0, 1)
-theme_override_font_sizes/font_size = 20
-text = "Cadence: 90"
-
-[node name="Power" type="Label" parent="Path3D/Bike/CanvasLayer/Panel/Main stats layout"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.917647, 0, 0, 1)
-theme_override_font_sizes/font_size = 20
-text = "Power: 150"
-
-[node name="Speed" type="Label" parent="Path3D/Bike/CanvasLayer/Panel/Main stats layout"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.119761, 0.443755, 1, 1)
-theme_override_font_sizes/font_size = 20
-text = "Speed: 150"
-
-[node name="Camera3D" type="Camera3D" parent="Path3D/Bike"]
-transform = Transform3D(1.00001, 0, 0, 0, 1.00001, 0, 0, 0, 1.00001, 0.106, 0.306, 0.8)
-
-[node name="road_bike" parent="Path3D/Bike" instance=ExtResource("8_4c57u")]
-transform = Transform3D(-4.37114e-09, 0, 0.1, 0, 0.1, 0, -0.1, 0, -4.37114e-09, 0, 0, 0)
-
 [node name="CSGPolygon3D" type="CSGPolygon3D" parent="Path3D"]
 material_override = ExtResource("13_ycdy4")
 polygon = PackedVector2Array(-0.5, -0.15, -0.5, 0, 0.5, 0, 0.5, -0.15)
@@ -150,9 +41,22 @@ path_joined = true
 smooth_faces = true
 material = ExtResource("13_ycdy4")
 
-[node name="menu" type="CanvasLayer" parent="."]
+[node name="menu main" type="Control" parent="." node_paths=PackedStringArray("playerSpawnPoint", "tabBar", "tabContents", "startGameButton")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("11_w48qg")
+player = ExtResource("3_272bh")
+playerSpawnPoint = NodePath("../Path3D")
+tabBar = NodePath("Panel/tabs/TabBar")
+tabContents = [NodePath("Panel/contents/device connection"), NodePath("Panel/contents/Load game")]
+startGameButton = NodePath("Panel/contents/Load game/Button")
 
-[node name="Panel" type="Panel" parent="menu"]
+[node name="Panel" type="Panel" parent="menu main"]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -167,7 +71,7 @@ grow_vertical = 2
 pivot_offset = Vector2(550, 300)
 theme = ExtResource("10_4c57u")
 
-[node name="tabs" type="Panel" parent="menu/Panel"]
+[node name="tabs" type="Panel" parent="menu main/Panel"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -176,7 +80,7 @@ grow_horizontal = 2
 theme = ExtResource("10_4c57u")
 theme_type_variation = &"lightPanel"
 
-[node name="TabBar" type="TabBar" parent="menu/Panel/tabs"]
+[node name="TabBar" type="TabBar" parent="menu main/Panel/tabs"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -193,11 +97,11 @@ tab_alignment = 1
 clip_tabs = false
 tab_count = 4
 tab_0/title = "device connection "
-tab_1/title = "Mode selection"
+tab_1/title = "Load game 󰚭"
 tab_2/title = "Settings"
 tab_3/title = "More things"
 
-[node name="device connection" type="Control" parent="menu/Panel"]
+[node name="contents" type="Control" parent="menu main/Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -209,14 +113,21 @@ offset_bottom = -5.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PeripherialsMenu" type="Node" parent="menu/Panel/device connection" node_paths=PackedStringArray("peripheralsDisplaysLayout", "tcpParser", "deviceTypes")]
+[node name="device connection" type="Control" parent="menu main/Panel/contents"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PeripherialsMenu" type="Node" parent="menu main/Panel/contents/device connection" node_paths=PackedStringArray("peripheralsDisplaysLayout", "deviceTypes")]
 script = ExtResource("11_ycdy4")
 peripheralsDisplaysLayout = NodePath("../HSplitContainer/peripheral to connect/VBoxContainer2")
-tcpParser = NodePath("../../../../Path3D/Bike/Tcp/TcpParser")
 peripheralDisplayPrefab = ExtResource("11_efxa6")
 deviceTypes = [NodePath("../HSplitContainer/device types/VBoxContainer2/Smart bike trainer 󰂣/trainer device type"), NodePath("../HSplitContainer/device types/VBoxContainer2/heart rate tracker /heart rate device type")]
 
-[node name="HSplitContainer" type="HSplitContainer" parent="menu/Panel/device connection"]
+[node name="HSplitContainer" type="HSplitContainer" parent="menu main/Panel/contents/device connection"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -225,11 +136,11 @@ grow_horizontal = 2
 grow_vertical = 2
 split_offset = 300
 
-[node name="device types" type="Panel" parent="menu/Panel/device connection/HSplitContainer"]
+[node name="device types" type="Panel" parent="menu main/Panel/contents/device connection/HSplitContainer"]
 layout_mode = 2
 theme_type_variation = &"lightborderPanel"
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="menu/Panel/device connection/HSplitContainer/device types"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="menu main/Panel/contents/device connection/HSplitContainer/device types"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -242,52 +153,52 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("10_4c57u")
 
-[node name="Smart bike trainer 󰂣" parent="menu/Panel/device connection/HSplitContainer/device types/VBoxContainer2" node_paths=PackedStringArray("icon") instance=ExtResource("11_efxa6")]
+[node name="Smart bike trainer 󰂣" parent="menu main/Panel/contents/device connection/HSplitContainer/device types/VBoxContainer2" node_paths=PackedStringArray("icon") instance=ExtResource("11_efxa6")]
 layout_mode = 2
 icon = Object(Label,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":false,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(0, 0),"layout_direction":0,"layout_mode":1,"anchors_preset":-1,"anchor_left":0.992,"anchor_top":0.5,"anchor_right":1.0,"anchor_bottom":0.5,"offset_left":-24.056,"offset_top":-12.5,"offset_right":-3.0,"offset_bottom":12.5,"grow_horizontal":0,"grow_vertical":2,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":4,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"mouse_filter":2,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"theme":null,"theme_type_variation":&"","text":"󰂣 ","label_settings":null,"horizontal_alignment":2,"vertical_alignment":0,"autowrap_mode":0,"justification_flags":163,"paragraph_separator":"\\n","clip_text":false,"text_overrun_behavior":0,"ellipsis_char":"…","uppercase":false,"tab_stops":PackedFloat32Array(),"lines_skipped":0,"max_lines_visible":-1,"visible_characters":-1,"visible_characters_behavior":0,"visible_ratio":1.0,"text_direction":0,"language":"","structured_text_bidi_override":0,"structured_text_bidi_override_options":[],"script":null)
 
 icon = NodePath("icon")
 
-[node name="icon" parent="menu/Panel/device connection/HSplitContainer/device types/VBoxContainer2/Smart bike trainer 󰂣" index="0"]
+[node name="icon" parent="menu main/Panel/contents/device connection/HSplitContainer/device types/VBoxContainer2/Smart bike trainer 󰂣" index="0"]
 visible = false
 
-[node name="trainer device type" type="Node" parent="menu/Panel/device connection/HSplitContainer/device types/VBoxContainer2/Smart bike trainer 󰂣" node_paths=PackedStringArray("display")]
+[node name="trainer device type" type="Node" parent="menu main/Panel/contents/device connection/HSplitContainer/device types/VBoxContainer2/Smart bike trainer 󰂣" node_paths=PackedStringArray("display")]
 script = ExtResource("13_w48qg")
 display = NodePath("..")
 name = "smart trainer"
 glyphIcon = "󰂣 "
 
-[node name="heart rate tracker " parent="menu/Panel/device connection/HSplitContainer/device types/VBoxContainer2" node_paths=PackedStringArray("icon") instance=ExtResource("11_efxa6")]
+[node name="heart rate tracker " parent="menu main/Panel/contents/device connection/HSplitContainer/device types/VBoxContainer2" node_paths=PackedStringArray("icon") instance=ExtResource("11_efxa6")]
 layout_mode = 2
 text = "heart rate tracker "
 icon = Object(Label,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":false,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(0, 0),"layout_direction":0,"layout_mode":1,"anchors_preset":-1,"anchor_left":0.992,"anchor_top":0.5,"anchor_right":1.0,"anchor_bottom":0.5,"offset_left":-24.056,"offset_top":-12.5,"offset_right":-3.0,"offset_bottom":12.5,"grow_horizontal":0,"grow_vertical":2,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":4,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"mouse_filter":2,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"theme":null,"theme_type_variation":&"","text":"󰂣 ","label_settings":null,"horizontal_alignment":2,"vertical_alignment":0,"autowrap_mode":0,"justification_flags":163,"paragraph_separator":"\\n","clip_text":false,"text_overrun_behavior":0,"ellipsis_char":"…","uppercase":false,"tab_stops":PackedFloat32Array(),"lines_skipped":0,"max_lines_visible":-1,"visible_characters":-1,"visible_characters_behavior":0,"visible_ratio":1.0,"text_direction":0,"language":"","structured_text_bidi_override":0,"structured_text_bidi_override_options":[],"script":null)
 
 icon = NodePath("icon")
 
-[node name="icon" parent="menu/Panel/device connection/HSplitContainer/device types/VBoxContainer2/heart rate tracker " index="0"]
+[node name="icon" parent="menu main/Panel/contents/device connection/HSplitContainer/device types/VBoxContainer2/heart rate tracker " index="0"]
 visible = false
 
-[node name="heart rate device type" type="Node" parent="menu/Panel/device connection/HSplitContainer/device types/VBoxContainer2/heart rate tracker " node_paths=PackedStringArray("display")]
+[node name="heart rate device type" type="Node" parent="menu main/Panel/contents/device connection/HSplitContainer/device types/VBoxContainer2/heart rate tracker " node_paths=PackedStringArray("display")]
 script = ExtResource("13_w48qg")
 display = NodePath("..")
 name = "heart rate"
 glyphIcon = " "
 
-[node name="other device type 󰤟" parent="menu/Panel/device connection/HSplitContainer/device types/VBoxContainer2" node_paths=PackedStringArray("icon") instance=ExtResource("11_efxa6")]
+[node name="other device type 󰤟" parent="menu main/Panel/contents/device connection/HSplitContainer/device types/VBoxContainer2" node_paths=PackedStringArray("icon") instance=ExtResource("11_efxa6")]
 layout_mode = 2
 text = "other device type 󰤟"
 icon = Object(Label,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":false,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(0, 0),"layout_direction":0,"layout_mode":1,"anchors_preset":-1,"anchor_left":0.992,"anchor_top":0.5,"anchor_right":1.0,"anchor_bottom":0.5,"offset_left":-24.056,"offset_top":-12.5,"offset_right":-3.0,"offset_bottom":12.5,"grow_horizontal":0,"grow_vertical":2,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":4,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"mouse_filter":2,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"theme":null,"theme_type_variation":&"","text":"󰂣 ","label_settings":null,"horizontal_alignment":2,"vertical_alignment":0,"autowrap_mode":0,"justification_flags":163,"paragraph_separator":"\\n","clip_text":false,"text_overrun_behavior":0,"ellipsis_char":"…","uppercase":false,"tab_stops":PackedFloat32Array(),"lines_skipped":0,"max_lines_visible":-1,"visible_characters":-1,"visible_characters_behavior":0,"visible_ratio":1.0,"text_direction":0,"language":"","structured_text_bidi_override":0,"structured_text_bidi_override_options":[],"script":null)
 
 icon = NodePath("icon")
 
-[node name="icon" parent="menu/Panel/device connection/HSplitContainer/device types/VBoxContainer2/other device type 󰤟" index="0"]
+[node name="icon" parent="menu main/Panel/contents/device connection/HSplitContainer/device types/VBoxContainer2/other device type 󰤟" index="0"]
 visible = false
 
-[node name="peripheral to connect" type="Panel" parent="menu/Panel/device connection/HSplitContainer"]
+[node name="peripheral to connect" type="Panel" parent="menu main/Panel/contents/device connection/HSplitContainer"]
 layout_mode = 2
 theme_type_variation = &"lightborderPanel"
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="menu/Panel/device connection/HSplitContainer/peripheral to connect"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="menu main/Panel/contents/device connection/HSplitContainer/peripheral to connect"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -300,6 +211,42 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("10_4c57u")
 
-[editable path="menu/Panel/device connection/HSplitContainer/device types/VBoxContainer2/Smart bike trainer 󰂣"]
-[editable path="menu/Panel/device connection/HSplitContainer/device types/VBoxContainer2/heart rate tracker "]
-[editable path="menu/Panel/device connection/HSplitContainer/device types/VBoxContainer2/other device type 󰤟"]
+[node name="Load game" type="Control" parent="menu main/Panel/contents"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="peripheral to connect" type="Panel" parent="menu main/Panel/contents/Load game"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"lightborderPanel"
+
+[node name="Button" type="Button" parent="menu main/Panel/contents/Load game"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -48.0
+offset_top = -31.0
+offset_right = 49.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("10_4c57u")
+theme_type_variation = &"buttonHighlight"
+theme_override_font_sizes/font_size = 23
+text = "Start game!"
+
+[editable path="menu main/Panel/contents/device connection/HSplitContainer/device types/VBoxContainer2/Smart bike trainer 󰂣"]
+[editable path="menu main/Panel/contents/device connection/HSplitContainer/device types/VBoxContainer2/heart rate tracker "]
+[editable path="menu main/Panel/contents/device connection/HSplitContainer/device types/VBoxContainer2/other device type 󰤟"]

@@ -9,9 +9,9 @@
 [ext_resource type="Script" uid="uid://ue850mqjokbo" path="res://Bike/BikeUIMain.cs" id="7_272bh"]
 [ext_resource type="PackedScene" uid="uid://dcyashkyaw7d6" path="res://assets/gravel bike model/road_bike.fbx" id="8_4c57u"]
 [ext_resource type="Theme" uid="uid://regixqqcydb8" path="res://theme.tres" id="10_4c57u"]
-[ext_resource type="PackedScene" uid="uid://b3prul5dd2nbn" path="res://Menu/peripherial_display.tscn" id="11_efxa6"]
-[ext_resource type="Script" uid="uid://cninou2cus8fu" path="res://Menu/PeripheralsMenu.cs" id="11_ycdy4"]
-[ext_resource type="Script" uid="uid://d3apq1nnkijj3" path="res://Menu/DeviceType.cs" id="13_w48qg"]
+[ext_resource type="PackedScene" uid="uid://b3prul5dd2nbn" path="res://Menu/DeviceConnection/peripherial_display.tscn" id="11_efxa6"]
+[ext_resource type="Script" uid="uid://cninou2cus8fu" path="res://Menu/DeviceConnection/PeripheralsMenu.cs" id="11_ycdy4"]
+[ext_resource type="Script" uid="uid://d3apq1nnkijj3" path="res://Menu/DeviceConnection/DeviceType.cs" id="13_w48qg"]
 [ext_resource type="Material" uid="uid://b8eum2mg7jl7r" path="res://assets/Material-LIB/Cobblestone/cobleStone.tres" id="13_ycdy4"]
 
 [sub_resource type="Curve3D" id="Curve3D_1bvp3"]

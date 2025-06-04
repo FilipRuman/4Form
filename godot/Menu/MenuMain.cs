@@ -1,11 +1,12 @@
-
 namespace ForForm.Menu
 {
+    using Godot;
+    using Tcp;
 
-using Godot;
-	using Tcp; 
     public partial class MenuMain : Control {
-	    [Export]TcpParser tcpParser;
+        [Export]
+        TcpParser tcpParser;
+
         [Export]
         PackedScene playerPrefab;
 
@@ -23,7 +24,10 @@ using Godot;
 
         public override void _Process(double delta) {
             base._Process(delta);
-            UpdateTabs();
+            if (Input.IsActionJustPressed("ToggleMenu"))
+                Visible = !Visible;
+            if (Visible) 
+                UpdateTabs();
         }
 
         public override void _Ready() {
@@ -44,8 +48,8 @@ using Godot;
 
         public void StartGame() {
             Visible = false;
-	    var playerNode = playerPrefab.Instantiate();
-	    tcpParser.bikePhysics = ((Bike.BikePhysics) playerNode  );
+            var playerNode = playerPrefab.Instantiate();
+            tcpParser.bikePhysics = ((Bike.BikePhysics)playerNode);
             playerSpawnPoint.AddChild(playerNode);
         }
     }

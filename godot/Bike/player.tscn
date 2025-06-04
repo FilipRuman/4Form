@@ -59,7 +59,7 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_top = -157.0
-offset_right = 180.0
+offset_right = 332.0
 grow_vertical = 0
 size_flags_horizontal = 3
 theme = ExtResource("8_4xn5f")
@@ -75,6 +75,7 @@ offset_right = -3.0
 offset_bottom = -3.0
 grow_horizontal = 2
 grow_vertical = 2
+alignment = 1
 
 [node name="Wheal rpm" type="Label" parent="CanvasLayer/Panel/Main stats layout2"]
 layout_mode = 2

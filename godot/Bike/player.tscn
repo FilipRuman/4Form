@@ -16,17 +16,16 @@ script = ExtResource("1_k7cyb")
 path = NodePath("Bike path")
 input = NodePath("BikeInput")
 stats = NodePath("Bike stats")
-speed = 36.23
 gravity = 9.8
 
 [node name="Bike stats" type="Node" parent="."]
 script = ExtResource("2_ijeuo")
-bikeMass = 10.0
-userMass = 60.0
-whealFrictionCoefficient = 0.165
-whealRadius = 0.5
-frontalArea = 2.0
-dragCoefficient = 1.365
+bikeMass = 1.0
+userMass = 1.0
+wheelFrictionCoefficient = 0.01
+wheelRadius = 0.25
+frontalArea = 0.2
+dragCoefficient = 1.0
 
 [node name="Bike path" type="Node" parent="." node_paths=PackedStringArray("bikePhysics", "pathFollow")]
 script = ExtResource("3_upywu")

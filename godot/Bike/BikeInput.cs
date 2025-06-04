@@ -6,5 +6,6 @@ namespace ForForm.Bike
     public partial class BikeInput : Node {
         public uint currentPower; // Watts
         public uint currentCadence; //RPM
+        public uint wheelRotation; //Deg/s
     }
 }

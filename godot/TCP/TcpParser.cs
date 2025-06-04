@@ -11,8 +11,12 @@ namespace ForForm.Tcp
         Menu.PeripheralsMenu peripheralsMenu;
         public Bike.BikePhysics bikePhysics;
         RegEx standardIndexNameRegex = new RegEx();
+        RegEx trainerDataRegex = new RegEx();
 
         public override void _Ready() {
+            trainerDataRegex.Compile(
+                """power:(?<power>\d*);cadence:(?<cadence>\d*);rotation:(?<rotation>\d*);"""
+            );
             standardIndexNameRegex.Compile("""\|(?<name>.*)\|\[(?<index>.*)\]""");
             base._Ready();
         }
@@ -22,29 +26,16 @@ namespace ForForm.Tcp
             GD.Print($"ParseTcpDataString '{data}'");
             switch (data[0])
             {
-                case 'r':
+                case 't':
                 {
+                    //"t power:477;cadence:321;rotation:123;"
                     if (bikePhysics == null)
                         return;
-                    // skips first char because it is used for data type
-                    uint.TryParse(data[1..data.Length], out bikePhysics.input.wheelRotation);
-                    break;
-                }
+                    var regexOutput = trainerDataRegex.Search(data[1..data.Length]);
+                    bikePhysics.input.currentPower = uint.Parse(regexOutput.GetString("power"));
+                    bikePhysics.input.currentCadence = uint.Parse(regexOutput.GetString("cadence"));
+                    bikePhysics.input.wheelRotation = uint.Parse(regexOutput.GetString("rotation"));
 
-                case 'c':
-                {
-                    if (bikePhysics == null)
-                        return;
-                    // skips first char because it is used for data type
-                    uint.TryParse(data[1..data.Length], out bikePhysics.input.currentCadence);
-                    break;
-                }
-                case 'p':
-                {
-                    if (bikePhysics == null)
-                        return;
-
-                    uint.TryParse(data[1..data.Length], out bikePhysics.input.currentPower);
                     break;
                 }
                 case 'i':

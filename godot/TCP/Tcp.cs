@@ -73,7 +73,7 @@ namespace ForForm.Tcp
             byte[] buffer = new byte[1024];
             int bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length);
             string data_raw = Encoding.UTF8.GetString(buffer, 0, bytesRead);
-            var splittedData = data_raw.Split('\n', 1000000);
+            var splittedData = data_raw.Split("\n", 1000000);
             foreach (string data in splittedData) {
                 tcpParser.ParseTcpDataString(data_raw);
             }

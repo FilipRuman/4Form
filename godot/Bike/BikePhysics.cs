@@ -11,7 +11,7 @@ namespace ForForm.Bike
 
     public partial class BikePhysics : PathFollow3D {
         [Export]
-        BikePath path;
+        public BikePath path;
 
         [Export]
         public BikeInput input;

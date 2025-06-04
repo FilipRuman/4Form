@@ -11,10 +11,10 @@ namespace ForForm.Bike
         public float totalMass => bikeMass + userMass; //kg
 
         [Export]
-        public float whealFrictionCoefficient;
+        public float wheelFrictionCoefficient;
 
         [Export]
-        public float whealRadius; //m
+        public float wheelRadius; //m
 
         // public float whealCircumference => whealRadius * 2 * Mathf.Pi;
 

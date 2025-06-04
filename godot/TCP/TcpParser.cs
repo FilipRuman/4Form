@@ -22,6 +22,15 @@ namespace ForForm.Tcp
             GD.Print($"ParseTcpDataString '{data}'");
             switch (data[0])
             {
+                case 'r':
+                {
+                    if (bikePhysics == null)
+                        return;
+                    // skips first char because it is used for data type
+                    uint.TryParse(data[1..data.Length], out bikePhysics.input.wheelRotation);
+                    break;
+                }
+
                 case 'c':
                 {
                     if (bikePhysics == null)

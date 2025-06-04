@@ -38,13 +38,14 @@ script = ExtResource("6_4ial8")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="BikeUIMain" type="Node" parent="CanvasLayer" node_paths=PackedStringArray("bikeInput", "bikePhysics", "cadenceLabel", "powerLabel", "speedLabel", "fpsLabel")]
+[node name="BikeUIMain" type="Node" parent="CanvasLayer" node_paths=PackedStringArray("bikeInput", "bikePhysics", "cadenceLabel", "whealRPMLabel", "powerLabel", "speedLabel", "fpsLabel")]
 script = ExtResource("7_ogdi3")
 bikeInput = NodePath("../../BikeInput")
 bikePhysics = NodePath("../..")
-cadenceLabel = NodePath("../Panel/Main stats layout/Cadence")
-powerLabel = NodePath("../Panel/Main stats layout/Power")
-speedLabel = NodePath("../Panel/Main stats layout/Speed")
+cadenceLabel = NodePath("../Panel/Main stats layout2/Cadence")
+whealRPMLabel = NodePath("../Panel/Main stats layout2/Wheal rpm")
+powerLabel = NodePath("../Panel/Main stats layout2/Power")
+speedLabel = NodePath("../Panel/Main stats layout2/Speed")
 fpsLabel = NodePath("../FPS")
 
 [node name="FPS" type="Label" parent="CanvasLayer"]
@@ -55,41 +56,47 @@ theme_override_font_sizes/font_size = 20
 text = "FPS:"
 
 [node name="Panel" type="Panel" parent="CanvasLayer"]
-anchors_preset = 7
-anchor_left = 0.5
+anchors_preset = 2
 anchor_top = 1.0
-anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -227.0
-offset_top = -40.0
-offset_right = 227.0
-grow_horizontal = 2
+offset_top = -157.0
+offset_right = 180.0
 grow_vertical = 0
 size_flags_horizontal = 3
 theme = ExtResource("8_4xn5f")
 
-[node name="Main stats layout" type="HBoxContainer" parent="CanvasLayer/Panel"]
+[node name="Main stats layout2" type="VBoxContainer" parent="CanvasLayer/Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = -3.0
+offset_bottom = -3.0
 grow_horizontal = 2
 grow_vertical = 2
-alignment = 1
 
-[node name="Cadence" type="Label" parent="CanvasLayer/Panel/Main stats layout"]
+[node name="Wheal rpm" type="Label" parent="CanvasLayer/Panel/Main stats layout2"]
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+theme_override_colors/font_color = Color(0, 0.570972, 0.479468, 1)
+theme_override_font_sizes/font_size = 20
+text = "Wheal rpm: 150"
+
+[node name="Cadence" type="Label" parent="CanvasLayer/Panel/Main stats layout2"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0.913725, 0, 1)
 theme_override_font_sizes/font_size = 20
 text = "Cadence: 90"
 
-[node name="Power" type="Label" parent="CanvasLayer/Panel/Main stats layout"]
+[node name="Power" type="Label" parent="CanvasLayer/Panel/Main stats layout2"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.917647, 0, 0, 1)
 theme_override_font_sizes/font_size = 20
 text = "Power: 150"
 
-[node name="Speed" type="Label" parent="CanvasLayer/Panel/Main stats layout"]
+[node name="Speed" type="Label" parent="CanvasLayer/Panel/Main stats layout2"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.119761, 0.443755, 1, 1)
 theme_override_font_sizes/font_size = 20

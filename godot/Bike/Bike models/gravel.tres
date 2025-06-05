@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="BikeModel" load_steps=3 format=3 uid="uid://d2dfpnsadunbi"]
+
+[ext_resource type="Texture2D" uid="uid://uihlxu6qbhwg" path="res://assets/Material-LIB/Gravel/Gravel-B.png" id="1_qcg57"]
+[ext_resource type="Script" uid="uid://bkb846kwab3kt" path="res://Bike/BikeModel.cs" id="1_yp48w"]
+
+[resource]
+script = ExtResource("1_yp48w")
+name = "gravel"
+mass = 5.0
+wheelFrictionCoefficient = 0.1
+wheelRadius = 0.25
+frontalArea = 0.1
+icon = ExtResource("1_qcg57")
+metadata/_custom_type_script = "uid://bkb846kwab3kt"

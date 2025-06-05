@@ -1,0 +1,34 @@
+[gd_scene load_steps=3 format=3 uid="uid://qpe4q7ownweu"]
+
+[ext_resource type="Script" uid="uid://csa2uvw4q4cre" path="res://Menu/BikeConfig/BikeModelSelectionUI.cs" id="1_ucbld"]
+[ext_resource type="Texture2D" uid="uid://ki1om8r5hm7c" path="res://assets/Material-LIB/BrickWall/BrickWall[Grey]-B.png" id="1_w1buw"]
+
+[node name="Bike model selection prefab" type="Button" node_paths=PackedStringArray("textureRect", "nameLabel")]
+custom_minimum_size = Vector2(200, 200)
+theme_type_variation = &"buttonDefault"
+script = ExtResource("1_ucbld")
+textureRect = NodePath("VBoxContainer/TextureRect")
+nameLabel = NodePath("VBoxContainer/Label")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("1_w1buw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 34.275)
+layout_mode = 2
+text = "test bike model name that is realy long and big so the image scales"
+horizontal_alignment = 1
+autowrap_mode = 3

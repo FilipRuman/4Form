@@ -1,4 +1,4 @@
-namespace ForForm.Menu
+namespace ForForm.Menu.DeviceConnection
 {
     using System;
     using Godot;
@@ -16,7 +16,7 @@ namespace ForForm.Menu
         }
 
         public void Highlight(bool highlight) {
-            ThemeTypeVariation = highlight ? "buttonHighlight" : "buttonDefault";
+             ThemeVariants.SetForButton(highlight,this as Button);
         }
 
         public override void _Pressed() {

@@ -1,7 +1,7 @@
-using Godot;
-
-namespace ForForm.Menu
+namespace ForForm.Menu.DeviceConnection
 {
+    using Godot;
+
     [GlobalClass]
     public partial class DeviceType : Node {
         [Export]

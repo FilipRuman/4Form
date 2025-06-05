@@ -17,53 +17,42 @@ namespace ForForm.Bike
         public BikeInput input;
 
         [Export]
-        BikeStats stats;
-
-        [Export]
         public float speed; //m/s
         public float speedKmH => speed * 3.6f; // km/h
 
         [Export]
         float gravity; //m/s^2
-        float gravityForce => stats.totalMass * gravity; //N
+        float gravityForce => BikeStats.totalMass * gravity; //N
         float slopeGravityForce => gravityForce * Mathf.Sin(path.slopeAngleRadians); //the force that is pushing you forward from hills
 
         // If you take a corner that looks like nascar track (curved to the inside) the we would need to account other forces but this doesn't matter
         float normalGravityForce => gravityForce * Mathf.Cos(path.slopeAngleRadians); //the force that is applied directly to the ground
         float rollingResistanceForce =>
-            stats.wheelFrictionCoefficient * normalGravityForce * float.Sign(speed); //N
+            BikeStats.bikeModel.wheelFrictionCoefficient * normalGravityForce * float.Sign(speed); //N
 
         // I could use formula from my flight sim XD https://github.com/FilipRuman/Flight-sim
         const float StandardAirDensity = 1.2250f; // kg/m^3
         float airDragForce =>
-            stats.frontalArea
-            * stats.dragCoefficient
+            BikeStats.frontalArea
+            * BikeStats.dragCoefficient
             * StandardAirDensity
             * Mathf.Pow(speed, 2)
             / 2f
             * float.Sign(speed); //N
 
-        float DegSToRadS =  Mathf.Pi / 180f;
 
         //https://en.wikipedia.org/wiki/Torque
-        // TODO: use data from trainer for this
-        float whealAngularVelocity => input.wheelRotation * DegSToRadS; // rad/s
-
-        // this is pushing straight forward so we can replace dot product by multiplication
-        float torque => whealAngularVelocity == 0 ? 0 : input.currentPower / whealAngularVelocity; // Nm
-
-        // this is pushing straight forward so we can replace cross product by multiplication
-        float drivetrainForwardPushingForce => torque / stats.wheelRadius; // N
+        float drivetrainForwardPushingForce => input.currentPower / Mathf.Max(speed, 1); // N
 
         float totalForwardForce =>
             drivetrainForwardPushingForce
             - slopeGravityForce
             - rollingResistanceForce
             - airDragForce; //N
-        public float acceleration => totalForwardForce / stats.totalMass; // m/s^2 clamped to remove any weirdness
+        public float acceleration => totalForwardForce / BikeStats.totalMass; // m/s^2 clamped to remove any weirdness
 
         public override void _Process(double delta) {
-            GD.Print($"drivetrainForwardPushingForce {drivetrainForwardPushingForce}: {whealAngularVelocity} {torque} {input.currentPower}");
+            
             // so you don't roll backwards on hills when stopping pedaling
             speed = Mathf.Max(speed + acceleration * (float)delta, 0);
             base._Process(delta);

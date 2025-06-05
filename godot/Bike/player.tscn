@@ -8,14 +8,13 @@
 [ext_resource type="Theme" uid="uid://regixqqcydb8" path="res://theme.tres" id="8_4xn5f"]
 [ext_resource type="PackedScene" uid="uid://dcyashkyaw7d6" path="res://assets/gravel bike model/road_bike.fbx" id="9_lxdhe"]
 
-[node name="Bike" type="PathFollow3D" node_paths=PackedStringArray("path", "input", "stats")]
+[node name="Bike" type="PathFollow3D" node_paths=PackedStringArray("path", "input")]
 transform = Transform3D(-0.405073, 0.454563, -0.793269, 0.396349, 0.869179, 0.295671, 0.823898, -0.194644, -0.532251, 0, 0, 0)
 progress = 26.05
 v_offset = 0.095
 script = ExtResource("1_k7cyb")
 path = NodePath("Bike path")
 input = NodePath("BikeInput")
-stats = NodePath("Bike stats")
 gravity = 9.8
 
 [node name="Bike stats" type="Node" parent="."]
@@ -78,6 +77,7 @@ grow_vertical = 2
 alignment = 1
 
 [node name="Wheal rpm" type="Label" parent="CanvasLayer/Panel/Main stats layout2"]
+visible = false
 layout_mode = 2
 size_flags_stretch_ratio = 0.0
 theme_override_colors/font_color = Color(0, 0.570972, 0.479468, 1)

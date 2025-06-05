@@ -8,7 +8,7 @@ namespace ForForm.Tcp
         Tcp tcp;
 
         [Export]
-        Menu.PeripheralsMenu peripheralsMenu;
+        Menu.DeviceConnection.PeripheralsMenu peripheralsMenu;
         public Bike.BikePhysics bikePhysics;
         RegEx standardIndexNameRegex = new RegEx();
         RegEx trainerDataRegex = new RegEx();

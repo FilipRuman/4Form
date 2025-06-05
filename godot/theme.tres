@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=18 format=3 uid="uid://regixqqcydb8"]
+[gd_resource type="Theme" load_steps=21 format=3 uid="uid://regixqqcydb8"]
 
 [ext_resource type="FontFile" uid="uid://cjv70l87rkx5t" path="res://assets/Meslo/MesloLGLDZNerdFont-Regular.ttf" id="1_e1x85"]
 
@@ -14,6 +14,8 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 corner_detail = 6
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e1x85"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ndmpe"]
 content_margin_left = 10.0
@@ -57,6 +59,8 @@ corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 corner_detail = 4
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cjfk0"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yin2u"]
 bg_color = Color(0.431373, 0.533333, 0.596078, 1)
 corner_radius_top_left = 2
@@ -80,6 +84,8 @@ bg_color = Color(0.0901961, 0.129412, 0.14902, 1)
 corner_radius_top_left = 2
 corner_radius_top_right = 2
 corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vj6dk"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_504p6"]
 bg_color = Color(0.431373, 0.533333, 0.596078, 1)
@@ -172,16 +178,18 @@ Panel/styles/panel = SubResource("StyleBoxFlat_e1x85")
 TabBar/styles/button_highlight = null
 TabBar/styles/button_pressed = null
 TabBar/styles/tab_disabled = null
-TabBar/styles/tab_focus = null
+TabBar/styles/tab_focus = SubResource("StyleBoxEmpty_e1x85")
 TabBar/styles/tab_hovered = SubResource("StyleBoxFlat_ndmpe")
 TabBar/styles/tab_selected = SubResource("StyleBoxFlat_vj6dk")
 TabBar/styles/tab_unselected = SubResource("StyleBoxFlat_110ce")
 buttonDefault/base_type = &"Button"
+buttonDefault/styles/focus = SubResource("StyleBoxEmpty_cjfk0")
 buttonDefault/styles/hover = SubResource("StyleBoxFlat_yin2u")
 buttonDefault/styles/hover_pressed = SubResource("StyleBoxFlat_6cw85")
 buttonDefault/styles/normal = SubResource("StyleBoxFlat_ttqs8")
 buttonDefault/styles/pressed = SubResource("StyleBoxFlat_wdt2l")
 buttonHighlight/base_type = &"Button"
+buttonHighlight/styles/focus = SubResource("StyleBoxEmpty_vj6dk")
 buttonHighlight/styles/hover = SubResource("StyleBoxFlat_504p6")
 buttonHighlight/styles/hover_pressed = SubResource("StyleBoxFlat_howt0")
 buttonHighlight/styles/normal = SubResource("StyleBoxFlat_n3ikw")

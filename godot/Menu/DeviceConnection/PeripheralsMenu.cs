@@ -1,4 +1,4 @@
-namespace ForForm.Menu
+namespace ForForm.Menu.DeviceConnection
 {
     using System.Collections.Generic;
     using Godot;
@@ -90,6 +90,5 @@ namespace ForForm.Menu
 
             matchingDeviceType.display.Highlight(true);
         }
-
     }
 }

@@ -40,17 +40,9 @@ namespace ForForm.Bike
             / 2f
             * float.Sign(speed); //N
 
-        float DegSToRadS =  Mathf.Pi / 180f;
 
         //https://en.wikipedia.org/wiki/Torque
-        // TODO: use data from trainer for this
-        float whealAngularVelocity => input.wheelRotation * DegSToRadS; // rad/s
-
-        // this is pushing straight forward so we can replace dot product by multiplication
-        float torque => whealAngularVelocity == 0 ? 0 : input.currentPower / whealAngularVelocity; // Nm
-
-        // this is pushing straight forward so we can replace cross product by multiplication
-        float drivetrainForwardPushingForce => torque / stats.wheelRadius; // N
+        float drivetrainForwardPushingForce => input.currentPower / Mathf.Max(speed, 1); // N
 
         float totalForwardForce =>
             drivetrainForwardPushingForce

@@ -73,14 +73,14 @@ namespace ForForm.Tcp
             byte[] buffer = new byte[1024];
             int bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length);
             string data_raw = Encoding.UTF8.GetString(buffer, 0, bytesRead);
-            var splittedData = data_raw.Split("\n", 1000000);
+            var splittedData = data_raw.Split('\n');
             foreach (string data in splittedData) {
-                tcpParser.ParseTcpDataString(data_raw);
+                tcpParser.ParseTcpDataString(data);
             }
         }
 
         public async Task SendDataAsync(String stringToSend) {
-            stringToSend += "\n";
+            stringToSend += '\n';
             var bytesToSend = Encoding.UTF8.GetBytes(stringToSend);
             await stream.WriteAsync(bytesToSend);
         }

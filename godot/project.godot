@@ -15,13 +15,34 @@ run/main_scene="res://main.tscn"
 config/features=PackedStringArray("4.4", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+
 [dotnet]
 
 project/assembly_name="4Form"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/easy charts/godot-engine.easy-charts-1b8d7f2ceacac54ca132159fd26c122bef88c9fb/addons/easy_charts/plugin.cfg")
+enabled=PackedStringArray()
+
+[file_customization]
+
+folder_colors={
+"res://Bike/": "purple",
+"res://Menu/": "yellow",
+"res://Menu/BikeConfig/": "blue",
+"res://Menu/DeviceConnection/": "green",
+"res://TCP/": "orange",
+"res://addons/": "green",
+"res://assets/": "gray",
+"res://assets/Material-LIB/": "yellow",
+"res://assets/Meslo/": "orange",
+"res://assets/gravel bike model/": "blue",
+"res://shaders/": "teal"
+}
 
 [filesystem]
 

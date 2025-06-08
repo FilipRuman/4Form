@@ -44,8 +44,11 @@ namespace ForForm.Bike
         //https://en.wikipedia.org/wiki/Torque
         float drivetrainForwardPushingForce => input.currentPower / Mathf.Max(speed, 1); // N
 
+        public float testingForce = 0;
+
         float totalForwardForce =>
             drivetrainForwardPushingForce
+            + testingForce
             - slopeGravityForce
             - rollingResistanceForce
             - airDragForce; //N

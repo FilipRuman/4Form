@@ -5,6 +5,8 @@ TODO: README
 
 
 
+Add baisic wind sounds 
+Change Main  UI colors
 Setup:
 git clone --recurse-submodules https://github.com/FilipRuman/4Form
 cd ble submodule

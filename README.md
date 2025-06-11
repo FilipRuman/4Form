@@ -3,7 +3,7 @@
 
 TODO: README
 
-![image](https://github.com/user-attachments/assets/e0a0e869-cae6-44d1-a005-af8edde10efd)
+![image](https://github.com/user-attachments/assets/4a18132c-e328-4e19-8c4c-8e0ca543fa62)
 
 
 Add baisic wind sounds 

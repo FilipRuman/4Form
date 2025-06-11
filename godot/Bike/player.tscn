@@ -10,11 +10,12 @@
 [ext_resource type="Theme" uid="uid://regixqqcydb8" path="res://theme.tres" id="8_4xn5f"]
 [ext_resource type="PackedScene" uid="uid://dcyashkyaw7d6" path="res://assets/gravel bike model/road_bike.fbx" id="9_lxdhe"]
 
-[node name="Bike" type="PathFollow3D" node_paths=PackedStringArray("path", "input")]
+[node name="Bike" type="PathFollow3D" node_paths=PackedStringArray("camera", "path", "input")]
 transform = Transform3D(-0.405073, 0.454563, -0.793269, 0.396349, 0.869179, 0.295671, 0.823898, -0.194644, -0.532251, 0, 0, 0)
 progress = 26.05
 v_offset = 0.095
 script = ExtResource("1_k7cyb")
+camera = NodePath("Camera3D")
 path = NodePath("Bike path")
 input = NodePath("BikeInput")
 gravity = 9.8
@@ -32,6 +33,7 @@ dragCoefficient = 1.0
 script = ExtResource("3_upywu")
 bikePhysics = NodePath("..")
 pathFollow = NodePath("..")
+speedScale = 2.5
 
 [node name="BikeInput" type="Node" parent="."]
 script = ExtResource("6_4ial8")
@@ -180,6 +182,7 @@ text = "Slope : 100%"
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1.00001, 0, 0, 0, 1.00001, 0, 0, 0, 1.00001, 0, 0.4, 0.035)
+current = true
 
 [node name="road_bike" parent="." instance=ExtResource("9_lxdhe")]
 transform = Transform3D(-6.55671e-09, 0, 0.15, 0, 0.15, 0, -0.15, 0, -6.55671e-09, 0, 0, 0)

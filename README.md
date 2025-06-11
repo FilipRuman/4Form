@@ -3,8 +3,8 @@
 
 TODO: README
 
+![image](https://github.com/user-attachments/assets/e0a0e869-cae6-44d1-a005-af8edde10efd)
 
-![image](https://github.com/user-attachments/assets/c6995046-17af-4077-8273-1663367d4da9)
 
 Add baisic wind sounds 
 Change Main  UI colors

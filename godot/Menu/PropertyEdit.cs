@@ -11,9 +11,9 @@ namespace ForForm.Menu
         float min,
             max;
 
-        public void Setup(float initValue,Action<float> output,bool editable = true) {
+        public void Setup(float initValue, Action<float> output) {
             lineEdit.Text = initValue.ToString();
-            lineEdit.Editable = editable;
+            lineEdit.Editable = GameConfig.GameSettings.CurrentGameMode.canEditBikeModels;
             lineEdit.TextChanged += (t) =>
             {
                 ParseAndClamp(t, output);

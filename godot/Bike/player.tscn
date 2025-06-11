@@ -1,0 +1,188 @@
+[gd_scene load_steps=10 format=3 uid="uid://w67eox52c1g"]
+
+[ext_resource type="Script" uid="uid://jxi7cxvrgke2" path="res://Bike/BikePhysics.cs" id="1_k7cyb"]
+[ext_resource type="Script" uid="uid://cgsqqemtrbivg" path="res://Bike/BikeStats.cs" id="2_ijeuo"]
+[ext_resource type="Script" uid="uid://hvnau3ci4qqp" path="res://Bike/BikePath.cs" id="3_upywu"]
+[ext_resource type="Script" uid="uid://bqdo3og8xp122" path="res://Bike/BikeInput.cs" id="6_4ial8"]
+[ext_resource type="FontFile" uid="uid://ktmhyk7ky8ip" path="res://assets/Meslo/MesloLGMNerdFont-Bold.ttf" id="7_6whun"]
+[ext_resource type="Script" uid="uid://ue850mqjokbo" path="res://Bike/BikeUIMain.cs" id="7_ogdi3"]
+[ext_resource type="Script" uid="uid://umjrnyh6tl08" path="res://Bike/TestingBikeUI.cs" id="7_qacm0"]
+[ext_resource type="Theme" uid="uid://regixqqcydb8" path="res://theme.tres" id="8_4xn5f"]
+[ext_resource type="PackedScene" uid="uid://dcyashkyaw7d6" path="res://assets/gravel bike model/road_bike.fbx" id="9_lxdhe"]
+
+[node name="Bike" type="PathFollow3D" node_paths=PackedStringArray("camera", "path", "input")]
+transform = Transform3D(-0.405073, 0.454563, -0.793269, 0.396349, 0.869179, 0.295671, 0.823898, -0.194644, -0.532251, 0, 0, 0)
+progress = 26.05
+v_offset = 0.095
+script = ExtResource("1_k7cyb")
+camera = NodePath("Camera3D")
+path = NodePath("Bike path")
+input = NodePath("BikeInput")
+gravity = 9.8
+
+[node name="Bike stats" type="Node" parent="."]
+script = ExtResource("2_ijeuo")
+bikeMass = 1.0
+userMass = 1.0
+wheelFrictionCoefficient = 0.01
+wheelRadius = 0.25
+frontalArea = 0.2
+dragCoefficient = 1.0
+
+[node name="Bike path" type="Node" parent="." node_paths=PackedStringArray("bikePhysics", "pathFollow")]
+script = ExtResource("3_upywu")
+bikePhysics = NodePath("..")
+pathFollow = NodePath("..")
+speedScale = 2.5
+
+[node name="BikeInput" type="Node" parent="."]
+script = ExtResource("6_4ial8")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="BikeUIMain" type="Node" parent="CanvasLayer" node_paths=PackedStringArray("bikeInput", "bikePhysics", "cadenceLabel", "powerLabel", "slopeLabel", "speedLabel", "fpsLabel")]
+script = ExtResource("7_ogdi3")
+bikeInput = NodePath("../../BikeInput")
+bikePhysics = NodePath("../..")
+cadenceLabel = NodePath("../Panel/Main stats layout2/Cadence")
+powerLabel = NodePath("../Panel/Main stats layout2/Power")
+slopeLabel = NodePath("../climbing ui/slope")
+speedLabel = NodePath("../Panel/Main stats layout2/Speed")
+fpsLabel = NodePath("../FPS")
+
+[node name="FPS" type="Label" parent="CanvasLayer"]
+offset_right = 116.0
+offset_bottom = 28.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 20
+text = "FPS:"
+
+[node name="Panel" type="Panel" parent="CanvasLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -157.0
+offset_right = 332.0
+grow_vertical = 0
+size_flags_horizontal = 3
+theme = ExtResource("8_4xn5f")
+
+[node name="Main stats layout2" type="VBoxContainer" parent="CanvasLayer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = -3.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Wheal rpm" type="Label" parent="CanvasLayer/Panel/Main stats layout2"]
+visible = false
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+theme_override_colors/font_color = Color(0, 0.570972, 0.479468, 1)
+theme_override_font_sizes/font_size = 20
+text = "Wheal rpm: 150"
+
+[node name="Cadence" type="Label" parent="CanvasLayer/Panel/Main stats layout2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.913725, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "Cadence: 90"
+
+[node name="Power" type="Label" parent="CanvasLayer/Panel/Main stats layout2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.917647, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "Power: 150"
+
+[node name="Speed" type="Label" parent="CanvasLayer/Panel/Main stats layout2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.119761, 0.443755, 1, 1)
+theme_override_font_sizes/font_size = 20
+text = "Speed: 150"
+
+[node name="Testing" type="Panel" parent="CanvasLayer" node_paths=PackedStringArray("bikePhysics", "powerSlider", "powerLabel")]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -332.0
+offset_top = -157.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 3
+theme = ExtResource("8_4xn5f")
+script = ExtResource("7_qacm0")
+bikePhysics = NodePath("../..")
+powerSlider = NodePath("Main stats layout2/TestPower/VSlider")
+powerLabel = NodePath("Main stats layout2/TestPower/Label")
+
+[node name="Main stats layout2" type="VBoxContainer" parent="CanvasLayer/Testing"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = -3.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Power" type="Label" parent="CanvasLayer/Testing/Main stats layout2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.917647, 0, 0, 1)
+theme_override_fonts/font = ExtResource("7_6whun")
+theme_override_font_sizes/font_size = 20
+text = "ONLY FOR TESTING PURPOSES."
+horizontal_alignment = 1
+
+[node name="TestPower" type="HBoxContainer" parent="CanvasLayer/Testing/Main stats layout2"]
+layout_mode = 2
+
+[node name="VSlider" type="VSlider" parent="CanvasLayer/Testing/Main stats layout2/TestPower"]
+custom_minimum_size = Vector2(0, 115.26)
+layout_mode = 2
+min_value = -50.0
+max_value = 200.0
+rounded = true
+
+[node name="Label" type="Label" parent="CanvasLayer/Testing/Main stats layout2/TestPower"]
+layout_mode = 2
+text = "Additional power: 2137w"
+
+[node name="climbing ui" type="Panel" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -191.0
+offset_bottom = 39.0
+grow_horizontal = 0
+
+[node name="slope" type="Label" parent="CanvasLayer/climbing ui"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = -3.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 20
+text = "Slope : 100%"
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1.00001, 0, 0, 0, 1.00001, 0, 0, 0, 1.00001, 0, 0.4, 0.035)
+current = true
+
+[node name="road_bike" parent="." instance=ExtResource("9_lxdhe")]
+transform = Transform3D(-6.55671e-09, 0, 0.15, 0, 0.15, 0, -0.15, 0, -6.55671e-09, 0, 0, 0)

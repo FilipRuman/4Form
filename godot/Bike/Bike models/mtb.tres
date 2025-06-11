@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="BikeModel" load_steps=4 format=3 uid="uid://32p4h7dufvih"]
+
+[ext_resource type="Script" uid="uid://bkb846kwab3kt" path="res://Bike/BikeModel.cs" id="1_6b2g3"]
+
+[sub_resource type="Gradient" id="Gradient_6b2g3"]
+offsets = PackedFloat32Array(0, 0.059375, 0.19375, 0.28125, 0.390625, 0.425, 0.571875, 0.721875, 0.809375, 0.940625, 0.996875, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.00538697, 0.00538697, 0.00538697, 1, 0.385781, 0.385781, 0.385781, 1, 0.0109195, 0.0109195, 0.0109195, 1, 0.543618, 0.543618, 0.543618, 1, 0.612671, 0.612671, 0.612671, 1, 0.00815326, 0.00815326, 0.00815326, 1, 0.203236, 0.203236, 0.203236, 1, 0.381154, 0.381154, 0.381154, 1, 0.025, 0.025, 0.025, 1, 0.626027, 0.626027, 0.626027, 1, 0.59, 0.59, 0.59, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_gs05q"]
+gradient = SubResource("Gradient_6b2g3")
+fill_from = Vector2(0, 1)
+
+[resource]
+script = ExtResource("1_6b2g3")
+name = "mtb"
+mass = 8.0
+wheelFrictionCoefficient = 0.15
+wheelRadius = 0.25
+frontalArea = 0.15
+icon = SubResource("GradientTexture2D_gs05q")
+metadata/_custom_type_script = "uid://bkb846kwab3kt"

@@ -1,0 +1,725 @@
+[gd_scene load_steps=26 format=3 uid="uid://c0hkngqkjxk3t"]
+
+[ext_resource type="Script" uid="uid://naawr1uq2pqg" path="res://TCP/Tcp.cs" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://buux5h8054hrj" path="res://TCP/TcpParser.cs" id="2_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://w67eox52c1g" path="res://Bike/player.tscn" id="3_272bh"]
+[ext_resource type="Script" uid="uid://b0iuc2y03g3ee" path="res://Menu/MenuTabContent.cs" id="4_getpj"]
+[ext_resource type="Script" uid="uid://cprrd1wmvo7al" path="res://Menu/BikeConfig/BikeConfigurationMenu.cs" id="8_efxa6"]
+[ext_resource type="Script" uid="uid://0bd4icrprif5" path="res://Menu/PropertyEdit.cs" id="9_dg77c"]
+[ext_resource type="PackedScene" uid="uid://qpe4q7ownweu" path="res://Menu/simple_selection_menu.tscn" id="9_ycdy4"]
+[ext_resource type="Theme" uid="uid://regixqqcydb8" path="res://theme.tres" id="10_4c57u"]
+[ext_resource type="FontFile" uid="uid://cfse7jemxeexd" path="res://assets/Meslo/MesloLGLDZNerdFont-Bold.ttf" id="10_dg77c"]
+[ext_resource type="Script" uid="uid://c3sqcg58mbnva" path="res://Menu/GameMode/GameModeMenu.cs" id="11_cegan"]
+[ext_resource type="PackedScene" uid="uid://b3prul5dd2nbn" path="res://Menu/DeviceConnection/peripherial_display.tscn" id="11_efxa6"]
+[ext_resource type="Script" uid="uid://basdgtr0ivql5" path="res://Menu/MenuMain.cs" id="11_w48qg"]
+[ext_resource type="Script" uid="uid://cninou2cus8fu" path="res://Menu/DeviceConnection/PeripheralsMenu.cs" id="11_ycdy4"]
+[ext_resource type="Resource" uid="uid://d2dfpnsadunbi" path="res://Bike/Bike models/gravel.tres" id="12_cegan"]
+[ext_resource type="Texture2D" uid="uid://cwq8v7lm8kdu2" path="res://assets/Material-LIB/Fire/Fire-B.png" id="12_getpj"]
+[ext_resource type="Resource" uid="uid://32p4h7dufvih" path="res://Bike/Bike models/mtb.tres" id="13_82xsv"]
+[ext_resource type="Script" uid="uid://ck2p27vr126p0" path="res://GameConfig/GameMode.cs" id="13_ryguw"]
+[ext_resource type="Script" uid="uid://d3apq1nnkijj3" path="res://Menu/DeviceConnection/DeviceType.cs" id="13_w48qg"]
+[ext_resource type="Texture2D" uid="uid://d25i15onyxgff" path="res://icon.svg" id="17_82xsv"]
+[ext_resource type="Script" uid="uid://uhf5jl83g6cp" path="res://Menu/GameMode/RouteMenu.cs" id="19_d13ii"]
+[ext_resource type="PackedScene" uid="uid://cftjx3hmwiptq" path="res://demo_map.tscn" id="19_getpj"]
+[ext_resource type="FontFile" uid="uid://befjt7bkyinos" path="res://assets/Meslo/MesloLGLNerdFont-Bold.ttf" id="19_ryguw"]
+[ext_resource type="Script" uid="uid://cohbjpg64p4dx" path="res://Map/MapLoading.cs" id="23_1u8w0"]
+
+[sub_resource type="Resource" id="Resource_d13ii"]
+script = ExtResource("13_ryguw")
+name = "Creative"
+icon = ExtResource("12_getpj")
+description = "You can do anything...
+almost."
+canEditBikeModels = true
+bikeModels = Array[Object]([ExtResource("12_cegan"), ExtResource("13_82xsv")])
+map = ExtResource("19_getpj")
+metadata/_custom_type_script = "uid://ck2p27vr126p0"
+
+[sub_resource type="Resource" id="Resource_getpj"]
+script = ExtResource("13_ryguw")
+name = "Progression"
+icon = ExtResource("17_82xsv")
+description = "You need to WORK HARD to use new stuff. Just like IRL."
+canEditBikeModels = false
+bikeModels = Array[Object]([ExtResource("12_cegan"), ExtResource("13_82xsv")])
+map = ExtResource("19_getpj")
+metadata/_custom_type_script = "uid://ck2p27vr126p0"
+
+[node name="scene" type="Node3D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
+follow_viewport_enabled = true
+
+[node name="menu main" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("tcpParser", "tabBar", "tabContents", "startGameButton", "tabContentsLockScreen", "tabContentsLockScreenLabel")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("11_w48qg")
+tcpParser = NodePath("../../Tcp/TcpParser")
+playerPrefab = ExtResource("3_272bh")
+tabBar = NodePath("Panel/tabs/TabBar")
+tabContents = [NodePath("Panel/contents/device connection"), NodePath("Panel/contents/Load game"), NodePath("Panel/contents/Bike settings"), NodePath("Panel/contents/Game modes")]
+startGameButton = NodePath("Panel/contents/Load game/Button")
+tabContentsLockScreen = NodePath("Panel/contents/Lock screen")
+tabContentsLockScreenLabel = NodePath("Panel/contents/Lock screen/RichTextLabel")
+
+[node name="Panel" type="Panel" parent="CanvasLayer/menu main"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 42.0
+offset_top = 48.0
+offset_right = -42.0
+offset_bottom = -48.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(550, 300)
+theme = ExtResource("10_4c57u")
+
+[node name="tabs" type="Panel" parent="CanvasLayer/menu main/Panel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 39.0
+grow_horizontal = 2
+theme = ExtResource("10_4c57u")
+theme_type_variation = &"lightPanel"
+
+[node name="TabBar" type="TabBar" parent="CanvasLayer/menu main/Panel/tabs"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 5.0
+offset_right = -2.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("10_4c57u")
+current_tab = 0
+tab_alignment = 1
+clip_tabs = false
+tab_count = 5
+tab_0/title = "device connection "
+tab_1/title = "Load game 󰚭"
+tab_2/title = "Bike settings 󰂣"
+tab_3/title = "Game 󱎓"
+tab_4/title = "Settings "
+
+[node name="contents" type="Control" parent="CanvasLayer/menu main/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 15.0
+offset_top = 45.0
+offset_right = -15.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="device connection" type="Control" parent="CanvasLayer/menu main/Panel/contents"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_getpj")
+
+[node name="PeripherialsMenu" type="Node" parent="CanvasLayer/menu main/Panel/contents/device connection" node_paths=PackedStringArray("peripheralsDisplaysLayout", "tcpParser", "deviceTypes")]
+script = ExtResource("11_ycdy4")
+peripheralsDisplaysLayout = NodePath("../HSplitContainer/peripheral to connect/VBoxContainer2")
+tcpParser = NodePath("../../../../../../Tcp/TcpParser")
+peripheralDisplayPrefab = ExtResource("11_efxa6")
+deviceTypes = [NodePath("../HSplitContainer/device types/VBoxContainer2/Smart bike trainer 󰂣/trainer device type"), NodePath("../HSplitContainer/device types/VBoxContainer2/heart rate tracker /heart rate device type")]
+
+[node name="HSplitContainer" type="HSplitContainer" parent="CanvasLayer/menu main/Panel/contents/device connection"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+split_offset = 300
+
+[node name="device types" type="Panel" parent="CanvasLayer/menu main/Panel/contents/device connection/HSplitContainer"]
+layout_mode = 2
+theme_type_variation = &"lightborderPanel"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/menu main/Panel/contents/device connection/HSplitContainer/device types"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = -3.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("10_4c57u")
+
+[node name="Smart bike trainer 󰂣" parent="CanvasLayer/menu main/Panel/contents/device connection/HSplitContainer/device types/VBoxContainer2" node_paths=PackedStringArray("icon") instance=ExtResource("11_efxa6")]
+layout_mode = 2
+icon = Object(Label,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":false,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(0, 0),"layout_direction":0,"layout_mode":1,"anchors_preset":-1,"anchor_left":0.992,"anchor_top":0.5,"anchor_right":1.0,"anchor_bottom":0.5,"offset_left":-24.056,"offset_top":-12.5,"offset_right":-3.0,"offset_bottom":12.5,"grow_horizontal":0,"grow_vertical":2,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":4,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"mouse_filter":2,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"theme":null,"theme_type_variation":&"","text":"󰂣 ","label_settings":null,"horizontal_alignment":2,"vertical_alignment":0,"autowrap_mode":0,"justification_flags":163,"paragraph_separator":"\\n","clip_text":false,"text_overrun_behavior":0,"ellipsis_char":"…","uppercase":false,"tab_stops":PackedFloat32Array(),"lines_skipped":0,"max_lines_visible":-1,"visible_characters":-1,"visible_characters_behavior":0,"visible_ratio":1.0,"text_direction":0,"language":"","structured_text_bidi_override":0,"structured_text_bidi_override_options":[],"script":null)
+
+icon = NodePath("icon")
+
+[node name="icon" parent="CanvasLayer/menu main/Panel/contents/device connection/HSplitContainer/device types/VBoxContainer2/Smart bike trainer 󰂣" index="0"]
+visible = false
+
+[node name="trainer device type" type="Node" parent="CanvasLayer/menu main/Panel/contents/device connection/HSplitContainer/device types/VBoxContainer2/Smart bike trainer 󰂣" node_paths=PackedStringArray("display")]
+script = ExtResource("13_w48qg")
+display = NodePath("..")
+name = "smart trainer"
+glyphIcon = "󰂣 "
+
+[node name="heart rate tracker " parent="CanvasLayer/menu main/Panel/contents/device connection/HSplitContainer/device types/VBoxContainer2" node_paths=PackedStringArray("icon") instance=ExtResource("11_efxa6")]
+layout_mode = 2
+text = "heart rate tracker "
+icon = Object(Label,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":false,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(0, 0),"layout_direction":0,"layout_mode":1,"anchors_preset":-1,"anchor_left":0.992,"anchor_top":0.5,"anchor_right":1.0,"anchor_bottom":0.5,"offset_left":-24.056,"offset_top":-12.5,"offset_right":-3.0,"offset_bottom":12.5,"grow_horizontal":0,"grow_vertical":2,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":4,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"mouse_filter":2,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"theme":null,"theme_type_variation":&"","text":"󰂣 ","label_settings":null,"horizontal_alignment":2,"vertical_alignment":0,"autowrap_mode":0,"justification_flags":163,"paragraph_separator":"\\n","clip_text":false,"text_overrun_behavior":0,"ellipsis_char":"…","uppercase":false,"tab_stops":PackedFloat32Array(),"lines_skipped":0,"max_lines_visible":-1,"visible_characters":-1,"visible_characters_behavior":0,"visible_ratio":1.0,"text_direction":0,"language":"","structured_text_bidi_override":0,"structured_text_bidi_override_options":[],"script":null)
+
+icon = NodePath("icon")
+
+[node name="icon" parent="CanvasLayer/menu main/Panel/contents/device connection/HSplitContainer/device types/VBoxContainer2/heart rate tracker " index="0"]
+visible = false
+
+[node name="heart rate device type" type="Node" parent="CanvasLayer/menu main/Panel/contents/device connection/HSplitContainer/device types/VBoxContainer2/heart rate tracker " node_paths=PackedStringArray("display")]
+script = ExtResource("13_w48qg")
+display = NodePath("..")
+name = "heart rate"
+glyphIcon = " "
+
+[node name="other device type 󰤟" parent="CanvasLayer/menu main/Panel/contents/device connection/HSplitContainer/device types/VBoxContainer2" node_paths=PackedStringArray("icon") instance=ExtResource("11_efxa6")]
+layout_mode = 2
+text = "other device type 󰤟"
+icon = Object(Label,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":false,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(0, 0),"layout_direction":0,"layout_mode":1,"anchors_preset":-1,"anchor_left":0.992,"anchor_top":0.5,"anchor_right":1.0,"anchor_bottom":0.5,"offset_left":-24.056,"offset_top":-12.5,"offset_right":-3.0,"offset_bottom":12.5,"grow_horizontal":0,"grow_vertical":2,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":4,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"mouse_filter":2,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"theme":null,"theme_type_variation":&"","text":"󰂣 ","label_settings":null,"horizontal_alignment":2,"vertical_alignment":0,"autowrap_mode":0,"justification_flags":163,"paragraph_separator":"\\n","clip_text":false,"text_overrun_behavior":0,"ellipsis_char":"…","uppercase":false,"tab_stops":PackedFloat32Array(),"lines_skipped":0,"max_lines_visible":-1,"visible_characters":-1,"visible_characters_behavior":0,"visible_ratio":1.0,"text_direction":0,"language":"","structured_text_bidi_override":0,"structured_text_bidi_override_options":[],"script":null)
+
+icon = NodePath("icon")
+
+[node name="icon" parent="CanvasLayer/menu main/Panel/contents/device connection/HSplitContainer/device types/VBoxContainer2/other device type 󰤟" index="0"]
+visible = false
+
+[node name="peripheral to connect" type="Panel" parent="CanvasLayer/menu main/Panel/contents/device connection/HSplitContainer"]
+layout_mode = 2
+theme_type_variation = &"lightborderPanel"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/menu main/Panel/contents/device connection/HSplitContainer/peripheral to connect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = -3.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("10_4c57u")
+
+[node name="Load game" type="Control" parent="CanvasLayer/menu main/Panel/contents"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_getpj")
+gameModeMustBeSelected = true
+
+[node name="peripheral to connect" type="Panel" parent="CanvasLayer/menu main/Panel/contents/Load game"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"lightborderPanel"
+
+[node name="Button" type="Button" parent="CanvasLayer/menu main/Panel/contents/Load game"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -48.0
+offset_top = -31.0
+offset_right = 49.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("10_4c57u")
+theme_type_variation = &"buttonHighlight"
+theme_override_font_sizes/font_size = 23
+text = "Start game!"
+
+[node name="Bike settings" type="Control" parent="CanvasLayer/menu main/Panel/contents"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_getpj")
+gameModeMustBeSelected = true
+gameCantBeStarted = true
+
+[node name="Bike settings script2" type="Control" parent="CanvasLayer/menu main/Panel/contents/Bike settings" node_paths=PackedStringArray("userMass", "dragCoefficient", "frontalArea", "bikeMass", "wheelFrictionCoefficient", "bikeWheelRadius", "bikeFrontalArea", "bikeModelLayout")]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("8_efxa6")
+userMass = NodePath("../HSplitContainer/user config/layout/User mass")
+dragCoefficient = NodePath("../HSplitContainer/user config/layout/dragCoefficient")
+frontalArea = NodePath("../HSplitContainer/user config/layout/user drag")
+bikeMass = NodePath("../HSplitContainer/Bike config/layout/Bike model stats/Layout/mass")
+wheelFrictionCoefficient = NodePath("../HSplitContainer/Bike config/layout/Bike model stats/Layout/wheel friction")
+bikeWheelRadius = NodePath("../HSplitContainer/Bike config/layout/Bike model stats/Layout/wheel radious")
+bikeFrontalArea = NodePath("../HSplitContainer/Bike config/layout/Bike model stats/Layout/drag")
+bikeModelSelectionPrefab = ExtResource("9_ycdy4")
+bikeModelLayout = NodePath("../HSplitContainer/Bike config/layout/Model selection/HBoxContainer")
+metadata/_edit_pinned_properties_ = [&"bikeMass"]
+
+[node name="background" type="Panel" parent="CanvasLayer/menu main/Panel/contents/Bike settings"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"lightborderPanel"
+
+[node name="HSplitContainer" type="HSplitContainer" parent="CanvasLayer/menu main/Panel/contents/Bike settings"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+split_offset = -755
+drag_area_margin_begin = 65
+
+[node name="user config" type="Panel" parent="CanvasLayer/menu main/Panel/contents/Bike settings/HSplitContainer"]
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="layout" type="VBoxContainer" parent="CanvasLayer/menu main/Panel/contents/Bike settings/HSplitContainer/user config"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("10_4c57u")
+
+[node name="Label" type="Label" parent="CanvasLayer/menu main/Panel/contents/Bike settings/HSplitContainer/user config/layout"]
+layout_mode = 2
+text = "User config:"
+horizontal_alignment = 1
+
+[node name="User mass" type="HBoxContainer" parent="CanvasLayer/menu main/Panel/contents/Bike settings/HSplitContainer/user config/layout" node_paths=PackedStringArray("lineEdit")]
+layout_mode = 2
+script = ExtResource("9_dg77c")
+lineEdit = NodePath("LineEdit")
+
+[node name="Label" type="Label" parent="CanvasLayer/menu main/Panel/contents/Bike settings/HSplitContainer/user config/layout/User mass"]
+layout_mode = 2
+text = " 󰖡 User mass: "
+
+[node name="LineEdit" type="LineEdit" parent="CanvasLayer/menu main/Panel/contents/Bike settings/HSplitContainer/user config/layout/User mass"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "enter value:"
+virtual_keyboard_type = 3
+
+[node name="dragCoefficient" type="HBoxContainer" parent="CanvasLayer/menu main/Panel/contents/Bike settings/HSplitContainer/user config/layout" node_paths=PackedStringArray("lineEdit")]
+layout_mode = 2
+script = ExtResource("9_dg77c")
+lineEdit = NodePath("LineEdit")
+
+[node name="Label" type="Label" parent="CanvasLayer/menu main/Panel/contents/Bike settings/HSplitContainer/user config/layout/dragCoefficient"]
+layout_mode = 2
+text = " 󰞍 Drag coefficient: "
+
+[node name="LineEdit" type="LineEdit" parent="CanvasLayer/menu main/Panel/contents/Bike settings/HSplitContainer/user config/layout/dragCoefficient"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "enter value:"
+virtual_keyboard_type = 3
+
+[node name="user drag" type="HBoxContainer" parent="CanvasLayer/menu main/Panel/contents/Bike settings/HSplitContainer/user config/layout" node_paths=PackedStringArray("lineEdit")]
+layout_mode = 2
+script = ExtResource("9_dg77c")
+lineEdit = NodePath("LineEdit")
+
+[node name="Label" type="Label" parent="CanvasLayer/menu main/Panel/contents/Bike settings/HSplitContainer/user config/layout/user drag"]
+layout_mode = 2
+text = " 󱄟 User drag: "
+
+[node name="LineEdit" type="LineEdit" parent="CanvasLayer/menu main/Panel/contents/Bike settings/HSplitContainer/user config/layout/user drag"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "enter value:"
+virtual_keyboard_type = 3
+
+[node name="Bike config" type="Panel" parent="CanvasLayer/menu main/Panel/contents/Bike settings/HSplitContainer"]
+clip_contents = true
+layout_mode = 2
+
+[node name="layout" type="VBoxContainer" parent="CanvasLayer/menu main/Panel/contents/Bike settings/HSplitContainer/Bike config"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = -3.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("10_4c57u")
+
+[node name="Label" type="Label" parent="CanvasLayer/menu main/Panel/contents/Bike settings/HSplitContainer/Bike config/layout"]
+layout_mode = 2
+text = "Bike config:"
+horizontal_alignment = 1
+
+[node name="Model selection" type="ScrollContainer" parent="CanvasLayer/menu main/Panel/contents/Bike settings/HSplitContainer/Bike config/layout"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+follow_focus = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/menu main/Panel/contents/Bike settings/HSplitContainer/Bike config/layout/Model selection"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Bike model stats" type="Panel" parent="CanvasLayer/menu main/Panel/contents/Bike settings/HSplitContainer/Bike config/layout"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"lightPanel"
+
+[node name="Layout" type="VBoxContainer" parent="CanvasLayer/menu main/Panel/contents/Bike settings/HSplitContainer/Bike config/layout/Bike model stats"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = -2.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/menu main/Panel/contents/Bike settings/HSplitContainer/Bike config/layout/Bike model stats/Layout"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("10_dg77c")
+text = "Test  bike model name"
+horizontal_alignment = 1
+
+[node name="mass" type="HBoxContainer" parent="CanvasLayer/menu main/Panel/contents/Bike settings/HSplitContainer/Bike config/layout/Bike model stats/Layout" node_paths=PackedStringArray("lineEdit")]
+layout_mode = 2
+script = ExtResource("9_dg77c")
+lineEdit = NodePath("LineEdit")
+
+[node name="Label" type="Label" parent="CanvasLayer/menu main/Panel/contents/Bike settings/HSplitContainer/Bike config/layout/Bike model stats/Layout/mass"]
+layout_mode = 2
+text = " 󰖡 Mass: "
+
+[node name="LineEdit" type="LineEdit" parent="CanvasLayer/menu main/Panel/contents/Bike settings/HSplitContainer/Bike config/layout/Bike model stats/Layout/mass"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "enter value:"
+virtual_keyboard_type = 2
+
+[node name="wheel friction" type="HBoxContainer" parent="CanvasLayer/menu main/Panel/contents/Bike settings/HSplitContainer/Bike config/layout/Bike model stats/Layout" node_paths=PackedStringArray("lineEdit")]
+layout_mode = 2
+script = ExtResource("9_dg77c")
+lineEdit = NodePath("LineEdit")
+
+[node name="Label" type="Label" parent="CanvasLayer/menu main/Panel/contents/Bike settings/HSplitContainer/Bike config/layout/Bike model stats/Layout/wheel friction"]
+layout_mode = 2
+text = " 󱥔 Wheel friction: "
+
+[node name="LineEdit" type="LineEdit" parent="CanvasLayer/menu main/Panel/contents/Bike settings/HSplitContainer/Bike config/layout/Bike model stats/Layout/wheel friction"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "enter value:"
+virtual_keyboard_type = 2
+
+[node name="wheel radious" type="HBoxContainer" parent="CanvasLayer/menu main/Panel/contents/Bike settings/HSplitContainer/Bike config/layout/Bike model stats/Layout" node_paths=PackedStringArray("lineEdit")]
+layout_mode = 2
+script = ExtResource("9_dg77c")
+lineEdit = NodePath("LineEdit")
+
+[node name="Label" type="Label" parent="CanvasLayer/menu main/Panel/contents/Bike settings/HSplitContainer/Bike config/layout/Bike model stats/Layout/wheel radious"]
+layout_mode = 2
+text = " 󰐙 Wheel radious: "
+
+[node name="LineEdit" type="LineEdit" parent="CanvasLayer/menu main/Panel/contents/Bike settings/HSplitContainer/Bike config/layout/Bike model stats/Layout/wheel radious"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "enter value:"
+virtual_keyboard_type = 2
+
+[node name="drag" type="HBoxContainer" parent="CanvasLayer/menu main/Panel/contents/Bike settings/HSplitContainer/Bike config/layout/Bike model stats/Layout" node_paths=PackedStringArray("lineEdit")]
+layout_mode = 2
+script = ExtResource("9_dg77c")
+lineEdit = NodePath("LineEdit")
+
+[node name="Label" type="Label" parent="CanvasLayer/menu main/Panel/contents/Bike settings/HSplitContainer/Bike config/layout/Bike model stats/Layout/drag"]
+layout_mode = 2
+text = " 󱄟 Drag: "
+
+[node name="LineEdit" type="LineEdit" parent="CanvasLayer/menu main/Panel/contents/Bike settings/HSplitContainer/Bike config/layout/Bike model stats/Layout/drag"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "enter value:"
+virtual_keyboard_type = 2
+
+[node name="Game modes" type="Control" parent="CanvasLayer/menu main/Panel/contents"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_getpj")
+gameCantBeStarted = true
+
+[node name="Game modes script" type="Control" parent="CanvasLayer/menu main/Panel/contents/Game modes" node_paths=PackedStringArray("mapLoading", "routeMenu", "layout", "description")]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("11_cegan")
+mapLoading = NodePath("../../../../../../MapLoading")
+routeMenu = NodePath("../HSplitContainer/Bike config/layout/Game mode stats/HSplitContainer/routes")
+layout = NodePath("../HSplitContainer/Bike config/layout/Model selection/HBoxContainer")
+description = NodePath("../HSplitContainer/Bike config/layout/Game mode stats/HSplitContainer/Layout/RichTextLabel")
+simpleSelectionPrefab = ExtResource("9_ycdy4")
+gameModes = Array[Resource]([SubResource("Resource_d13ii"), SubResource("Resource_getpj")])
+
+[node name="background" type="Panel" parent="CanvasLayer/menu main/Panel/contents/Game modes"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"lightborderPanel"
+
+[node name="HSplitContainer" type="HSplitContainer" parent="CanvasLayer/menu main/Panel/contents/Game modes"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+split_offset = -755
+drag_area_margin_begin = 65
+
+[node name="Bike config" type="Panel" parent="CanvasLayer/menu main/Panel/contents/Game modes/HSplitContainer"]
+clip_contents = true
+layout_mode = 2
+
+[node name="layout" type="VBoxContainer" parent="CanvasLayer/menu main/Panel/contents/Game modes/HSplitContainer/Bike config"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = -3.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("10_4c57u")
+
+[node name="Model selection" type="ScrollContainer" parent="CanvasLayer/menu main/Panel/contents/Game modes/HSplitContainer/Bike config/layout"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+follow_focus = true
+vertical_scroll_mode = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/menu main/Panel/contents/Game modes/HSplitContainer/Bike config/layout/Model selection"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Game mode stats" type="Panel" parent="CanvasLayer/menu main/Panel/contents/Game modes/HSplitContainer/Bike config/layout"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"lightPanel"
+
+[node name="HSplitContainer" type="HSplitContainer" parent="CanvasLayer/menu main/Panel/contents/Game modes/HSplitContainer/Bike config/layout/Game mode stats"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+split_offset = 1370
+drag_area_margin_begin = 65
+
+[node name="routes" type="Panel" parent="CanvasLayer/menu main/Panel/contents/Game modes/HSplitContainer/Bike config/layout/Game mode stats/HSplitContainer" node_paths=PackedStringArray("layout", "difficulty", "time", "ascent", "distance")]
+layout_mode = 2
+script = ExtResource("19_d13ii")
+layout = NodePath("VBoxContainer/route selection/HBoxContainer")
+simpleSelectionPrefab = ExtResource("9_ycdy4")
+difficulty = NodePath("VBoxContainer/Stats/HFlowContainer/dificulty")
+time = NodePath("VBoxContainer/Stats/HFlowContainer/time")
+ascent = NodePath("VBoxContainer/Stats/HFlowContainer/Ascent")
+distance = NodePath("VBoxContainer/Stats/HFlowContainer/distance")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/menu main/Panel/contents/Game modes/HSplitContainer/Bike config/layout/Game mode stats/HSplitContainer/routes"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/menu main/Panel/contents/Game modes/HSplitContainer/Bike config/layout/Game mode stats/HSplitContainer/routes/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("19_ryguw")
+text = "Routes:"
+horizontal_alignment = 1
+
+[node name="route selection" type="ScrollContainer" parent="CanvasLayer/menu main/Panel/contents/Game modes/HSplitContainer/Bike config/layout/Game mode stats/HSplitContainer/routes/VBoxContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+follow_focus = true
+vertical_scroll_mode = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/menu main/Panel/contents/Game modes/HSplitContainer/Bike config/layout/Game mode stats/HSplitContainer/routes/VBoxContainer/route selection"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Stats" type="Panel" parent="CanvasLayer/menu main/Panel/contents/Game modes/HSplitContainer/Bike config/layout/Game mode stats/HSplitContainer/routes/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"midPanel"
+
+[node name="HFlowContainer" type="HFlowContainer" parent="CanvasLayer/menu main/Panel/contents/Game modes/HSplitContainer/Bike config/layout/Game mode stats/HSplitContainer/routes/VBoxContainer/Stats"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 7.0
+offset_top = 9.0
+offset_right = -7.0
+offset_bottom = -9.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 30
+theme_override_constants/v_separation = 20
+alignment = 1
+
+[node name="dificulty" type="Label" parent="CanvasLayer/menu main/Panel/contents/Game modes/HSplitContainer/Bike config/layout/Game mode stats/HSplitContainer/routes/VBoxContainer/Stats/HFlowContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("19_ryguw")
+text = "Dificulty: Hard "
+
+[node name="time" type="Label" parent="CanvasLayer/menu main/Panel/contents/Game modes/HSplitContainer/Bike config/layout/Game mode stats/HSplitContainer/routes/VBoxContainer/Stats/HFlowContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("19_ryguw")
+text = "Estimated time to finish: 120 min "
+
+[node name="Ascent" type="Label" parent="CanvasLayer/menu main/Panel/contents/Game modes/HSplitContainer/Bike config/layout/Game mode stats/HSplitContainer/routes/VBoxContainer/Stats/HFlowContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("19_ryguw")
+text = "Ascent: 300m "
+
+[node name="distance" type="Label" parent="CanvasLayer/menu main/Panel/contents/Game modes/HSplitContainer/Bike config/layout/Game mode stats/HSplitContainer/routes/VBoxContainer/Stats/HFlowContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("19_ryguw")
+text = "distance: 50km 󰣰"
+
+[node name="Layout" type="VBoxContainer" parent="CanvasLayer/menu main/Panel/contents/Game modes/HSplitContainer/Bike config/layout/Game mode stats/HSplitContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/menu main/Panel/contents/Game modes/HSplitContainer/Bike config/layout/Game mode stats/HSplitContainer/Layout"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("10_dg77c")
+text = "Description:"
+horizontal_alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/menu main/Panel/contents/Game modes/HSplitContainer/Bike config/layout/Game mode stats/HSplitContainer/Layout"]
+layout_mode = 2
+bbcode_enabled = true
+text = "Test TEst test test test
+next line text
+test
+'"
+fit_content = true
+context_menu_enabled = true
+horizontal_alignment = 1
+
+[node name="Lock screen" type="Control" parent="CanvasLayer/menu main/Panel/contents"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="CanvasLayer/menu main/Panel/contents/Lock screen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/menu main/Panel/contents/Lock screen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(0.678431, 0.0901961, 0.0901961, 1)
+bbcode_enabled = true
+text = "Test Lock Screen text"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Tcp" type="Node" parent="." node_paths=PackedStringArray("tcpParser")]
+script = ExtResource("1_ig7tw")
+tcpParser = NodePath("TcpParser")
+
+[node name="TcpParser" type="Node" parent="Tcp" node_paths=PackedStringArray("tcp", "peripheralsMenu")]
+script = ExtResource("2_1bvp3")
+tcp = NodePath("..")
+peripheralsMenu = NodePath("../../CanvasLayer/menu main/Panel/contents/device connection/PeripherialsMenu")
+
+[node name="MapLoading" type="Node" parent="." node_paths=PackedStringArray("mapParent")]
+script = ExtResource("23_1u8w0")
+mapParent = NodePath("MapParent")
+
+[node name="MapParent" type="Node3D" parent="MapLoading"]
+
+[editable path="CanvasLayer/menu main/Panel/contents/device connection/HSplitContainer/device types/VBoxContainer2/Smart bike trainer 󰂣"]
+[editable path="CanvasLayer/menu main/Panel/contents/device connection/HSplitContainer/device types/VBoxContainer2/heart rate tracker "]
+[editable path="CanvasLayer/menu main/Panel/contents/device connection/HSplitContainer/device types/VBoxContainer2/other device type 󰤟"]

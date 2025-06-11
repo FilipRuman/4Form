@@ -12,6 +12,7 @@ namespace ForForm.Bike
     public partial class BikePhysics : PathFollow3D {
         [Export]
         public Camera3D camera;
+
         [Export]
         public BikePath path;
 
@@ -42,22 +43,20 @@ namespace ForForm.Bike
             / 2f
             * float.Sign(speed); //N
 
-
         //https://en.wikipedia.org/wiki/Torque
         float drivetrainForwardPushingForce => input.currentPower / Mathf.Max(speed, 1); // N
 
-        public float testingForce = 0;
+        public float testingPower = 0;
 
         float totalForwardForce =>
             drivetrainForwardPushingForce
-            + testingForce
+            + testingPower  / Mathf.Max(speed, 1)
             - slopeGravityForce
             - rollingResistanceForce
             - airDragForce; //N
         public float acceleration => totalForwardForce / BikeStats.totalMass; // m/s^2 clamped to remove any weirdness
 
         public override void _Process(double delta) {
-            
             // so you don't roll backwards on hills when stopping pedaling
             speed = Mathf.Max(speed + acceleration * (float)delta, 0);
             base._Process(delta);

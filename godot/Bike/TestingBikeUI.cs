@@ -16,8 +16,8 @@ namespace ForForm.Bike.UI
             powerLabel.Text = " ";
             powerSlider.ValueChanged += (_) =>
             {
-                bikePhysics.testingForce = (float)powerSlider.Value;
-                powerLabel.Text = $"Additional power:{(int)bikePhysics.testingForce}W";
+                bikePhysics.testingPower = (float)powerSlider.Value;
+                powerLabel.Text = $"Additional power:{(int)bikePhysics.testingPower}W";
             };
             base._Ready();
         }

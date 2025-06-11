@@ -11,6 +11,8 @@ namespace ForForm.Bike
 
     public partial class BikePhysics : PathFollow3D {
         [Export]
+        public Camera3D camera;
+        [Export]
         public BikePath path;
 
         [Export]

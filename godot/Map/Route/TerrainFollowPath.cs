@@ -1,4 +1,4 @@
-namespace ForForm.TerrainGen
+namespace ForForm.Map.Route
 {
     using Godot;
 
@@ -76,6 +76,7 @@ namespace ForForm.TerrainGen
         public void Run() {
             outputPath.Curve.ClearPoints();
             var points = roughPath.Curve.GetBakedPoints();
+            GD.Print($"Run {points.Length}");
             var spaceState = GetWorld3D().DirectSpaceState;
 
             foreach (var point in points) {

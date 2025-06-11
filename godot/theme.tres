@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=21 format=3 uid="uid://regixqqcydb8"]
+[gd_resource type="Theme" load_steps=22 format=3 uid="uid://regixqqcydb8"]
 
 [ext_resource type="FontFile" uid="uid://cjv70l87rkx5t" path="res://assets/Meslo/MesloLGLDZNerdFont-Regular.ttf" id="1_e1x85"]
 
@@ -146,7 +146,7 @@ corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cjfk0"]
-bg_color = Color(0.218838, 0.319755, 0.370104, 1)
+bg_color = Color(0.2478, 0.3626, 0.42, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
@@ -166,6 +166,19 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0.431373, 0.533333, 0.596078, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0ceoj"]
+bg_color = Color(0.1952, 0.2784, 0.32, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.135, 0.22275, 0.27, 0)
 corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
@@ -202,3 +215,5 @@ lightPanel/base_type = &"Panel"
 lightPanel/styles/panel = SubResource("StyleBoxFlat_cjfk0")
 lightborderPanel/base_type = &"Panel"
 lightborderPanel/styles/panel = SubResource("StyleBoxFlat_05tig")
+midPanel/base_type = &"Panel"
+midPanel/styles/panel = SubResource("StyleBoxFlat_0ceoj")

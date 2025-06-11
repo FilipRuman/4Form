@@ -2,6 +2,7 @@ namespace ForForm.Menu.BikeConfig
 {
     using System.Collections.Generic;
     using Bike;
+    using ForForm.GameConfig;
     using Godot;
 
     public partial class BikeConfigurationMenu : Control {
@@ -19,26 +20,23 @@ namespace ForForm.Menu.BikeConfig
             bikeFrontalArea;
 
         [Export]
-        BikeModel[] bikeModels;
-
-        [Export]
         PackedScene bikeModelSelectionPrefab;
 
         [Export]
-        bool canEditBikeModelSettings;
-
-        [Export]
-        Control BikeModelLayout;
-        Dictionary<BikeModel, BikeModelSelectionUI> bikeModelSelections = new();
+        Control bikeModelLayout;
+        Dictionary<BikeModel, SimpleSelectionUI> bikeModelSelections = new();
 
         public void SetupBikeModels() {
-            foreach (var bikeModel in bikeModels) {
-                var script = bikeModelSelectionPrefab.Instantiate() as BikeModelSelectionUI;
-                BikeModelLayout.AddChild(script);
+            UIMiscs.ClearChildren(bikeModelLayout);
+            bikeModelSelections.Clear();
+            foreach (var bikeModel in GameSettings.CurrentGameMode.bikeModels) {
+                var script = bikeModelSelectionPrefab.Instantiate() as SimpleSelectionUI;
+                bikeModelLayout.AddChild(script);
                 bikeModelSelections.Add(bikeModel, script);
 
                 script.Setup(
-                    bikeModel,
+                    bikeModel.name,
+                    bikeModel.icon,
                     () =>
                     {
                         OnBikeModelSelected(bikeModel);
@@ -61,38 +59,33 @@ namespace ForForm.Menu.BikeConfig
                 (f) =>
                 {
                     BikeStats.bikeModel.mass = f;
-                },
-                canEditBikeModelSettings
+                }
             );
             wheelFrictionCoefficient.Setup(
                 BikeStats.bikeModel.wheelFrictionCoefficient,
                 (f) =>
                 {
                     BikeStats.bikeModel.wheelFrictionCoefficient = f;
-                },
-                canEditBikeModelSettings
+                }
             );
             bikeWheelRadius.Setup(
                 BikeStats.bikeModel.wheelRadius,
                 (f) =>
                 {
                     BikeStats.bikeModel.wheelRadius = f;
-                },
-                canEditBikeModelSettings
+                }
             );
             bikeFrontalArea.Setup(
                 BikeStats.bikeModel.frontalArea,
                 (f) =>
                 {
                     BikeStats.bikeModel.frontalArea = f;
-                },
-                canEditBikeModelSettings
+                }
             );
         }
 
-        public override void _Ready() {
-            if (BikeStats.bikeModel == null)
-                BikeStats.bikeModel = bikeModels[0];
+        public void OnCurrentGameModeChanged() {
+            BikeStats.bikeModel = GameSettings.CurrentGameMode.bikeModels[0];
             SetupBikeModels();
             SetupBikeStatsUI();
             userMass.Setup(
@@ -116,6 +109,10 @@ namespace ForForm.Menu.BikeConfig
                     BikeStats.frontalArea = f;
                 }
             );
+        }
+
+        public override void _Ready() {
+            GameSettings.onCurrentGameModeChanged += OnCurrentGameModeChanged;
             base._Ready();
         }
     }

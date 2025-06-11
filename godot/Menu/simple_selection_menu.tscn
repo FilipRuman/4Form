@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://qpe4q7ownweu"]
 
-[ext_resource type="Script" uid="uid://csa2uvw4q4cre" path="res://Menu/BikeConfig/BikeModelSelectionUI.cs" id="1_ucbld"]
+[ext_resource type="Script" uid="uid://djt351kf6fwid" path="res://Menu/SimpleSelectionUI.cs" id="1_ucbld"]
 [ext_resource type="Texture2D" uid="uid://ki1om8r5hm7c" path="res://assets/Material-LIB/BrickWall/BrickWall[Grey]-B.png" id="1_w1buw"]
 
 [node name="Bike model selection prefab" type="Button" node_paths=PackedStringArray("textureRect", "nameLabel")]

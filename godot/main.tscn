@@ -1,108 +1,49 @@
-[gd_scene load_steps=27 format=3 uid="uid://cobwm3cgpu0d0"]
+[gd_scene load_steps=26 format=3 uid="uid://c0hkngqkjxk3t"]
 
 [ext_resource type="Script" uid="uid://naawr1uq2pqg" path="res://TCP/Tcp.cs" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://buux5h8054hrj" path="res://TCP/TcpParser.cs" id="2_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://w67eox52c1g" path="res://Bike/player.tscn" id="3_272bh"]
+[ext_resource type="Script" uid="uid://b0iuc2y03g3ee" path="res://Menu/MenuTabContent.cs" id="4_getpj"]
 [ext_resource type="Script" uid="uid://cprrd1wmvo7al" path="res://Menu/BikeConfig/BikeConfigurationMenu.cs" id="8_efxa6"]
 [ext_resource type="Script" uid="uid://0bd4icrprif5" path="res://Menu/PropertyEdit.cs" id="9_dg77c"]
-[ext_resource type="Resource" uid="uid://d2dfpnsadunbi" path="res://Bike/Bike models/gravel.tres" id="9_w48qg"]
-[ext_resource type="PackedScene" uid="uid://qpe4q7ownweu" path="res://Menu/BikeConfig/bike_model_selection_prefab.tscn" id="9_ycdy4"]
+[ext_resource type="PackedScene" uid="uid://qpe4q7ownweu" path="res://Menu/simple_selection_menu.tscn" id="9_ycdy4"]
 [ext_resource type="Theme" uid="uid://regixqqcydb8" path="res://theme.tres" id="10_4c57u"]
 [ext_resource type="FontFile" uid="uid://cfse7jemxeexd" path="res://assets/Meslo/MesloLGLDZNerdFont-Bold.ttf" id="10_dg77c"]
-[ext_resource type="Resource" uid="uid://32p4h7dufvih" path="res://Bike/Bike models/mtb.tres" id="10_vivmo"]
+[ext_resource type="Script" uid="uid://c3sqcg58mbnva" path="res://Menu/GameMode/GameModeMenu.cs" id="11_cegan"]
 [ext_resource type="PackedScene" uid="uid://b3prul5dd2nbn" path="res://Menu/DeviceConnection/peripherial_display.tscn" id="11_efxa6"]
 [ext_resource type="Script" uid="uid://basdgtr0ivql5" path="res://Menu/MenuMain.cs" id="11_w48qg"]
 [ext_resource type="Script" uid="uid://cninou2cus8fu" path="res://Menu/DeviceConnection/PeripheralsMenu.cs" id="11_ycdy4"]
+[ext_resource type="Resource" uid="uid://d2dfpnsadunbi" path="res://Bike/Bike models/gravel.tres" id="12_cegan"]
+[ext_resource type="Texture2D" uid="uid://cwq8v7lm8kdu2" path="res://assets/Material-LIB/Fire/Fire-B.png" id="12_getpj"]
+[ext_resource type="Resource" uid="uid://32p4h7dufvih" path="res://Bike/Bike models/mtb.tres" id="13_82xsv"]
+[ext_resource type="Script" uid="uid://ck2p27vr126p0" path="res://GameConfig/GameMode.cs" id="13_ryguw"]
 [ext_resource type="Script" uid="uid://d3apq1nnkijj3" path="res://Menu/DeviceConnection/DeviceType.cs" id="13_w48qg"]
-[ext_resource type="Script" uid="uid://im748abclny1" path="res://TerrainGen/TerrainFollowPath.cs" id="16_2cqfq"]
-[ext_resource type="Script" uid="uid://chstoagn42gbr" path="res://demo/src/DemoScene.gd" id="16_ryguw"]
-[ext_resource type="PackedScene" uid="uid://bb2lp50sjndus" path="res://demo/components/Environment.tscn" id="18_1u8w0"]
-[ext_resource type="PackedScene" uid="uid://dwnhqfjq7v1pq" path="res://demo/components/Borders.tscn" id="19_0odxb"]
-[ext_resource type="PackedScene" uid="uid://djhl3foqkj4e2" path="res://demo/components/Tunnel.tscn" id="20_lswn8"]
-[ext_resource type="Terrain3DAssets" uid="uid://dal3jhw6241qg" path="res://demo/data/assets.tres" id="22_xuqvo"]
+[ext_resource type="Texture2D" uid="uid://d25i15onyxgff" path="res://icon.svg" id="17_82xsv"]
+[ext_resource type="Script" uid="uid://uhf5jl83g6cp" path="res://Menu/GameMode/RouteMenu.cs" id="19_d13ii"]
+[ext_resource type="PackedScene" uid="uid://cftjx3hmwiptq" path="res://demo_map.tscn" id="19_getpj"]
+[ext_resource type="FontFile" uid="uid://befjt7bkyinos" path="res://assets/Meslo/MesloLGLNerdFont-Bold.ttf" id="19_ryguw"]
+[ext_resource type="Script" uid="uid://cohbjpg64p4dx" path="res://Map/MapLoading.cs" id="23_1u8w0"]
 
-[sub_resource type="Curve3D" id="Curve3D_yaehf"]
-closed = true
-bake_interval = 11.56
-_data = {
-"points": PackedVector3Array(-7.7392, 6.45047, -96.7162, 7.7392, -6.45047, 96.7162, 295.32, 101.359, 241.163, -17.631, -1.23074, -18.1394, 17.631, 1.23074, 18.1394, 333.384, 121.29, 347.682, -21.2498, 11.6195, -19.3373, 21.2498, -11.6195, 19.3373, 599.848, 127.131, 358.458, -51.9518, 4.20486, 45.0719, 51.9518, -4.20486, -45.0719, 786.554, 106.31, 365.503, -4.4303, 0.469719, 38.4073, 4.4303, -0.469719, -38.4073, 832.509, 106.365, 180.153, 90.4907, 7.23471, 41.6121, -90.4907, -7.23471, -41.6121, 777.702, 112.066, -112.092, 49.1553, 7.32341, -16.1174, -49.1553, -7.32341, 16.1174, 599.881, 108.872, -93.158, 25.4558, -13.3243, -0.182922, -25.4558, 13.3243, 0.182922, 457.895, 116.533, -57.019, 16.2519, 4.72044, -7.94393, -16.2519, -4.72044, 7.94393, 363.013, 112.357, -7.05703, 0, 0, 0, 0, 0, 0, 327.633, 100.489, 66.1013),
-"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-}
-point_count = 10
+[sub_resource type="Resource" id="Resource_d13ii"]
+script = ExtResource("13_ryguw")
+name = "Creative"
+icon = ExtResource("12_getpj")
+description = "You can do anything...
+almost."
+canEditBikeModels = true
+bikeModels = Array[Object]([ExtResource("12_cegan"), ExtResource("13_82xsv")])
+map = ExtResource("19_getpj")
+metadata/_custom_type_script = "uid://ck2p27vr126p0"
 
-[sub_resource type="Curve3D" id="Curve3D_1bvp3"]
-closed = true
-bake_interval = 512.0
-_data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 295.32, 98.0039, 241.163, 0, 0, 0, 0, 0, 0, 296.06, 98.2227, 249.927, 0, 0, 0, 0, 0, 0, 296.829, 98.4912, 258.099, 0, 0, 0, 0, 0, 0, 297.627, 98.5, 265.703, 0, 0, 0, 0, 0, 0, 298.455, 98.5, 272.764, 0, 0, 0, 0, 0, 0, 299.311, 98.5, 279.306, 0, 0, 0, 0, 0, 0, 300.196, 98.5, 285.353, 0, 0, 0, 0, 0, 0, 302.053, 98.5, 296.058, 0, 0, 0, 0, 0, 0, 304.027, 98.5, 305.071, 0, 0, 0, 0, 0, 0, 306.116, 98.5, 312.586, 0, 0, 0, 0, 0, 0, 308.321, 98.5078, 318.794, 0, 0, 0, 0, 0, 0, 310.643, 98.543, 323.889, 0, 0, 0, 0, 0, 0, 315.633, 98.9248, 331.509, 0, 0, 0, 0, 0, 0, 321.087, 99.1973, 336.987, 0, 0, 0, 0, 0, 0, 327.004, 99.5566, 341.864, 0, 0, 0, 0, 0, 0, 333.384, 100.481, 347.682, 0, 0, 0, 0, 0, 0, 339.049, 100.682, 350.58, 0, 0, 0, 0, 0, 0, 349.024, 100.767, 352.56, 0, 0, 0, 0, 0, 0, 355.438, 100.77, 353.248, 0, 0, 0, 0, 0, 0, 362.701, 100.782, 353.756, 0, 0, 0, 0, 0, 0, 370.737, 100.805, 354.101, 0, 0, 0, 0, 0, 0, 379.469, 100.821, 354.299, 0, 0, 0, 0, 0, 0, 388.822, 100.83, 354.368, 0, 0, 0, 0, 0, 0, 398.719, 100.874, 354.325, 0, 0, 0, 0, 0, 0, 409.083, 100.988, 354.184, 0, 0, 0, 0, 0, 0, 419.84, 101.262, 353.965, 0, 0, 0, 0, 0, 0, 430.912, 101.298, 353.682, 0, 0, 0, 0, 0, 0, 442.223, 101.433, 353.352, 0, 0, 0, 0, 0, 0, 453.698, 101.727, 352.993, 0, 0, 0, 0, 0, 0, 459.472, 101.765, 352.808, 0, 0, 0, 0, 0, 0, 465.259, 101.552, 352.621, 0, 0, 0, 0, 0, 0, 471.048, 101.27, 352.435, 0, 0, 0, 0, 0, 0, 476.831, 101.144, 352.252, 0, 0, 0, 0, 0, 0, 488.337, 101.182, 351.904, 0, 0, 0, 0, 0, 0, 499.701, 101.2, 351.592, 0, 0, 0, 0, 0, 0, 510.848, 101.2, 351.334, 0, 0, 0, 0, 0, 0, 521.7, 101.2, 351.145, 0, 0, 0, 0, 0, 0, 532.181, 101.2, 351.044, 0, 0, 0, 0, 0, 0, 542.216, 101.2, 351.046, 0, 0, 0, 0, 0, 0, 551.727, 101.2, 351.167, 0, 0, 0, 0, 0, 0, 560.64, 101.2, 351.426, 0, 0, 0, 0, 0, 0, 568.877, 101.2, 351.837, 0, 0, 0, 0, 0, 0, 576.363, 101.2, 352.419, 0, 0, 0, 0, 0, 0, 583.02, 101.2, 353.187, 0, 0, 0, 0, 0, 0, 593.547, 101.2, 355.35, 0, 0, 0, 0, 0, 0, 599.848, 101.2, 358.458, 0, 0, 0, 0, 0, 0, 604.876, 101.2, 362.219, 0, 0, 0, 0, 0, 0, 611.84, 101.2, 366.161, 0, 0, 0, 0, 0, 0, 620.517, 101.201, 370.151, 0, 0, 0, 0, 0, 0, 630.68, 101.2, 374.055, 0, 0, 0, 0, 0, 0, 636.248, 101.2, 375.933, 0, 0, 0, 0, 0, 0, 642.103, 101.2, 377.739, 0, 0, 0, 0, 0, 0, 648.218, 101.2, 379.457, 0, 0, 0, 0, 0, 0, 654.563, 101.2, 381.069, 0, 0, 0, 0, 0, 0, 661.11, 101.2, 382.56, 0, 0, 0, 0, 0, 0, 667.833, 101.2, 383.912, 0, 0, 0, 0, 0, 0, 674.701, 101.2, 385.109, 0, 0, 0, 0, 0, 0, 681.688, 101.219, 386.134, 0, 0, 0, 0, 0, 0, 688.764, 101.289, 386.971, 0, 0, 0, 0, 0, 0, 695.902, 101.44, 387.601, 0, 0, 0, 0, 0, 0, 703.074, 101.557, 388.01, 0, 0, 0, 0, 0, 0, 710.252, 101.603, 388.18, 0, 0, 0, 0, 0, 0, 717.406, 101.662, 388.094, 0, 0, 0, 0, 0, 0, 724.51, 101.649, 387.736, 0, 0, 0, 0, 0, 0, 731.535, 101.463, 387.089, 0, 0, 0, 0, 0, 0, 738.452, 101.188, 386.137, 0, 0, 0, 0, 0, 0, 745.234, 100.989, 384.862, 0, 0, 0, 0, 0, 0, 751.853, 101.003, 383.247, 0, 0, 0, 0, 0, 0, 758.28, 101.184, 381.277, 0, 0, 0, 0, 0, 0, 764.487, 101.391, 378.934, 0, 0, 0, 0, 0, 0, 770.446, 101.519, 376.202, 0, 0, 0, 0, 0, 0, 776.129, 101.553, 373.064, 0, 0, 0, 0, 0, 0, 781.508, 101.515, 369.504, 0, 0, 0, 0, 0, 0, 786.554, 101.405, 365.503, 0, 0, 0, 0, 0, 0, 791.244, 101.284, 361.115, 0, 0, 0, 0, 0, 0, 795.583, 101.207, 356.416, 0, 0, 0, 0, 0, 0, 799.584, 101.187, 351.428, 0, 0, 0, 0, 0, 0, 803.263, 101.193, 346.174, 0, 0, 0, 0, 0, 0, 806.632, 101.202, 340.675, 0, 0, 0, 0, 0, 0, 809.707, 101.211, 334.953, 0, 0, 0, 0, 0, 0, 812.501, 101.204, 329.03, 0, 0, 0, 0, 0, 0, 815.029, 101.2, 322.929, 0, 0, 0, 0, 0, 0, 817.304, 101.2, 316.671, 0, 0, 0, 0, 0, 0, 819.341, 101.2, 310.278, 0, 0, 0, 0, 0, 0, 821.154, 101.2, 303.773, 0, 0, 0, 0, 0, 0, 822.757, 101.2, 297.177, 0, 0, 0, 0, 0, 0, 824.164, 101.2, 290.513, 0, 0, 0, 0, 0, 0, 825.39, 101.211, 283.802, 0, 0, 0, 0, 0, 0, 826.448, 101.208, 277.067, 0, 0, 0, 0, 0, 0, 827.352, 101.201, 270.329, 0, 0, 0, 0, 0, 0, 828.118, 101.2, 263.61, 0, 0, 0, 0, 0, 0, 828.758, 101.2, 256.934, 0, 0, 0, 0, 0, 0, 829.287, 101.2, 250.32, 0, 0, 0, 0, 0, 0, 829.72, 101.2, 243.793, 0, 0, 0, 0, 0, 0, 830.07, 101.196, 237.373, 0, 0, 0, 0, 0, 0, 830.351, 101.189, 231.082, 0, 0, 0, 0, 0, 0, 830.579, 101.183, 224.944, 0, 0, 0, 0, 0, 0, 830.765, 101.178, 218.978, 0, 0, 0, 0, 0, 0, 831.075, 101.159, 207.657, 0, 0, 0, 0, 0, 0, 831.393, 101.101, 197.295, 0, 0, 0, 0, 0, 0, 831.834, 100.989, 188.068, 0, 0, 0, 0, 0, 0, 832.509, 100.949, 180.153, 0, 0, 0, 0, 0, 0, 833.618, 100.721, 170.998, 0, 0, 0, 0, 0, 0, 834.34, 100.792, 165.051, 0, 0, 0, 0, 0, 0, 835.138, 100.795, 158.275, 0, 0, 0, 0, 0, 0, 835.984, 100.803, 150.732, 0, 0, 0, 0, 0, 0, 836.851, 100.659, 142.486, 0, 0, 0, 0, 0, 0, 837.712, 100.288, 133.601, 0, 0, 0, 0, 0, 0, 838.54, 100.163, 124.138, 0, 0, 0, 0, 0, 0, 839.307, 100.355, 114.161, 0, 0, 0, 0, 0, 0, 839.987, 100.652, 103.734, 0, 0, 0, 0, 0, 0, 840.552, 100.7, 92.9183, 0, 0, 0, 0, 0, 0, 840.975, 100.7, 81.7782, 0, 0, 0, 0, 0, 0, 841.228, 100.7, 70.3764, 0, 0, 0, 0, 0, 0, 841.283, 100.7, 64.5971, 0, 0, 0, 0, 0, 0, 841.285, 100.7, 58.7761, 0, 0, 0, 0, 0, 0, 841.232, 100.7, 52.9211, 0, 0, 0, 0, 0, 0, 841.119, 100.7, 47.0402, 0, 0, 0, 0, 0, 0, 840.943, 100.7, 41.1412, 0, 0, 0, 0, 0, 0, 840.701, 100.7, 35.2319, 0, 0, 0, 0, 0, 0, 840.39, 100.7, 29.3203, 0, 0, 0, 0, 0, 0, 840.006, 100.7, 23.4142, 0, 0, 0, 0, 0, 0, 839.545, 100.7, 17.5215, 0, 0, 0, 0, 0, 0, 839.005, 100.7, 11.6501, 0, 0, 0, 0, 0, 0, 838.381, 100.7, 5.80795, 0, 0, 0, 0, 0, 0, 837.671, 100.7, 0.00286865, 0, 0, 0, 0, 0, 0, 836.871, 100.7, -5.75732, 0, 0, 0, 0, 0, 0, 835.978, 100.7, -11.4647, 0, 0, 0, 0, 0, 0, 833.898, 100.7, -22.6892, 0, 0, 0, 0, 0, 0, 831.404, 100.7, -33.6079, 0, 0, 0, 0, 0, 0, 828.469, 100.7, -44.1575, 0, 0, 0, 0, 0, 0, 825.065, 100.7, -54.2751, 0, 0, 0, 0, 0, 0, 821.165, 100.7, -63.8975, 0, 0, 0, 0, 0, 0, 816.743, 100.7, -72.9617, 0, 0, 0, 0, 0, 0, 811.77, 100.707, -81.4046, 0, 0, 0, 0, 0, 0, 806.22, 100.66, -89.1631, 0, 0, 0, 0, 0, 0, 800.065, 99.6445, -96.1743, 0, 0, 0, 0, 0, 0, 793.279, 98.376, -102.375, 0, 0, 0, 0, 0, 0, 785.834, 97.2598, -107.702, 0, 0, 0, 0, 0, 0, 777.702, 96.4551, -112.092, 0, 0, 0, 0, 0, 0, 769.37, 96.002, -115.745, 0, 0, 0, 0, 0, 0, 761.333, 95.7988, -118.914, 0, 0, 0, 0, 0, 0, 753.579, 95.6182, -121.621, 0, 0, 0, 0, 0, 0, 746.097, 95.4502, -123.887, 0, 0, 0, 0, 0, 0, 738.875, 95.4004, -125.733, 0, 0, 0, 0, 0, 0, 731.902, 95.6191, -127.178, 0, 0, 0, 0, 0, 0, 725.166, 96.0879, -128.246, 0, 0, 0, 0, 0, 0, 718.655, 96.5273, -128.956, 0, 0, 0, 0, 0, 0, 712.357, 97.2402, -129.329, 0, 0, 0, 0, 0, 0, 706.263, 98.6426, -129.386, 0, 0, 0, 0, 0, 0, 700.358, 99.3506, -129.149, 0, 0, 0, 0, 0, 0, 694.633, 99.3965, -128.638, 0, 0, 0, 0, 0, 0, 683.674, 99.4004, -126.878, 0, 0, 0, 0, 0, 0, 673.291, 99.3994, -124.274, 0, 0, 0, 0, 0, 0, 663.393, 99.4004, -120.993, 0, 0, 0, 0, 0, 0, 653.887, 99.4004, -117.204, 0, 0, 0, 0, 0, 0, 644.679, 99.4004, -113.073, 0, 0, 0, 0, 0, 0, 635.678, 99.4004, -108.768, 0, 0, 0, 0, 0, 0, 626.79, 99.4004, -104.456, 0, 0, 0, 0, 0, 0, 617.924, 99.4063, -100.306, 0, 0, 0, 0, 0, 0, 608.985, 99.4121, -96.4839, 0, 0, 0, 0, 0, 0, 599.881, 99.416, -93.158, 0, 0, 0, 0, 0, 0, 590.466, 99.4014, -90.0981, 0, 0, 0, 0, 0, 0, 580.712, 99.4004, -86.9852, 0, 0, 0, 0, 0, 0, 570.706, 99.4004, -83.8536, 0, 0, 0, 0, 0, 0, 560.538, 99.4004, -80.7375, 0, 0, 0, 0, 0, 0, 550.296, 99.4004, -77.6711, 0, 0, 0, 0, 0, 0, 540.066, 99.4004, -74.6888, 0, 0, 0, 0, 0, 0, 529.939, 99.4004, -71.8247, 0, 0, 0, 0, 0, 0, 520.001, 99.4004, -69.1131, 0, 0, 0, 0, 0, 0, 510.34, 99.4023, -66.5882, 0, 0, 0, 0, 0, 0, 501.046, 99.4014, -64.2843, 0, 0, 0, 0, 0, 0, 492.205, 99.4004, -62.2356, 0, 0, 0, 0, 0, 0, 483.907, 99.4004, -60.4764, 0, 0, 0, 0, 0, 0, 476.238, 99.4004, -59.0409, 0, 0, 0, 0, 0, 0, 469.288, 99.4004, -57.9633, 0, 0, 0, 0, 0, 0, 463.144, 99.4004, -57.2779, 0, 0, 0, 0, 0, 0, 457.895, 99.4004, -57.019, 0, 0, 0, 0, 0, 0, 447.176, 99.4004, -55.1455, 0, 0, 0, 0, 0, 0, 441.078, 99.4004, -53.0211, 0, 0, 0, 0, 0, 0, 434.616, 99.4004, -50.2524, 0, 0, 0, 0, 0, 0, 427.882, 99.4004, -46.9501, 0, 0, 0, 0, 0, 0, 420.972, 99.4004, -43.2249, 0, 0, 0, 0, 0, 0, 413.98, 99.4004, -39.1875, 0, 0, 0, 0, 0, 0, 407.002, 99.4004, -34.9484, 0, 0, 0, 0, 0, 0, 400.132, 99.4004, -30.6184, 0, 0, 0, 0, 0, 0, 393.464, 99.4004, -26.3081, 0, 0, 0, 0, 0, 0, 387.093, 99.4004, -22.1281, 0, 0, 0, 0, 0, 0, 381.115, 99.4004, -18.1892, 0, 0, 0, 0, 0, 0, 375.622, 99.4004, -14.602, 0, 0, 0, 0, 0, 0, 370.712, 99.4014, -11.4771, 0, 0, 0, 0, 0, 0, 363.013, 99.4023, -7.05704, 0, 0, 0, 0, 0, 0, 356.826, 99.4102, -1.63275, 0, 0, 0, 0, 0, 0, 350.628, 99.4014, 7.72531, 0, 0, 0, 0, 0, 0, 347.606, 99.4004, 13.4309, 0, 0, 0, 0, 0, 0, 344.676, 99.4014, 19.5817, 0, 0, 0, 0, 0, 0, 341.873, 99.4043, 25.9983, 0, 0, 0, 0, 0, 0, 339.229, 99.4063, 32.5011, 0, 0, 0, 0, 0, 0, 336.774, 99.416, 38.9109, 0, 0, 0, 0, 0, 0, 334.542, 99.4521, 45.0481, 0, 0, 0, 0, 0, 0, 330.876, 99.4775, 55.7874, 0, 0, 0, 0, 0, 0, 327.633, 99.5039, 66.1013, 0, 0, 0, 0, 0, 0, 325.927, 99.5615, 69.6566, 0, 0, 0, 0, 0, 0, 321.496, 99.6904, 79.854, 0, 0, 0, 0, 0, 0, 318.58, 99.7148, 87.2238, 0, 0, 0, 0, 0, 0, 315.368, 99.6953, 95.9906, 0, 0, 0, 0, 0, 0, 311.99, 99.7559, 106.067, 0, 0, 0, 0, 0, 0, 310.279, 99.7988, 111.568, 0, 0, 0, 0, 0, 0, 308.574, 99.8096, 117.364, 0, 0, 0, 0, 0, 0, 306.892, 99.708, 123.443, 0, 0, 0, 0, 0, 0, 305.249, 99.665, 129.794, 0, 0, 0, 0, 0, 0, 303.661, 99.6475, 136.407, 0, 0, 0, 0, 0, 0, 302.143, 99.624, 143.27, 0, 0, 0, 0, 0, 0, 300.713, 99.6387, 150.373, 0, 0, 0, 0, 0, 0, 299.385, 99.4941, 157.704, 0, 0, 0, 0, 0, 0, 298.177, 99.4121, 165.253, 0, 0, 0, 0, 0, 0, 297.104, 99.4082, 173.008, 0, 0, 0, 0, 0, 0, 296.182, 99.4414, 180.958, 0, 0, 0, 0, 0, 0, 295.428, 100.317, 189.093, 0, 0, 0, 0, 0, 0, 294.858, 100.992, 197.402, 0, 0, 0, 0, 0, 0, 294.487, 101.182, 205.873, 0, 0, 0, 0, 0, 0, 294.331, 101.052, 214.496, 0, 0, 0, 0, 0, 0, 294.408, 99.4072, 223.259, 0, 0, 0, 0, 0, 0, 294.732, 98.1445, 232.152, 0, 0, 0, 0, 0, 0, 295.32, 98.0039, 241.163),
-"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-}
-point_count = 225
-
-[sub_resource type="Gradient" id="Gradient_vr1m7"]
-offsets = PackedFloat32Array(0.2, 1)
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_d8lcj"]
-noise_type = 2
-frequency = 0.03
-cellular_jitter = 3.0
-cellular_return_type = 0
-domain_warp_enabled = true
-domain_warp_type = 1
-domain_warp_amplitude = 50.0
-domain_warp_fractal_type = 2
-domain_warp_fractal_lacunarity = 1.5
-domain_warp_fractal_gain = 1.0
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_bov7h"]
-seamless = true
-color_ramp = SubResource("Gradient_vr1m7")
-noise = SubResource("FastNoiseLite_d8lcj")
-
-[sub_resource type="Terrain3DMaterial" id="Terrain3DMaterial_jrc01"]
-_shader_parameters = {
-"_mouse_layer": 2147483648,
-"auto_base_texture": 0,
-"auto_height_reduction": 0.0,
-"auto_overlay_texture": 1,
-"auto_slope": 1.0,
-"bias_distance": 512.0,
-"blend_sharpness": 0.87,
-"depth_blur": 0.0,
-"dual_scale_far": 170.0,
-"dual_scale_near": 100.0,
-"dual_scale_reduction": 0.3,
-"dual_scale_texture": 0,
-"enable_macro_variation": true,
-"enable_projection": true,
-"height_blending": true,
-"macro_variation1": Color(0.855, 0.8625, 0.9, 1),
-"macro_variation2": Color(0.9, 0.885, 0.81, 1),
-"macro_variation_slope": 0.333,
-"mipmap_bias": 1.0,
-"noise1_angle": 0.1,
-"noise1_offset": Vector2(0.5, 0.5),
-"noise1_scale": 0.04,
-"noise2_scale": 0.076,
-"noise3_scale": 0.225,
-"noise_texture": SubResource("NoiseTexture2D_bov7h"),
-"projection_angular_division": 1.0,
-"projection_threshold": 0.8,
-"tri_scale_reduction": 0.3,
-"world_noise_fragment_normals": false,
-"world_noise_height": 34.0,
-"world_noise_lod_distance": 7500.0,
-"world_noise_max_octaves": 4,
-"world_noise_min_octaves": 2,
-"world_noise_offset": Vector3(2.17, -1.225, 1.9),
-"world_noise_region_blend": 0.33,
-"world_noise_scale": 9.85,
-"world_space_normal_blend": true
-}
-world_background = 2
-auto_shader = true
-dual_scaling = true
+[sub_resource type="Resource" id="Resource_getpj"]
+script = ExtResource("13_ryguw")
+name = "Progression"
+icon = ExtResource("17_82xsv")
+description = "You need to WORK HARD to use new stuff. Just like IRL."
+canEditBikeModels = false
+bikeModels = Array[Object]([ExtResource("12_cegan"), ExtResource("13_82xsv")])
+map = ExtResource("19_getpj")
+metadata/_custom_type_script = "uid://ck2p27vr126p0"
 
 [node name="scene" type="Node3D"]
 
@@ -110,7 +51,7 @@ dual_scaling = true
 layer = 2
 follow_viewport_enabled = true
 
-[node name="menu main" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("tcpParser", "playerSpawnPoint", "tabBar", "tabContents", "startGameButton")]
+[node name="menu main" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("tcpParser", "tabBar", "tabContents", "startGameButton", "tabContentsLockScreen", "tabContentsLockScreenLabel")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -120,10 +61,11 @@ grow_vertical = 2
 script = ExtResource("11_w48qg")
 tcpParser = NodePath("../../Tcp/TcpParser")
 playerPrefab = ExtResource("3_272bh")
-playerSpawnPoint = NodePath("../../Path3D")
 tabBar = NodePath("Panel/tabs/TabBar")
-tabContents = [NodePath("Panel/contents/device connection"), NodePath("Panel/contents/Load game"), NodePath("Panel/contents/Bike settings")]
+tabContents = [NodePath("Panel/contents/device connection"), NodePath("Panel/contents/Load game"), NodePath("Panel/contents/Bike settings"), NodePath("Panel/contents/Game modes")]
 startGameButton = NodePath("Panel/contents/Load game/Button")
+tabContentsLockScreen = NodePath("Panel/contents/Lock screen")
+tabContentsLockScreenLabel = NodePath("Panel/contents/Lock screen/RichTextLabel")
 
 [node name="Panel" type="Panel" parent="CanvasLayer/menu main"]
 layout_mode = 1
@@ -163,11 +105,12 @@ theme = ExtResource("10_4c57u")
 current_tab = 0
 tab_alignment = 1
 clip_tabs = false
-tab_count = 4
+tab_count = 5
 tab_0/title = "device connection "
 tab_1/title = "Load game 󰚭"
-tab_2/title = "Bike settings󰂣"
-tab_3/title = "Settings"
+tab_2/title = "Bike settings 󰂣"
+tab_3/title = "Game 󱎓"
+tab_4/title = "Settings "
 
 [node name="contents" type="Control" parent="CanvasLayer/menu main/Panel"]
 layout_mode = 1
@@ -188,6 +131,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("4_getpj")
 
 [node name="PeripherialsMenu" type="Node" parent="CanvasLayer/menu main/Panel/contents/device connection" node_paths=PackedStringArray("peripheralsDisplaysLayout", "tcpParser", "deviceTypes")]
 script = ExtResource("11_ycdy4")
@@ -288,6 +232,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("4_getpj")
+gameModeMustBeSelected = true
 
 [node name="peripheral to connect" type="Panel" parent="CanvasLayer/menu main/Panel/contents/Load game"]
 layout_mode = 1
@@ -316,7 +262,19 @@ theme_type_variation = &"buttonHighlight"
 theme_override_font_sizes/font_size = 23
 text = "Start game!"
 
-[node name="Bike settings" type="Control" parent="CanvasLayer/menu main/Panel/contents" node_paths=PackedStringArray("userMass", "dragCoefficient", "frontalArea", "bikeMass", "wheelFrictionCoefficient", "bikeWheelRadius", "bikeFrontalArea", "BikeModelLayout")]
+[node name="Bike settings" type="Control" parent="CanvasLayer/menu main/Panel/contents"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_getpj")
+gameModeMustBeSelected = true
+gameCantBeStarted = true
+
+[node name="Bike settings script2" type="Control" parent="CanvasLayer/menu main/Panel/contents/Bike settings" node_paths=PackedStringArray("userMass", "dragCoefficient", "frontalArea", "bikeMass", "wheelFrictionCoefficient", "bikeWheelRadius", "bikeFrontalArea", "bikeModelLayout")]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -325,17 +283,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("8_efxa6")
-userMass = NodePath("HSplitContainer/user config/layout/User mass")
-dragCoefficient = NodePath("HSplitContainer/user config/layout/dragCoefficient")
-frontalArea = NodePath("HSplitContainer/user config/layout/user drag")
-bikeMass = NodePath("HSplitContainer/Bike config/layout/Bike model stats/Layout/mass")
-wheelFrictionCoefficient = NodePath("HSplitContainer/Bike config/layout/Bike model stats/Layout/wheel friction")
-bikeWheelRadius = NodePath("HSplitContainer/Bike config/layout/Bike model stats/Layout/wheel radious")
-bikeFrontalArea = NodePath("HSplitContainer/Bike config/layout/Bike model stats/Layout/drag")
-bikeModels = Array[Object]([ExtResource("9_w48qg"), ExtResource("10_vivmo")])
+userMass = NodePath("../HSplitContainer/user config/layout/User mass")
+dragCoefficient = NodePath("../HSplitContainer/user config/layout/dragCoefficient")
+frontalArea = NodePath("../HSplitContainer/user config/layout/user drag")
+bikeMass = NodePath("../HSplitContainer/Bike config/layout/Bike model stats/Layout/mass")
+wheelFrictionCoefficient = NodePath("../HSplitContainer/Bike config/layout/Bike model stats/Layout/wheel friction")
+bikeWheelRadius = NodePath("../HSplitContainer/Bike config/layout/Bike model stats/Layout/wheel radious")
+bikeFrontalArea = NodePath("../HSplitContainer/Bike config/layout/Bike model stats/Layout/drag")
 bikeModelSelectionPrefab = ExtResource("9_ycdy4")
-canEditBikeModelSettings = true
-BikeModelLayout = NodePath("HSplitContainer/Bike config/layout/Model selection/HBoxContainer")
+bikeModelLayout = NodePath("../HSplitContainer/Bike config/layout/Model selection/HBoxContainer")
 metadata/_edit_pinned_properties_ = [&"bikeMass"]
 
 [node name="background" type="Panel" parent="CanvasLayer/menu main/Panel/contents/Bike settings"]
@@ -537,6 +493,218 @@ size_flags_horizontal = 3
 placeholder_text = "enter value:"
 virtual_keyboard_type = 2
 
+[node name="Game modes" type="Control" parent="CanvasLayer/menu main/Panel/contents"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_getpj")
+gameCantBeStarted = true
+
+[node name="Game modes script" type="Control" parent="CanvasLayer/menu main/Panel/contents/Game modes" node_paths=PackedStringArray("mapLoading", "routeMenu", "layout", "description")]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("11_cegan")
+mapLoading = NodePath("../../../../../../MapLoading")
+routeMenu = NodePath("../HSplitContainer/Bike config/layout/Game mode stats/HSplitContainer/routes")
+layout = NodePath("../HSplitContainer/Bike config/layout/Model selection/HBoxContainer")
+description = NodePath("../HSplitContainer/Bike config/layout/Game mode stats/HSplitContainer/Layout/RichTextLabel")
+simpleSelectionPrefab = ExtResource("9_ycdy4")
+gameModes = Array[Resource]([SubResource("Resource_d13ii"), SubResource("Resource_getpj")])
+
+[node name="background" type="Panel" parent="CanvasLayer/menu main/Panel/contents/Game modes"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"lightborderPanel"
+
+[node name="HSplitContainer" type="HSplitContainer" parent="CanvasLayer/menu main/Panel/contents/Game modes"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+split_offset = -755
+drag_area_margin_begin = 65
+
+[node name="Bike config" type="Panel" parent="CanvasLayer/menu main/Panel/contents/Game modes/HSplitContainer"]
+clip_contents = true
+layout_mode = 2
+
+[node name="layout" type="VBoxContainer" parent="CanvasLayer/menu main/Panel/contents/Game modes/HSplitContainer/Bike config"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = -3.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("10_4c57u")
+
+[node name="Model selection" type="ScrollContainer" parent="CanvasLayer/menu main/Panel/contents/Game modes/HSplitContainer/Bike config/layout"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+follow_focus = true
+vertical_scroll_mode = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/menu main/Panel/contents/Game modes/HSplitContainer/Bike config/layout/Model selection"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Game mode stats" type="Panel" parent="CanvasLayer/menu main/Panel/contents/Game modes/HSplitContainer/Bike config/layout"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"lightPanel"
+
+[node name="HSplitContainer" type="HSplitContainer" parent="CanvasLayer/menu main/Panel/contents/Game modes/HSplitContainer/Bike config/layout/Game mode stats"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+split_offset = 1370
+drag_area_margin_begin = 65
+
+[node name="routes" type="Panel" parent="CanvasLayer/menu main/Panel/contents/Game modes/HSplitContainer/Bike config/layout/Game mode stats/HSplitContainer" node_paths=PackedStringArray("layout", "difficulty", "time", "ascent", "distance")]
+layout_mode = 2
+script = ExtResource("19_d13ii")
+layout = NodePath("VBoxContainer/route selection/HBoxContainer")
+simpleSelectionPrefab = ExtResource("9_ycdy4")
+difficulty = NodePath("VBoxContainer/Stats/HFlowContainer/dificulty")
+time = NodePath("VBoxContainer/Stats/HFlowContainer/time")
+ascent = NodePath("VBoxContainer/Stats/HFlowContainer/Ascent")
+distance = NodePath("VBoxContainer/Stats/HFlowContainer/distance")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/menu main/Panel/contents/Game modes/HSplitContainer/Bike config/layout/Game mode stats/HSplitContainer/routes"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/menu main/Panel/contents/Game modes/HSplitContainer/Bike config/layout/Game mode stats/HSplitContainer/routes/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("19_ryguw")
+text = "Routes:"
+horizontal_alignment = 1
+
+[node name="route selection" type="ScrollContainer" parent="CanvasLayer/menu main/Panel/contents/Game modes/HSplitContainer/Bike config/layout/Game mode stats/HSplitContainer/routes/VBoxContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+follow_focus = true
+vertical_scroll_mode = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/menu main/Panel/contents/Game modes/HSplitContainer/Bike config/layout/Game mode stats/HSplitContainer/routes/VBoxContainer/route selection"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Stats" type="Panel" parent="CanvasLayer/menu main/Panel/contents/Game modes/HSplitContainer/Bike config/layout/Game mode stats/HSplitContainer/routes/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"midPanel"
+
+[node name="HFlowContainer" type="HFlowContainer" parent="CanvasLayer/menu main/Panel/contents/Game modes/HSplitContainer/Bike config/layout/Game mode stats/HSplitContainer/routes/VBoxContainer/Stats"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 7.0
+offset_top = 9.0
+offset_right = -7.0
+offset_bottom = -9.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 30
+theme_override_constants/v_separation = 20
+alignment = 1
+
+[node name="dificulty" type="Label" parent="CanvasLayer/menu main/Panel/contents/Game modes/HSplitContainer/Bike config/layout/Game mode stats/HSplitContainer/routes/VBoxContainer/Stats/HFlowContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("19_ryguw")
+text = "Dificulty: Hard "
+
+[node name="time" type="Label" parent="CanvasLayer/menu main/Panel/contents/Game modes/HSplitContainer/Bike config/layout/Game mode stats/HSplitContainer/routes/VBoxContainer/Stats/HFlowContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("19_ryguw")
+text = "Estimated time to finish: 120 min "
+
+[node name="Ascent" type="Label" parent="CanvasLayer/menu main/Panel/contents/Game modes/HSplitContainer/Bike config/layout/Game mode stats/HSplitContainer/routes/VBoxContainer/Stats/HFlowContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("19_ryguw")
+text = "Ascent: 300m "
+
+[node name="distance" type="Label" parent="CanvasLayer/menu main/Panel/contents/Game modes/HSplitContainer/Bike config/layout/Game mode stats/HSplitContainer/routes/VBoxContainer/Stats/HFlowContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("19_ryguw")
+text = "distance: 50km 󰣰"
+
+[node name="Layout" type="VBoxContainer" parent="CanvasLayer/menu main/Panel/contents/Game modes/HSplitContainer/Bike config/layout/Game mode stats/HSplitContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/menu main/Panel/contents/Game modes/HSplitContainer/Bike config/layout/Game mode stats/HSplitContainer/Layout"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("10_dg77c")
+text = "Description:"
+horizontal_alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/menu main/Panel/contents/Game modes/HSplitContainer/Bike config/layout/Game mode stats/HSplitContainer/Layout"]
+layout_mode = 2
+bbcode_enabled = true
+text = "Test TEst test test test
+next line text
+test
+'"
+fit_content = true
+context_menu_enabled = true
+horizontal_alignment = 1
+
+[node name="Lock screen" type="Control" parent="CanvasLayer/menu main/Panel/contents"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="CanvasLayer/menu main/Panel/contents/Lock screen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/menu main/Panel/contents/Lock screen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(0.678431, 0.0901961, 0.0901961, 1)
+bbcode_enabled = true
+text = "Test Lock Screen text"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Tcp" type="Node" parent="." node_paths=PackedStringArray("tcpParser")]
 script = ExtResource("1_ig7tw")
 tcpParser = NodePath("TcpParser")
@@ -546,57 +714,12 @@ script = ExtResource("2_1bvp3")
 tcp = NodePath("..")
 peripheralsMenu = NodePath("../../CanvasLayer/menu main/Panel/contents/device connection/PeripherialsMenu")
 
-[node name="terrain follow path test" type="Node3D" parent="." node_paths=PackedStringArray("roughPath", "outputPath")]
-script = ExtResource("16_2cqfq")
-roughPath = NodePath("rough")
-outputPath = NodePath("../Path3D")
-checkIntervalDistance = 100.0
-highlightPaths = true
-highlightRefreshIntervalSec = 1.0
+[node name="MapLoading" type="Node" parent="." node_paths=PackedStringArray("mapParent")]
+script = ExtResource("23_1u8w0")
+mapParent = NodePath("MapParent")
 
-[node name="rough" type="Path3D" parent="terrain follow path test"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.57764e-05, 0)
-curve = SubResource("Curve3D_yaehf")
-
-[node name="Path3D" type="Path3D" parent="."]
-curve = SubResource("Curve3D_1bvp3")
-
-[node name="Bike" parent="Path3D" instance=ExtResource("3_272bh")]
-transform = Transform3D(-0.231643, 0.00256975, 0.972633, 0.0112177, 0.999776, 3.01298e-05, -0.972576, 0.0109194, -0.231656, 674.693, 99.4945, -124.673)
-progress = 1199.66
-
-[node name="Bike path" parent="Path3D/Bike" index="1"]
-speedScale = 2.5
-
-[node name="Camera3D" parent="Path3D/Bike" index="4"]
-transform = Transform3D(1.00016, -9.31323e-10, -1.49012e-08, 1.86265e-09, 1.00016, -2.32831e-10, 4.47035e-08, 6.98492e-10, 1.00016, 0.023262, 1.37573, -0.0165405)
-
-[node name="road_bike" parent="Path3D/Bike" index="5"]
-transform = Transform3D(-2.18557e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.18557e-08, 0, 0, 0)
-
-[node name="Demo" type="Node" parent="."]
-script = ExtResource("16_ryguw")
-
-[node name="Environment" parent="Demo" instance=ExtResource("18_1u8w0")]
-
-[node name="Borders" parent="Demo" instance=ExtResource("19_0odxb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 512, -3, 512)
-collision_mask = 3
-
-[node name="Tunnel" parent="Demo" instance=ExtResource("20_lswn8")]
-
-[node name="Terrain3D" type="Terrain3D" parent="Demo"]
-data_directory = "res://demo/data"
-material = SubResource("Terrain3DMaterial_jrc01")
-assets = ExtResource("22_xuqvo")
-collision_mode = 0
-collision_shape_size = 64
-collision_radius = 256
-collision_mask = 3
-top_level = true
-metadata/_edit_lock_ = true
+[node name="MapParent" type="Node3D" parent="MapLoading"]
 
 [editable path="CanvasLayer/menu main/Panel/contents/device connection/HSplitContainer/device types/VBoxContainer2/Smart bike trainer 󰂣"]
 [editable path="CanvasLayer/menu main/Panel/contents/device connection/HSplitContainer/device types/VBoxContainer2/heart rate tracker "]
 [editable path="CanvasLayer/menu main/Panel/contents/device connection/HSplitContainer/device types/VBoxContainer2/other device type 󰤟"]
-[editable path="Path3D/Bike"]

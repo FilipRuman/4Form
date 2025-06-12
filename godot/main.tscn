@@ -32,6 +32,8 @@ description = "You can do anything...
 almost."
 canEditBikeModels = true
 bikeModels = Array[Object]([ExtResource("12_cegan"), ExtResource("13_82xsv")])
+dragCoefficient = 0.4
+userDrag = 1.0
 map = ExtResource("19_getpj")
 metadata/_custom_type_script = "uid://ck2p27vr126p0"
 
@@ -42,6 +44,8 @@ icon = ExtResource("17_82xsv")
 description = "You need to WORK HARD to use new stuff. Just like IRL."
 canEditBikeModels = false
 bikeModels = Array[Object]([ExtResource("12_cegan"), ExtResource("13_82xsv")])
+dragCoefficient = 0.4
+userDrag = 1.0
 map = ExtResource("19_getpj")
 metadata/_custom_type_script = "uid://ck2p27vr126p0"
 

@@ -86,6 +86,8 @@ namespace ForForm.Menu.BikeConfig
 
         public void OnCurrentGameModeChanged() {
             BikeStats.bikeModel = GameSettings.CurrentGameMode.bikeModels[0];
+            BikeStats.dragCoefficient = GameSettings.CurrentGameMode.dragCoefficient;
+            BikeStats.frontalArea = GameSettings.CurrentGameMode.userDrag;
             SetupBikeModels();
             SetupBikeStatsUI();
             userMass.Setup(

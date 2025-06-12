@@ -20,9 +20,15 @@ namespace ForForm.GameConfig
         [Export]
         public Bike.BikeModel[] bikeModels;
 
+        [ExportGroup("drag settings")]
+        [Export]
+        public float dragCoefficient = 0;
+
+        [Export]
+        public float userDrag = 0;
+
         [ExportGroup("map")]
         [Export]
         public PackedScene map;
-
     }
 }

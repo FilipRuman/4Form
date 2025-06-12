@@ -7,8 +7,8 @@
 script = ExtResource("1_yp48w")
 name = "gravel"
 mass = 5.0
-wheelFrictionCoefficient = 0.1
+wheelFrictionCoefficient = 0.0
 wheelRadius = 0.25
-frontalArea = 0.1
+frontalArea = 0.5
 icon = ExtResource("1_qcg57")
 metadata/_custom_type_script = "uid://bkb846kwab3kt"

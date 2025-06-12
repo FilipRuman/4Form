@@ -55,10 +55,10 @@ namespace ForForm.Bike
             - rollingResistanceForce
             - airDragForce; //N
         public float acceleration => totalForwardForce / BikeStats.totalMass; // m/s^2 clamped to remove any weirdness
-
+        
         public override void _Process(double delta) {
             // so you don't roll backwards on hills when stopping pedaling
-            speed = Mathf.Max(speed + acceleration * (float)delta, 0);
+            speed = Mathf.Max(speed + acceleration * (float)delta, .01f);
             base._Process(delta);
         }
     }

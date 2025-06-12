@@ -10,7 +10,7 @@ namespace ForForm.Bike
         PathFollow3D pathFollow;
         float distanceFromStart;
 
-        public float slope; // percentage -> 0deg = 0.0 - flat, 90deg = 1.0 - straight up, -20 deg = 0.(2)
+        public float slope;
         public float slopeAngleRadians;
 
         [Export]

@@ -16,6 +16,11 @@ namespace ForForm.Bike
         [Export]
         float speedScale;
 
+        public override void _Ready() {
+            bikePhysics.Progress = GameConfig.GameSettings.currentRoute.startingPoint;
+
+            base._Ready();
+        }
         public override void _Process(double delta) {
             distanceFromStart += bikePhysics.speed * (float)delta * speedScale;
 

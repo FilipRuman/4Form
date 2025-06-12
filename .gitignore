@@ -4,6 +4,7 @@
 logs/
 # Godot-specific ignores
 .import/
+builds/windows/
 export.cfg
 export_credentials.cfg
 

@@ -140,7 +140,6 @@ top_level = true
 metadata/_edit_lock_ = true
 
 [node name="Route short" type="Path3D" parent="Demo map script"]
-visible = false
 curve = SubResource("Curve3D_vipss")
 script = ExtResource("7_n3c11")
 name = "Short"

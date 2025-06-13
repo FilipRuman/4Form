@@ -12,12 +12,12 @@
 
 4Form allows users to create interesting training in the exact way they like by allowing community to create:
  * maps
- * routes
+ * routes 
  * equipment
  * game modes
  * competitions
 
-### this project aims to provide good user experience with clear ui, easy to use tools and great documentation.
+### this project aims to provide good user experience with clear ui, easy to use tools and great documentation alongside **SAFTEY first design** .
 
 # **Base** Of this project will be free and open source **forever**.
 ##  ⭐ If you think this project sounds interesting, you might use it in the future when it's production ready, Please give this repo a star, it helps a lot.

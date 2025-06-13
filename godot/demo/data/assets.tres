@@ -34,24 +34,24 @@ last_lod = 3
 last_shadow_lod = 3
 
 [sub_resource type="Terrain3DTextureAsset" id="Terrain3DTextureAsset_lha57"]
-name = "Cliff"
+name = ""
 albedo_texture = ExtResource("2_pog6b")
 normal_texture = ExtResource("3_wncaf")
 normal_depth = 1.0
 ao_strength = 2.0
 roughness = -0.05
 
-[sub_resource type="Terrain3DTextureAsset" id="Terrain3DTextureAsset_od0q7"]
-name = "Grass"
+[sub_resource type="Terrain3DTextureAsset" id="Terrain3DTextureAsset_y3ibi"]
+name = "FoliageGrass-B"
 id = 1
-albedo_color = Color(0.67451, 0.74902, 0.686275, 1)
+albedo_color = Color(0.565428, 0.618804, 0.569116, 1)
 albedo_texture = ExtResource("3_g8f2m")
 normal_texture = ExtResource("4_aw5y1")
-normal_depth = 1.0
-ao_strength = 2.0
-uv_scale = 0.2
-detiling_rotation = 0.161
+roughness = 0.211
+uv_scale = 0.145
+detiling_rotation = 0.561
+detiling_shift = 0.307
 
 [resource]
 mesh_list = Array[Terrain3DMeshAsset]([SubResource("Terrain3DMeshAsset_2qf8x"), SubResource("Terrain3DMeshAsset_or12t")])
-texture_list = Array[Terrain3DTextureAsset]([SubResource("Terrain3DTextureAsset_lha57"), SubResource("Terrain3DTextureAsset_od0q7")])
+texture_list = Array[Terrain3DTextureAsset]([SubResource("Terrain3DTextureAsset_lha57"), SubResource("Terrain3DTextureAsset_y3ibi")])

@@ -10,16 +10,24 @@ namespace ForForm.Bike
         PathFollow3D pathFollow;
         float distanceFromStart;
 
-        public float slope; // percentage -> 0deg = 0.0 - flat, 90deg = 1.0 - straight up, -20 deg = 0.(2)
+        public float slope;
         public float slopeAngleRadians;
 
         [Export]
         float speedScale;
 
+        public override void _Ready() {
+            bikePhysics.Progress = GameConfig.GameSettings.currentRoute.startingPoint;
+
+            base._Ready();
+        }
+
         public override void _Process(double delta) {
             distanceFromStart += bikePhysics.speed * (float)delta * speedScale;
-
-            slope = Mathf.Tan(bikePhysics.GlobalRotation.X) * 100;
+            // this shouldn't happen but just to make sure...
+            slope =
+                (bikePhysics.RotationDegrees.X > 45 ? 100 : 0)
+                + Mathf.Tan(bikePhysics.Rotation.X) * 100f;
             slopeAngleRadians = bikePhysics.GlobalRotation.X;
 
             bikePhysics.Progress = distanceFromStart;

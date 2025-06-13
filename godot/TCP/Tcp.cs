@@ -22,6 +22,8 @@ namespace ForForm.Tcp
         const float TcpConnectionTimeout = .5f; //S
         private static readonly string[] possibleRustBleHandlerAppFilePaths =
         {
+            "./BleHandler.exe",
+            "./BleHandler",
             "./../BleHandler.exe",
             "./../BleHandler",
         };

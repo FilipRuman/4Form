@@ -5,7 +5,7 @@ thanks in advance.
 
 ### how to find good task
  1. [open this project](https://github.com/users/FilipRuman/projects/6/views/3)
- 2. look at label for priority of this issue. **good first issue** label might be a good indicator for new contributors.
+ 2. look at label for priority of this issue. [**good first issue**](https://github.com/FilipRuman/4Form/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) label might be a good indicator for new contributors.
  3. select task that looks the most interesting. read summary and all comments.
  4. write a comment that you are working on this issue.
  5. create new branch with appropriate name.

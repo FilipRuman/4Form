@@ -34,7 +34,7 @@
  - [ ] multiplayer with steam and steam workshop to download maps
  - [ ] custom scripts in users content
 
-### [For more accurate progress tracking use development project](https://github.com/users/FilipRuman/projects/6/views/3) 
+### [For progress tracking use development project](https://github.com/users/FilipRuman/projects/6/views/3) 
 # 🛠️ Instalation
 ## If you want to test it out just download [the latest release](https://github.com/FilipRuman/4Form/releases) for your platform
 ## Setup for development:

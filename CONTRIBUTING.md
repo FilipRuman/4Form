@@ -14,7 +14,7 @@ thanks in advance.
  8. create pull request from **your** to **dev** branch
  9. give the pull request a good name and describe changes, for changes in ui a screenshot of changes would be nice.  
 ### Before code contribution
- * please setup your system as [written in here](## Setup for development:)
+ * please setup your system as [written in here](https://github.com/FilipRuman/4Form?tab=readme-ov-file#setup-for-development)
  * write all code for Godot in c# don't use any other lang if you don't need to.
  * follow standard c# styling conventions with .editorconfig settings in your formatter.
 ### UI

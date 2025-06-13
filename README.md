@@ -35,7 +35,7 @@
  - [ ] custom scripts in users content
 
 ### [For progress tracking use development project](https://github.com/users/FilipRuman/projects/6/views/3) 
-# 🛠️ Instalation
+# 🛠️ Installation
 ## If you want to test it out just download [the latest release](https://github.com/FilipRuman/4Form/releases) for your platform
 ## Setup for development:
 ### 0.a [Install rust](https://www.rust-lang.org/learn/get-started) 

@@ -13,15 +13,14 @@
 **Base** Of this project will be free and open source **forever**.
 ## If you think this project sounds interesting, you might use it in the future when it's production ready, Please give this repo a star, it helps a lot.
 ## This project is in really early stage of development 
-It will change a lot in the future and **MOST** of the intended features are not implemented *yet*. 
-
+It will change a lot in the future and **MOST** of the intended features are not implemented *yet*.  
 ## Example Vid:
 ## Implemented features
  * **easy to use tools for routes creation** - create routes using path3D and custom tool makes it smoothly follow terrain.
  * **integration with [terrain3D](https://github.com/TokisanGames/Terrain3D)** - allows easy creation of great looking maps. 
  * **multi-platform** - windows 11 && 10??, mac, and *****linux***(most distros if you do some tinkering)
  
-### Future plans
+## Future plans
  * steam release
  * steam workshop and easy maps downloading
  * multiplayer with steam and steam workshop to download maps
@@ -29,7 +28,7 @@ It will change a lot in the future and **MOST** of the intended features are not
 
 ### [For more accurate progress tracking use development project](https://github.com/users/FilipRuman/projects/6/views/3) 
 
-## If you want to test it out just download [the latest release](https://github.com/FilipRuman/4Form/releases) for your 
+## If you want to test it out just download [the latest release](https://github.com/FilipRuman/4Form/releases) for your platform
 ## Setup for development:
 ### 0.a [Install rust](https://www.rust-lang.org/learn/get-started) 
 ### 0.b [Install latest Godot with .Net support](https://godotengine.org/download/)
@@ -41,9 +40,6 @@ It will change a lot in the future and **MOST** of the intended features are not
 ``cargo build``
 ### 3. open project in Godot
 ### You are ready to run it!
-
-## This project is in realy early stages of development 
-It will change alot in the future 
 
 ## Architecture of project
 ![image](https://github.com/user-attachments/assets/4a18132c-e328-4e19-8c4c-8e0ca543fa62)

@@ -8,7 +8,7 @@
 > **This project is in really early stage of development**
 > It will change a lot in the future and **MOST** of the intended features are not *yet* implemented.
 > 
-> it's not production ready. But I need contributiors for further developement.
+> it's not production ready. But I need contributes for further development.
 
 4Form allows users to create interesting training in the exact way they like by allowing community to create:
  * maps
@@ -16,7 +16,7 @@
  * equipment
  * game modes
  * competitions
-this project aims to provide good user expirience with clear ui, easy to use tools and greate documentation.
+this project aims to provide good user experience with clear ui, easy to use tools and great documentation.
 
 # **Base** Of this project will be free and open source **forever**.
 ##  ⭐ If you think this project sounds interesting, you might use it in the future when it's production ready, Please give this repo a star, it helps a lot.
@@ -29,10 +29,10 @@ this project aims to provide good user expirience with clear ui, easy to use too
  * **multi-platform** - windows 11 && 10??, mac, and *****linux***(most distros if you do some tinkering)
  
 ### Future plans
- * steam release
- * steam workshop and easy maps downloading
- * multiplayer with steam and steam workshop to download maps
- * custom scripts in users content
+ - [ ] steam release
+ - [ ] steam workshop and easy maps downloading
+ - [ ] multiplayer with steam and steam workshop to download maps
+ - [ ] custom scripts in users content
 
 ### [For more accurate progress tracking use development project](https://github.com/users/FilipRuman/projects/6/views/3) 
 # 🛠️ Instalation
@@ -51,7 +51,7 @@ this project aims to provide good user expirience with clear ui, easy to use too
 
 # 🧱Architecture of the project
 ![image](https://github.com/user-attachments/assets/4a18132c-e328-4e19-8c4c-8e0ca543fa62)
-this project is split into 2 parts. I've done this because [btleplug](https://github.com/deviceplug/btleplug) is the only bluetooth library that worked for me and is multiplatform. it also splits project into 2 parts nicley.  
+this project is split into 2 parts. I've done this because [btleplug](https://github.com/deviceplug/btleplug) is the only bluetooth library that worked for me and is multiplatform. it also splits project into 2 parts nicely.  
 ### [Rust](https://github.com/FilipRuman/4Form-BluetoothHandler) 
  it's responsible for interacting with devices thru Bluetooth low energy with [btleplug](https://github.com/deviceplug/btleplug). sends data and collects inputs thru TCP.
 ### Godot \ C#

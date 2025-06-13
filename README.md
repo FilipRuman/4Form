@@ -31,7 +31,6 @@
  
 ### Future plans
  - [ ] steam release
- - [ ] steam workshop and easy maps downloading
  - [ ] multiplayer with steam and steam workshop to download maps
  - [ ] custom scripts in users content
 

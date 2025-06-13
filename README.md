@@ -16,7 +16,7 @@
  * equipment
  * game modes
  * competitions
-this project aims to provide good user expirience with clear ui and easy to use tools.
+this project aims to provide good user expirience with clear ui, easy to use tools and greate documentation.
 
 # **Base** Of this project will be free and open source **forever**.
 ##  ⭐ If you think this project sounds interesting, you might use it in the future when it's production ready, Please give this repo a star, it helps a lot.

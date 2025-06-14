@@ -32,7 +32,7 @@
 ### Future plans
  - [ ] steam release
  - [ ] multiplayer with steam and steam workshop to download maps
- - [ ] custom scripts in users content
+ - [ ] safe custom scripts in users content
 
 ### [For progress tracking use development project](https://github.com/users/FilipRuman/projects/6/views/3) 
 # 🛠️ Installation

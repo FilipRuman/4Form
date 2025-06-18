@@ -53,6 +53,7 @@
 Add import/export tool to features
 Add documentation
 Clean up code a bit
+Move Miscs script
 Remove this TODO :P
 # 🧱Architecture of the project
 ![image](https://github.com/user-attachments/assets/4a18132c-e328-4e19-8c4c-8e0ca543fa62)

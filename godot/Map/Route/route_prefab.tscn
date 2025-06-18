@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://dm8jwqa2m164g"]
+
+[ext_resource type="Script" uid="uid://cu84pino7trdb" path="res://Map/Route/Route.cs" id="1_038ys"]
+
+[sub_resource type="Curve3D" id="Curve3D_nyavo"]
+
+[node name="Route prefab" type="Path3D"]
+curve = SubResource("Curve3D_nyavo")
+script = ExtResource("1_038ys")

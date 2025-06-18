@@ -20,3 +20,4 @@ thanks in advance.
 ### UI
  * please use shades of colors from this [color palette](https://coolors.co/ffcc85-ff9f1c-7a4700-9fb1bc-6e8898-2e5266-233a46-172126-62732f-ad1717)
  * give screenshots of changed ui in commits / pull requests
+ * insted of using image icons please use nerd font glyphs(if you can). [you can find them here](https://www.nerdfonts.com/cheat-sheet).

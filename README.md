@@ -12,12 +12,12 @@
 
 4Form allows users to create interesting training in the exact way they like by allowing community to create:
  * maps
- * routes
+ * routes 
  * equipment
  * game modes
  * competitions
 
-### this project aims to provide good user experience with clear ui, easy to use tools and great documentation.
+### this project aims to provide good user experience with clear ui, easy to use tools and great documentation alongside **SAFTEY first design** .
 
 # **Base** Of this project will be free and open source **forever**.
 ##  ⭐ If you think this project sounds interesting, you might use it in the future when it's production ready, Please give this repo a star, it helps a lot.
@@ -32,10 +32,10 @@
 ### Future plans
  - [ ] steam release
  - [ ] multiplayer with steam and steam workshop to download maps
- - [ ] custom scripts in users content
+ - [ ] safe custom scripts in users content
 
 ### [For progress tracking use development project](https://github.com/users/FilipRuman/projects/6/views/3) 
-# 🛠️ Instalation
+# 🛠️ Installation
 ## If you want to test it out just download [the latest release](https://github.com/FilipRuman/4Form/releases) for your platform
 ## Setup for development:
 ### 0.a [Install rust](https://www.rust-lang.org/learn/get-started) 
@@ -49,6 +49,12 @@
 ### 3. open project in Godot
 ### You are ready to run it!
 
+## TODO:
+Add import/export tool to features
+Add documentation
+Clean up code a bit
+Move Miscs script
+Remove this TODO :P
 # 🧱Architecture of the project
 ![image](https://github.com/user-attachments/assets/4a18132c-e328-4e19-8c4c-8e0ca543fa62)
 this project is split into 2 parts. I've done this because [btleplug](https://github.com/deviceplug/btleplug) is the only bluetooth library that worked for me and is multiplatform. it also splits project into 2 parts nicely.  
@@ -56,4 +62,6 @@ this project is split into 2 parts. I've done this because [btleplug](https://gi
  it's responsible for interacting with devices thru Bluetooth low energy with [btleplug](https://github.com/deviceplug/btleplug). sends data and collects inputs thru TCP.
 ### Godot \ C#
  collects data from devices and sends inputs thru tcp to rust. all game tools are written in C#. 
+
+ 
 # 🤝[Contribution guide](./CONTRIBUTING.md) 

@@ -2,7 +2,7 @@ namespace ForForm.Map
 {
     using Godot;
 
-    [Icon("res://assets/4Form logo.png")]
+    [Icon("res://Script icons/publish.png")]
     [Tool]
     public partial class WholeMapExport : Node {
         [Export]

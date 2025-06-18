@@ -2,7 +2,7 @@ namespace ForForm.Map
 {
     using Godot;
 
-    [Tool]
+    [Tool,Icon("res://Script icons/map_3D_node_color.png")]
     public partial class Map : Node3D {
         [Export]
         public string name;

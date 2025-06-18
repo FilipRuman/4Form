@@ -1,5 +1,7 @@
 # Godot 4+ specific ignores
 .godot/
+godot/addons/terrain_3d/bin/
+./godot/addons/debug_draw_3d/libs/
 .nomedia
 logs/
 # Godot-specific ignores

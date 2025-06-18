@@ -2,17 +2,8 @@ namespace ForForm.GameConfig
 {
     using Godot;
 
-    [GlobalClass]
+    [GlobalClass,Tool]
     public partial class GameMode : Resource {
-        [Export]
-        public string name;
-
-        [Export]
-        public Texture2D icon;
-
-        [Export(PropertyHint.MultilineText)]
-        public string description;
-
         [ExportGroup("bike models")]
         [Export]
         public bool canEditBikeModels;
@@ -27,8 +18,5 @@ namespace ForForm.GameConfig
         [Export]
         public float userDrag = 0;
 
-        [ExportGroup("map")]
-        [Export]
-        public PackedScene map;
     }
 }

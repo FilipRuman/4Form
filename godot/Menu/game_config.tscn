@@ -1,0 +1,458 @@
+[gd_scene load_steps=7 format=3 uid="uid://xhe2bn86m8s0"]
+
+[ext_resource type="PackedScene" uid="uid://qpe4q7ownweu" path="res://Menu/simple_selection_menu.tscn" id="2_e1e62"]
+[ext_resource type="Theme" uid="uid://regixqqcydb8" path="res://theme.tres" id="6_bt2k0"]
+[ext_resource type="Script" uid="uid://uhf5jl83g6cp" path="res://Menu/GameMode/RouteMenu.cs" id="7_siv7b"]
+[ext_resource type="FontFile" uid="uid://befjt7bkyinos" path="res://assets/Meslo/MesloLGLNerdFont-Bold.ttf" id="8_jlfx1"]
+[ext_resource type="FontFile" uid="uid://cfse7jemxeexd" path="res://assets/Meslo/MesloLGLDZNerdFont-Bold.ttf" id="9_chcsm"]
+[ext_resource type="Script" uid="uid://0bd4icrprif5" path="res://Menu/PropertyEdit.cs" id="11_xwyxq"]
+
+[node name="Game config" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Game config menus" type="Panel" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"midPanel"
+
+[node name="Map selecton" type="Control" parent="VBoxContainer/Game config menus"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Game config menus/Map selecton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 7.0
+offset_top = 10.0
+offset_right = -7.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/Game config menus/Map selecton/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("9_chcsm")
+theme_override_font_sizes/font_size = 22
+text = "Select Map:"
+horizontal_alignment = 1
+
+[node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer/Game config menus/Map selecton/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+split_offset = 1380
+
+[node name="MapSelection" type="Control" parent="VBoxContainer/Game config menus/Map selecton/VBoxContainer/HSplitContainer"]
+layout_mode = 2
+
+[node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer/Game config menus/Map selecton/VBoxContainer/HSplitContainer/MapSelection"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+split_offset = 485
+
+[node name="Local" type="Panel" parent="VBoxContainer/Game config menus/Map selecton/VBoxContainer/HSplitContainer/MapSelection/HSplitContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Game config menus/Map selecton/VBoxContainer/HSplitContainer/MapSelection/HSplitContainer/Local"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 9.0
+offset_top = 9.0
+offset_right = -9.0
+offset_bottom = -9.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/Game config menus/Map selecton/VBoxContainer/HSplitContainer/MapSelection/HSplitContainer/Local/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("9_chcsm")
+text = "Local:"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="VBoxContainer/Game config menus/Map selecton/VBoxContainer/HSplitContainer/MapSelection/HSplitContainer/Local/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"buttonDefault"
+text = "Random name of game that you can select"
+
+[node name="Online" type="Panel" parent="VBoxContainer/Game config menus/Map selecton/VBoxContainer/HSplitContainer/MapSelection/HSplitContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/Game config menus/Map selecton/VBoxContainer/HSplitContainer/MapSelection/HSplitContainer/Online"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 9.0
+offset_top = 9.0
+offset_right = -9.0
+offset_bottom = -9.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/Game config menus/Map selecton/VBoxContainer/HSplitContainer/MapSelection/HSplitContainer/Online/VBoxContainer2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("9_chcsm")
+text = "Online:"
+horizontal_alignment = 1
+
+[node name="descriptioin" type="Panel" parent="VBoxContainer/Game config menus/Map selecton/VBoxContainer/HSplitContainer"]
+layout_mode = 2
+theme_type_variation = &"lightPanel"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Game config menus/Map selecton/VBoxContainer/HSplitContainer/descriptioin"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/Game config menus/Map selecton/VBoxContainer/HSplitContainer/descriptioin/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("9_chcsm")
+text = "Description:"
+horizontal_alignment = 1
+
+[node name="description value" type="RichTextLabel" parent="VBoxContainer/Game config menus/Map selecton/VBoxContainer/HSplitContainer/descriptioin/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "werqwrqwrqwrqwerqewrqwerwqerqwrwqrwqerwqrqqwrqwrwqrqwrwqrwqrewqrqwrwqr"
+horizontal_alignment = 1
+
+[node name="Route selection" type="Control" parent="VBoxContainer/Game config menus"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Game mode stats" type="Panel" parent="VBoxContainer/Game config menus/Route selection"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme_type_variation = &"lightPanel"
+
+[node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer/Game config menus/Route selection/Game mode stats"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+split_offset = 1370
+drag_area_margin_begin = 65
+
+[node name="routes" type="Panel" parent="VBoxContainer/Game config menus/Route selection/Game mode stats/HSplitContainer" node_paths=PackedStringArray("layout", "difficulty", "time", "ascent", "distance")]
+layout_mode = 2
+script = ExtResource("7_siv7b")
+simpleSelectionPrefab = ExtResource("2_e1e62")
+layout = NodePath("VBoxContainer/route selection/HBoxContainer")
+difficulty = NodePath("VBoxContainer/Stats/HFlowContainer/dificulty")
+time = NodePath("VBoxContainer/Stats/HFlowContainer/time")
+ascent = NodePath("VBoxContainer/Stats/HFlowContainer/Ascent")
+distance = NodePath("VBoxContainer/Stats/HFlowContainer/distance")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Game config menus/Route selection/Game mode stats/HSplitContainer/routes"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/Game config menus/Route selection/Game mode stats/HSplitContainer/routes/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("8_jlfx1")
+text = "Routes:"
+horizontal_alignment = 1
+
+[node name="route selection" type="ScrollContainer" parent="VBoxContainer/Game config menus/Route selection/Game mode stats/HSplitContainer/routes/VBoxContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+follow_focus = true
+vertical_scroll_mode = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Game config menus/Route selection/Game mode stats/HSplitContainer/routes/VBoxContainer/route selection"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Stats" type="Panel" parent="VBoxContainer/Game config menus/Route selection/Game mode stats/HSplitContainer/routes/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"midPanel"
+
+[node name="HFlowContainer" type="HFlowContainer" parent="VBoxContainer/Game config menus/Route selection/Game mode stats/HSplitContainer/routes/VBoxContainer/Stats"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 7.0
+offset_top = 9.0
+offset_right = -7.0
+offset_bottom = -9.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 30
+theme_override_constants/v_separation = 20
+alignment = 1
+
+[node name="dificulty" type="Label" parent="VBoxContainer/Game config menus/Route selection/Game mode stats/HSplitContainer/routes/VBoxContainer/Stats/HFlowContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("8_jlfx1")
+text = "Dificulty: Hard "
+
+[node name="time" type="Label" parent="VBoxContainer/Game config menus/Route selection/Game mode stats/HSplitContainer/routes/VBoxContainer/Stats/HFlowContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("8_jlfx1")
+text = "Estimated time to finish: 120 min "
+
+[node name="Ascent" type="Label" parent="VBoxContainer/Game config menus/Route selection/Game mode stats/HSplitContainer/routes/VBoxContainer/Stats/HFlowContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("8_jlfx1")
+text = "Ascent: 300m "
+
+[node name="distance" type="Label" parent="VBoxContainer/Game config menus/Route selection/Game mode stats/HSplitContainer/routes/VBoxContainer/Stats/HFlowContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("8_jlfx1")
+text = "distance: 50km 󰣰"
+
+[node name="Layout" type="VBoxContainer" parent="VBoxContainer/Game config menus/Route selection/Game mode stats/HSplitContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/Game config menus/Route selection/Game mode stats/HSplitContainer/Layout"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("9_chcsm")
+text = "Description:"
+horizontal_alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/Game config menus/Route selection/Game mode stats/HSplitContainer/Layout"]
+layout_mode = 2
+bbcode_enabled = true
+text = "Test TEst test test test
+next line text
+test
+'"
+fit_content = true
+context_menu_enabled = true
+horizontal_alignment = 1
+
+[node name="Bike selection" type="Control" parent="VBoxContainer/Game config menus"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="background" type="Panel" parent="VBoxContainer/Game config menus/Bike selection"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"lightborderPanel"
+
+[node name="Bike config" type="Panel" parent="VBoxContainer/Game config menus/Bike selection"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="layout" type="VBoxContainer" parent="VBoxContainer/Game config menus/Bike selection/Bike config"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = -3.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("6_bt2k0")
+
+[node name="Label" type="Label" parent="VBoxContainer/Game config menus/Bike selection/Bike config/layout"]
+layout_mode = 2
+text = "Bike config:"
+horizontal_alignment = 1
+
+[node name="Model selection" type="ScrollContainer" parent="VBoxContainer/Game config menus/Bike selection/Bike config/layout"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+follow_focus = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Game config menus/Bike selection/Bike config/layout/Model selection"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Bike model stats" type="Panel" parent="VBoxContainer/Game config menus/Bike selection/Bike config/layout"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"lightPanel"
+
+[node name="Layout" type="VBoxContainer" parent="VBoxContainer/Game config menus/Bike selection/Bike config/layout/Bike model stats"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = -2.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/Game config menus/Bike selection/Bike config/layout/Bike model stats/Layout"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("9_chcsm")
+text = "Test  bike model name"
+horizontal_alignment = 1
+
+[node name="mass" type="HBoxContainer" parent="VBoxContainer/Game config menus/Bike selection/Bike config/layout/Bike model stats/Layout" node_paths=PackedStringArray("lineEdit")]
+layout_mode = 2
+script = ExtResource("11_xwyxq")
+lineEdit = NodePath("LineEdit")
+
+[node name="Label" type="Label" parent="VBoxContainer/Game config menus/Bike selection/Bike config/layout/Bike model stats/Layout/mass"]
+layout_mode = 2
+text = " 󰖡 Mass: "
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer/Game config menus/Bike selection/Bike config/layout/Bike model stats/Layout/mass"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "enter value:"
+virtual_keyboard_type = 2
+
+[node name="wheel friction" type="HBoxContainer" parent="VBoxContainer/Game config menus/Bike selection/Bike config/layout/Bike model stats/Layout" node_paths=PackedStringArray("lineEdit")]
+layout_mode = 2
+script = ExtResource("11_xwyxq")
+lineEdit = NodePath("LineEdit")
+
+[node name="Label" type="Label" parent="VBoxContainer/Game config menus/Bike selection/Bike config/layout/Bike model stats/Layout/wheel friction"]
+layout_mode = 2
+text = " 󱥔 Wheel friction: "
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer/Game config menus/Bike selection/Bike config/layout/Bike model stats/Layout/wheel friction"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "enter value:"
+virtual_keyboard_type = 2
+
+[node name="wheel radious" type="HBoxContainer" parent="VBoxContainer/Game config menus/Bike selection/Bike config/layout/Bike model stats/Layout" node_paths=PackedStringArray("lineEdit")]
+layout_mode = 2
+script = ExtResource("11_xwyxq")
+lineEdit = NodePath("LineEdit")
+
+[node name="Label" type="Label" parent="VBoxContainer/Game config menus/Bike selection/Bike config/layout/Bike model stats/Layout/wheel radious"]
+layout_mode = 2
+text = " 󰐙 Wheel radious: "
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer/Game config menus/Bike selection/Bike config/layout/Bike model stats/Layout/wheel radious"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "enter value:"
+virtual_keyboard_type = 2
+
+[node name="drag" type="HBoxContainer" parent="VBoxContainer/Game config menus/Bike selection/Bike config/layout/Bike model stats/Layout" node_paths=PackedStringArray("lineEdit")]
+layout_mode = 2
+script = ExtResource("11_xwyxq")
+lineEdit = NodePath("LineEdit")
+
+[node name="Label" type="Label" parent="VBoxContainer/Game config menus/Bike selection/Bike config/layout/Bike model stats/Layout/drag"]
+layout_mode = 2
+text = " 󱄟 Drag: "
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer/Game config menus/Bike selection/Bike config/layout/Bike model stats/Layout/drag"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "enter value:"
+virtual_keyboard_type = 2
+
+[node name="Load game" type="Control" parent="VBoxContainer/Game config menus"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="VBoxContainer/Game config menus/Load game"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -8.0
+offset_right = 4.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_type_variation = &"buttonHighlight"
+theme_override_fonts/font = ExtResource("9_chcsm")
+theme_override_font_sizes/font_size = 50
+text = "Start game!"
+
+[node name="Menu movement" type="HBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+alignment = 1
+
+[node name="left" type="Button" parent="VBoxContainer/Menu movement"]
+custom_minimum_size = Vector2(384.31, 0)
+layout_mode = 2
+theme_type_variation = &"buttonDefault"
+theme_override_font_sizes/font_size = 50
+text = ""
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/Menu movement"]
+custom_minimum_size = Vector2(418.505, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="right" type="Button" parent="VBoxContainer/Menu movement"]
+custom_minimum_size = Vector2(384.31, 0)
+layout_mode = 2
+theme_type_variation = &"buttonHighlight"
+theme_override_font_sizes/font_size = 50
+text = ""

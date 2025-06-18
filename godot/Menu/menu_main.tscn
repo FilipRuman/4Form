@@ -1,0 +1,217 @@
+[gd_scene load_steps=9 format=3 uid="uid://dnsjumx1dj3o7"]
+
+[ext_resource type="Script" uid="uid://basdgtr0ivql5" path="res://Menu/MenuMain.cs" id="1_pqpoy"]
+[ext_resource type="PackedScene" uid="uid://w67eox52c1g" path="res://Player/player.tscn" id="2_2i4oj"]
+[ext_resource type="Theme" uid="uid://regixqqcydb8" path="res://theme.tres" id="3_fk81q"]
+[ext_resource type="Script" uid="uid://b0iuc2y03g3ee" path="res://Menu/MenuTabContent.cs" id="4_tcn24"]
+[ext_resource type="Script" uid="uid://cninou2cus8fu" path="res://Menu/DeviceConnection/PeripheralsMenu.cs" id="5_e117p"]
+[ext_resource type="PackedScene" uid="uid://b3prul5dd2nbn" path="res://Menu/DeviceConnection/peripherial_display.tscn" id="6_bexj6"]
+[ext_resource type="Script" uid="uid://d3apq1nnkijj3" path="res://Menu/DeviceConnection/DeviceType.cs" id="7_lqkny"]
+[ext_resource type="PackedScene" uid="uid://xhe2bn86m8s0" path="res://Menu/game_config.tscn" id="8_iq3lu"]
+
+[node name="menu main" type="Control" node_paths=PackedStringArray("tabBar", "tabContents", "tabContentsLockScreen", "tabContentsLockScreenLabel")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pqpoy")
+playerPrefab = ExtResource("2_2i4oj")
+tabBar = NodePath("Panel/tabs/TabBar")
+tabContents = [null, null, null, null]
+tabContentsLockScreen = NodePath("Panel/contents/Lock screen")
+tabContentsLockScreenLabel = NodePath("Panel/contents/Lock screen/RichTextLabel")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 42.0
+offset_top = 48.0
+offset_right = -42.0
+offset_bottom = -48.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(550, 300)
+theme = ExtResource("3_fk81q")
+
+[node name="tabs" type="Panel" parent="Panel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 39.0
+grow_horizontal = 2
+theme = ExtResource("3_fk81q")
+theme_type_variation = &"lightPanel"
+
+[node name="TabBar" type="TabBar" parent="Panel/tabs"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 5.0
+offset_right = -2.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_fk81q")
+current_tab = 0
+tab_alignment = 1
+clip_tabs = false
+tab_count = 4
+tab_0/title = "Device connection "
+tab_1/title = "User settings "
+tab_2/title = "Game 󱎓"
+tab_3/title = "Settings "
+
+[node name="contents" type="Control" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 15.0
+offset_top = 45.0
+offset_right = -15.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="device connection" type="Control" parent="Panel/contents"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_tcn24")
+
+[node name="PeripherialsMenu" type="Node" parent="Panel/contents/device connection" node_paths=PackedStringArray("peripheralsDisplaysLayout", "deviceTypes")]
+script = ExtResource("5_e117p")
+peripheralsDisplaysLayout = NodePath("../HSplitContainer/peripheral to connect/VBoxContainer2")
+peripheralDisplayPrefab = ExtResource("6_bexj6")
+deviceTypes = [null, null]
+
+[node name="HSplitContainer" type="HSplitContainer" parent="Panel/contents/device connection"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+split_offset = 300
+
+[node name="device types" type="Panel" parent="Panel/contents/device connection/HSplitContainer"]
+layout_mode = 2
+theme_type_variation = &"lightborderPanel"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Panel/contents/device connection/HSplitContainer/device types"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = -3.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_fk81q")
+
+[node name="Smart bike trainer 󰂣" parent="Panel/contents/device connection/HSplitContainer/device types/VBoxContainer2" node_paths=PackedStringArray("icon") instance=ExtResource("6_bexj6")]
+layout_mode = 2
+icon = Object(Label,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":false,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(0, 0),"layout_direction":0,"layout_mode":1,"anchors_preset":-1,"anchor_left":0.992,"anchor_top":0.5,"anchor_right":1.0,"anchor_bottom":0.5,"offset_left":-24.056,"offset_top":-12.5,"offset_right":-3.0,"offset_bottom":12.5,"grow_horizontal":0,"grow_vertical":2,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":4,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"mouse_filter":2,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"theme":null,"theme_type_variation":&"","text":"󰂣 ","label_settings":null,"horizontal_alignment":2,"vertical_alignment":0,"autowrap_mode":0,"justification_flags":163,"paragraph_separator":"\\n","clip_text":false,"text_overrun_behavior":0,"ellipsis_char":"…","uppercase":false,"tab_stops":PackedFloat32Array(),"lines_skipped":0,"max_lines_visible":-1,"visible_characters":-1,"visible_characters_behavior":0,"visible_ratio":1.0,"text_direction":0,"language":"","structured_text_bidi_override":0,"structured_text_bidi_override_options":[],"script":null)
+
+icon = NodePath("icon")
+
+[node name="icon" parent="Panel/contents/device connection/HSplitContainer/device types/VBoxContainer2/Smart bike trainer 󰂣" index="0"]
+visible = false
+
+[node name="trainer device type" type="Node" parent="Panel/contents/device connection/HSplitContainer/device types/VBoxContainer2/Smart bike trainer 󰂣" node_paths=PackedStringArray("display")]
+script = ExtResource("7_lqkny")
+display = NodePath("..")
+name = "smart trainer"
+glyphIcon = "󰂣 "
+
+[node name="heart rate tracker " parent="Panel/contents/device connection/HSplitContainer/device types/VBoxContainer2" node_paths=PackedStringArray("icon") instance=ExtResource("6_bexj6")]
+layout_mode = 2
+text = "heart rate tracker "
+icon = Object(Label,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":false,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(0, 0),"layout_direction":0,"layout_mode":1,"anchors_preset":-1,"anchor_left":0.992,"anchor_top":0.5,"anchor_right":1.0,"anchor_bottom":0.5,"offset_left":-24.056,"offset_top":-12.5,"offset_right":-3.0,"offset_bottom":12.5,"grow_horizontal":0,"grow_vertical":2,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":4,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"mouse_filter":2,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"theme":null,"theme_type_variation":&"","text":"󰂣 ","label_settings":null,"horizontal_alignment":2,"vertical_alignment":0,"autowrap_mode":0,"justification_flags":163,"paragraph_separator":"\\n","clip_text":false,"text_overrun_behavior":0,"ellipsis_char":"…","uppercase":false,"tab_stops":PackedFloat32Array(),"lines_skipped":0,"max_lines_visible":-1,"visible_characters":-1,"visible_characters_behavior":0,"visible_ratio":1.0,"text_direction":0,"language":"","structured_text_bidi_override":0,"structured_text_bidi_override_options":[],"script":null)
+
+icon = NodePath("icon")
+
+[node name="icon" parent="Panel/contents/device connection/HSplitContainer/device types/VBoxContainer2/heart rate tracker " index="0"]
+visible = false
+
+[node name="heart rate device type" type="Node" parent="Panel/contents/device connection/HSplitContainer/device types/VBoxContainer2/heart rate tracker " node_paths=PackedStringArray("display")]
+script = ExtResource("7_lqkny")
+display = NodePath("..")
+name = "heart rate"
+glyphIcon = " "
+
+[node name="other device type 󰤟" parent="Panel/contents/device connection/HSplitContainer/device types/VBoxContainer2" node_paths=PackedStringArray("icon") instance=ExtResource("6_bexj6")]
+layout_mode = 2
+text = "other device type 󰤟"
+icon = Object(Label,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":false,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(0, 0),"layout_direction":0,"layout_mode":1,"anchors_preset":-1,"anchor_left":0.992,"anchor_top":0.5,"anchor_right":1.0,"anchor_bottom":0.5,"offset_left":-24.056,"offset_top":-12.5,"offset_right":-3.0,"offset_bottom":12.5,"grow_horizontal":0,"grow_vertical":2,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":4,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"mouse_filter":2,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"theme":null,"theme_type_variation":&"","text":"󰂣 ","label_settings":null,"horizontal_alignment":2,"vertical_alignment":0,"autowrap_mode":0,"justification_flags":163,"paragraph_separator":"\\n","clip_text":false,"text_overrun_behavior":0,"ellipsis_char":"…","uppercase":false,"tab_stops":PackedFloat32Array(),"lines_skipped":0,"max_lines_visible":-1,"visible_characters":-1,"visible_characters_behavior":0,"visible_ratio":1.0,"text_direction":0,"language":"","structured_text_bidi_override":0,"structured_text_bidi_override_options":[],"script":null)
+
+icon = NodePath("icon")
+
+[node name="icon" parent="Panel/contents/device connection/HSplitContainer/device types/VBoxContainer2/other device type 󰤟" index="0"]
+visible = false
+
+[node name="peripheral to connect" type="Panel" parent="Panel/contents/device connection/HSplitContainer"]
+layout_mode = 2
+theme_type_variation = &"lightborderPanel"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Panel/contents/device connection/HSplitContainer/peripheral to connect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = -3.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_fk81q")
+
+[node name="Lock screen" type="Control" parent="Panel/contents"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="Panel/contents/Lock screen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel/contents/Lock screen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(0.678431, 0.0901961, 0.0901961, 1)
+bbcode_enabled = true
+text = "Test Lock Screen text"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Game config" parent="Panel/contents" instance=ExtResource("8_iq3lu")]
+layout_mode = 1
+
+[editable path="Panel/contents/device connection/HSplitContainer/device types/VBoxContainer2/Smart bike trainer 󰂣"]
+[editable path="Panel/contents/device connection/HSplitContainer/device types/VBoxContainer2/heart rate tracker "]
+[editable path="Panel/contents/device connection/HSplitContainer/device types/VBoxContainer2/other device type 󰤟"]

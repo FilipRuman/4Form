@@ -3,7 +3,7 @@ namespace ForForm.Map.Route
     using System;
     using Godot;
 
-    [Tool]
+    [Tool,Icon("res://Script icons/publish.png")]
     public partial class RouteExport : Node3D {
         string RouteSpecificBasePath(string routeName) =>
             $"user://Maps/{map.name}/Routes/{routeName}/";

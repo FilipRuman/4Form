@@ -1,9 +1,54 @@
-[gd_scene load_steps=5 format=3 uid="uid://c0hkngqkjxk3t"]
+[gd_scene load_steps=9 format=3 uid="uid://c0hkngqkjxk3t"]
 
 [ext_resource type="PackedScene" uid="uid://dnsjumx1dj3o7" path="res://Menu/menu_main.tscn" id="1_h2yge"]
 [ext_resource type="Script" uid="uid://naawr1uq2pqg" path="res://TCP/Tcp.cs" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://buux5h8054hrj" path="res://TCP/TcpParser.cs" id="2_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://bs5dl4uif5ysp" path="res://Map/blank_map.tscn" id="4_1bvp3"]
+
+[sub_resource type="Gradient" id="Gradient_1bvp3"]
+offsets = PackedFloat32Array(0.2, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_lquwl"]
+noise_type = 2
+frequency = 0.03
+cellular_jitter = 3.0
+cellular_return_type = 0
+domain_warp_enabled = true
+domain_warp_type = 1
+domain_warp_amplitude = 50.0
+domain_warp_fractal_type = 2
+domain_warp_fractal_lacunarity = 1.5
+domain_warp_fractal_gain = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_7mycd"]
+seamless = true
+color_ramp = SubResource("Gradient_1bvp3")
+noise = SubResource("FastNoiseLite_lquwl")
+
+[sub_resource type="Terrain3DMaterial" id="Terrain3DMaterial_272bh"]
+_shader_parameters = {
+&"bias_distance": 512.0,
+&"blend_sharpness": 0.87,
+&"depth_blur": 0.0,
+&"enable_macro_variation": true,
+&"enable_projection": true,
+&"height_blending": true,
+&"macro_variation1": Color(1, 1, 1, 1),
+&"macro_variation2": Color(1, 1, 1, 1),
+&"macro_variation_slope": 0.333,
+&"mipmap_bias": 1.0,
+&"noise1_angle": 0.0,
+&"noise1_offset": Vector2(0.5, 0.5),
+&"noise1_scale": 0.04,
+&"noise2_scale": 0.076,
+&"noise3_scale": 0.225,
+&"noise_texture": SubResource("NoiseTexture2D_7mycd"),
+&"projection_angular_division": 2.0,
+&"projection_threshold": 0.8,
+&"world_space_normal_blend": true
+}
+show_checkered = true
 
 [node name="scene" type="Node3D"]
 
@@ -15,6 +60,9 @@ follow_viewport_enabled = true
 tcpParser = NodePath("../../Tcp/TcpParser")
 startGameButton = NodePath("Panel/contents/Game/Game config/VBoxContainer/Game config menus/Load game/Button")
 terrain3D = NodePath("../../Blank map/Terrain3D")
+
+[node name="device connection" parent="CanvasLayer/menu main/Panel/contents" index="0"]
+visible = true
 
 [node name="PeripherialsMenu" parent="CanvasLayer/menu main/Panel/contents/device connection" index="0" node_paths=PackedStringArray("tcpParser", "deviceTypes")]
 tcpParser = NodePath("../../../../../../Tcp/TcpParser")
@@ -49,7 +97,7 @@ tcp = NodePath("..")
 [node name="Blank map" parent="." instance=ExtResource("4_1bvp3")]
 
 [node name="Terrain3D" parent="Blank map" index="0"]
-show_colormap = true
+material = SubResource("Terrain3DMaterial_272bh")
 
 [node name="route export" parent="Blank map" index="2" node_paths=PackedStringArray("routeMenu")]
 routeMenu = NodePath("../../CanvasLayer/menu main/Panel/contents/Game/Game config/VBoxContainer/Game config menus/Route selection")

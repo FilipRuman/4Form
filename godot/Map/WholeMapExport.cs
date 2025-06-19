@@ -43,8 +43,13 @@ namespace ForForm.Map
         /// Call this to import ALL components of map like:
         /// map, game mode, 3D scene, terrain 3D, routes
         public void Import(string mapName) {
+            map.name = mapName;
+
+            terrain3DTrueExport.Call("run_import");
             GameConfig.GameSettings.currentMap = Map.Load(mapName);
+
             GameConfig.GameSettings.currentMap.gameMode = GameConfig.GameMode.Load(mapName);
+            GameConfig.GameSettings.SetCurrentGameMode(GameConfig.GameSettings.currentMap.gameMode);
             Menu.UIMiscs.ClearChildren(this);
             ImportScene();
             routeExport.ImportRoutes();

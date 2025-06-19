@@ -1,15 +1,15 @@
 [gd_scene load_steps=19 format=3 uid="uid://cftjx3hmwiptq"]
 
-[ext_resource type="Script" uid="uid://bd4gkcdu8623j" path="res://Map/Map.cs" id="1_ofcdo"]
-[ext_resource type="Script" uid="uid://chstoagn42gbr" path="res://demo/src/DemoScene.gd" id="1_ywkik"]
-[ext_resource type="PackedScene" uid="uid://bb2lp50sjndus" path="res://demo/components/Environment.tscn" id="2_ofcdo"]
-[ext_resource type="PackedScene" uid="uid://dwnhqfjq7v1pq" path="res://demo/components/Borders.tscn" id="3_yjjny"]
-[ext_resource type="PackedScene" uid="uid://djhl3foqkj4e2" path="res://demo/components/Tunnel.tscn" id="4_n3c11"]
-[ext_resource type="Terrain3DAssets" uid="uid://dal3jhw6241qg" path="res://demo/data/assets.tres" id="5_vipss"]
-[ext_resource type="Script" uid="uid://cu84pino7trdb" path="res://Map/Route/Route.cs" id="7_n3c11"]
-[ext_resource type="Script" uid="uid://db1v62mcs7w5y" path="res://Map/Route/TerrainFollowPath.cs" id="7_yjjny"]
-[ext_resource type="Texture2D" uid="uid://d25i15onyxgff" path="res://icon.svg" id="8_vipss"]
-[ext_resource type="Texture2D" uid="uid://dhotn6jywb01t" path="res://assets/Short path printscreen.png" id="10_i1pmm"]
+[ext_resource type="Script" uid="uid://bd4gkcdu8623j" path="res://Map/Map.cs" id="1_lh3ij"]
+[ext_resource type="Script" uid="uid://chstoagn42gbr" path="res://demo/src/DemoScene.gd" id="2_qanxs"]
+[ext_resource type="PackedScene" uid="uid://bb2lp50sjndus" path="res://demo/components/Environment.tscn" id="3_l0btf"]
+[ext_resource type="PackedScene" uid="uid://dwnhqfjq7v1pq" path="res://demo/components/Borders.tscn" id="4_5qp4p"]
+[ext_resource type="PackedScene" uid="uid://djhl3foqkj4e2" path="res://demo/components/Tunnel.tscn" id="5_a6gdr"]
+[ext_resource type="Terrain3DAssets" uid="uid://dal3jhw6241qg" path="res://demo/data/assets.tres" id="6_ntdri"]
+[ext_resource type="Script" uid="uid://cu84pino7trdb" path="res://Map/Route/Route.cs" id="7_m4r2a"]
+[ext_resource type="Texture2D" uid="uid://d25i15onyxgff" path="res://icon.svg" id="8_pq3bi"]
+[ext_resource type="Script" uid="uid://db1v62mcs7w5y" path="res://Map/Route/TerrainFollowPath.cs" id="9_udkbk"]
+[ext_resource type="Texture2D" uid="uid://dhotn6jywb01t" path="res://assets/Short path printscreen.png" id="10_g58f4"]
 
 [sub_resource type="Gradient" id="Gradient_vr1m7"]
 offsets = PackedFloat32Array(0.2, 1)
@@ -112,26 +112,25 @@ _data = {
 }
 point_count = 19
 
-[node name="DemoMap" type="Node3D" node_paths=PackedStringArray("routes", "terrain3D")]
-script = ExtResource("1_ofcdo")
+[node name="DemoMap" type="Node3D" node_paths=PackedStringArray("routes")]
+script = ExtResource("1_lh3ij")
 routes = [NodePath("Demo map script/Route short"), NodePath("Demo map script/Route mid")]
-terrain3D = NodePath("Demo map script/Terrain3D")
 
 [node name="Demo map script" type="Node" parent="."]
-script = ExtResource("1_ywkik")
+script = ExtResource("2_qanxs")
 
-[node name="Environment" parent="Demo map script" instance=ExtResource("2_ofcdo")]
+[node name="Environment" parent="Demo map script" instance=ExtResource("3_l0btf")]
 
-[node name="Borders" parent="Demo map script" instance=ExtResource("3_yjjny")]
+[node name="Borders" parent="Demo map script" instance=ExtResource("4_5qp4p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 512, -3, 512)
 collision_mask = 3
 
-[node name="Tunnel" parent="Demo map script" instance=ExtResource("4_n3c11")]
+[node name="Tunnel" parent="Demo map script" instance=ExtResource("5_a6gdr")]
 
 [node name="Terrain3D" type="Terrain3D" parent="Demo map script"]
 data_directory = "res://demo/data"
 material = SubResource("Terrain3DMaterial_jrc01")
-assets = ExtResource("5_vipss")
+assets = ExtResource("6_ntdri")
 collision_mode = 0
 collision_shape_size = 64
 collision_radius = 256
@@ -141,15 +140,15 @@ metadata/_edit_lock_ = true
 
 [node name="Route short" type="Path3D" parent="Demo map script"]
 curve = SubResource("Curve3D_vipss")
-script = ExtResource("7_n3c11")
+script = ExtResource("7_m4r2a")
 name = "Short"
-icon = ExtResource("8_vipss")
+icon = ExtResource("8_pq3bi")
 startingPoint = 10.0
 difficulty = "Hard"
 estimatedTime = 10
 
 [node name="terrain follow path" type="Node3D" parent="Demo map script/Route short" node_paths=PackedStringArray("roughPath", "outputPath")]
-script = ExtResource("7_yjjny")
+script = ExtResource("9_udkbk")
 roughPath = NodePath("rough")
 outputPath = NodePath("..")
 checkIntervalDistance = 100.0
@@ -161,15 +160,15 @@ curve = SubResource("Curve3D_7gilj")
 
 [node name="Route mid" type="Path3D" parent="Demo map script"]
 curve = SubResource("Curve3D_i1pmm")
-script = ExtResource("7_n3c11")
+script = ExtResource("7_m4r2a")
 name = "Mid"
-icon = ExtResource("10_i1pmm")
+icon = ExtResource("10_g58f4")
 startingPoint = 3000.0
 difficulty = "Easy :P"
 estimatedTime = 15
 
 [node name="terrain follow path" type="Node3D" parent="Demo map script/Route mid" node_paths=PackedStringArray("roughPath", "outputPath")]
-script = ExtResource("7_yjjny")
+script = ExtResource("9_udkbk")
 roughPath = NodePath("rough")
 outputPath = NodePath("..")
 checkIntervalDistance = 10.0

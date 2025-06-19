@@ -37,6 +37,7 @@ namespace ForForm.Player
 
             userConfig.name = ((string)data[0]);
             userConfig.mass = ((float)data[1]);
+            Bike.BikeStats.userConfig = userConfig;
             return userConfig;
         }
     }

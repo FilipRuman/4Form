@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dnsjumx1dj3o7"]
+[gd_scene load_steps=23 format=3 uid="uid://dnsjumx1dj3o7"]
 
 [ext_resource type="Script" uid="uid://basdgtr0ivql5" path="res://Menu/MenuMain.cs" id="1_pqpoy"]
 [ext_resource type="PackedScene" uid="uid://w67eox52c1g" path="res://Bike/player.tscn" id="2_2i4oj"]
@@ -8,6 +8,31 @@
 [ext_resource type="PackedScene" uid="uid://b3prul5dd2nbn" path="res://Menu/DeviceConnection/peripherial_display.tscn" id="6_bexj6"]
 [ext_resource type="Script" uid="uid://d3apq1nnkijj3" path="res://Menu/DeviceConnection/DeviceType.cs" id="7_lqkny"]
 [ext_resource type="PackedScene" uid="uid://xhe2bn86m8s0" path="res://Menu/game_config.tscn" id="8_iq3lu"]
+[ext_resource type="Script" uid="uid://erdnmfehrmhp" path="res://Menu/UserConfigMenu.cs" id="8_kgf20"]
+[ext_resource type="Texture2D" uid="uid://dhotn6jywb01t" path="res://assets/Short path printscreen.png" id="9_u54ij"]
+[ext_resource type="Script" uid="uid://0bd4icrprif5" path="res://Menu/PropertyEdit.cs" id="10_u54ij"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xmmyl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nxyy8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_px0ll"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_y6lst"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gjaq1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m3b06"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_y6jaq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5lnfq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lf1v0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8jt2l"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jblj6"]
 
 [node name="menu main" type="Control" node_paths=PackedStringArray("tabBar", "tabContents", "tabContentsLockScreen", "tabContentsLockScreenLabel")]
 layout_mode = 3
@@ -19,7 +44,7 @@ grow_vertical = 2
 script = ExtResource("1_pqpoy")
 playerPrefab = ExtResource("2_2i4oj")
 tabBar = NodePath("Panel/tabs/TabBar")
-tabContents = [NodePath("Panel/contents/device connection"), NodePath("Panel/contents/Usersettings"), NodePath("Panel/contents/Game")]
+tabContents = [NodePath("Panel/contents/device connection"), NodePath("Panel/contents/UserConfig"), NodePath("Panel/contents/Game")]
 tabContentsLockScreen = NodePath("Panel/contents/Lock screen")
 tabContentsLockScreenLabel = NodePath("Panel/contents/Lock screen/RichTextLabel")
 
@@ -63,7 +88,7 @@ tab_alignment = 1
 clip_tabs = false
 tab_count = 4
 tab_0/title = "Device connection "
-tab_1/title = "User settings "
+tab_1/title = "User "
 tab_2/title = "Game 󱎓"
 tab_3/title = "Settings "
 
@@ -80,6 +105,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="device connection" type="Control" parent="Panel/contents"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -172,12 +198,92 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("3_fk81q")
 
-[node name="Usersettings" type="Control" parent="Panel/contents"]
+[node name="UserConfig" type="Control" parent="Panel/contents"]
 visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_tcn24")
+gameCantBeStarted = true
+
+[node name="User config menu" type="Control" parent="Panel/contents/UserConfig" node_paths=PackedStringArray("name", "mass", "icon")]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-script = ExtResource("4_tcn24")
+script = ExtResource("8_kgf20")
+name = NodePath("../VFlowContainer/name")
+mass = NodePath("../VFlowContainer/mass")
+icon = NodePath("../VFlowContainer/Icon")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/contents/UserConfig"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VFlowContainer" type="VFlowContainer" parent="Panel/contents/UserConfig"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Icon" type="Button" parent="Panel/contents/UserConfig/VFlowContainer"]
+custom_minimum_size = Vector2(250, 200)
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_xmmyl")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_nxyy8")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_px0ll")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_y6lst")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_gjaq1")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_m3b06")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_y6jaq")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_5lnfq")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_lf1v0")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_8jt2l")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_jblj6")
+icon = ExtResource("9_u54ij")
+expand_icon = true
+
+[node name="name" type="Control" parent="Panel/contents/UserConfig/VFlowContainer" node_paths=PackedStringArray("lineEdit")]
+custom_minimum_size = Vector2(350, 40)
+layout_mode = 2
+script = ExtResource("10_u54ij")
+lineEdit = NodePath("name")
+
+[node name="name" type="LineEdit" parent="Panel/contents/UserConfig/VFlowContainer/name"]
+custom_minimum_size = Vector2(17.705, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+placeholder_text = "name:"
+max_length = 30
+
+[node name="mass" type="Control" parent="Panel/contents/UserConfig/VFlowContainer" node_paths=PackedStringArray("lineEdit")]
+custom_minimum_size = Vector2(350, 40)
+layout_mode = 2
+script = ExtResource("10_u54ij")
+lineEdit = NodePath("mass")
+
+[node name="mass" type="LineEdit" parent="Panel/contents/UserConfig/VFlowContainer/mass"]
+custom_minimum_size = Vector2(39.04, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+placeholder_text = "mass:"
+virtual_keyboard_type = 3
 
 [node name="Game" type="Control" parent="Panel/contents"]
 visible = false

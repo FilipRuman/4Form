@@ -2,7 +2,7 @@ namespace ForForm.Menu.DeviceConnection
 {
     using System;
     using Godot;
-
+[Tool]
     public partial class PeripheralDisplay : Button {
         [Export]
         public Label icon;

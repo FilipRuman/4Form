@@ -21,7 +21,8 @@ namespace ForForm.Menu
 
         [Export]
         Control tabContentsLockScreen;
-
+[Export]
+Node3D terrain3D;
         [Export]
         RichTextLabel tabContentsLockScreenLabel;
 
@@ -67,7 +68,7 @@ namespace ForForm.Menu
             GameConfig.GameSettings.gameStarted = true;
             var playerNode = playerPrefab.Instantiate();
             tcpParser.bikePhysics = ((Bike.BikePhysics)playerNode);
-            GameConfig.GameSettings.currentMap.terrain3D.Call(
+            terrain3D.Call(
                 "set_camera",
                 ((Bike.BikePhysics)playerNode).camera
             );

@@ -11,6 +11,7 @@ namespace ForForm.Menu
         Button icon;
 
         public override void _Ready() {
+            Bike.BikeStats.userConfig =  Player.UserConfig.Load();
 GD.Print($"Bike.BikeStats.userConfig.name {Bike.BikeStats.userConfig.name}");
             name.SetupStr(
                 Bike.BikeStats.userConfig.name,

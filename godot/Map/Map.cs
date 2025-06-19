@@ -58,10 +58,5 @@ namespace ForForm.Map
             };
         }
 
-        public override void _Ready() {
-            //TEMP: Later move somewhere else where it makes more sens
-            Player.UserConfig.Load();
-            base._Ready();
-        }
     }
 }

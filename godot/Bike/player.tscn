@@ -1,7 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://w67eox52c1g"]
+[gd_scene load_steps=9 format=3 uid="uid://w67eox52c1g"]
 
 [ext_resource type="Script" uid="uid://jxi7cxvrgke2" path="res://Bike/BikePhysics.cs" id="1_k7cyb"]
-[ext_resource type="Script" uid="uid://cgsqqemtrbivg" path="res://Bike/BikeStats.cs" id="2_ijeuo"]
 [ext_resource type="Script" uid="uid://hvnau3ci4qqp" path="res://Bike/BikePath.cs" id="3_upywu"]
 [ext_resource type="Script" uid="uid://bqdo3og8xp122" path="res://Bike/BikeInput.cs" id="6_4ial8"]
 [ext_resource type="FontFile" uid="uid://ktmhyk7ky8ip" path="res://assets/Meslo/MesloLGMNerdFont-Bold.ttf" id="7_6whun"]
@@ -19,15 +18,6 @@ camera = NodePath("Camera3D")
 path = NodePath("Bike path")
 input = NodePath("BikeInput")
 gravity = 9.8
-
-[node name="Bike stats" type="Node" parent="."]
-script = ExtResource("2_ijeuo")
-bikeMass = 1.0
-userMass = 1.0
-wheelFrictionCoefficient = 0.01
-wheelRadius = 0.25
-frontalArea = 0.2
-dragCoefficient = 1.0
 
 [node name="Bike path" type="Node" parent="." node_paths=PackedStringArray("bikePhysics", "pathFollow")]
 script = ExtResource("3_upywu")

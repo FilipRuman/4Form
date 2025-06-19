@@ -8,6 +8,9 @@ namespace ForForm.Map.Route
         [ExportGroup("Input by hand")]
         [Export]
         public string name;
+        [Export(PropertyHint.MultilineText)]
+        public string description;
+
 
         [Export]
         public Texture2D icon;

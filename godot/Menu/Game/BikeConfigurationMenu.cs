@@ -1,4 +1,4 @@
-namespace ForForm.Menu.BikeConfig
+namespace ForForm.Menu.Game
 {
     using System.Collections.Generic;
     using Bike;
@@ -6,13 +6,6 @@ namespace ForForm.Menu.BikeConfig
     using Godot;
 
     public partial class BikeConfigurationMenu : Control {
-        [ExportGroup("user settings")]
-        [Export]
-        PropertyEdit userMass,
-            dragCoefficient,
-            frontalArea;
-
-        [ExportGroup("bike settings")]
         [Export]
         PropertyEdit bikeMass,
             wheelFrictionCoefficient,
@@ -21,6 +14,9 @@ namespace ForForm.Menu.BikeConfig
 
         [Export]
         PackedScene bikeModelSelectionPrefab;
+
+        [Export]
+        GameMenu gameMenu;
 
         [Export]
         Control bikeModelLayout;
@@ -39,6 +35,9 @@ namespace ForForm.Menu.BikeConfig
                     bikeModel.icon,
                     () =>
                     {
+                        gameMenu.OnMenuComplete(2);
+                        if (bikeModel == BikeStats.bikeModel)
+                            return;
                         OnBikeModelSelected(bikeModel);
                     }
                 );
@@ -48,69 +47,55 @@ namespace ForForm.Menu.BikeConfig
 
         public void OnBikeModelSelected(BikeModel bikeModel) {
             ThemeVariants.SetForButton(true, bikeModelSelections[bikeModel]);
-            ThemeVariants.SetForButton(false, bikeModelSelections[BikeStats.bikeModel]);
+            if (BikeStats.bikeModel != null && bikeModelSelections.ContainsKey(BikeStats.bikeModel))
+                ThemeVariants.SetForButton(false, bikeModelSelections[BikeStats.bikeModel]);
             BikeStats.bikeModel = bikeModel;
             SetupBikeStatsUI();
         }
 
         public void SetupBikeStatsUI() {
+            if (BikeStats.bikeModel == null)
+                return;
+            var editable = GameConfig.GameSettings.CurrentGameMode.canEditBikeModels;
             bikeMass.Setup(
                 BikeStats.bikeModel.mass,
                 (f) =>
                 {
                     BikeStats.bikeModel.mass = f;
-                }
+                },
+                editable
             );
             wheelFrictionCoefficient.Setup(
                 BikeStats.bikeModel.wheelFrictionCoefficient,
                 (f) =>
                 {
                     BikeStats.bikeModel.wheelFrictionCoefficient = f;
-                }
+                },
+                editable
             );
             bikeWheelRadius.Setup(
                 BikeStats.bikeModel.wheelRadius,
                 (f) =>
                 {
                     BikeStats.bikeModel.wheelRadius = f;
-                }
+                },
+                editable
             );
             bikeFrontalArea.Setup(
                 BikeStats.bikeModel.frontalArea,
                 (f) =>
                 {
                     BikeStats.bikeModel.frontalArea = f;
-                }
+                },
+                editable
             );
         }
 
         public void OnCurrentGameModeChanged() {
-            BikeStats.bikeModel = GameSettings.CurrentGameMode.bikeModels[0];
             BikeStats.dragCoefficient = GameSettings.CurrentGameMode.dragCoefficient;
             BikeStats.frontalArea = GameSettings.CurrentGameMode.userDrag;
             SetupBikeModels();
             SetupBikeStatsUI();
-            userMass.Setup(
-                BikeStats.userMass,
-                (f) =>
-                {
-                    BikeStats.userMass = f;
-                }
-            );
-            dragCoefficient.Setup(
-                BikeStats.dragCoefficient,
-                (f) =>
-                {
-                    BikeStats.dragCoefficient = f;
-                }
-            );
-            frontalArea.Setup(
-                BikeStats.frontalArea,
-                (f) =>
-                {
-                    BikeStats.frontalArea = f;
-                }
-            );
         }
 
         public override void _Ready() {

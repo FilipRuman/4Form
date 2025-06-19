@@ -1,14 +1,21 @@
-namespace ForForm.Menu.GameMode
+namespace ForForm.Menu.Game
 {
     using System;
     using Godot;
 
+    [Tool]
     public partial class RouteMenu : Control {
+        [Export]
+        GameMenu gameMenu;
+
         [Export]
         Control layout;
 
         [Export]
         PackedScene simpleSelectionPrefab;
+
+        [Export]
+        RichTextLabel description;
 
         [Export]
         Label difficulty,
@@ -17,6 +24,7 @@ namespace ForForm.Menu.GameMode
             distance;
 
         public override void _Ready() {
+            description.Text = "";
             difficulty.Text = "";
             time.Text = "";
             ascent.Text = "";
@@ -40,6 +48,7 @@ namespace ForForm.Menu.GameMode
                     {
                         HandleNewSelectionUIHighlight(script);
                         OnRouteSelection(route);
+                        gameMenu.OnMenuComplete(1);
                     }
                 );
             }
@@ -49,11 +58,13 @@ namespace ForForm.Menu.GameMode
             if (currentRouteSelectionUI != null)
                 ThemeVariants.SetForButton(false, currentRouteSelectionUI as Button);
             ThemeVariants.SetForButton(true, newSelectionUI as Button);
-           currentRouteSelectionUI = newSelectionUI;
+            currentRouteSelectionUI = newSelectionUI;
         }
 
         private void OnRouteSelection(Map.Route.Route route) {
             GameConfig.GameSettings.currentRoute = route;
+
+            description.Text = route.description;
             difficulty.Text = $"Difficulty: {route.difficulty} ";
             time.Text = $"Estimated time to finish: {route.estimatedTime}min ";
             ascent.Text = $"Ascent: {Mathf.RoundToInt(route.ascent)}m ";

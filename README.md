@@ -54,7 +54,9 @@ Add import/export tool to features
 Add documentation
 Clean up code a bit
 Move Miscs script
+Build processs: ble handler, inital maps
 Remove this TODO :P
+
 # 🧱Architecture of the project
 ![image](https://github.com/user-attachments/assets/4a18132c-e328-4e19-8c4c-8e0ca543fa62)
 this project is split into 2 parts. I've done this because [btleplug](https://github.com/deviceplug/btleplug) is the only bluetooth library that worked for me and is multiplatform. it also splits project into 2 parts nicely.  

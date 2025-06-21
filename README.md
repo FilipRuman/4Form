@@ -26,6 +26,11 @@
 ``cd 4Form/subomdules/4Form-BluetoothHandler``
 ``cargo build``
 ### 3. open project in Godot
+### 4. set your editor's font to nerdfont, so you can easly see glyphs: 
+open: Editor>Editor Settings>Interface>Editor>
+* Main Font: assets/Meslo/MesloLGLDZNerdFont-Regular.ttf
+* Main Font Bold: assets/Meslo/MesloLGLDZNerdFont-Bold.ttf
+* Code Font: assets/Meslo/MesloLGLDZNerdFont-Regular.ttf
 ### You are ready to run it!
 # 🔭 Overview
 4Form allows users to create interesting training in the exact way they like by allowing community to create:

@@ -21,8 +21,8 @@ namespace ForForm.Menu.Game
             {
                 description.Text = GameConfig.GameSettings.currentMap.description;
             };
-            UIMiscs.ClearChildren(localLayout);
-            UIMiscs.ClearChildren(onlineLayout);
+            Miscs.ClearChildren(localLayout);
+            Miscs.ClearChildren(onlineLayout);
             description.Text = "";
             DisplayMaps();
             base._Ready();

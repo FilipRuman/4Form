@@ -33,7 +33,7 @@ namespace ForForm.Map
                 Import(manualMapLoadName);
             }
             if (clearChildren) {
-                Menu.UIMiscs.ClearChildren(this);
+                Miscs.ClearChildren(this);
                 clearChildren = false;
             }
 
@@ -51,7 +51,7 @@ namespace ForForm.Map
 
             GameConfig.GameSettings.currentMap.gameMode = GameConfig.GameMode.Load(mapName);
             GameConfig.GameSettings.SetCurrentGameMode(GameConfig.GameSettings.currentMap.gameMode);
-            Menu.UIMiscs.ClearChildren(this);
+            Miscs.ClearChildren(this);
             ImportScene();
             routeExport.ImportRoutes();
             // call this second time to be sure that everything is imported

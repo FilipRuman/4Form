@@ -35,7 +35,7 @@ namespace ForForm.Menu.Game
         SimpleSelectionUI currentRouteSelectionUI;
 
         public void Setup(Map.Route.Route[] routes) {
-            UIMiscs.ClearChildren(layout);
+            Miscs.ClearChildren(layout);
             foreach (var route in routes) {
                 var script = simpleSelectionPrefab.Instantiate() as SimpleSelectionUI;
                 layout.AddChild(script);

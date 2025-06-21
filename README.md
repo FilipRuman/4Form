@@ -15,7 +15,7 @@
 > it's not production ready. But I need contributes for further development.
 ##  ⭐ If you think this project sounds interesting, you might use it in the future when it's production ready, Please give this repo a star, it helps a lot.
 # 🛠️ Installation
-## If you want to test it out just download [the latest release](https://github.com/FilipRuman/4Form/releases) for your platform
+## If you want to test it out, just download [the latest release](https://github.com/FilipRuman/4Form/releases) for your platform
 ## Setup for development:
 ### 0.a [Install rust](https://www.rust-lang.org/learn/get-started) 
 ### 0.b [Install latest Godot with .Net support](https://godotengine.org/download/)

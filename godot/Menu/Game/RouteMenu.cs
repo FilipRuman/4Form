@@ -24,11 +24,11 @@ namespace ForForm.Menu.Game
             distance;
 
         public override void _Ready() {
-            description.Text = "";
             difficulty.Text = "";
             time.Text = "";
             ascent.Text = "";
             distance.Text = "";
+            description.Text = "";
             base._Ready();
         }
 

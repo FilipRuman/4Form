@@ -36,6 +36,8 @@ namespace ForForm.Menu.Game
         Button lastMapSelected;
 
         private void LocalMaps() {
+            if (DirAccess.Open("user://Maps/") == null)
+                return;
             var maps = DirAccess.Open("user://Maps/").GetDirectories();
             foreach (var mapName in maps) {
                 var button = new Button() { Text = mapName };

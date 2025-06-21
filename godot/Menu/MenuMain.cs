@@ -62,7 +62,7 @@ Node3D terrain3D;
                 (gameStartedErr ? "You can't edit contents of this page during active game \n" : "")
                 + (modeSelectedErr ? "You need to select game mode first." : "");
         }
-
+// TODO: move this to better place
         public void StartGame() {
             Visible = false;
             GameConfig.GameSettings.gameStarted = true;

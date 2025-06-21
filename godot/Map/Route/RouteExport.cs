@@ -95,7 +95,8 @@ namespace ForForm.Map.Route
                 i++;
             }
             map.routes = routeArray;
-            routeMenu.Setup(routeArray);
+            if (!Engine.IsEditorHint())
+                routeMenu.Setup(routeArray);
         }
 
         // Idk. i can't get the standard(Vector3[]) way to work so i did this:

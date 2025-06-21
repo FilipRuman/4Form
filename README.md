@@ -55,5 +55,5 @@ Add documentation
 Move Miscs script
 Remove this TODO :P
 # 🧱[Architecture of the project](./ARCHITECTURE.md)
-# [Documentation](./docs/Contents.md)
+# 📖[Documentation](./docs/Contents.md)
 # 🤝[Contribution guide](./CONTRIBUTING.md) 

@@ -34,27 +34,25 @@ func  _process(delta: float) -> void:
 var  map_name : String
 func  run_export() -> void:
 	map_name = map.get("name")
-	DirAccess.open("user://" ).make_dir("Maps")
 	DirAccess.open("user://Maps/").make_dir(map_name)
 	DirAccess.open("user://Maps/%s/" % [map_name]).make_dir("Terrain3D")
 	DirAccess.open("user://Maps/%s/Terrain3D" % [map_name]).make_dir("Assets")
 	DirAccess.open("user://Maps/%s/Terrain3D" % [map_name]).make_dir("Material")
+	DirAccess.open("user://Maps/%s/Terrain3D" % [map_name]).make_dir("Regions")
+	
+	export_regions()
 	handle_assets_export()
 	handle_material_export()
+
+func export_regions():
+	# mark all regions modified
+	for regionPosition in ($'..'.data as Terrain3DData).get_regions_all().keys():
+		($'..'.data as Terrain3DData).set_region_modified(regionPosition,true)
 	
-	#height$
-	$'..'.map_type = 0
-	$'..'.file_name_out = "user://Maps/%s/Terrain3D/Assets/Height.exr" % [map_name]
-	$'..'.start_export(true)
-	#Control
-	$'..'.map_type = 1
-	$'..'.file_name_out = "user://Maps/%s/Terrain3D/Assets/Control.exr" % [map_name]
-	$'..'.start_export(true)
-	#Color
-	$'..'.map_type = 2
-	$'..'.file_name_out = "user://Maps/%s/Terrain3D/Assets/Color.png" % [map_name]
-	$'..'.start_export(true)
-	
+	$'..'.destination_directory = "user://Maps/%s/Terrain3D/Regions/" % [map_name]
+	$'..'.save_to_disk = true
+	DirAccess.remove_absolute("user://Maps/%s/Terrain3D/Regions/assets.tres");
+	DirAccess.remove_absolute("user://Maps/%s/Terrain3D/Regions/nav_mesh.res");
 func handle_assets_export():
 	for texture_class in terrain.assets.texture_list:
 		DirAccess.open("user://Maps/%s/Terrain3D/Assets/" % [map_name]).make_dir(texture_class.name);
@@ -129,18 +127,20 @@ func handle_material_export() :
 
 #endregion
 #region import
-
 func  run_import() :	
 	map_name = map.get("name")
-	$'..'.height_file_name = "user://Maps/%s/Terrain3D/Assets/Height.exr" % [map_name]
-	$'..'.control_file_name = "user://Maps/%s/Terrain3D/Assets/Control.exr" % [map_name]
-	$'..'.color_file_name = "user://Maps/%s/Terrain3D/Assets/Color.png" % [map_name]
-	$'..'.start_import(true)
+	
+	$'..'.clear_all = true
 
+	if should_import_material :
+		$'..'.material = import_material()
+	else : 
+		$'..'.material = default_material
+	$'..'.data_directory = "user://Maps/%s/Terrain3D/Regions/" % [map_name]
 	
+	DirAccess.remove_absolute("user://Maps/%s/Terrain3D/Regions/assets.tres");
+	DirAccess.remove_absolute("user://Maps/%s/Terrain3D/Regions/nav_mesh.res");
 	var dir = DirAccess.open("user://Maps/%s/Terrain3D/Assets/" % [map_name]);
-	
-	
 	var texture_assets = []
 	if dir:
 		dir.list_dir_begin()
@@ -155,10 +155,6 @@ func  run_import() :
 	assets.mesh_list = $'..'.get_assets().mesh_list
 	
 	$'..'.set_assets(assets);
-	if should_import_material :
-		$'..'.material = import_material()
-	else : 
-		$'..'.material = default_material
 	
 func  import_texutre_asset(asset_name:String) -> Terrain3DTextureAsset:
 		var  texture_asset = Terrain3DTextureAsset.new()

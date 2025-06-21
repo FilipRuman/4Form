@@ -57,7 +57,7 @@ namespace ForForm.Map.Route
         PackedScene routePrefab;
 
         public void ImportRoutes() {
-            Menu.UIMiscs.ClearChildren(this);
+            Miscs.ClearChildren(this);
             var routeDirs = DirAccess.GetDirectoriesAt(AllRoutesPath);
             var routeArray = new Route[routeDirs.Length];
             var i = 0;

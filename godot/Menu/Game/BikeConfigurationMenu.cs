@@ -23,7 +23,7 @@ namespace ForForm.Menu.Game
         Dictionary<BikeModel, SimpleSelectionUI> bikeModelSelections = new();
 
         public void SetupBikeModels() {
-            UIMiscs.ClearChildren(bikeModelLayout);
+            Miscs.ClearChildren(bikeModelLayout);
             bikeModelSelections.Clear();
             foreach (var bikeModel in GameSettings.CurrentGameMode.bikeModels) {
                 var script = bikeModelSelectionPrefab.Instantiate() as SimpleSelectionUI;

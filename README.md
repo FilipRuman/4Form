@@ -48,12 +48,6 @@
 ``cargo build``
 ### 3. open project in Godot
 ### You are ready to run it!
-
-## TODO:
-Add import/export tool to features
-Add documentation
-Move Miscs script
-Remove this TODO :P
 # 🧱[Architecture of the project](./ARCHITECTURE.md)
 # 📖[Documentation](./docs/Contents.md)
 # 🤝[Contribution guide](./CONTRIBUTING.md) 

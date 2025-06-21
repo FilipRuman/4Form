@@ -6,7 +6,7 @@
 ### Done. you can now run game and you should be able to find this map.
 If you have any problems please write bug report under the issues page
 # For map developement
-##🛠️Setup
+## 🛠️Setup
 ### Setup your scene similar to blank map scene (if you case your scene of [blank map](./../godot/Map/blank_map.tsc) and eaverything works, you can skip this!)
  0. place ``Map.cs`` at the root of the scene and add fill it's references
  1. place ``terrain3DTrueExport.gd`` script on node under terrain3D node and fill it's references (look at blank map scene)

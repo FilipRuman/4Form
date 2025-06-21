@@ -46,6 +46,7 @@ namespace ForForm.Map
             map.name = mapName;
 
             terrain3DTrueExport.Call("run_import");
+
             GameConfig.GameSettings.currentMap = Map.Load(mapName);
 
             GameConfig.GameSettings.currentMap.gameMode = GameConfig.GameMode.Load(mapName);
@@ -53,6 +54,8 @@ namespace ForForm.Map
             Menu.UIMiscs.ClearChildren(this);
             ImportScene();
             routeExport.ImportRoutes();
+            // call this second time to be sure that everything is imported
+            // terrain3DTrueExport.Call("run_import");
         }
 
         public void ImportScene() {
@@ -98,6 +101,7 @@ namespace ForForm.Map
         /// map, game mode, 3D scene, terrain 3D, routes
 
         public void Export() {
+            DirAccess.Open($"user://Maps/").MakeDir(map.name);
             DirAccess.Open($"user://Maps/{map.name}/").MakeDir("Scene");
 
             map.Save();

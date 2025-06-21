@@ -1,15 +1,16 @@
-[gd_scene load_steps=9 format=3 uid="uid://c0hkngqkjxk3t"]
+[gd_scene load_steps=17 format=3 uid="uid://c0hkngqkjxk3t"]
 
-[ext_resource type="PackedScene" uid="uid://dnsjumx1dj3o7" path="res://Menu/menu_main.tscn" id="1_h2yge"]
+[ext_resource type="PackedScene" path="res://Menu/menu_main.tscn" id="1_h2yge"]
 [ext_resource type="Script" uid="uid://naawr1uq2pqg" path="res://TCP/Tcp.cs" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://buux5h8054hrj" path="res://TCP/TcpParser.cs" id="2_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://bs5dl4uif5ysp" path="res://Map/blank_map.tscn" id="4_1bvp3"]
+[ext_resource type="Script" uid="uid://c7q1uobo5sscd" path="res://Map/InitialMapsImporter.cs" id="5_lquwl"]
 
-[sub_resource type="Gradient" id="Gradient_1bvp3"]
+[sub_resource type="Gradient" id="Gradient_lquwl"]
 offsets = PackedFloat32Array(0.2, 1)
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_lquwl"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_7mycd"]
 noise_type = 2
 frequency = 0.03
 cellular_jitter = 3.0
@@ -21,12 +22,12 @@ domain_warp_fractal_type = 2
 domain_warp_fractal_lacunarity = 1.5
 domain_warp_fractal_gain = 1.0
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_7mycd"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_272bh"]
 seamless = true
-color_ramp = SubResource("Gradient_1bvp3")
-noise = SubResource("FastNoiseLite_lquwl")
+color_ramp = SubResource("Gradient_lquwl")
+noise = SubResource("FastNoiseLite_7mycd")
 
-[sub_resource type="Terrain3DMaterial" id="Terrain3DMaterial_272bh"]
+[sub_resource type="Terrain3DMaterial" id="Terrain3DMaterial_5vw27"]
 _shader_parameters = {
 &"bias_distance": 512.0,
 &"blend_sharpness": 0.87,
@@ -43,12 +44,98 @@ _shader_parameters = {
 &"noise1_scale": 0.04,
 &"noise2_scale": 0.076,
 &"noise3_scale": 0.225,
-&"noise_texture": SubResource("NoiseTexture2D_7mycd"),
+&"noise_texture": SubResource("NoiseTexture2D_272bh"),
 &"projection_angular_division": 2.0,
 &"projection_threshold": 0.8,
 &"world_space_normal_blend": true
 }
 show_checkered = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kek77"]
+transparency = 4
+cull_mode = 2
+vertex_color_use_as_albedo = true
+backlight_enabled = true
+backlight = Color(0.5, 0.5, 0.5, 1)
+distance_fade_mode = 1
+distance_fade_min_distance = 128.0
+distance_fade_max_distance = 96.0
+
+[sub_resource type="Terrain3DMeshAsset" id="Terrain3DMeshAsset_4c57u"]
+generated_type = 1
+height_offset = 0.5
+material_override = SubResource("StandardMaterial3D_kek77")
+last_lod = 0
+last_shadow_lod = 0
+lod0_range = 128.0
+
+[sub_resource type="Terrain3DAssets" id="Terrain3DAssets_efxa6"]
+mesh_list = Array[Terrain3DMeshAsset]([SubResource("Terrain3DMeshAsset_4c57u")])
+
+[sub_resource type="Gradient" id="Gradient_vr1m7"]
+offsets = PackedFloat32Array(0.2, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_d8lcj"]
+noise_type = 2
+frequency = 0.03
+cellular_jitter = 3.0
+cellular_return_type = 0
+domain_warp_enabled = true
+domain_warp_type = 1
+domain_warp_amplitude = 50.0
+domain_warp_fractal_type = 2
+domain_warp_fractal_lacunarity = 1.5
+domain_warp_fractal_gain = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_bov7h"]
+seamless = true
+color_ramp = SubResource("Gradient_vr1m7")
+noise = SubResource("FastNoiseLite_d8lcj")
+
+[sub_resource type="Terrain3DMaterial" id="Terrain3DMaterial_lquwl"]
+_shader_parameters = {
+"_mouse_layer": 2147483648,
+"auto_base_texture": 0,
+"auto_height_reduction": 0.0,
+"auto_overlay_texture": 1,
+"auto_slope": 1.0,
+"bias_distance": 512.0,
+"blend_sharpness": 0.87,
+"depth_blur": 0.0,
+"dual_scale_far": 170.0,
+"dual_scale_near": 100.0,
+"dual_scale_reduction": 0.3,
+"dual_scale_texture": 0,
+"enable_macro_variation": true,
+"enable_projection": true,
+"height_blending": true,
+"macro_variation1": Color(0.855, 0.8625, 0.9, 1),
+"macro_variation2": Color(0.9, 0.885, 0.81, 1),
+"macro_variation_slope": 0.333,
+"mipmap_bias": 1.0,
+"noise1_angle": 0.1,
+"noise1_offset": Vector2(0.5, 0.5),
+"noise1_scale": 0.04,
+"noise2_scale": 0.076,
+"noise3_scale": 0.225,
+"noise_texture": SubResource("NoiseTexture2D_bov7h"),
+"projection_angular_division": 1.0,
+"projection_threshold": 0.8,
+"tri_scale_reduction": 0.3,
+"world_noise_fragment_normals": false,
+"world_noise_height": 34.0,
+"world_noise_lod_distance": 7500.0,
+"world_noise_max_octaves": 4,
+"world_noise_min_octaves": 2,
+"world_noise_offset": Vector3(2.17, -1.225, 1.9),
+"world_noise_region_blend": 0.33,
+"world_noise_scale": 9.85,
+"world_space_normal_blend": true
+}
+world_background = 2
+auto_shader = true
+dual_scaling = true
 
 [node name="scene" type="Node3D"]
 
@@ -94,13 +181,28 @@ tcpParser = NodePath("TcpParser")
 script = ExtResource("2_1bvp3")
 tcp = NodePath("..")
 
-[node name="Blank map" parent="." instance=ExtResource("4_1bvp3")]
+[node name="Blank map" parent="." node_paths=PackedStringArray("routes") instance=ExtResource("4_1bvp3")]
+name = "demo map v2"
+routes = [null, null]
 
 [node name="Terrain3D" parent="Blank map" index="0"]
-material = SubResource("Terrain3DMaterial_272bh")
+data_directory = ""
+material = SubResource("Terrain3DMaterial_5vw27")
+assets = SubResource("Terrain3DAssets_efxa6")
+
+[node name="terrain 3D true export" parent="Blank map/Terrain3D" index="2"]
+default_material = SubResource("Terrain3DMaterial_lquwl")
+
+[node name="whole map export" parent="Blank map" index="1"]
+manualMapLoadName = "demo map v2"
 
 [node name="route export" parent="Blank map" index="2" node_paths=PackedStringArray("routeMenu")]
 routeMenu = NodePath("../../CanvasLayer/menu main/Panel/contents/Game/Game config/VBoxContainer/Game config menus/Route selection")
+
+[node name="initial maps importer" type="Node" parent="." node_paths=PackedStringArray("mapSelectionMenu")]
+process_priority = 1
+script = ExtResource("5_lquwl")
+mapSelectionMenu = NodePath("../CanvasLayer/menu main/Panel/contents/Game/Game config/VBoxContainer/Game config menus/Map selecton")
 
 [editable path="CanvasLayer/menu main"]
 [editable path="CanvasLayer/menu main/Panel/contents/device connection/HSplitContainer/device types/VBoxContainer2/Smart bike trainer 󰂣"]

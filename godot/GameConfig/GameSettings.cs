@@ -13,6 +13,7 @@ namespace ForForm.GameConfig
 
         public static void SetCurrentGameMode(GameMode gameMode) {
             CurrentGameMode = gameMode;
+            if(onCurrentGameModeChanged != null)// this can happen only in editor
             onCurrentGameModeChanged();
 
             Bike.BikeStats.dragCoefficient = gameMode.dragCoefficient;

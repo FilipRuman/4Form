@@ -45,7 +45,6 @@ namespace ForForm.Map
         public void Import(string mapName) {
             map.name = mapName;
 
-            terrain3DTrueExport.Call("run_import");
 
             GameConfig.GameSettings.currentMap = Map.Load(mapName);
 
@@ -54,6 +53,8 @@ namespace ForForm.Map
             Miscs.ClearChildren(this);
             ImportScene();
             routeExport.ImportRoutes();
+
+            terrain3DTrueExport.Call("run_import");
         }
 
         public void ImportScene() {
@@ -64,43 +65,44 @@ namespace ForForm.Map
             if (error == Error.Ok) {
                 var gltfSceneRootNode = gltfDocumentLoad.GenerateScene(gltfStateLoad);
                 var d = gltfSceneRootNode as Node3D;
-                HandleImportedNode(this, d);
+                AddChild(d);
+                d.Owner = Owner;
 
                 d.Visible = true;
             } else {
                 GD.PrintErr($"Couldn't load glTF scene (error code: {error}).");
             }
         }
-
-        void HandleImportedNode(Node parent, Node importNode) {
-            if (importNode is ImporterMeshInstance3D importerMesh) {
-                var realMesh = new MeshInstance3D();
-                parent.AddChild(realMesh);
-                // so nodes appear in editor
-                if (Engine.IsEditorHint())
-                    realMesh.Owner = Owner;
-                realMesh.Name = importNode.Name;               
-                realMesh.MaterialOverlay = importerMesh.Mesh.GetSurfaceMaterial(0);
-                realMesh.Transform = importerMesh.Transform;
-                realMesh.Mesh = importerMesh.Mesh.GetMesh();
-                foreach (var child in importNode.GetChildren()) {
-                    HandleImportedNode(realMesh, child);
-                }
-            } else {
-                var realNode = new Node3D();
-                realNode.Transform = (importNode as Node3D).Transform;
-                parent.AddChild(realNode);
-                realNode.Name = importNode.Name;               
-
-                // so nodes appear in editor
-                if (Engine.IsEditorHint())
-                    realNode.Owner = Owner;
-                foreach (var child in importNode.GetChildren()) {
-                    HandleImportedNode(realNode, child);
-                }
-            }
-        }
-
+        //
+        // void HandleImportedNode(Node parent, Node importNode) {
+        //     if (importNode is ImporterMeshInstance3D importerMesh) {
+        //         var realMesh = new MeshInstance3D();
+        //         GD.Print(" add real mesh");
+        //         parent.AddChild(realMesh);
+        //         // so nodes appear in editor
+        //         if (Engine.IsEditorHint())
+        //             realMesh.Owner = Owner;
+        //         realMesh.Name = importNode.Name;               
+        //         realMesh.MaterialOverlay = importerMesh.Mesh.GetSurfaceMaterial(0);
+        //         realMesh.Transform = importerMesh.Transform;
+        //         realMesh.Mesh = importerMesh.Mesh.GetMesh();
+        //         foreach (var child in importNode.GetChildren()) {
+        //             HandleImportedNode(realMesh, child);
+        //         }
+        //     } else {
+        //         var realNode = new Node3D();
+        //         realNode.Transform = (importNode as Node3D).Transform;
+        //         parent.AddChild(realNode);
+        //         realNode.Name = importNode.Name;               
+        //
+        //         // so nodes appear in editor
+        //             realNode.Owner = Owner;
+        //         foreach (var child in importNode.GetChildren()) {
+        //             HandleImportedNode(realNode, child);
+        //         }
+        //     }
+        // }
+        //
         /// Call this to export ALL components of map like:
         /// map, game mode, 3D scene, terrain 3D, routes
 

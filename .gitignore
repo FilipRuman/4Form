@@ -4,6 +4,7 @@ godot/addons/terrain_3d/bin/
 godot/addons/debug_draw_3d/libs/
 .nomedia
 logs/
+builds/
 # Godot-specific ignores
 .import/
 builds/windows/

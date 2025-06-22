@@ -54,8 +54,6 @@ namespace ForForm.Map
             Menu.UIMiscs.ClearChildren(this);
             ImportScene();
             routeExport.ImportRoutes();
-            // call this second time to be sure that everything is imported
-            // terrain3DTrueExport.Call("run_import");
         }
 
         public void ImportScene() {
@@ -65,9 +63,6 @@ namespace ForForm.Map
 
             if (error == Error.Ok) {
                 var gltfSceneRootNode = gltfDocumentLoad.GenerateScene(gltfStateLoad);
-                AddChild(gltfSceneRootNode);
-                if (Engine.IsEditorHint())
-                    gltfSceneRootNode.Owner = map;
                 var d = gltfSceneRootNode as Node3D;
                 HandleImportedNode(this, d);
 
@@ -81,6 +76,10 @@ namespace ForForm.Map
             if (importNode is ImporterMeshInstance3D importerMesh) {
                 var realMesh = new MeshInstance3D();
                 parent.AddChild(realMesh);
+                // so nodes appear in editor
+                if (Engine.IsEditorHint())
+                    realMesh.Owner = Owner;
+                realMesh.Name = importNode.Name;               
                 realMesh.MaterialOverlay = importerMesh.Mesh.GetSurfaceMaterial(0);
                 realMesh.Transform = importerMesh.Transform;
                 realMesh.Mesh = importerMesh.Mesh.GetMesh();
@@ -91,6 +90,11 @@ namespace ForForm.Map
                 var realNode = new Node3D();
                 realNode.Transform = (importNode as Node3D).Transform;
                 parent.AddChild(realNode);
+                realNode.Name = importNode.Name;               
+
+                // so nodes appear in editor
+                if (Engine.IsEditorHint())
+                    realNode.Owner = Owner;
                 foreach (var child in importNode.GetChildren()) {
                     HandleImportedNode(realNode, child);
                 }

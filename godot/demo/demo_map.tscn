@@ -128,6 +128,7 @@ collision_mask = 3
 [node name="Tunnel" parent="Demo map script" instance=ExtResource("5_a6gdr")]
 
 [node name="Terrain3D" type="Terrain3D" parent="Demo map script"]
+debug_level = 2
 data_directory = "res://demo/data"
 material = SubResource("Terrain3DMaterial_jrc01")
 assets = ExtResource("6_ntdri")

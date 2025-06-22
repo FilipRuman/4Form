@@ -63,7 +63,12 @@ namespace ForForm.Map.Route
             var i = 0;
             foreach (var routeName in routeDirs) {
                 var route = routePrefab.Instantiate() as Route;
+
                 AddChild(route);
+
+                if (Engine.IsEditorHint())
+                    route.Owner = Owner;
+                route.Name = routeName;
 
                 string _basePath = RouteSpecificBasePath(routeName);
                 route.icon = ImageTexture.CreateFromImage(

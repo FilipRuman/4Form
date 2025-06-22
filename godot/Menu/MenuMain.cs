@@ -21,7 +21,8 @@ namespace ForForm.Menu
 
         [Export]
         Control tabContentsLockScreen;
-
+[Export]
+Node3D terrain3D;
         [Export]
         RichTextLabel tabContentsLockScreenLabel;
 
@@ -61,13 +62,13 @@ namespace ForForm.Menu
                 (gameStartedErr ? "You can't edit contents of this page during active game \n" : "")
                 + (modeSelectedErr ? "You need to select game mode first." : "");
         }
-
+// TODO: move this to better place
         public void StartGame() {
             Visible = false;
             GameConfig.GameSettings.gameStarted = true;
             var playerNode = playerPrefab.Instantiate();
             tcpParser.bikePhysics = ((Bike.BikePhysics)playerNode);
-            GameConfig.GameSettings.currentMap.terrain3D.Call(
+            terrain3D.Call(
                 "set_camera",
                 ((Bike.BikePhysics)playerNode).camera
             );

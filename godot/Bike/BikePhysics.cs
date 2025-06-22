@@ -50,12 +50,12 @@ namespace ForForm.Bike
 
         float totalForwardForce =>
             drivetrainForwardPushingForce
-            + testingPower  / Mathf.Max(speed, 1)
+            + testingPower / Mathf.Max(speed, 1)
             - slopeGravityForce
             - rollingResistanceForce
             - airDragForce; //N
         public float acceleration => totalForwardForce / BikeStats.totalMass; // m/s^2 clamped to remove any weirdness
-        
+
         public override void _Process(double delta) {
             // so you don't roll backwards on hills when stopping pedaling
             speed = Mathf.Max(speed + acceleration * (float)delta, .01f);

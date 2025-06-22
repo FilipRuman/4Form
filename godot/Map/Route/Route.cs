@@ -2,12 +2,15 @@ namespace ForForm.Map.Route
 {
     using Godot;
 
-    [Tool]
+    [Tool,Icon("res://Script icons/conversion_path.png")]
     public partial class Route : Path3D {
         /// WARN: Remember: when changing or adding any variable add that to RouteExport.cs
         [ExportGroup("Input by hand")]
         [Export]
         public string name;
+        [Export(PropertyHint.MultilineText)]
+        public string description;
+
 
         [Export]
         public Texture2D icon;

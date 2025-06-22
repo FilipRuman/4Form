@@ -2,7 +2,7 @@ namespace ForForm.Map
 {
     using Godot;
 
-    [Tool]
+    [Tool, Icon("res://Script icons/map_3D_node_color.png")]
     public partial class Map : Node3D {
         [Export]
         public string name;
@@ -18,9 +18,6 @@ namespace ForForm.Map
 
         [Export]
         public Route.Route[] routes;
-
-        [Export]
-        public Node3D terrain3D;
 
         // Exporting
         static string BasePath(string name) => $"user://Maps/{name}/Map/";
@@ -43,7 +40,7 @@ namespace ForForm.Map
             file.StoreLine(text);
             file.Flush();
 
-            // Calling dispose is needed because otherwise ***.json.temp02*** instead of normal json files are created 
+            // Calling dispose is needed because otherwise ***.json.temp02*** instead of normal json files are created
             file.Dispose();
         }
 
@@ -60,5 +57,6 @@ namespace ForForm.Map
                 icon = ImageTexture.CreateFromImage(Image.LoadFromFile(_basePath + "icon.png")),
             };
         }
+
     }
 }

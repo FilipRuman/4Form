@@ -26,7 +26,7 @@
 ``cd 4Form/subomdules/4Form-BluetoothHandler``
 ``cargo build``
 ### 3. open project in Godot
-### 4. set your editor's font to nerdfont, so you can easly see glyphs: 
+### 4. set your editor's font to nerdfont, so you can easily see glyphs: 
 open: Editor>Editor Settings>Interface>Editor>
 * Main Font: assets/Meslo/MesloLGLDZNerdFont-Regular.ttf
 * Main Font Bold: assets/Meslo/MesloLGLDZNerdFont-Bold.ttf
@@ -40,7 +40,7 @@ open: Editor>Editor Settings>Interface>Editor>
  * game modes
  * competitions
 
-### this project aims to provide good user experience with clear ui, easy to use tools and great documentation alongside **SAFTEY first design** .
+### this project aims to provide good user experience with clear ui, easy to use tools and great documentation alongside **SAFETY first design** .
 
 # **Base** Of this project will be free and open source **forever**.
 

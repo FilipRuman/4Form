@@ -13,7 +13,7 @@
 > It will change a lot in the future and **MOST** of the intended features are not *yet* implemented.
 > 
 > it's not production ready. But I need contributes for further development.
-##  ⭐ If you think this project sounds interesting, you might use it in the future when it's production ready, Please give this repo a star, it helps a lot.
+##  ⭐ If you think this project sounds interesting and you might use it in the future when it's production ready. Then please give this repo a star, it helps a lot.
 # 🛠️ Installation
 ## If you want to test it out, just download [the latest release](https://github.com/FilipRuman/4Form/releases) for your platform
 ## Setup for development:

@@ -24,7 +24,13 @@
 ``git switch dev``
 ### 2. make sure that you have latest build of ble-handler
 ``cd 4Form/subomdules/4Form-BluetoothHandler``
+
 ``cargo build``
+
+> [!TIP]
+>  If you have problem with building your project because of d-bus you can add this to cargo.toml under dependencies:
+>
+> ``libdbus-sys = {version = "0.2.5", features = ["vendored"]}``
 ### 3. open project in Godot
 ### 4. set your editor's font to nerdfont, so you can easily see glyphs: 
 open: Editor>Editor Settings>Interface>Editor>

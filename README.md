@@ -54,7 +54,7 @@ open: Editor>Editor Settings>Interface>Editor>
 ### Implemented
  * **easy to use tools for routes creation** - create routes using path3D and custom tool makes it smoothly follow terrain.
  * **integration with [terrain3D](https://github.com/TokisanGames/Terrain3D)** - allows easy creation of great looking maps. 
- * **multi-platform** - windows 11 && 10??, mac, and *****linux***(most distros if you do some tinkering)
+ * **multi-platform** - windows 11 && 10, mac, and *****linux***(most distros if you do some tinkering)
  
 ### Future plans
  - [ ] steam release

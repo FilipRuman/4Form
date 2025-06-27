@@ -51,7 +51,7 @@ _shader_parameters = {
 }
 show_checkered = true
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kek77"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4c57u"]
 transparency = 4
 cull_mode = 2
 vertex_color_use_as_albedo = true
@@ -61,16 +61,16 @@ distance_fade_mode = 1
 distance_fade_min_distance = 128.0
 distance_fade_max_distance = 96.0
 
-[sub_resource type="Terrain3DMeshAsset" id="Terrain3DMeshAsset_4c57u"]
+[sub_resource type="Terrain3DMeshAsset" id="Terrain3DMeshAsset_efxa6"]
 generated_type = 1
 height_offset = 0.5
-material_override = SubResource("StandardMaterial3D_kek77")
+material_override = SubResource("StandardMaterial3D_4c57u")
 last_lod = 0
 last_shadow_lod = 0
 lod0_range = 128.0
 
-[sub_resource type="Terrain3DAssets" id="Terrain3DAssets_efxa6"]
-mesh_list = Array[Terrain3DMeshAsset]([SubResource("Terrain3DMeshAsset_4c57u")])
+[sub_resource type="Terrain3DAssets" id="Terrain3DAssets_dg77c"]
+mesh_list = Array[Terrain3DMeshAsset]([SubResource("Terrain3DMeshAsset_efxa6")])
 
 [sub_resource type="Gradient" id="Gradient_vr1m7"]
 offsets = PackedFloat32Array(0.2, 1)
@@ -160,10 +160,20 @@ icon = Object(Label,"_import_path":NodePath(""),"unique_name_in_owner":false,"pr
 
 icon = NodePath("icon")
 
+[node name="trainer device type" parent="CanvasLayer/menu main/Panel/contents/device connection/HSplitContainer/device types/VBoxContainer2/Smart bike trainer 󰂣" index="1" node_paths=PackedStringArray("display")]
+display = NodePath("..")
+name = "smart trainer"
+glyphIcon = " 󰂣"
+
 [node name="heart rate tracker " parent="CanvasLayer/menu main/Panel/contents/device connection/HSplitContainer/device types/VBoxContainer2" index="1" node_paths=PackedStringArray("icon")]
 icon = Object(Label,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":false,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(0, 0),"layout_direction":0,"layout_mode":1,"anchors_preset":-1,"anchor_left":0.992,"anchor_top":0.5,"anchor_right":1.0,"anchor_bottom":0.5,"offset_left":-24.056,"offset_top":-12.5,"offset_right":-3.0,"offset_bottom":12.5,"grow_horizontal":0,"grow_vertical":2,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":4,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"mouse_filter":2,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"theme":null,"theme_type_variation":&"","text":"󰂣 ","label_settings":null,"horizontal_alignment":2,"vertical_alignment":0,"autowrap_mode":0,"justification_flags":163,"paragraph_separator":"\\n","clip_text":false,"text_overrun_behavior":0,"ellipsis_char":"…","uppercase":false,"tab_stops":PackedFloat32Array(),"lines_skipped":0,"max_lines_visible":-1,"visible_characters":-1,"visible_characters_behavior":0,"visible_ratio":1.0,"text_direction":0,"language":"","structured_text_bidi_override":0,"structured_text_bidi_override_options":[],"script":null)
 
 icon = NodePath("icon")
+
+[node name="heart rate device type" parent="CanvasLayer/menu main/Panel/contents/device connection/HSplitContainer/device types/VBoxContainer2/heart rate tracker " index="1" node_paths=PackedStringArray("display")]
+display = NodePath("..")
+name = "hr tracker"
+glyphIcon = " "
 
 [node name="other device type 󰤟" parent="CanvasLayer/menu main/Panel/contents/device connection/HSplitContainer/device types/VBoxContainer2" index="2" node_paths=PackedStringArray("icon")]
 icon = Object(Label,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":false,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(0, 0),"layout_direction":0,"layout_mode":1,"anchors_preset":-1,"anchor_left":0.992,"anchor_top":0.5,"anchor_right":1.0,"anchor_bottom":0.5,"offset_left":-24.056,"offset_top":-12.5,"offset_right":-3.0,"offset_bottom":12.5,"grow_horizontal":0,"grow_vertical":2,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":4,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"mouse_filter":2,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"theme":null,"theme_type_variation":&"","text":"󰂣 ","label_settings":null,"horizontal_alignment":2,"vertical_alignment":0,"autowrap_mode":0,"justification_flags":163,"paragraph_separator":"\\n","clip_text":false,"text_overrun_behavior":0,"ellipsis_char":"…","uppercase":false,"tab_stops":PackedFloat32Array(),"lines_skipped":0,"max_lines_visible":-1,"visible_characters":-1,"visible_characters_behavior":0,"visible_ratio":1.0,"text_direction":0,"language":"","structured_text_bidi_override":0,"structured_text_bidi_override_options":[],"script":null)
@@ -177,24 +187,25 @@ wholeMapExport = NodePath("../../../../../../../../../Blank map/whole map export
 script = ExtResource("1_ig7tw")
 tcpParser = NodePath("TcpParser")
 
-[node name="TcpParser" type="Node" parent="Tcp" node_paths=PackedStringArray("tcp")]
+[node name="TcpParser" type="Node" parent="Tcp" node_paths=PackedStringArray("tcp", "peripheralsMenu")]
 script = ExtResource("2_1bvp3")
 tcp = NodePath("..")
+peripheralsMenu = NodePath("../../CanvasLayer/menu main/Panel/contents/device connection/PeripherialsMenu")
 
 [node name="Blank map" parent="." node_paths=PackedStringArray("routes") instance=ExtResource("4_1bvp3")]
-name = "demo map v2"
-routes = [null, null]
+name = "demo climb"
+routes = [null]
 
 [node name="Terrain3D" parent="Blank map" index="0"]
-data_directory = ""
 material = SubResource("Terrain3DMaterial_5vw27")
-assets = SubResource("Terrain3DAssets_efxa6")
+assets = SubResource("Terrain3DAssets_dg77c")
+process_mode = 4
 
 [node name="terrain 3D true export" parent="Blank map/Terrain3D" index="2"]
 default_material = SubResource("Terrain3DMaterial_lquwl")
 
 [node name="whole map export" parent="Blank map" index="1"]
-manualMapLoadName = "demo map v2"
+manualMapLoadName = "demo climb"
 
 [node name="route export" parent="Blank map" index="2" node_paths=PackedStringArray("routeMenu")]
 routeMenu = NodePath("../../CanvasLayer/menu main/Panel/contents/Game/Game config/VBoxContainer/Game config menus/Route selection")

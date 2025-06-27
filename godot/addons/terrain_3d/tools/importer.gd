@@ -20,7 +20,6 @@ func reset_settings(p_value) -> void:
 		import_scale = 1.0
 		r16_range = Vector2(0, 1)
 		r16_size = Vector2i(1024, 1024)
-		material = null
 		assets = null
 		reset_terrain(true)
 

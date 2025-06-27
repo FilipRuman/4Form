@@ -45,7 +45,6 @@ namespace ForForm.Map
         public void Import(string mapName) {
             map.name = mapName;
 
-
             GameConfig.GameSettings.currentMap = Map.Load(mapName);
 
             GameConfig.GameSettings.currentMap.gameMode = GameConfig.GameMode.Load(mapName);
@@ -73,6 +72,7 @@ namespace ForForm.Map
                 GD.PrintErr($"Couldn't load glTF scene (error code: {error}).");
             }
         }
+
         //
         // void HandleImportedNode(Node parent, Node importNode) {
         //     if (importNode is ImporterMeshInstance3D importerMesh) {
@@ -82,7 +82,7 @@ namespace ForForm.Map
         //         // so nodes appear in editor
         //         if (Engine.IsEditorHint())
         //             realMesh.Owner = Owner;
-        //         realMesh.Name = importNode.Name;               
+        //         realMesh.Name = importNode.Name;
         //         realMesh.MaterialOverlay = importerMesh.Mesh.GetSurfaceMaterial(0);
         //         realMesh.Transform = importerMesh.Transform;
         //         realMesh.Mesh = importerMesh.Mesh.GetMesh();
@@ -93,7 +93,7 @@ namespace ForForm.Map
         //         var realNode = new Node3D();
         //         realNode.Transform = (importNode as Node3D).Transform;
         //         parent.AddChild(realNode);
-        //         realNode.Name = importNode.Name;               
+        //         realNode.Name = importNode.Name;
         //
         //         // so nodes appear in editor
         //             realNode.Owner = Owner;
@@ -107,6 +107,7 @@ namespace ForForm.Map
         /// map, game mode, 3D scene, terrain 3D, routes
 
         public void Export() {
+            OS.MoveToTrash(ProjectSettings.GlobalizePath($"user://Maps/{map.name}/"));
             DirAccess.Open($"user://Maps/").MakeDir(map.name);
             DirAccess.Open($"user://Maps/{map.name}/").MakeDir("Scene");
 

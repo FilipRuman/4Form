@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://c1ots7w6i0i1q"
 path.bptc="res://.godot/imported/ground037_nrm_rgh.png-02372c72ee87f1844ee708d952e43e96.bptc.ctex"
+path.astc="res://.godot/imported/ground037_nrm_rgh.png-02372c72ee87f1844ee708d952e43e96.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://demo/assets/textures/ground037_nrm_rgh.png"
-dest_files=["res://.godot/imported/ground037_nrm_rgh.png-02372c72ee87f1844ee708d952e43e96.bptc.ctex"]
+dest_files=["res://.godot/imported/ground037_nrm_rgh.png-02372c72ee87f1844ee708d952e43e96.bptc.ctex", "res://.godot/imported/ground037_nrm_rgh.png-02372c72ee87f1844ee708d952e43e96.astc.ctex"]
 
 [params]
 

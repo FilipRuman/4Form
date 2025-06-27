@@ -7,5 +7,6 @@ namespace ForForm.Bike
         public uint currentPower; // Watts
         public uint currentCadence; //RPM
         public uint wheelRotation; //Deg/s
+        public uint heartRate;
     }
 }

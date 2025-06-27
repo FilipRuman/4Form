@@ -9,7 +9,6 @@
 [ext_resource type="Script" uid="uid://d3apq1nnkijj3" path="res://Menu/DeviceConnection/DeviceType.cs" id="7_lqkny"]
 [ext_resource type="PackedScene" uid="uid://xhe2bn86m8s0" path="res://Menu/game_config.tscn" id="8_iq3lu"]
 [ext_resource type="Script" uid="uid://erdnmfehrmhp" path="res://Menu/UserConfigMenu.cs" id="8_kgf20"]
-[ext_resource type="Texture2D" uid="uid://dhotn6jywb01t" path="res://assets/Short path printscreen.png" id="9_u54ij"]
 [ext_resource type="Script" uid="uid://0bd4icrprif5" path="res://Menu/PropertyEdit.cs" id="10_u54ij"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xmmyl"]
@@ -33,6 +32,8 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8jt2l"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jblj6"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_kgf20"]
 
 [node name="menu main" type="Control" node_paths=PackedStringArray("tabBar", "tabContents", "tabContentsLockScreen", "tabContentsLockScreenLabel")]
 layout_mode = 3
@@ -248,7 +249,7 @@ theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_5lnfq")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_lf1v0")
 theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_8jt2l")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_jblj6")
-icon = ExtResource("9_u54ij")
+icon = SubResource("CompressedTexture2D_kgf20")
 expand_icon = true
 
 [node name="name" type="Control" parent="Panel/contents/UserConfig/VFlowContainer" node_paths=PackedStringArray("lineEdit")]

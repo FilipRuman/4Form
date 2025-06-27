@@ -22,6 +22,16 @@ namespace ForForm.Map
         // Exporting
         static string BasePath(string name) => $"user://Maps/{name}/Map/";
 
+        [Export]
+        public float speedScale;
+
+        public override void _Process(double delta) {
+            if (Engine.IsEditorHint()) {
+                GameConfig.GameSettings.currentMap = this;
+            }
+            base._Process(delta);
+        }
+
         public void Save() {
             DirAccess.Open($"user://Maps/{name}").MakeDir("Map");
             string _basePath = BasePath(name);
@@ -31,6 +41,7 @@ namespace ForForm.Map
 
             var data = new Godot.Collections.Dictionary {
                 { "name", name },
+                { "speedScale", speedScale },
                 { "description", description },
             };
             var text = Json.Stringify(data, "\t");
@@ -55,8 +66,8 @@ namespace ForForm.Map
                 name = ((string)data["name"]),
                 description = ((string)data["description"]),
                 icon = ImageTexture.CreateFromImage(Image.LoadFromFile(_basePath + "icon.png")),
+                speedScale = ((float)data["speedScale"]),
             };
         }
-
     }
 }

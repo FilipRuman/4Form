@@ -26,10 +26,10 @@ namespace ForForm.Bike
         [Export]
         float gravity; //m/s^2
         float gravityForce => BikeStats.totalMass * gravity; //N
-        float slopeGravityForce => gravityForce * Mathf.Sin(path.slopeAngleRadians); //the force that is pushing you forward from hills
+        float slopeGravityForce => gravityForce * Mathf.Sin(path.slopeAngleRad); //the force that is pushing you forward from hills
 
         // If you take a corner that looks like nascar track (curved to the inside) the we would need to account other forces but this doesn't matter
-        float normalGravityForce => gravityForce * Mathf.Cos(path.slopeAngleRadians); //the force that is applied directly to the ground
+        float normalGravityForce => gravityForce * Mathf.Cos(path.slopeAngleRad); //the force that is applied directly to the ground
         float rollingResistanceForce =>
             BikeStats.bikeModel.wheelFrictionCoefficient * normalGravityForce * float.Sign(speed); //N
 

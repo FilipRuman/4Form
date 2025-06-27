@@ -1,4 +1,4 @@
-namespace ForForm.Bike
+namespace ForForm.Bike.HUD
 {
     using System;
     using ForForm.Map.Route;
@@ -7,14 +7,14 @@ namespace ForForm.Bike
     public partial class ClimbChart : TextureRect {
         const int ShaderResolution = 500;
 
-        // TODO Fix reference
         [Export]
-        BikePhysics bikePhysics;
+        BikeHUDMain main;
 
         [Export]
         Label minHeight,
             maxHeight,
-            distance;
+            distance,
+            slope;
 
         [Export]
         Control playerPositionIndicator;
@@ -33,6 +33,8 @@ namespace ForForm.Bike
 
         public override void _Process(double delta) {
             UpdatePlayerIndicatorPosition();
+
+            slope.Text = $"{Math.Round((double)main.bikePhysics.slope_percent, 1)}% slope ";
             base._Process(delta);
         }
 
@@ -46,7 +48,7 @@ namespace ForForm.Bike
 
         private void UpdatePlayerIndicatorPosition() {
             Route currentRoute = GameConfig.GameSettings.currentRoute;
-            var xPercent = bikePhysics.Progress / currentRoute.Curve.GetBakedLength();
+            var xPercent = main.bikePhysics.Progress / currentRoute.Curve.GetBakedLength();
 
             var yPos = currentRoute.heightMapM[((int)(currentRoute.heightMapM.Length * xPercent))];
             var yPercent = Mathf.InverseLerp(currentRoute.minHeight, currentRoute.maxHeight, yPos);

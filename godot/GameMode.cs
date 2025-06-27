@@ -1,8 +1,9 @@
-namespace ForForm.GameConfig
+namespace ForForm
 {
     using Godot;
 
-    [GlobalClass,Tool]
+    //TODO: Integrate this with map
+    [GlobalClass, Tool]
     public partial class GameMode : Resource {
         [ExportGroup("bike models")]
         [Export]
@@ -39,8 +40,7 @@ namespace ForForm.GameConfig
             file.StoreLine(text);
             file.Flush();
 
-
-            // Calling dispose is needed because otherwise ***.json.temp02*** instead of normal json files are created 
+            // Calling dispose is needed because otherwise ***.json.temp02*** instead of normal json files are created
             file.Dispose();
         }
 

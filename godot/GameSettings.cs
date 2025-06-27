@@ -1,4 +1,4 @@
-namespace ForForm.GameConfig
+namespace ForForm
 {
     using System;
     using ForForm.Map.Route;
@@ -12,7 +12,7 @@ namespace ForForm.GameConfig
         public static Action onCurrentRouteChanged;
 
         public static Route currentRoute { get; private set; }
-        public static Map currentMap;
+        public static Map.Map currentMap;
 
         public static void SetCurrentRoute(Route route) {
             currentRoute = route;

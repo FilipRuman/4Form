@@ -17,9 +17,9 @@ namespace ForForm.Menu.Game
         GameMenu gameMenu;
 
         public override void _Ready() {
-            GameConfig.GameSettings.onCurrentGameModeChanged += () =>
+            GameSettings.onCurrentGameModeChanged += () =>
             {
-                description.Text = GameConfig.GameSettings.currentMap.description;
+                description.Text = GameSettings.currentMap.description;
             };
             Miscs.ClearChildren(localLayout);
             Miscs.ClearChildren(onlineLayout);

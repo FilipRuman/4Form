@@ -45,10 +45,10 @@ namespace ForForm.Map
         public void Import(string mapName) {
             map.name = mapName;
 
-            GameConfig.GameSettings.currentMap = Map.Load(mapName);
+            GameSettings.currentMap = Map.Load(mapName);
 
-            GameConfig.GameSettings.currentMap.gameMode = GameConfig.GameMode.Load(mapName);
-            GameConfig.GameSettings.SetCurrentGameMode(GameConfig.GameSettings.currentMap.gameMode);
+            GameSettings.currentMap.gameMode = GameMode.Load(mapName);
+            GameSettings.SetCurrentGameMode(GameSettings.currentMap.gameMode);
             Miscs.ClearChildren(this);
             ImportScene();
             routeExport.ImportRoutes();

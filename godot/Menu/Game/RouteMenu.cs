@@ -41,7 +41,7 @@ namespace ForForm.Menu.Game
             foreach (var route in routes) {
                 var script = simpleSelectionPrefab.Instantiate() as SimpleSelectionUI;
                 layout.AddChild(script);
-                if (route == GameConfig.GameSettings.currentRoute)
+                if (route == GameSettings.currentRoute)
                     HandleNewSelectionUIHighlight(script);
                 script.Setup(
                     route.name,
@@ -64,7 +64,7 @@ namespace ForForm.Menu.Game
         }
 
         private void OnRouteSelection(Map.Route.Route route) {
-            GameConfig.GameSettings.SetCurrentRoute( route);
+            GameSettings.SetCurrentRoute( route);
 
             description.Text = route.description;
             difficulty.Text = $"Difficulty: {route.difficulty} ";

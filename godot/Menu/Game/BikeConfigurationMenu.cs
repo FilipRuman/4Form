@@ -2,7 +2,6 @@ namespace ForForm.Menu.Game
 {
     using System.Collections.Generic;
     using Bike;
-    using ForForm.GameConfig;
     using Godot;
 
     public partial class BikeConfigurationMenu : Control {
@@ -17,6 +16,7 @@ namespace ForForm.Menu.Game
 
         [Export]
         GameMenu gameMenu;
+
 
         [Export]
         Control bikeModelLayout;
@@ -56,7 +56,7 @@ namespace ForForm.Menu.Game
         public void SetupBikeStatsUI() {
             if (BikeStats.bikeModel == null)
                 return;
-            var editable = GameConfig.GameSettings.CurrentGameMode.canEditBikeModels;
+            var editable = GameSettings.CurrentGameMode.canEditBikeModels;
             bikeMass.Setup(
                 BikeStats.bikeModel.mass_kg,
                 (f) =>

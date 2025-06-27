@@ -66,7 +66,7 @@ namespace ForForm.Bike
 
         private void UpdatePath(double delta) {
             float currentProgress_m =
-                Progress + speed_mS * (float)delta * GameConfig.GameSettings.currentMap.speedScale;
+                Progress + speed_mS * (float)delta * GameSettings.currentMap.speedScale;
 
             CalculateSlope(currentProgress_m);
             Progress = currentProgress_m;
@@ -91,7 +91,7 @@ namespace ForForm.Bike
         public float slope_rad;
 
         public override void _Ready() {
-            Progress = GameConfig.GameSettings.currentRoute.startingPoint;
+            Progress =GameSettings.currentRoute.startingPoint;
             base._Ready();
         }
     }

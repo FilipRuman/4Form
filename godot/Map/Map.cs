@@ -14,7 +14,7 @@ namespace ForForm.Map
         public Texture2D icon;
 
         [Export]
-        public GameConfig.GameMode gameMode;
+        public GameMode gameMode;
 
         [Export]
         public Route.Route[] routes;
@@ -27,7 +27,7 @@ namespace ForForm.Map
 
         public override void _Process(double delta) {
             if (Engine.IsEditorHint()) {
-                GameConfig.GameSettings.currentMap = this;
+                GameSettings.currentMap = this;
             }
             base._Process(delta);
         }

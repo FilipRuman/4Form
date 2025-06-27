@@ -49,26 +49,21 @@ namespace ForForm.Map.Route
 
 
         public void CalculateRouteStats() {
-            if (GameConfig.GameSettings.currentMap == null)
+            if (GameSettings.currentMap == null)
                 GD.PrintErr("you need to set map before using CalculateRouteStats() ");
-            if (GameConfig.GameSettings.currentMap.gameMode == null)
+            if (GameSettings.currentMap.gameMode == null)
                 GD.PrintErr("you need to set game mode before using CalculateRouteStats() ");
-            if (GameConfig.GameSettings.currentMap.gameMode.bikeModels[0] == null)
+            if (GameSettings.currentMap.gameMode.bikeModels[0] == null)
                 GD.PrintErr(
                     "you need to set at least 1 bike model before using CalculateRouteStats() "
                 );
 
-            float wheelBase = GameConfig
-                .GameSettings
-                .currentMap
-                .gameMode
-                .bikeModels[0]
-                .modelsWheelBase_m;
+            float wheelBase = GameSettings.currentMap.gameMode.bikeModels[0].modelsWheelBase_m;
             ascentM = 0;
             descentM = 0;
 
             var points = Curve.GetBakedPoints();
-            totalDistanceM = Curve.GetBakedLength() / GameConfig.GameSettings.currentMap.speedScale;
+            totalDistanceM = Curve.GetBakedLength() / GameSettings.currentMap.speedScale;
 
             int pointsLen = points.Length;
 
@@ -98,8 +93,8 @@ namespace ForForm.Map.Route
                 slopeMap[i] = slope;
             }
 
-            ascentM /= GameConfig.GameSettings.currentMap.speedScale;
-            descentM /= GameConfig.GameSettings.currentMap.speedScale;
+            ascentM /= GameSettings.currentMap.speedScale;
+            descentM /= GameSettings.currentMap.speedScale;
         }
     }
 }

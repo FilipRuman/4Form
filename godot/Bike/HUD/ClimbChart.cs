@@ -20,12 +20,12 @@ namespace ForForm.Bike.HUD
         Control playerPositionIndicator;
 
         public override void _Ready() {
-            UpdateShader(GameConfig.GameSettings.currentRoute);
+            UpdateShader(GameSettings.currentRoute);
             UpdateLabels();
 
-            GameConfig.GameSettings.onCurrentRouteChanged += () =>
+            GameSettings.onCurrentRouteChanged += () =>
             {
-                UpdateShader(GameConfig.GameSettings.currentRoute);
+                UpdateShader(GameSettings.currentRoute);
                 UpdateLabels();
             };
             base._Ready();
@@ -39,7 +39,7 @@ namespace ForForm.Bike.HUD
         }
 
         private void UpdateLabels() {
-            Route currentRoute = GameConfig.GameSettings.currentRoute;
+            Route currentRoute = GameSettings.currentRoute;
 
             minHeight.Text = $" {((int)(currentRoute.minHeight))}m";
             maxHeight.Text = $" {((int)(currentRoute.maxHeight))}m";
@@ -47,7 +47,7 @@ namespace ForForm.Bike.HUD
         }
 
         private void UpdatePlayerIndicatorPosition() {
-            Route currentRoute = GameConfig.GameSettings.currentRoute;
+            Route currentRoute = GameSettings.currentRoute;
             var xPercent = main.bikePhysics.Progress / currentRoute.Curve.GetBakedLength();
 
             var yPos = currentRoute.heightMapM[((int)(currentRoute.heightMapM.Length * xPercent))];

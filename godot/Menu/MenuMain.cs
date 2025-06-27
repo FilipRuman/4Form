@@ -56,9 +56,9 @@ namespace ForForm.Menu
         }
 
         void HandleLockScreen(MenuTabContent content) {
-            bool gameStartedErr = content.gameCantBeStarted && GameConfig.GameSettings.gameStarted;
+            bool gameStartedErr = content.gameCantBeStarted && GameSettings.gameStarted;
             bool modeSelectedErr =
-                content.gameModeMustBeSelected && GameConfig.GameSettings.CurrentGameMode == null;
+                content.gameModeMustBeSelected && GameSettings.CurrentGameMode == null;
             tabContentsLockScreen.Visible = gameStartedErr || modeSelectedErr;
             tabContentsLockScreenLabel.Text =
                 (gameStartedErr ? "You can't edit contents of this page during active game \n" : "")
@@ -68,11 +68,11 @@ namespace ForForm.Menu
         // TODO: move this to better place
         public void StartGame() {
             Visible = false;
-            GameConfig.GameSettings.gameStarted = true;
+            GameSettings.gameStarted = true;
             var playerNode = playerPrefab.Instantiate();
             tcpParser.bikePhysics = ((Bike.BikePhysics)playerNode);
             terrain3D.Call("set_camera", ((Bike.BikePhysics)playerNode).camera);
-            GameConfig.GameSettings.currentRoute.AddChild(playerNode);
+            GameSettings.currentRoute.AddChild(playerNode);
             // terrain 3D is disabled before so it doesn't send irrelevant errors
             terrain3D.ProcessMode = ProcessModeEnum.Inherit;
         }

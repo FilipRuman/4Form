@@ -23,10 +23,10 @@ GD.Print($"Bike.BikeStats.userConfig.name {Bike.BikeStats.userConfig.name}");
                 editable: true
             );
             mass.Setup(
-                Bike.BikeStats.userConfig.mass,
+                Bike.BikeStats.userConfig.mass_kg,
                 (num) =>
                 {
-                    Bike.BikeStats.userConfig.mass = num;
+                    Bike.BikeStats.userConfig.mass_kg = num;
                     Bike.BikeStats.userConfig.Save();
                 },
                 editable: true

@@ -63,7 +63,7 @@ namespace ForForm.Map.Route
                 .currentMap
                 .gameMode
                 .bikeModels[0]
-                .modelsWheelBase;
+                .modelsWheelBase_m;
             ascentM = 0;
             descentM = 0;
 

@@ -35,9 +35,9 @@ namespace ForForm.Tcp
                     if (bikePhysics == null)
                         return;
                     var regexOutput = trainerDataRegex.Search(data[1..data.Length]);
-                    bikePhysics.input.currentPower = uint.Parse(regexOutput.GetString("power"));
-                    bikePhysics.input.currentCadence = uint.Parse(regexOutput.GetString("cadence"));
-                    bikePhysics.input.wheelRotation = uint.Parse(regexOutput.GetString("rotation"));
+                    bikePhysics.input.currentWatts = uint.Parse(regexOutput.GetString("power"));
+                    bikePhysics.input.currentCadence_RPM = uint.Parse(regexOutput.GetString("cadence"));
+                    bikePhysics.input.wheelRotation_degS = uint.Parse(regexOutput.GetString("rotation"));
 
                     break;
                 }

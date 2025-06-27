@@ -58,10 +58,10 @@ namespace ForForm.Menu.Game
                 return;
             var editable = GameConfig.GameSettings.CurrentGameMode.canEditBikeModels;
             bikeMass.Setup(
-                BikeStats.bikeModel.mass,
+                BikeStats.bikeModel.mass_Kg,
                 (f) =>
                 {
-                    BikeStats.bikeModel.mass = f;
+                    BikeStats.bikeModel.mass_Kg = f;
                 },
                 editable
             );
@@ -74,18 +74,18 @@ namespace ForForm.Menu.Game
                 editable
             );
             bikeWheelRadius.Setup(
-                BikeStats.bikeModel.wheelRadius,
+                BikeStats.bikeModel.wheelRadius_m,
                 (f) =>
                 {
-                    BikeStats.bikeModel.wheelRadius = f;
+                    BikeStats.bikeModel.wheelRadius_m = f;
                 },
                 editable
             );
             bikeFrontalArea.Setup(
-                BikeStats.bikeModel.frontalArea,
+                BikeStats.bikeModel.frontalArea_m,
                 (f) =>
                 {
-                    BikeStats.bikeModel.frontalArea = f;
+                    BikeStats.bikeModel.frontalArea_m = f;
                 },
                 editable
             );
@@ -93,7 +93,7 @@ namespace ForForm.Menu.Game
 
         public void OnCurrentGameModeChanged() {
             BikeStats.dragCoefficient = GameSettings.CurrentGameMode.dragCoefficient;
-            BikeStats.frontalArea = GameSettings.CurrentGameMode.userDrag;
+            BikeStats.frontalArea_m = GameSettings.CurrentGameMode.userDrag;
             SetupBikeModels();
             SetupBikeStatsUI();
         }

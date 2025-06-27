@@ -8,11 +8,11 @@ namespace ForForm.Player
         public string name = "";
 
         [Export]
-        public float mass; // kg
+        public float mass_kg; 
         public const string Path = "user://UserConfig.json";
 
         public void Save() {
-            List<string> data = [name, mass.ToString()];
+            List<string> data = [name, mass_kg.ToString()];
             var text = Json.Stringify(data.ToArray(), "\t");
 
             var file = FileAccess.Open(Path, FileAccess.ModeFlags.Write);
@@ -36,7 +36,7 @@ namespace ForForm.Player
             }
 
             userConfig.name = ((string)data[0]);
-            userConfig.mass = ((float)data[1]);
+            userConfig.mass_kg = ((float)data[1]);
             return userConfig;
         }
     }

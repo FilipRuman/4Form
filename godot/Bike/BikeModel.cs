@@ -8,11 +8,11 @@ namespace ForForm.Bike
         public string name;
 
         [Export]
-        public float mass, //kg
+        public float mass_kg,
             wheelFrictionCoefficient,
-            wheelRadius, //m
-            frontalArea,
-            modelsWheelBase;
+            wheelRadius_m,
+            frontalArea_m,
+            modelsWheelBase_m; // needed for calculating slope and bike rotation animations. should match bike model size in Godot units * player scale
 
         [Export]
         public Texture2D icon;
@@ -29,11 +29,11 @@ namespace ForForm.Bike
             icon.GetImage().SavePng(_basePath + "icon.png");
             var data = new Godot.Collections.Dictionary {
                 { "name", name },
-                { "mass", mass },
+                { "mass", mass_kg },
                 { "wheelFrictionCoefficient", wheelFrictionCoefficient },
-                { "wheelRadius", wheelRadius },
-                { "frontalArea", frontalArea },
-                { "modelsWhealBase", modelsWheelBase },
+                { "wheelRadius", wheelRadius_m },
+                { "frontalArea", frontalArea_m },
+                { "modelsWhealBase", modelsWheelBase_m },
             };
             var text = Json.Stringify(data, "\t");
 
@@ -53,11 +53,11 @@ namespace ForForm.Bike
 
             return new BikeModel {
                 name = ((string)data["name"]),
-                mass = ((float)data["mass"]),
-                modelsWheelBase = ((float)data["modelsWhealBase"]),
+                mass_kg = ((float)data["mass"]),
+                modelsWheelBase_m = ((float)data["modelsWhealBase"]),
                 wheelFrictionCoefficient = ((float)data["wheelFrictionCoefficient"]),
-                wheelRadius = ((float)data["wheelRadius"]),
-                frontalArea = ((float)data["frontalArea"]),
+                wheelRadius_m = ((float)data["wheelRadius"]),
+                frontalArea_m = ((float)data["frontalArea"]),
                 icon = ImageTexture.CreateFromImage(Image.LoadFromFile(_basePath + "icon.png")),
             };
         }

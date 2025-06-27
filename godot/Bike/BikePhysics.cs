@@ -10,56 +10,89 @@ namespace ForForm.Bike
     // 6. it's not a lot of code.
 
     public partial class BikePhysics : PathFollow3D {
+        // I put units after _ in camel case so: speed in km/h will be speed_(first word lowercase)km(second word Capitalize)H
+        // so you know the unit at firs look and you don't make mistakes with them!
         [Export]
         public Camera3D camera;
-
-        [Export]
-        public BikePath path;
 
         [Export]
         public BikeInput input;
 
         [Export]
-        public float speed; //m/s
-        public float speedKmH => speed * 3.6f; // km/h
+        public float speed_mS; //m/s
+        public float speed_kmH => speed_mS * 3.6f; // km/h
 
         [Export]
-        float gravity; //m/s^2
-        float gravityForce => BikeStats.totalMass * gravity; //N
-        float slopeGravityForce => gravityForce * Mathf.Sin(path.slopeAngleRad); //the force that is pushing you forward from hills
+        float gravity_mS2; //m/s^2
+        float gravity_N => BikeStats.totalMass_Kg * gravity_mS2; //N
+        float slopeGravityForce_N => gravity_N * Mathf.Sin(slope_rad); //the force that is pushing you forward from hills
 
         // If you take a corner that looks like nascar track (curved to the inside) the we would need to account other forces but this doesn't matter
-        float normalGravityForce => gravityForce * Mathf.Cos(path.slopeAngleRad); //the force that is applied directly to the ground
-        float rollingResistanceForce =>
-            BikeStats.bikeModel.wheelFrictionCoefficient * normalGravityForce * float.Sign(speed); //N
+        float normalGravityForce_N => gravity_N * Mathf.Cos(slope_rad); //the force that is applied directly to the ground
+        float rollingResistance_N =>
+            BikeStats.bikeModel.wheelFrictionCoefficient
+            * normalGravityForce_N
+            * float.Sign(speed_mS); //N
 
         // I could use formula from my flight sim XD https://github.com/FilipRuman/Flight-sim
-        const float StandardAirDensity = 1.2250f; // kg/m^3
-        float airDragForce =>
-            BikeStats.frontalArea
+        const float StandardAirDensity_kgM3 = 1.2250f; // kg/m^3
+        float airDrag_N =>
+            BikeStats.frontalArea_m
             * BikeStats.dragCoefficient
-            * StandardAirDensity
-            * Mathf.Pow(speed, 2)
+            * StandardAirDensity_kgM3
+            * Mathf.Pow(speed_mS, 2)
             / 2f
-            * float.Sign(speed); //N
+            * float.Sign(speed_mS); //N
 
         //https://en.wikipedia.org/wiki/Torque
-        float drivetrainForwardPushingForce => input.currentPower / Mathf.Max(speed, 1); // N
+        float drivetrainForwardPushing_N => input.currentWatts / Mathf.Max(speed_mS, 1); // N
 
         public float testingPower = 0;
 
-        float totalForwardForce =>
-            drivetrainForwardPushingForce
-            + testingPower / Mathf.Max(speed, 1)
-            - slopeGravityForce
-            - rollingResistanceForce
-            - airDragForce; //N
-        public float acceleration => totalForwardForce / BikeStats.totalMass; // m/s^2 clamped to remove any weirdness
+        float totalForwardForce_N =>
+            drivetrainForwardPushing_N
+            + testingPower / Mathf.Max(speed_mS, 1)
+            - slopeGravityForce_N
+            - rollingResistance_N
+            - airDrag_N; //N
+        public float acceleration_mS2 => totalForwardForce_N / BikeStats.totalMass_Kg; // m/s^2 clamped to remove any weirdness
 
         public override void _Process(double delta) {
             // so you don't roll backwards on hills when stopping pedaling
-            speed = Mathf.Max(speed + acceleration * (float)delta, .01f);
+            speed_mS = Mathf.Max(speed_mS + acceleration_mS2 * (float)delta, .01f);
+            UpdatePath(delta);
             base._Process(delta);
+        }
+
+        private void UpdatePath(double delta) {
+            float currentProgress_m =
+                Progress + speed_mS * (float)delta * GameConfig.GameSettings.currentMap.speedScale;
+
+            CalculateSlope(currentProgress_m);
+            Progress = currentProgress_m;
+
+            // later add rotation at Z axis to add animation for rotating into turns
+            Vector3 rotation_deg = new(Mathf.RadToDeg(slope_rad), GlobalRotationDegrees.Y, 0);
+            GlobalRotationDegrees = rotation_deg;
+        }
+
+        private void CalculateSlope(float currentProgress_m) {
+            Progress = currentProgress_m;
+            var backWheal = Position.Y;
+            Progress = currentProgress_m + BikeStats.bikeModel.modelsWheelBase_m;
+            var frontWheal = Position.Y;
+
+            var heightDelta = frontWheal - backWheal;
+            slope_rad = Mathf.Atan(heightDelta / BikeStats.bikeModel.modelsWheelBase_m);
+            slope_percent = Mathf.Tan(slope_rad) * 100;
+        }
+
+        public float slope_percent; //%
+        public float slope_rad;
+
+        public override void _Ready() {
+            Progress = GameConfig.GameSettings.currentRoute.startingPoint;
+            base._Ready();
         }
     }
 }

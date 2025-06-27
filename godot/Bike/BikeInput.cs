@@ -4,9 +4,9 @@ namespace ForForm.Bike
     using Godot;
 
     public partial class BikeInput : Node {
-        public uint currentPower; // Watts
-        public uint currentCadence; //RPM
-        public uint wheelRotation; //Deg/s
+        public uint currentWatts;
+        public uint currentCadence_RPM;
+        public uint wheelRotation_degS; //Deg/s
         public uint heartRate;
     }
 }

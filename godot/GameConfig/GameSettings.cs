@@ -27,7 +27,7 @@ namespace ForForm.GameConfig
                 onCurrentGameModeChanged();
 
             Bike.BikeStats.dragCoefficient = gameMode.dragCoefficient;
-            Bike.BikeStats.frontalArea = gameMode.userDrag;
+            Bike.BikeStats.frontalArea_m = gameMode.userDrag;
         }
     }
 }

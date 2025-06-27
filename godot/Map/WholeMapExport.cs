@@ -73,39 +73,8 @@ namespace ForForm.Map
             }
         }
 
-        //
-        // void HandleImportedNode(Node parent, Node importNode) {
-        //     if (importNode is ImporterMeshInstance3D importerMesh) {
-        //         var realMesh = new MeshInstance3D();
-        //         GD.Print(" add real mesh");
-        //         parent.AddChild(realMesh);
-        //         // so nodes appear in editor
-        //         if (Engine.IsEditorHint())
-        //             realMesh.Owner = Owner;
-        //         realMesh.Name = importNode.Name;
-        //         realMesh.MaterialOverlay = importerMesh.Mesh.GetSurfaceMaterial(0);
-        //         realMesh.Transform = importerMesh.Transform;
-        //         realMesh.Mesh = importerMesh.Mesh.GetMesh();
-        //         foreach (var child in importNode.GetChildren()) {
-        //             HandleImportedNode(realMesh, child);
-        //         }
-        //     } else {
-        //         var realNode = new Node3D();
-        //         realNode.Transform = (importNode as Node3D).Transform;
-        //         parent.AddChild(realNode);
-        //         realNode.Name = importNode.Name;
-        //
-        //         // so nodes appear in editor
-        //             realNode.Owner = Owner;
-        //         foreach (var child in importNode.GetChildren()) {
-        //             HandleImportedNode(realNode, child);
-        //         }
-        //     }
-        // }
-        //
         /// Call this to export ALL components of map like:
         /// map, game mode, 3D scene, terrain 3D, routes
-
         public void Export() {
             OS.MoveToTrash(ProjectSettings.GlobalizePath($"user://Maps/{map.name}/"));
             DirAccess.Open($"user://Maps/").MakeDir(map.name);

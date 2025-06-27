@@ -43,13 +43,14 @@ namespace ForForm.Map.Route
             route.CalculateRouteStats();
 
             if (highlightPaths)
-                ShowHighlight();
+                HighlightOutputPathPoints();
 
             base._Process(delta);
         }
 
-        void ShowHighlight() {
+        void HighlightOutputPathPoints() {
             foreach (var point in roughPath.Curve.GetBakedPoints()) {
+                // show path rough points
                 DebugDraw3D.DrawSphere(
                     point,
                     pathHighlightPointSize,
@@ -68,15 +69,17 @@ namespace ForForm.Map.Route
                 DebugDraw3D.DrawSphere(
                     _point,
                     pathHighlightPointSize,
+                    // Shows slope by color specified in the gradient
                     slopeColorGradient.Sample(slope01),
                     refreshRateSec
                 );
             }
         }
 
+        // uses raycasts to hit terrains collision mesh  that is at the under/over the baked point in rough path
+        // places point at the raycast hit point
         public void RunTerrainFollow() {
             var points = roughPath.Curve.GetBakedPoints();
-            var spaceState = GetWorld3D().DirectSpaceState;
             int length = points.Length;
             // fixes the No target vector when changing bake resolution
             if (outputPath.Curve.PointCount != length) {
@@ -87,7 +90,7 @@ namespace ForForm.Map.Route
                 }
             }
 
-            bool hitAPointInfo = false;
+            var spaceState = GetWorld3D().DirectSpaceState;
             for (int i = 0; i < length; i++) {
                 Vector3 point = points[i];
                 Vector3 origin = new(point.X, 10000, point.Z);
@@ -95,16 +98,9 @@ namespace ForForm.Map.Route
                 var query = PhysicsRayQueryParameters3D.Create(origin, end);
                 var result = spaceState.IntersectRay(query);
 
-                if (!result.TryGetValue("position", out Variant output)) {
-                    if (outputPath.Curve.GetPointPosition(reverse ? length - i - 1 : i) == null)
-                        outputPath.Curve.SetPointPosition(
-                            reverse ? length - i - 1 : i,
-                            Vector3.One
-                        );
-
+                if (!result.TryGetValue("position", out Variant output))
                     continue;
-                }
-                // hitAPointInfo = true;
+
                 if (
                     outputPath.Curve.GetPointPosition(reverse ? length - i - 1 : i)
                     != (Vector3)output
@@ -114,10 +110,6 @@ namespace ForForm.Map.Route
                         (Vector3)output
                     );
             }
-            // if (!hitAPointInfo)
-            // GD.PrintErr(
-            //     "Please, before generating route, set on terrain 3D: Collision>Collision Mode = Full/Editor or Dynamic/Editor "
-            // );
         }
     }
 }

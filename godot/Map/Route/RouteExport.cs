@@ -54,6 +54,7 @@ namespace ForForm.Map.Route
                 file.Flush();
 
                 // Calling dispose is needed because otherwise ***.json.temp02*** instead of normal json files are created
+                // idk. this sometimes spawns temp files anyway....
                 file.Dispose();
             }
         }
@@ -114,7 +115,7 @@ namespace ForForm.Map.Route
                 routeMenu.Setup(routeArray);
         }
 
-        // Idk. i can't get the standard(Vector3[]) way to work so i did this:
+        // Idk. i can't get the standard way to work so i did this:
         public static Vector3[] ParseVector3Array(string input) {
             // Match (x, y, z) patterns
             var matches = Regex.Matches(input, @"\(([^,]+), ([^,]+), ([^)]+)\)");

@@ -26,14 +26,13 @@ namespace ForForm.Bike
             GameConfig.GameSettings.onCurrentRouteChanged += () =>
             {
                 UpdateShader(GameConfig.GameSettings.currentRoute);
-
                 UpdateLabels();
             };
             base._Ready();
         }
 
         public override void _Process(double delta) {
-            UpdatePlayerPosition();
+            UpdatePlayerIndicatorPosition();
             base._Process(delta);
         }
 
@@ -45,7 +44,7 @@ namespace ForForm.Bike
             distance.Text = $"{Math.Round(currentRoute.totalDistanceM / 1000f, 1)}km  ";
         }
 
-        private void UpdatePlayerPosition() {
+        private void UpdatePlayerIndicatorPosition() {
             Route currentRoute = GameConfig.GameSettings.currentRoute;
             var xPercent = bikePhysics.Progress / currentRoute.Curve.GetBakedLength();
 

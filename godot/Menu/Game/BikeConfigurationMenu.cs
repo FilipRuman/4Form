@@ -58,10 +58,10 @@ namespace ForForm.Menu.Game
                 return;
             var editable = GameConfig.GameSettings.CurrentGameMode.canEditBikeModels;
             bikeMass.Setup(
-                BikeStats.bikeModel.mass_Kg,
+                BikeStats.bikeModel.mass_kg,
                 (f) =>
                 {
-                    BikeStats.bikeModel.mass_Kg = f;
+                    BikeStats.bikeModel.mass_kg = f;
                 },
                 editable
             );

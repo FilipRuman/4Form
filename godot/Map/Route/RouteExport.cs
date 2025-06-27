@@ -35,8 +35,13 @@ namespace ForForm.Map.Route
                     { "startingPoint", route.startingPoint },
                     { "difficulty", route.difficulty },
                     { "estimatedTime", route.estimatedTime },
-                    { "totalDistance", route.totalDistance },
-                    { "ascent", route.ascent },
+                    { "totalDistance", route.totalDistanceM },
+                    { "ascent", route.ascentM },
+                    { "descent", route.descentM },
+                    { "slopeMap", GD.VarToStr(route.slopeMap) },
+                    { "heightMap", GD.VarToStr(route.heightMapM) },
+                    { "maxHeight", route.maxHeight },
+                    { "minHeight", route.minHeight },
                     // curve 3D data
                     { "Closed", route.Curve.Closed },
                     { "BakeInterval", route.Curve.BakeInterval },
@@ -85,12 +90,17 @@ namespace ForForm.Map.Route
                 route.startingPoint = ((float)data["startingPoint"]);
                 route.difficulty = ((string)data["difficulty"]);
                 route.estimatedTime = ((uint)data["estimatedTime"]);
-                route.totalDistance = ((float)data["totalDistance"]);
-                route.ascent = ((float)data["ascent"]);
+                route.maxHeight = (float)data["maxHeight"];
+                route.minHeight = (float)data["minHeight"];
+                route.totalDistanceM = ((float)data["totalDistance"]);
+                route.ascentM = ((float)data["ascent"]);
+                route.descentM = ((float)data["descent"]);
+                route.heightMapM = GD.StrToVar(data["heightMap"].ToString()).AsFloat32Array();
+                route.slopeMap = GD.StrToVar(data["slopeMap"].ToString()).AsFloat32Array();
+
                 // curve 3D data
                 route.Curve.Closed = ((bool)data["Closed"]);
                 route.Curve.BakeInterval = ((float)data["BakeInterval"]);
-
                 route.Curve.ClearPoints();
                 var parsedPoints = ParseVector3Array(data["Points"].ToString());
                 foreach (var point in parsedPoints) {

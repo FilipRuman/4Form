@@ -2,18 +2,21 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://0cbjhcpy8bcj"
-path.s3tc="res://.godot/imported/Cobblestone-R.png-0e43def9b4d4a7e23671fa214342d77f.s3tc.ctex"
-path.etc2="res://.godot/imported/Cobblestone-R.png-0e43def9b4d4a7e23671fa214342d77f.etc2.ctex"
+uid="uid://bjrvxdhd8nmk"
+path.s3tc="res://.godot/imported/low_poly_trees_12.png-3d60cf7dce2ecaf12825b0de706001f2.s3tc.ctex"
+path.etc2="res://.godot/imported/low_poly_trees_12.png-3d60cf7dce2ecaf12825b0de706001f2.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
+generator_parameters={
+"md5": "479e135369c297cacc3543ffcf56b9de"
+}
 
 [deps]
 
-source_file="res://assets/Material-LIB/Cobblestone/Cobblestone-R.png"
-dest_files=["res://.godot/imported/Cobblestone-R.png-0e43def9b4d4a7e23671fa214342d77f.s3tc.ctex", "res://.godot/imported/Cobblestone-R.png-0e43def9b4d4a7e23671fa214342d77f.etc2.ctex"]
+source_file="res://assets/low poly trees/low_poly_trees_12.png"
+dest_files=["res://.godot/imported/low_poly_trees_12.png-3d60cf7dce2ecaf12825b0de706001f2.s3tc.ctex", "res://.godot/imported/low_poly_trees_12.png-3d60cf7dce2ecaf12825b0de706001f2.etc2.ctex"]
 
 [params]
 

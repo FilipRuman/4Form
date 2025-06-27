@@ -28,6 +28,8 @@ namespace ForForm.Menu.Game
             time.Text = "";
             ascent.Text = "";
             distance.Text = "";
+            // this was causing weird issues 
+            if (description != null)
             description.Text = "";
             base._Ready();
         }
@@ -62,13 +64,13 @@ namespace ForForm.Menu.Game
         }
 
         private void OnRouteSelection(Map.Route.Route route) {
-            GameConfig.GameSettings.currentRoute = route;
+            GameConfig.GameSettings.SetCurrentRoute( route);
 
             description.Text = route.description;
             difficulty.Text = $"Difficulty: {route.difficulty} ";
             time.Text = $"Estimated time to finish: {route.estimatedTime}min ";
-            ascent.Text = $"Ascent: {Mathf.RoundToInt(route.ascent)}m ";
-            distance.Text = $"Distance: {Math.Round(route.totalDistance / 1000f, 1)}km 󰣰";
+            ascent.Text = $"Ascent: {Mathf.RoundToInt(route.ascentM)}m ";
+            distance.Text = $"Distance: {Math.Round(route.totalDistanceM / 1000f, 1)}km 󰣰";
         }
     }
 }

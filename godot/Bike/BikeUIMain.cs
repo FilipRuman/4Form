@@ -16,13 +16,15 @@ namespace ForForm.Bike.UI
             powerLabel,
             slopeLabel,
             speedLabel,
+            heartRateLabel,
             fpsLabel;
 
         public override void _Process(double delta) {
-            cadenceLabel.Text = $"cadence  : {bikeInput.currentCadence}";
-            slopeLabel.Text = $"slope  : {Math.Round((double)bikePhysics.path.slope, 1)}%";
-            speedLabel.Text = $"speed 󰓅 : {Math.Round(bikePhysics.speedKmH, 1)}km/h";
-            powerLabel.Text = $"power 󱐋 : {bikeInput.currentPower}";
+            cadenceLabel.Text = $"{bikeInput.currentCadence}rpm cadence ";
+            slopeLabel.Text = $"{Math.Round((double)bikePhysics.path.slope, 1)}% slope ";
+            speedLabel.Text = $"{Math.Round(bikePhysics.speedKmH, 1)}km/h speed󰓅 ";
+            powerLabel.Text = $"{bikeInput.currentPower}w power󱐋";
+            heartRateLabel.Text = $"{bikeInput.heartRate}bpm HR ";
             fpsLabel.Text = $"FPS: {Engine.GetFramesPerSecond()}";
             base._Process(delta);
         }

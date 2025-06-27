@@ -11,7 +11,8 @@ namespace ForForm.Bike
         public float mass, //kg
             wheelFrictionCoefficient,
             wheelRadius, //m
-            frontalArea;
+            frontalArea,
+            modelsWheelBase;
 
         [Export]
         public Texture2D icon;
@@ -32,6 +33,7 @@ namespace ForForm.Bike
                 { "wheelFrictionCoefficient", wheelFrictionCoefficient },
                 { "wheelRadius", wheelRadius },
                 { "frontalArea", frontalArea },
+                { "modelsWhealBase", modelsWheelBase },
             };
             var text = Json.Stringify(data, "\t");
 
@@ -52,6 +54,7 @@ namespace ForForm.Bike
             return new BikeModel {
                 name = ((string)data["name"]),
                 mass = ((float)data["mass"]),
+                modelsWheelBase = ((float)data["modelsWhealBase"]),
                 wheelFrictionCoefficient = ((float)data["wheelFrictionCoefficient"]),
                 wheelRadius = ((float)data["wheelRadius"]),
                 frontalArea = ((float)data["frontalArea"]),

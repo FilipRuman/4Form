@@ -2,6 +2,7 @@ namespace ForForm.Menu.Game
 {
     using Godot;
 
+    [Tool]
     public partial class MapSelectionMenu : Control {
         [Export]
         Control localLayout,
@@ -9,9 +10,6 @@ namespace ForForm.Menu.Game
 
         [Export]
         RichTextLabel description;
-
-        [Export]
-        Map.WholeMapExport wholeMapExport;
 
         [Export]
         GameMenu gameMenu;
@@ -49,7 +47,7 @@ namespace ForForm.Menu.Game
                     lastMapSelected = button;
 
                     ThemeVariants.SetForButton(true, button);
-                    wholeMapExport.Import(mapName);
+                    gameMenu.menuMain.wholeMapExport.Import(mapName);
                     gameMenu.OnMenuComplete(menuIndex: 0);
                 };
 

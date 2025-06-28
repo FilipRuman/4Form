@@ -7,10 +7,10 @@ namespace ForForm.Bike.HUD
         //INFO:  I put all references in one script so there is less clutter in the godot editor
         //  Also it makes setting separate scenes for each segment of code easier
         [Export]
-        public BikeInput bikeInput;
+        internal BikeInput bikeInput;
 
         [Export]
-        public BikePhysics bikePhysics;
+        internal BikePhysics bikePhysics;
 
         [ExportGroup("UI")]
         [Export]

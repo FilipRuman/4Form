@@ -41,7 +41,6 @@ folder_colors={
 "res://Menu/": "yellow",
 "res://Menu/BikeConfig/": "blue",
 "res://Menu/DeviceConnection/": "green",
-"res://Player/": "red",
 "res://TCP/": "orange",
 "res://TerrainGen/": "green",
 "res://addons/": "green",
@@ -49,8 +48,7 @@ folder_colors={
 "res://assets/Material-LIB/": "yellow",
 "res://assets/Meslo/": "orange",
 "res://assets/gravel bike model/": "blue",
-"res://assets/trees/": "green",
-"res://shaders/": "teal"
+"res://assets/trees/": "green"
 }
 
 [filesystem]

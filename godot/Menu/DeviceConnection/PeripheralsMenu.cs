@@ -10,7 +10,7 @@ namespace ForForm.Menu.DeviceConnection
         private Control peripheralsDisplaysLayout;
 
         [Export]
-        private Tcp.TcpParser tcpParser;
+        MenuMain menuMain;
 
         [Export]
         private PackedScene peripheralDisplayPrefab;
@@ -70,7 +70,7 @@ namespace ForForm.Menu.DeviceConnection
         private void OnPeripheralSelection(uint index) {
             var deviceTypeName = currentDeviceType.name;
 
-            tcpParser.SendPeripheralConnectionRequest(index, deviceTypeName);
+            menuMain.tcpParser.SendPeripheralConnectionRequest(index, deviceTypeName);
         }
 
         public void OnPeripheralConnection(string deviceTypeName, uint index) {

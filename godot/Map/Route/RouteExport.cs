@@ -1,6 +1,5 @@
 namespace ForForm.Map.Route
 {
-    using System;
     using System.Collections.Generic;
     using System.Globalization;
     using System.Text.RegularExpressions;
@@ -14,7 +13,7 @@ namespace ForForm.Map.Route
         string AllRoutesPath => $"user://Maps/{map.name}/Routes/";
 
         [Export]
-        Menu.Game.RouteMenu routeMenu;
+        Menu.MenuMain menuMain;
 
         [Export]
         Map map;
@@ -112,7 +111,7 @@ namespace ForForm.Map.Route
             }
             map.routes = routeArray;
             if (!Engine.IsEditorHint())
-                routeMenu.Setup(routeArray);
+                menuMain.gameMenu.routeMenu.Setup(routeArray);
         }
 
         // Idk. i can't get the standard way to work so i did this:

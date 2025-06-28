@@ -2,9 +2,17 @@ namespace ForForm.Menu.Game
 {
     using Godot;
 
-[Tool]
+    [Tool]
     public partial class GameMenu : Control {
-        private const int V = 2;
+        [Export]
+        internal MenuMain menuMain;
+
+        [Export]
+        public RouteMenu routeMenu;
+
+        [Export]
+        public MapSelectionMenu mapSelectionMenu;
+
         [Export]
         Control[] menus;
         uint currentMenuIndex = 0;
@@ -44,7 +52,7 @@ namespace ForForm.Menu.Game
         }
 
         public void OnMenuComplete(uint menuIndex) {
-            if (currentMenuIndex != menus.Length - 1 )
+            if (currentMenuIndex != menus.Length - 1)
                 next.Visible = true;
         }
     }

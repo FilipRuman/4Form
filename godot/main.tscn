@@ -1,10 +1,13 @@
-[gd_scene load_steps=17 format=3 uid="uid://c0hkngqkjxk3t"]
+[gd_scene load_steps=20 format=3 uid="uid://c0hkngqkjxk3t"]
 
+[ext_resource type="Script" uid="uid://dfu55milq3n52" path="res://Map/GameLoader.cs" id="1_5vw27"]
 [ext_resource type="PackedScene" uid="uid://dnsjumx1dj3o7" path="res://Menu/menu_main.tscn" id="1_h2yge"]
 [ext_resource type="Script" uid="uid://naawr1uq2pqg" path="res://TCP/Tcp.cs" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://buux5h8054hrj" path="res://TCP/TcpParser.cs" id="2_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://domhm87hbhbg1" path="res://demo/components/Player.tscn" id="2_kek77"]
 [ext_resource type="PackedScene" uid="uid://bs5dl4uif5ysp" path="res://Map/blank_map.tscn" id="4_1bvp3"]
 [ext_resource type="Script" uid="uid://c7q1uobo5sscd" path="res://Map/InitialMapsImporter.cs" id="5_lquwl"]
+[ext_resource type="Script" uid="uid://bul8dgmajymhd" path="res://Map/terrain3DTrueExport.gd" id="7_4c57u"]
 
 [sub_resource type="Gradient" id="Gradient_lquwl"]
 offsets = PackedFloat32Array(0.2, 1)
@@ -72,11 +75,11 @@ lod0_range = 128.0
 [sub_resource type="Terrain3DAssets" id="Terrain3DAssets_dg77c"]
 mesh_list = Array[Terrain3DMeshAsset]([SubResource("Terrain3DMeshAsset_efxa6")])
 
-[sub_resource type="Gradient" id="Gradient_vr1m7"]
+[sub_resource type="Gradient" id="Gradient_by2o1"]
 offsets = PackedFloat32Array(0.2, 1)
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_d8lcj"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_clhxh"]
 noise_type = 2
 frequency = 0.03
 cellular_jitter = 3.0
@@ -88,12 +91,12 @@ domain_warp_fractal_type = 2
 domain_warp_fractal_lacunarity = 1.5
 domain_warp_fractal_gain = 1.0
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_bov7h"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_5d3gs"]
 seamless = true
-color_ramp = SubResource("Gradient_vr1m7")
-noise = SubResource("FastNoiseLite_d8lcj")
+color_ramp = SubResource("Gradient_by2o1")
+noise = SubResource("FastNoiseLite_clhxh")
 
-[sub_resource type="Terrain3DMaterial" id="Terrain3DMaterial_lquwl"]
+[sub_resource type="Terrain3DMaterial" id="Terrain3DMaterial_kek77"]
 _shader_parameters = {
 "_mouse_layer": 2147483648,
 "auto_base_texture": 0,
@@ -119,7 +122,7 @@ _shader_parameters = {
 "noise1_scale": 0.04,
 "noise2_scale": 0.076,
 "noise3_scale": 0.225,
-"noise_texture": SubResource("NoiseTexture2D_bov7h"),
+"noise_texture": SubResource("NoiseTexture2D_5d3gs"),
 "projection_angular_division": 1.0,
 "projection_threshold": 0.8,
 "tri_scale_reduction": 0.3,
@@ -139,20 +142,25 @@ dual_scaling = true
 
 [node name="scene" type="Node3D"]
 
+[node name="Game loader" type="Node" parent="." node_paths=PackedStringArray("tcpParser", "terrain3D")]
+script = ExtResource("1_5vw27")
+tcpParser = NodePath("../Tcp/TcpParser")
+terrain3D = NodePath("../Blank map/Terrain3D")
+playerPrefab = ExtResource("2_kek77")
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 2
 follow_viewport_enabled = true
 
-[node name="menu main" parent="CanvasLayer" node_paths=PackedStringArray("tcpParser", "startGameButton", "terrain3D") instance=ExtResource("1_h2yge")]
-tcpParser = NodePath("../../Tcp/TcpParser")
-startGameButton = NodePath("Panel/contents/Game/Game config/VBoxContainer/Game config menus/Load game/Button")
-terrain3D = NodePath("../../Blank map/Terrain3D")
+[node name="menu main" parent="CanvasLayer" node_paths=PackedStringArray("wholeMapExport", "tabContents") instance=ExtResource("1_h2yge")]
+wholeMapExport = NodePath("../../Blank map/whole map export")
+tabContents = []
 
 [node name="device connection" parent="CanvasLayer/menu main/Panel/contents" index="0"]
 visible = true
 
-[node name="PeripherialsMenu" parent="CanvasLayer/menu main/Panel/contents/device connection" index="0" node_paths=PackedStringArray("tcpParser", "deviceTypes")]
-tcpParser = NodePath("../../../../../../Tcp/TcpParser")
+[node name="PeripherialsMenu" parent="CanvasLayer/menu main/Panel/contents/device connection" index="0" node_paths=PackedStringArray("menuMain", "deviceTypes")]
+menuMain = NodePath("../../../..")
 deviceTypes = [NodePath("../HSplitContainer/device types/VBoxContainer2/Smart bike trainer 󰂣/trainer device type"), NodePath("../HSplitContainer/device types/VBoxContainer2/heart rate tracker /heart rate device type")]
 
 [node name="Smart bike trainer 󰂣" parent="CanvasLayer/menu main/Panel/contents/device connection/HSplitContainer/device types/VBoxContainer2" index="0" node_paths=PackedStringArray("icon")]
@@ -180,8 +188,10 @@ icon = Object(Label,"_import_path":NodePath(""),"unique_name_in_owner":false,"pr
 
 icon = NodePath("icon")
 
-[node name="Map selecton" parent="CanvasLayer/menu main/Panel/contents/Game/Game config/VBoxContainer/Game config menus" index="0" node_paths=PackedStringArray("wholeMapExport")]
-wholeMapExport = NodePath("../../../../../../../../../Blank map/whole map export")
+[node name="Game config" parent="CanvasLayer/menu main/Panel/contents/Game" index="0" node_paths=PackedStringArray("menuMain", "routeMenu", "mapSelectionMenu")]
+menuMain = NodePath("../../../..")
+routeMenu = NodePath("VBoxContainer/Game config menus/Route selection")
+mapSelectionMenu = NodePath("VBoxContainer/Game config menus/Map selecton")
 
 [node name="Tcp" type="Node" parent="." node_paths=PackedStringArray("tcpParser")]
 script = ExtResource("1_ig7tw")
@@ -201,19 +211,17 @@ material = SubResource("Terrain3DMaterial_5vw27")
 assets = SubResource("Terrain3DAssets_dg77c")
 process_mode = 4
 
-[node name="terrain 3D true export" parent="Blank map/Terrain3D" index="2"]
-default_material = SubResource("Terrain3DMaterial_lquwl")
+[node name="terrain 3D true export" parent="Blank map/Terrain3D" index="2" node_paths=PackedStringArray("map")]
+script = ExtResource("7_4c57u")
+map = NodePath("../../../CanvasLayer/menu main")
+default_material = SubResource("Terrain3DMaterial_kek77")
 
 [node name="whole map export" parent="Blank map" index="1"]
 manualMapLoadName = "demo climb"
 
-[node name="route export" parent="Blank map" index="2" node_paths=PackedStringArray("routeMenu")]
-routeMenu = NodePath("../../CanvasLayer/menu main/Panel/contents/Game/Game config/VBoxContainer/Game config menus/Route selection")
-
-[node name="initial maps importer" type="Node" parent="." node_paths=PackedStringArray("mapSelectionMenu")]
+[node name="initial maps importer" type="Node" parent="."]
 process_priority = 1
 script = ExtResource("5_lquwl")
-mapSelectionMenu = NodePath("../CanvasLayer/menu main/Panel/contents/Game/Game config/VBoxContainer/Game config menus/Map selecton")
 
 [editable path="CanvasLayer/menu main"]
 [editable path="CanvasLayer/menu main/Panel/contents/device connection/HSplitContainer/device types/VBoxContainer2/Smart bike trainer 󰂣"]

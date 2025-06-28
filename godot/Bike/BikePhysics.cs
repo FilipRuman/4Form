@@ -24,7 +24,7 @@ namespace ForForm.Bike
 
         [Export]
         float gravity_mS2; //m/s^2
-        float gravity_N => BikeStats.totalMass_Kg * gravity_mS2; //N
+        float gravity_N => BikeStats.totalMass_kg * gravity_mS2; //N
         float slopeGravityForce_N => gravity_N * Mathf.Sin(slope_rad); //the force that is pushing you forward from hills
 
         // If you take a corner that looks like nascar track (curved to the inside) the we would need to account other forces but this doesn't matter
@@ -55,7 +55,7 @@ namespace ForForm.Bike
             - slopeGravityForce_N
             - rollingResistance_N
             - airDrag_N; //N
-        public float acceleration_mS2 => totalForwardForce_N / BikeStats.totalMass_Kg; // m/s^2 clamped to remove any weirdness
+        public float acceleration_mS2 => totalForwardForce_N / BikeStats.totalMass_kg; // m/s^2 clamped to remove any weirdness
 
         public override void _Process(double delta) {
             // so you don't roll backwards on hills when stopping pedaling

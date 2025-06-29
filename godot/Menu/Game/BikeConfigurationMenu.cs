@@ -17,7 +17,6 @@ namespace ForForm.Menu.Game
         [Export]
         GameMenu gameMenu;
 
-
         [Export]
         Control bikeModelLayout;
         Dictionary<BikeModel, SimpleSelectionUI> bikeModelSelections = new();

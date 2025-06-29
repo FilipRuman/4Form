@@ -2,7 +2,6 @@ namespace ForForm.Menu.Game
 {
     using Godot;
 
-    [Tool]
     public partial class MapSelectionMenu : Control {
         [Export]
         Control localLayout,
@@ -49,6 +48,8 @@ namespace ForForm.Menu.Game
                     ThemeVariants.SetForButton(true, button);
                     gameMenu.menuMain.wholeMapExport.Import(mapName);
                     gameMenu.OnMenuComplete(menuIndex: 0);
+
+                    gameMenu.routeMenu.Setup(GameSettings.currentMap.routes);
                 };
 
                 ThemeVariants.SetForButton(false, button);

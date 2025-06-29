@@ -2,8 +2,9 @@ namespace ForForm.Menu
 {
     using Godot;
     using Tcp;
-[Tool]
+
     public partial class MenuMain : Control {
+        [ExportGroup("Outside references")]
         [Export]
         internal Map.WholeMapExport wholeMapExport;
 
@@ -11,10 +12,11 @@ namespace ForForm.Menu
         internal TcpParser tcpParser;
 
         [Export]
-        public Game.GameMenu gameMenu;
-
-        [Export]
         Map.GameLoader gameLoader;
+
+        [ExportGroup("UI")]
+        [Export]
+        public Game.GameMenu gameMenu;
 
         [Export]
         TabBar tabBar;
@@ -33,6 +35,8 @@ namespace ForForm.Menu
 
         public override void _Process(double delta) {
             base._Process(delta);
+            if (Engine.IsEditorHint())
+                return;
             if (Input.IsActionJustPressed("ToggleMenu"))
                 Visible = !Visible;
         }

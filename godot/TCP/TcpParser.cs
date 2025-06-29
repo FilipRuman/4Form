@@ -24,9 +24,13 @@ namespace ForForm.Tcp
             base._Ready();
         }
 
+        [Export]
+        bool debugTCPData;
+
         public void ParseTcpDataString(string data) {
             // c# switch statements are UGLY compered to rust...
-            GD.Print($"ParseTcpDataString '{data}'");
+            if (debugTCPData)
+                GD.Print($"ParseTcpDataString '{data}'");
             switch (data[0])
             {
                 case 't':
@@ -36,8 +40,12 @@ namespace ForForm.Tcp
                         return;
                     var regexOutput = trainerDataRegex.Search(data[1..data.Length]);
                     bikePhysics.input.currentWatts = uint.Parse(regexOutput.GetString("power"));
-                    bikePhysics.input.currentCadence_RPM = uint.Parse(regexOutput.GetString("cadence"));
-                    bikePhysics.input.wheelRotation_degS = uint.Parse(regexOutput.GetString("rotation"));
+                    bikePhysics.input.currentCadence_RPM = uint.Parse(
+                        regexOutput.GetString("cadence")
+                    );
+                    bikePhysics.input.wheelRotation_degS = uint.Parse(
+                        regexOutput.GetString("rotation")
+                    );
 
                     break;
                 }

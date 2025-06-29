@@ -8,21 +8,19 @@ namespace ForForm.Map.Route
     [Tool, Icon("res://Script icons/publish.png")]
     public partial class RouteExport : Node3D {
         string RouteSpecificBasePath(string routeName) =>
-            $"user://Maps/{map.name}/Routes/{routeName}/";
+            $"user://Maps/{Map.name}/Routes/{routeName}/";
 
-        string AllRoutesPath => $"user://Maps/{map.name}/Routes/";
+        string AllRoutesPath => $"user://Maps/{Map.name}/Routes/";
 
-        [Export]
-        Menu.MenuMain menuMain;
+        public Menu.MenuMain menuMain;
 
-        [Export]
-        Map map;
+        Map Map => GameSettings.currentMap;
 
         public void ExportRoutes() {
-            DirAccess.Open($"user://Maps/{map.name}").MakeDir("Routes");
+            DirAccess.Open($"user://Maps/{Map.name}").MakeDir("Routes");
 
-            foreach (var route in map.routes) {
-                DirAccess.Open($"user://Maps/{map.name}/Routes").MakeDir(route.name);
+            foreach (var route in Map.routes) {
+                DirAccess.Open($"user://Maps/{Map.name}/Routes").MakeDir(route.name);
                 string _basePath = RouteSpecificBasePath(route.name);
 
                 if (route.icon != null)
@@ -109,9 +107,7 @@ namespace ForForm.Map.Route
 
                 i++;
             }
-            map.routes = routeArray;
-            if (!Engine.IsEditorHint())
-                menuMain.gameMenu.routeMenu.Setup(routeArray);
+            Map.routes = routeArray;
         }
 
         // Idk. i can't get the standard way to work so i did this:

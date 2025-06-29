@@ -68,7 +68,7 @@ namespace ForForm.Menu.DeviceConnection
         }
 
         private void OnPeripheralSelection(uint index) {
-            var deviceTypeName = currentDeviceType.name;
+            var deviceTypeName = currentDeviceType.bluetoothDeviceTypeName;
 
             menuMain.tcpParser.SendPeripheralConnectionRequest(index, deviceTypeName);
         }
@@ -78,7 +78,7 @@ namespace ForForm.Menu.DeviceConnection
             var matchingDeviceType = currentDeviceType;
             // switch or dictionary would be faster but this  is cleaner
             foreach (var _deviceType in deviceTypes) {
-                if (_deviceType.name != deviceTypeName)
+                if (_deviceType.bluetoothDeviceTypeName != deviceTypeName)
                     continue;
                 matchingDeviceType = _deviceType;
                 glyph = _deviceType.glyphIcon;

@@ -1,6 +1,5 @@
 namespace ForForm.Bike.HUD
 {
-    using System;
     using Godot;
 
     public partial class BikeHUDMain : Node {
@@ -23,7 +22,7 @@ namespace ForForm.Bike.HUD
         public override void _Process(double delta) {
             cadence.Text = $"{bikeInput.currentCadence_RPM}rpm cadence ";
 
-            speed.Text = $"{Math.Round(bikePhysics.speed_kmH, 1)}km/h speed󰓅 ";
+            speed.Text = $"{(int)bikePhysics.speed_kmH}km/h speed󰓅 ";
             power.Text = $"{bikeInput.currentWatts}w power󱐋";
             heartRate.Text = $"{bikeInput.heartRate}bpm HR ";
             fps.Text = $"FPS: {Engine.GetFramesPerSecond()}";

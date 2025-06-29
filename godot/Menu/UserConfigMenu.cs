@@ -11,8 +11,6 @@ namespace ForForm.Menu
         Button icon;
 
         public override void _Ready() {
-
-
             name.SetupStr(
                 Bike.BikeStats.userConfig.name,
                 (text) =>

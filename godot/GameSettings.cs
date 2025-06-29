@@ -2,8 +2,6 @@ namespace ForForm
 {
     using System;
     using ForForm.Map.Route;
-    using Godot;
-    using Map;
 
     public static class GameSettings {
         public static GameMode CurrentGameMode { get; private set; }

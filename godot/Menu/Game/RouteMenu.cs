@@ -3,7 +3,6 @@ namespace ForForm.Menu.Game
     using System;
     using Godot;
 
-    [Tool]
     public partial class RouteMenu : Control {
         [Export]
         GameMenu gameMenu;
@@ -28,9 +27,9 @@ namespace ForForm.Menu.Game
             time.Text = "";
             ascent.Text = "";
             distance.Text = "";
-            // this was causing weird issues 
+            // this was causing weird issues
             if (description != null)
-            description.Text = "";
+                description.Text = "";
             base._Ready();
         }
 
@@ -38,6 +37,7 @@ namespace ForForm.Menu.Game
 
         public void Setup(Map.Route.Route[] routes) {
             Miscs.ClearChildren(layout);
+
             foreach (var route in routes) {
                 var script = simpleSelectionPrefab.Instantiate() as SimpleSelectionUI;
                 layout.AddChild(script);
@@ -64,7 +64,7 @@ namespace ForForm.Menu.Game
         }
 
         private void OnRouteSelection(Map.Route.Route route) {
-            GameSettings.SetCurrentRoute( route);
+            GameSettings.SetCurrentRoute(route);
 
             description.Text = route.description;
             difficulty.Text = $"Difficulty: {route.difficulty} ";

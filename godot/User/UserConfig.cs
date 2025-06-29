@@ -8,7 +8,7 @@ namespace ForForm.User
         public string name = "";
 
         [Export]
-        public float mass_kg; 
+        public float mass_kg;
         public const string Path = "user://UserConfig.json";
 
         public void Save() {

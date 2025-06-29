@@ -30,9 +30,7 @@ namespace ForForm.Bike
         // If you take a corner that looks like nascar track (curved to the inside) the we would need to account other forces but this doesn't matter
         float normalGravityForce_N => gravity_N * Mathf.Cos(slope_rad); //the force that is applied directly to the ground
         float rollingResistance_N =>
-            BikeStats.bikeModel.wheelFrictionCoefficient
-            * normalGravityForce_N
-            * float.Sign(speed_mS); //N
+            BikeStats.bikeModel.wheelFrictionCoefficient * normalGravityForce_N; //N
 
         // I could use formula from my flight sim XD https://github.com/FilipRuman/Flight-sim
         const float StandardAirDensity_kgM3 = 1.2250f; // kg/m^3
@@ -41,8 +39,7 @@ namespace ForForm.Bike
             * BikeStats.dragCoefficient
             * StandardAirDensity_kgM3
             * Mathf.Pow(speed_mS, 2)
-            / 2f
-            * float.Sign(speed_mS); //N
+            / 2f; //N
 
         //https://en.wikipedia.org/wiki/Torque
         float drivetrainForwardPushing_N => input.currentWatts / Mathf.Max(speed_mS, 1); // N
@@ -59,7 +56,8 @@ namespace ForForm.Bike
 
         public override void _Process(double delta) {
             // so you don't roll backwards on hills when stopping pedaling
-            speed_mS = Mathf.Max(speed_mS + acceleration_mS2 * (float)delta, .01f);
+            speed_mS = Mathf.Max(speed_mS + acceleration_mS2 * (float)delta, .001f);
+
             UpdatePath(delta);
             base._Process(delta);
         }
@@ -67,11 +65,11 @@ namespace ForForm.Bike
         private void UpdatePath(double delta) {
             float currentProgress_m =
                 Progress + speed_mS * (float)delta * GameSettings.currentMap.speedScale;
-
             CalculateSlope(currentProgress_m);
+
             Progress = currentProgress_m;
 
-            // later add rotation at Z axis to add animation for rotating into turns
+            //TODO: later add rotation at Z axis to add animation for rotating into turns
             Vector3 rotation_deg = new(Mathf.RadToDeg(slope_rad), GlobalRotationDegrees.Y, 0);
             GlobalRotationDegrees = rotation_deg;
         }
@@ -91,7 +89,7 @@ namespace ForForm.Bike
         public float slope_rad;
 
         public override void _Ready() {
-            Progress =GameSettings.currentRoute.startingPoint;
+            Progress = GameSettings.currentRoute.startingPoint;
             base._Ready();
         }
     }

@@ -22,19 +22,27 @@ namespace ForForm.Tcp
         const float TcpConnectionTimeout = .5f; //S
         private static readonly string[] possibleRustBleHandlerAppFilePaths =
         {
-            "./BleHandler.exe",
-            "./BleHandler",
-            "./../BleHandler.exe",
-            "./../BleHandler",
+            "./bluetooth_handler.exe",
+            "./bluetooth_handler",
+            "./bluetooth_handler.x86_64",
+            "./../subomdules/4Form-BluetoothHandler/target/debug/bluetooth_handler.exe",
+            "./../subomdules/4Form-BluetoothHandler/target/debug/bluetooth_handler",
+            "./../subomdules/4Form-BluetoothHandler/target/debug/bluetooth_handler.x86_64",
         };
 
         public override void _Ready() {
-            var working_path = "none of the paths works!";
+            var working_path = "";
             foreach (string path in possibleRustBleHandlerAppFilePaths) {
                 if (File.Exists(path)) {
                     working_path = path;
                     break;
                 }
+            }
+
+            if (working_path == "") {
+                GD.PrintErr(
+                    $"Bluetooth LE handling program was not found. Please compile it directly, or download it from release page https://github.com/FilipRuman/4Form/releases \n and place it in one of Following Directories: \n {ProjectSettings.GlobalizePath("./")} \n {ProjectSettings.GlobalizePath("./../subomdules/4Form-BluetoothHandler/target/debug/")} "
+                );
             }
             GD.Print($"working file path to rust Ble handler:{working_path}");
 

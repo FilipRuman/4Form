@@ -2,7 +2,6 @@ namespace ForForm.Menu.Game
 {
     using Godot;
 
-    [Tool]
     public partial class GameMenu : Control {
         [Export]
         internal MenuMain menuMain;
@@ -19,7 +18,8 @@ namespace ForForm.Menu.Game
 
         [Export]
         Button next,
-            previous;
+            previous,
+            startGame;
 
         public override void _Ready() {
             foreach (var menu in menus) {
@@ -30,6 +30,8 @@ namespace ForForm.Menu.Game
             next.Visible = false;
             previous.Visible = false;
             previous.Pressed += onPreviousMenu;
+
+            startGame.Pressed += menuMain.StartGame;
             base._Ready();
         }
 

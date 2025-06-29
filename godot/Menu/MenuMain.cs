@@ -25,9 +25,6 @@ namespace ForForm.Menu
         public MenuTabContent[] tabContents;
 
         [Export]
-        public Button startGameButton;
-
-        [Export]
         Control tabContentsLockScreen;
 
         [Export]
@@ -46,12 +43,13 @@ namespace ForForm.Menu
             {
                 UpdateTabs();
             };
-            startGameButton.Pressed += () =>
-            {
-                Visible = false;
-                gameLoader.StartGame();
-            };
+
             base._Ready();
+        }
+
+        internal void StartGame() {
+            Visible = false;
+            gameLoader.StartGame();
         }
 
         int lastTab = 0;

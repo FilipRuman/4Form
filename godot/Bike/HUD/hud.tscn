@@ -16,16 +16,16 @@ colors = PackedColorArray(0, 0, 0, 1, 0.314317, 0.314316, 0.314316, 1, 0.845, 0.
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_txxpi"]
 gradient = SubResource("Gradient_v1hxu")
 
-[sub_resource type="Gradient" id="Gradient_3sjaa"]
+[sub_resource type="Gradient" id="Gradient_61qk6"]
 interpolation_mode = 2
 interpolation_color_space = 2
-offsets = PackedFloat32Array(0.42, 0.43, 0.44, 0.47, 0.5, 0.51, 0.53, 0.54, 0.56)
-colors = PackedColorArray(0.260422, 0.000266572, 0.343869, 1, 0.0915868, 0.385993, 0.517041, 1, 0.281635, 0.795188, 1, 1, 2.21401e-06, 0.740376, 0.49411, 1, 0.219608, 0.690196, 0.156863, 1, 1, 0.776, 0.04, 1, 1.07059, 0.282353, 0.168627, 1, 0.972549, 0, 0, 1, 0.397872, 0, 0.104721, 1)
+offsets = PackedFloat32Array(0.43, 0.44, 0.47, 0.5, 0.52, 0.54, 0.56, 0.58, 0.6)
+colors = PackedColorArray(0.260422, 0.000266572, 0.343869, 1, 0.0915868, 0.385993, 0.517041, 1, 0.281635, 0.795188, 1, 1, 0.219608, 0.690196, 0.156863, 1, 1, 0.776, 0.04, 1, 1.03669, 0.491528, -0.0239121, 1, 0.972549, 0, 0, 1, 0.63, 0, 0.1575, 1, 0.217253, 0, 0.0548413, 1)
 metadata/_snap_enabled = true
 metadata/_snap_count = 100
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_mn5b2"]
-gradient = SubResource("Gradient_3sjaa")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_2jrfd"]
+gradient = SubResource("Gradient_61qk6")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xtl7g"]
 shader = ExtResource("5_tjljn")
@@ -34,7 +34,7 @@ shader_parameter/slope_map = PackedFloat32Array()
 shader_parameter/height_map = PackedFloat32Array()
 shader_parameter/max_height = 154.503
 shader_parameter/min_height = 2.65
-shader_parameter/slope_color = SubResource("GradientTexture1D_mn5b2")
+shader_parameter/slope_color = SubResource("GradientTexture1D_2jrfd")
 shader_parameter/alpha_based_on_distance_from_line = SubResource("GradientTexture1D_txxpi")
 
 [sub_resource type="Gradient" id="Gradient_rie2u"]
@@ -42,10 +42,8 @@ shader_parameter/alpha_based_on_distance_from_line = SubResource("GradientTextur
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_2s7lo"]
 gradient = SubResource("Gradient_rie2u")
 
-[node name="Hud" type="CanvasLayer" node_paths=PackedStringArray("bikeInput", "bikePhysics", "cadence", "power", "speed", "heartRate", "fps")]
+[node name="HUD" type="CanvasLayer" node_paths=PackedStringArray("cadence", "power", "speed", "heartRate", "fps")]
 script = ExtResource("1_2jrfd")
-bikeInput = NodePath("")
-bikePhysics = NodePath("")
 cadence = NodePath("main stats/Main stats layout2/Cadence")
 power = NodePath("main stats/Main stats layout2/Power")
 speed = NodePath("main stats/Main stats layout2/Speed")
@@ -88,13 +86,18 @@ theme_override_colors/font_color = Color(0, 0.570972, 0.479468, 1)
 theme_override_font_sizes/font_size = 20
 text = "Wheal rpm: 150"
 
+[node name="VSeparator4" type="VSeparator" parent="main stats/Main stats layout2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_6whun")
+
 [node name="Power" type="Label" parent="main stats/Main stats layout2"]
 custom_minimum_size = Vector2(114.25, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.960784, 0.560784, 0, 1)
 theme_override_fonts/font = ExtResource("3_gcj2r")
 theme_override_font_sizes/font_size = 27
-text = "151w power󱐋"
+text = "151 power󱐋"
 horizontal_alignment = 1
 
 [node name="VSeparator2" type="VSeparator" parent="main stats/Main stats layout2"]
@@ -108,6 +111,11 @@ theme_override_colors/font_color = Color(0.86959, 0.14237, 0.137062, 1)
 theme_override_fonts/font = ExtResource("3_gcj2r")
 theme_override_font_sizes/font_size = 27
 text = "160bpm HR "
+
+[node name="VSeparator3" type="VSeparator" parent="main stats/Main stats layout2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_6whun")
 
 [node name="Cadence" type="Label" parent="main stats/Main stats layout2"]
 layout_mode = 2
@@ -178,7 +186,7 @@ offset_left = -556.0
 offset_bottom = 318.0
 grow_horizontal = 0
 
-[node name="climb chart" type="TextureRect" parent="climbing ui" node_paths=PackedStringArray("main", "minHeight", "maxHeight", "distance", "playerPositionIndicator")]
+[node name="climb chart" type="TextureRect" parent="climbing ui" node_paths=PackedStringArray("main", "minHeight", "maxHeight", "distance", "slope", "playerPositionIndicator")]
 material = SubResource("ShaderMaterial_xtl7g")
 custom_minimum_size = Vector2(0.09, 0.26)
 layout_mode = 1
@@ -199,7 +207,9 @@ main = NodePath("../..")
 minHeight = NodePath("min height")
 maxHeight = NodePath("max height")
 distance = NodePath("distance")
+slope = NodePath("slope")
 playerPositionIndicator = NodePath("Player position")
+slopeGradient = SubResource("Gradient_61qk6")
 
 [node name="Player position" type="Control" parent="climbing ui/climb chart"]
 anchors_preset = 0

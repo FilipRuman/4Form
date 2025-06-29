@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bd4gkcdu8623j" path="res://Map/Map.cs" id="1_w5osy"]
 [ext_resource type="Script" uid="uid://cib2rig7vup10" path="res://addons/terrain_3d/tools/importer.gd" id="2_qta8f"]
-[ext_resource type="Script" uid="uid://bk8leo2n7uly5" path="res://terrain3DTrueExport.gd" id="3_by2o1"]
+[ext_resource type="Script" uid="uid://bul8dgmajymhd" path="res://Map/terrain3DTrueExport.gd" id="3_by2o1"]
 [ext_resource type="Script" uid="uid://cllnsjg7h1am0" path="res://Map/WholeMapExport.cs" id="4_clhxh"]
 [ext_resource type="Script" uid="uid://1bbhovp3py7l" path="res://Map/Route/RouteExport.cs" id="5_5d3gs"]
 [ext_resource type="PackedScene" uid="uid://dm8jwqa2m164g" path="res://Map/Route/route_prefab.tscn" id="6_hxlt8"]
@@ -141,7 +141,6 @@ dual_scaling = true
 
 [node name="Blank map" type="Node3D" node_paths=PackedStringArray("routes")]
 script = ExtResource("1_w5osy")
-name = "demo map"
 routes = []
 
 [node name="Terrain3D" type="Terrain3D" parent="."]
@@ -166,9 +165,8 @@ terrain3DTrueExport = NodePath("../Terrain3D/terrain 3D true export")
 map = NodePath("..")
 metadata/_edit_lock_ = true
 
-[node name="route export" type="Node3D" parent="." node_paths=PackedStringArray("map")]
+[node name="route export" type="Node3D" parent="."]
 script = ExtResource("5_5d3gs")
-map = NodePath("..")
 routePrefab = ExtResource("6_hxlt8")
 
 [node name="Environment" parent="." instance=ExtResource("7_qta8f")]

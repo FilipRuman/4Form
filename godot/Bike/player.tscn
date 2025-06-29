@@ -6,11 +6,12 @@
 [ext_resource type="PackedScene" uid="uid://dcyashkyaw7d6" path="res://assets/gravel bike model/road_bike.fbx" id="9_lxdhe"]
 
 [node name="BikePhysics" type="PathFollow3D" node_paths=PackedStringArray("camera", "input")]
-transform = Transform3D(-1.01269, 1.13642, -1.98318, 0.99088, 2.17296, 0.739182, 2.05976, -0.486614, -1.33064, 0, 0, 0)
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
 progress = 26.05
 script = ExtResource("1_k7cyb")
 camera = NodePath("Camera3D")
 input = NodePath("BikeInput")
+gravity_mS2 = 9.82
 
 [node name="Bike path" type="Node" parent="."]
 

@@ -19,6 +19,9 @@ namespace ForForm.Bike.HUD
         [Export]
         Control playerPositionIndicator;
 
+        [Export]
+        Gradient slopeGradient;
+
         public override void _Ready() {
             UpdateShader(GameSettings.currentRoute);
             UpdateLabels();
@@ -33,7 +36,10 @@ namespace ForForm.Bike.HUD
 
         public override void _Process(double delta) {
             UpdatePlayerIndicatorPosition();
-
+            slope.AddThemeColorOverride(
+                "font_color",
+                slopeGradient.Sample(main.bikePhysics.slope_percent / 200f + .5f)
+            );
             slope.Text = $"{Math.Round((double)main.bikePhysics.slope_percent, 1)}% slope ";
             base._Process(delta);
         }

@@ -1,16 +1,18 @@
-[gd_scene load_steps=17 format=3 uid="uid://c0hkngqkjxk3t"]
+[gd_scene load_steps=15 format=3 uid="uid://c0hkngqkjxk3t"]
 
+[ext_resource type="Script" uid="uid://dfu55milq3n52" path="res://Map/GameLoader.cs" id="1_5vw27"]
 [ext_resource type="PackedScene" uid="uid://dnsjumx1dj3o7" path="res://Menu/menu_main.tscn" id="1_h2yge"]
 [ext_resource type="Script" uid="uid://naawr1uq2pqg" path="res://TCP/Tcp.cs" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://buux5h8054hrj" path="res://TCP/TcpParser.cs" id="2_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://w67eox52c1g" path="res://Bike/player.tscn" id="2_272bh"]
 [ext_resource type="PackedScene" uid="uid://bs5dl4uif5ysp" path="res://Map/blank_map.tscn" id="4_1bvp3"]
 [ext_resource type="Script" uid="uid://c7q1uobo5sscd" path="res://Map/InitialMapsImporter.cs" id="5_lquwl"]
 
-[sub_resource type="Gradient" id="Gradient_lquwl"]
+[sub_resource type="Gradient" id="Gradient_by2o1"]
 offsets = PackedFloat32Array(0.2, 1)
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_7mycd"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_clhxh"]
 noise_type = 2
 frequency = 0.03
 cellular_jitter = 3.0
@@ -22,78 +24,12 @@ domain_warp_fractal_type = 2
 domain_warp_fractal_lacunarity = 1.5
 domain_warp_fractal_gain = 1.0
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_272bh"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_5d3gs"]
 seamless = true
-color_ramp = SubResource("Gradient_lquwl")
-noise = SubResource("FastNoiseLite_7mycd")
+color_ramp = SubResource("Gradient_by2o1")
+noise = SubResource("FastNoiseLite_clhxh")
 
-[sub_resource type="Terrain3DMaterial" id="Terrain3DMaterial_5vw27"]
-_shader_parameters = {
-&"bias_distance": 512.0,
-&"blend_sharpness": 0.87,
-&"depth_blur": 0.0,
-&"enable_macro_variation": true,
-&"enable_projection": true,
-&"height_blending": true,
-&"macro_variation1": Color(1, 1, 1, 1),
-&"macro_variation2": Color(1, 1, 1, 1),
-&"macro_variation_slope": 0.333,
-&"mipmap_bias": 1.0,
-&"noise1_angle": 0.0,
-&"noise1_offset": Vector2(0.5, 0.5),
-&"noise1_scale": 0.04,
-&"noise2_scale": 0.076,
-&"noise3_scale": 0.225,
-&"noise_texture": SubResource("NoiseTexture2D_272bh"),
-&"projection_angular_division": 2.0,
-&"projection_threshold": 0.8,
-&"world_space_normal_blend": true
-}
-show_checkered = true
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4c57u"]
-transparency = 4
-cull_mode = 2
-vertex_color_use_as_albedo = true
-backlight_enabled = true
-backlight = Color(0.5, 0.5, 0.5, 1)
-distance_fade_mode = 1
-distance_fade_min_distance = 128.0
-distance_fade_max_distance = 96.0
-
-[sub_resource type="Terrain3DMeshAsset" id="Terrain3DMeshAsset_efxa6"]
-generated_type = 1
-height_offset = 0.5
-material_override = SubResource("StandardMaterial3D_4c57u")
-last_lod = 0
-last_shadow_lod = 0
-lod0_range = 128.0
-
-[sub_resource type="Terrain3DAssets" id="Terrain3DAssets_dg77c"]
-mesh_list = Array[Terrain3DMeshAsset]([SubResource("Terrain3DMeshAsset_efxa6")])
-
-[sub_resource type="Gradient" id="Gradient_vr1m7"]
-offsets = PackedFloat32Array(0.2, 1)
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_d8lcj"]
-noise_type = 2
-frequency = 0.03
-cellular_jitter = 3.0
-cellular_return_type = 0
-domain_warp_enabled = true
-domain_warp_type = 1
-domain_warp_amplitude = 50.0
-domain_warp_fractal_type = 2
-domain_warp_fractal_lacunarity = 1.5
-domain_warp_fractal_gain = 1.0
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_bov7h"]
-seamless = true
-color_ramp = SubResource("Gradient_vr1m7")
-noise = SubResource("FastNoiseLite_d8lcj")
-
-[sub_resource type="Terrain3DMaterial" id="Terrain3DMaterial_lquwl"]
+[sub_resource type="Terrain3DMaterial" id="Terrain3DMaterial_43vcr"]
 _shader_parameters = {
 "_mouse_layer": 2147483648,
 "auto_base_texture": 0,
@@ -119,7 +55,7 @@ _shader_parameters = {
 "noise1_scale": 0.04,
 "noise2_scale": 0.076,
 "noise3_scale": 0.225,
-"noise_texture": SubResource("NoiseTexture2D_bov7h"),
+"noise_texture": SubResource("NoiseTexture2D_5d3gs"),
 "projection_angular_division": 1.0,
 "projection_threshold": 0.8,
 "tri_scale_reduction": 0.3,
@@ -136,52 +72,45 @@ _shader_parameters = {
 world_background = 2
 auto_shader = true
 dual_scaling = true
+show_checkered = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5vw27"]
+transparency = 4
+cull_mode = 2
+vertex_color_use_as_albedo = true
+backlight_enabled = true
+backlight = Color(0.5, 0.5, 0.5, 1)
+distance_fade_mode = 1
+distance_fade_min_distance = 128.0
+distance_fade_max_distance = 96.0
+
+[sub_resource type="Terrain3DMeshAsset" id="Terrain3DMeshAsset_kek77"]
+generated_type = 1
+height_offset = 0.5
+material_override = SubResource("StandardMaterial3D_5vw27")
+last_lod = 0
+last_shadow_lod = 0
+lod0_range = 128.0
+
+[sub_resource type="Terrain3DAssets" id="Terrain3DAssets_4c57u"]
+mesh_list = Array[Terrain3DMeshAsset]([SubResource("Terrain3DMeshAsset_kek77")])
 
 [node name="scene" type="Node3D"]
+
+[node name="Game loader" type="Node" parent="." node_paths=PackedStringArray("tcpParser", "terrain3D")]
+script = ExtResource("1_5vw27")
+tcpParser = NodePath("../Tcp/TcpParser")
+terrain3D = NodePath("../Blank map/Terrain3D")
+playerPrefab = ExtResource("2_272bh")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 2
 follow_viewport_enabled = true
 
-[node name="menu main" parent="CanvasLayer" node_paths=PackedStringArray("tcpParser", "startGameButton", "terrain3D") instance=ExtResource("1_h2yge")]
+[node name="menu main" parent="CanvasLayer" node_paths=PackedStringArray("wholeMapExport", "tcpParser", "gameLoader") instance=ExtResource("1_h2yge")]
+wholeMapExport = NodePath("../../Blank map/whole map export")
 tcpParser = NodePath("../../Tcp/TcpParser")
-startGameButton = NodePath("Panel/contents/Game/Game config/VBoxContainer/Game config menus/Load game/Button")
-terrain3D = NodePath("../../Blank map/Terrain3D")
-
-[node name="device connection" parent="CanvasLayer/menu main/Panel/contents" index="0"]
-visible = true
-
-[node name="PeripherialsMenu" parent="CanvasLayer/menu main/Panel/contents/device connection" index="0" node_paths=PackedStringArray("tcpParser", "deviceTypes")]
-tcpParser = NodePath("../../../../../../Tcp/TcpParser")
-deviceTypes = [NodePath("../HSplitContainer/device types/VBoxContainer2/Smart bike trainer 󰂣/trainer device type"), NodePath("../HSplitContainer/device types/VBoxContainer2/heart rate tracker /heart rate device type")]
-
-[node name="Smart bike trainer 󰂣" parent="CanvasLayer/menu main/Panel/contents/device connection/HSplitContainer/device types/VBoxContainer2" index="0" node_paths=PackedStringArray("icon")]
-icon = Object(Label,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":false,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(0, 0),"layout_direction":0,"layout_mode":1,"anchors_preset":-1,"anchor_left":0.992,"anchor_top":0.5,"anchor_right":1.0,"anchor_bottom":0.5,"offset_left":-24.056,"offset_top":-12.5,"offset_right":-3.0,"offset_bottom":12.5,"grow_horizontal":0,"grow_vertical":2,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":4,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"mouse_filter":2,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"theme":null,"theme_type_variation":&"","text":"󰂣 ","label_settings":null,"horizontal_alignment":2,"vertical_alignment":0,"autowrap_mode":0,"justification_flags":163,"paragraph_separator":"\\n","clip_text":false,"text_overrun_behavior":0,"ellipsis_char":"…","uppercase":false,"tab_stops":PackedFloat32Array(),"lines_skipped":0,"max_lines_visible":-1,"visible_characters":-1,"visible_characters_behavior":0,"visible_ratio":1.0,"text_direction":0,"language":"","structured_text_bidi_override":0,"structured_text_bidi_override_options":[],"script":null)
-
-icon = NodePath("icon")
-
-[node name="trainer device type" parent="CanvasLayer/menu main/Panel/contents/device connection/HSplitContainer/device types/VBoxContainer2/Smart bike trainer 󰂣" index="1" node_paths=PackedStringArray("display")]
-display = NodePath("..")
-name = "smart trainer"
-glyphIcon = " 󰂣"
-
-[node name="heart rate tracker " parent="CanvasLayer/menu main/Panel/contents/device connection/HSplitContainer/device types/VBoxContainer2" index="1" node_paths=PackedStringArray("icon")]
-icon = Object(Label,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":false,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(0, 0),"layout_direction":0,"layout_mode":1,"anchors_preset":-1,"anchor_left":0.992,"anchor_top":0.5,"anchor_right":1.0,"anchor_bottom":0.5,"offset_left":-24.056,"offset_top":-12.5,"offset_right":-3.0,"offset_bottom":12.5,"grow_horizontal":0,"grow_vertical":2,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":4,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"mouse_filter":2,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"theme":null,"theme_type_variation":&"","text":"󰂣 ","label_settings":null,"horizontal_alignment":2,"vertical_alignment":0,"autowrap_mode":0,"justification_flags":163,"paragraph_separator":"\\n","clip_text":false,"text_overrun_behavior":0,"ellipsis_char":"…","uppercase":false,"tab_stops":PackedFloat32Array(),"lines_skipped":0,"max_lines_visible":-1,"visible_characters":-1,"visible_characters_behavior":0,"visible_ratio":1.0,"text_direction":0,"language":"","structured_text_bidi_override":0,"structured_text_bidi_override_options":[],"script":null)
-
-icon = NodePath("icon")
-
-[node name="heart rate device type" parent="CanvasLayer/menu main/Panel/contents/device connection/HSplitContainer/device types/VBoxContainer2/heart rate tracker " index="1" node_paths=PackedStringArray("display")]
-display = NodePath("..")
-name = "hr tracker"
-glyphIcon = " "
-
-[node name="other device type 󰤟" parent="CanvasLayer/menu main/Panel/contents/device connection/HSplitContainer/device types/VBoxContainer2" index="2" node_paths=PackedStringArray("icon")]
-icon = Object(Label,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":false,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(0, 0),"layout_direction":0,"layout_mode":1,"anchors_preset":-1,"anchor_left":0.992,"anchor_top":0.5,"anchor_right":1.0,"anchor_bottom":0.5,"offset_left":-24.056,"offset_top":-12.5,"offset_right":-3.0,"offset_bottom":12.5,"grow_horizontal":0,"grow_vertical":2,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":4,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"mouse_filter":2,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"theme":null,"theme_type_variation":&"","text":"󰂣 ","label_settings":null,"horizontal_alignment":2,"vertical_alignment":0,"autowrap_mode":0,"justification_flags":163,"paragraph_separator":"\\n","clip_text":false,"text_overrun_behavior":0,"ellipsis_char":"…","uppercase":false,"tab_stops":PackedFloat32Array(),"lines_skipped":0,"max_lines_visible":-1,"visible_characters":-1,"visible_characters_behavior":0,"visible_ratio":1.0,"text_direction":0,"language":"","structured_text_bidi_override":0,"structured_text_bidi_override_options":[],"script":null)
-
-icon = NodePath("icon")
-
-[node name="Map selecton" parent="CanvasLayer/menu main/Panel/contents/Game/Game config/VBoxContainer/Game config menus" index="0" node_paths=PackedStringArray("wholeMapExport")]
-wholeMapExport = NodePath("../../../../../../../../../Blank map/whole map export")
+gameLoader = NodePath("../../Game loader")
 
 [node name="Tcp" type="Node" parent="." node_paths=PackedStringArray("tcpParser")]
 script = ExtResource("1_ig7tw")
@@ -192,32 +121,23 @@ script = ExtResource("2_1bvp3")
 tcp = NodePath("..")
 peripheralsMenu = NodePath("../../CanvasLayer/menu main/Panel/contents/device connection/PeripherialsMenu")
 
-[node name="Blank map" parent="." node_paths=PackedStringArray("routes") instance=ExtResource("4_1bvp3")]
+[node name="Blank map" parent="." instance=ExtResource("4_1bvp3")]
 name = "demo climb"
-routes = [null]
 
 [node name="Terrain3D" parent="Blank map" index="0"]
-material = SubResource("Terrain3DMaterial_5vw27")
-assets = SubResource("Terrain3DAssets_dg77c")
+material = SubResource("Terrain3DMaterial_43vcr")
+assets = SubResource("Terrain3DAssets_4c57u")
 process_mode = 4
 
 [node name="terrain 3D true export" parent="Blank map/Terrain3D" index="2"]
-default_material = SubResource("Terrain3DMaterial_lquwl")
+default_material = SubResource("Terrain3DMaterial_43vcr")
 
 [node name="whole map export" parent="Blank map" index="1"]
 manualMapLoadName = "demo climb"
 
-[node name="route export" parent="Blank map" index="2" node_paths=PackedStringArray("routeMenu")]
-routeMenu = NodePath("../../CanvasLayer/menu main/Panel/contents/Game/Game config/VBoxContainer/Game config menus/Route selection")
-
-[node name="initial maps importer" type="Node" parent="." node_paths=PackedStringArray("mapSelectionMenu")]
+[node name="initial maps importer" type="Node" parent="." node_paths=PackedStringArray("menuMain")]
 process_priority = 1
 script = ExtResource("5_lquwl")
-mapSelectionMenu = NodePath("../CanvasLayer/menu main/Panel/contents/Game/Game config/VBoxContainer/Game config menus/Map selecton")
+menuMain = NodePath("../CanvasLayer/menu main")
 
-[editable path="CanvasLayer/menu main"]
-[editable path="CanvasLayer/menu main/Panel/contents/device connection/HSplitContainer/device types/VBoxContainer2/Smart bike trainer 󰂣"]
-[editable path="CanvasLayer/menu main/Panel/contents/device connection/HSplitContainer/device types/VBoxContainer2/heart rate tracker "]
-[editable path="CanvasLayer/menu main/Panel/contents/device connection/HSplitContainer/device types/VBoxContainer2/other device type 󰤟"]
-[editable path="CanvasLayer/menu main/Panel/contents/Game/Game config"]
 [editable path="Blank map"]

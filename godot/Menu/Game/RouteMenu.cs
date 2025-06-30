@@ -2,8 +2,8 @@ namespace ForForm.Menu.Game
 {
     using System;
     using Godot;
+    using Map.Route;
 
-    [Tool]
     public partial class RouteMenu : Control {
         [Export]
         GameMenu gameMenu;
@@ -24,24 +24,27 @@ namespace ForForm.Menu.Game
             distance;
 
         public override void _Ready() {
+            gameMenu.routeMenu = this;
             difficulty.Text = "";
             time.Text = "";
             ascent.Text = "";
             distance.Text = "";
-            // this was causing weird issues 
+            // this was causing weird issues
             if (description != null)
-            description.Text = "";
+                description.Text = "";
             base._Ready();
         }
 
         SimpleSelectionUI currentRouteSelectionUI;
+        internal Route currentRoute;
 
-        public void Setup(Map.Route.Route[] routes) {
+        public void Setup(Route[] routes) {
             Miscs.ClearChildren(layout);
+
             foreach (var route in routes) {
                 var script = simpleSelectionPrefab.Instantiate() as SimpleSelectionUI;
                 layout.AddChild(script);
-                if (route == GameConfig.GameSettings.currentRoute)
+                if (route == currentRoute)
                     HandleNewSelectionUIHighlight(script);
                 script.Setup(
                     route.name,
@@ -50,7 +53,6 @@ namespace ForForm.Menu.Game
                     {
                         HandleNewSelectionUIHighlight(script);
                         OnRouteSelection(route);
-                        gameMenu.OnMenuComplete(1);
                     }
                 );
             }
@@ -63,8 +65,9 @@ namespace ForForm.Menu.Game
             currentRouteSelectionUI = newSelectionUI;
         }
 
-        private void OnRouteSelection(Map.Route.Route route) {
-            GameConfig.GameSettings.SetCurrentRoute( route);
+        private void OnRouteSelection(Route route) {
+            currentRoute = route;
+            gameMenu.OnMenuComplete(1);
 
             description.Text = route.description;
             difficulty.Text = $"Difficulty: {route.difficulty} ";

@@ -3,7 +3,7 @@ namespace ForForm.Menu
     using System;
     using Godot;
 
-    public partial class SimpleSelectionUI: Button {
+    public partial class SimpleSelectionUI : Button {
         [Export]
         TextureRect textureRect;
 

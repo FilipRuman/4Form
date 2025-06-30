@@ -9,6 +9,9 @@ namespace ForForm.Map
         Route.RouteExport routeExport;
 
         [Export]
+        Export3DScenes export3DScenes;
+
+        [Export]
         Node terrain3DTrueExport;
 
         [Export]
@@ -42,92 +45,31 @@ namespace ForForm.Map
 
         /// Call this to import ALL components of map like:
         /// map, game mode, 3D scene, terrain 3D, routes
-        public void Import(string mapName) {
+        public Map Import(string mapName) {
             map.name = mapName;
 
-            GameConfig.GameSettings.currentMap = Map.Load(mapName);
+            map = Map.Load(mapName);
 
-            GameConfig.GameSettings.currentMap.gameMode = GameConfig.GameMode.Load(mapName);
-            GameConfig.GameSettings.SetCurrentGameMode(GameConfig.GameSettings.currentMap.gameMode);
             Miscs.ClearChildren(this);
-            ImportScene();
-            routeExport.ImportRoutes();
+            export3DScenes.ImportScene(map);
+            routeExport.ImportRoutes(map);
 
             terrain3DTrueExport.Call("run_import");
+            return map;
         }
 
-        public void ImportScene() {
-            var gltfDocumentLoad = new GltfDocument();
-            var gltfStateLoad = new GltfState();
-            var error = gltfDocumentLoad.AppendFromFile(SceneBasePath + "Scene.glb", gltfStateLoad);
-
-            if (error == Error.Ok) {
-                var gltfSceneRootNode = gltfDocumentLoad.GenerateScene(gltfStateLoad);
-                var d = gltfSceneRootNode as Node3D;
-                AddChild(d);
-                d.Owner = Owner;
-
-                d.Visible = true;
-            } else {
-                GD.PrintErr($"Couldn't load glTF scene (error code: {error}).");
-            }
-        }
-
-        //
-        // void HandleImportedNode(Node parent, Node importNode) {
-        //     if (importNode is ImporterMeshInstance3D importerMesh) {
-        //         var realMesh = new MeshInstance3D();
-        //         GD.Print(" add real mesh");
-        //         parent.AddChild(realMesh);
-        //         // so nodes appear in editor
-        //         if (Engine.IsEditorHint())
-        //             realMesh.Owner = Owner;
-        //         realMesh.Name = importNode.Name;
-        //         realMesh.MaterialOverlay = importerMesh.Mesh.GetSurfaceMaterial(0);
-        //         realMesh.Transform = importerMesh.Transform;
-        //         realMesh.Mesh = importerMesh.Mesh.GetMesh();
-        //         foreach (var child in importNode.GetChildren()) {
-        //             HandleImportedNode(realMesh, child);
-        //         }
-        //     } else {
-        //         var realNode = new Node3D();
-        //         realNode.Transform = (importNode as Node3D).Transform;
-        //         parent.AddChild(realNode);
-        //         realNode.Name = importNode.Name;
-        //
-        //         // so nodes appear in editor
-        //             realNode.Owner = Owner;
-        //         foreach (var child in importNode.GetChildren()) {
-        //             HandleImportedNode(realNode, child);
-        //         }
-        //     }
-        // }
-        //
         /// Call this to export ALL components of map like:
         /// map, game mode, 3D scene, terrain 3D, routes
-
         public void Export() {
             OS.MoveToTrash(ProjectSettings.GlobalizePath($"user://Maps/{map.name}/"));
             DirAccess.Open($"user://Maps/").MakeDir(map.name);
             DirAccess.Open($"user://Maps/{map.name}/").MakeDir("Scene");
 
             map.Save();
-            map.gameMode.Save(map.name);
 
             terrain3DTrueExport.Call("run_export");
-            ExportScene();
-            routeExport.ExportRoutes();
-        }
-
-        string SceneBasePath => $"user://Maps/{map.name}/Scene/";
-
-        public void ExportScene() {
-            DirAccess.Open(SceneBasePath).Remove("textures");
-            var gltfDocumentSave = new GltfDocument();
-            var gltfStateSave = new GltfState();
-            gltfDocumentSave.AppendFromScene(this, gltfStateSave);
-
-            gltfDocumentSave.WriteToFilesystem(gltfStateSave, SceneBasePath + "Scene.glb");
+            export3DScenes.ExportScene(map);
+            routeExport.ExportRoutes(map);
         }
     }
 }

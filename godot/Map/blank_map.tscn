@@ -1,12 +1,13 @@
-[gd_scene load_steps=19 format=3 uid="uid://bs5dl4uif5ysp"]
+[gd_scene load_steps=20 format=3 uid="uid://bs5dl4uif5ysp"]
 
 [ext_resource type="Script" uid="uid://bd4gkcdu8623j" path="res://Map/Map.cs" id="1_w5osy"]
 [ext_resource type="Script" uid="uid://cib2rig7vup10" path="res://addons/terrain_3d/tools/importer.gd" id="2_qta8f"]
-[ext_resource type="Script" uid="uid://bk8leo2n7uly5" path="res://terrain3DTrueExport.gd" id="3_by2o1"]
+[ext_resource type="Script" uid="uid://bul8dgmajymhd" path="res://Map/terrain3DTrueExport.gd" id="3_by2o1"]
 [ext_resource type="Script" uid="uid://cllnsjg7h1am0" path="res://Map/WholeMapExport.cs" id="4_clhxh"]
 [ext_resource type="Script" uid="uid://1bbhovp3py7l" path="res://Map/Route/RouteExport.cs" id="5_5d3gs"]
 [ext_resource type="PackedScene" uid="uid://dm8jwqa2m164g" path="res://Map/Route/route_prefab.tscn" id="6_hxlt8"]
 [ext_resource type="PackedScene" uid="uid://bb2lp50sjndus" path="res://demo/components/Environment.tscn" id="7_qta8f"]
+[ext_resource type="Script" uid="uid://csep6pljvdu32" path="res://Map/Export3DScenes.cs" id="8_by2o1"]
 
 [sub_resource type="Gradient" id="Gradient_qta8f"]
 offsets = PackedFloat32Array(0.2, 1)
@@ -141,8 +142,8 @@ dual_scaling = true
 
 [node name="Blank map" type="Node3D" node_paths=PackedStringArray("routes")]
 script = ExtResource("1_w5osy")
-name = "demo map"
 routes = []
+bikeModels = []
 
 [node name="Terrain3D" type="Terrain3D" parent="."]
 material = SubResource("Terrain3DMaterial_5d3gs")
@@ -159,16 +160,22 @@ terrain = NodePath("..")
 map = NodePath("../..")
 default_material = SubResource("Terrain3DMaterial_43vcr")
 
-[node name="whole map export" type="Node3D" parent="." node_paths=PackedStringArray("routeExport", "terrain3DTrueExport", "map")]
+[node name="whole map export" type="Node3D" parent="." node_paths=PackedStringArray("routeExport", "export3DScenes", "terrain3DTrueExport", "map")]
 script = ExtResource("4_clhxh")
 routeExport = NodePath("../route export")
+export3DScenes = NodePath("../export 3D scenes")
 terrain3DTrueExport = NodePath("../Terrain3D/terrain 3D true export")
 map = NodePath("..")
 metadata/_edit_lock_ = true
 
-[node name="route export" type="Node3D" parent="." node_paths=PackedStringArray("map")]
+[node name="route export" type="Node3D" parent="."]
 script = ExtResource("5_5d3gs")
-map = NodePath("..")
 routePrefab = ExtResource("6_hxlt8")
 
 [node name="Environment" parent="." instance=ExtResource("7_qta8f")]
+
+[node name="export 3D scenes" type="Node3D" parent="."]
+script = ExtResource("8_by2o1")
+
+[node name="export 3D scenes2" type="Node3D" parent="."]
+script = ExtResource("8_by2o1")

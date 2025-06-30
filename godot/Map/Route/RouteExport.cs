@@ -1,6 +1,5 @@
 namespace ForForm.Map.Route
 {
-    using System;
     using System.Collections.Generic;
     using System.Globalization;
     using System.Text.RegularExpressions;
@@ -9,21 +8,20 @@ namespace ForForm.Map.Route
     [Tool, Icon("res://Script icons/publish.png")]
     public partial class RouteExport : Node3D {
         string RouteSpecificBasePath(string routeName) =>
-            $"user://Maps/{map.name}/Routes/{routeName}/";
+            $"user://maps/{map.name}/Routes/{routeName}/";
 
-        string AllRoutesPath => $"user://Maps/{map.name}/Routes/";
+        string AllRoutesPath => $"user://maps/{map.name}/Routes/";
 
-        [Export]
-        Menu.Game.RouteMenu routeMenu;
+        public Menu.MenuMain menuMain;
 
-        [Export]
         Map map;
 
-        public void ExportRoutes() {
-            DirAccess.Open($"user://Maps/{map.name}").MakeDir("Routes");
+        public void ExportRoutes(Map _map) {
+            map = _map;
+            DirAccess.Open($"user://maps/{map.name}").MakeDir("Routes");
 
             foreach (var route in map.routes) {
-                DirAccess.Open($"user://Maps/{map.name}/Routes").MakeDir(route.name);
+                DirAccess.Open($"user://maps/{map.name}/Routes").MakeDir(route.name);
                 string _basePath = RouteSpecificBasePath(route.name);
 
                 if (route.icon != null)
@@ -39,7 +37,7 @@ namespace ForForm.Map.Route
                     { "ascent", route.ascentM },
                     { "descent", route.descentM },
                     { "slopeMap", GD.VarToStr(route.slopeMap) },
-                    { "heightMap", GD.VarToStr(route.heightMapM) },
+                    { "heightMap", GD.VarToStr(route.heightMap_m) },
                     { "maxHeight", route.maxHeight },
                     { "minHeight", route.minHeight },
                     // curve 3D data
@@ -54,6 +52,7 @@ namespace ForForm.Map.Route
                 file.Flush();
 
                 // Calling dispose is needed because otherwise ***.json.temp02*** instead of normal json files are created
+                // idk. this sometimes spawns temp files anyway....
                 file.Dispose();
             }
         }
@@ -61,7 +60,9 @@ namespace ForForm.Map.Route
         [Export]
         PackedScene routePrefab;
 
-        public void ImportRoutes() {
+        public void ImportRoutes(Map _map) {
+            map = _map;
+
             Miscs.ClearChildren(this);
             var routeDirs = DirAccess.GetDirectoriesAt(AllRoutesPath);
             var routeArray = new Route[routeDirs.Length];
@@ -95,7 +96,7 @@ namespace ForForm.Map.Route
                 route.totalDistanceM = ((float)data["totalDistance"]);
                 route.ascentM = ((float)data["ascent"]);
                 route.descentM = ((float)data["descent"]);
-                route.heightMapM = GD.StrToVar(data["heightMap"].ToString()).AsFloat32Array();
+                route.heightMap_m = GD.StrToVar(data["heightMap"].ToString()).AsFloat32Array();
                 route.slopeMap = GD.StrToVar(data["slopeMap"].ToString()).AsFloat32Array();
 
                 // curve 3D data
@@ -110,11 +111,9 @@ namespace ForForm.Map.Route
                 i++;
             }
             map.routes = routeArray;
-            if (!Engine.IsEditorHint())
-                routeMenu.Setup(routeArray);
         }
 
-        // Idk. i can't get the standard(Vector3[]) way to work so i did this:
+        // Idk. i can't get the standard way to work so i did this:
         public static Vector3[] ParseVector3Array(string input) {
             // Match (x, y, z) patterns
             var matches = Regex.Matches(input, @"\(([^,]+), ([^,]+), ([^)]+)\)");

@@ -10,7 +10,7 @@
 [ext_resource type="FontFile" uid="uid://cfse7jemxeexd" path="res://assets/Meslo/MesloLGLDZNerdFont-Bold.ttf" id="9_chcsm"]
 [ext_resource type="Script" uid="uid://0bd4icrprif5" path="res://Menu/PropertyEdit.cs" id="11_xwyxq"]
 
-[node name="Game menu" type="Control" node_paths=PackedStringArray("menus", "next", "previous")]
+[node name="Game menu" type="Control" node_paths=PackedStringArray("menus", "next", "previous", "startGame")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -21,6 +21,7 @@ script = ExtResource("1_3n1nv")
 menus = [NodePath("VBoxContainer/Game config menus/Map selecton"), NodePath("VBoxContainer/Game config menus/Route selection"), NodePath("VBoxContainer/Game config menus/Bike selection"), NodePath("VBoxContainer/Game config menus/Load game")]
 next = NodePath("VBoxContainer/Menu movement/right")
 previous = NodePath("VBoxContainer/Menu movement/left")
+startGame = NodePath("VBoxContainer/Game config menus/Load game/Button")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -99,17 +100,6 @@ offset_bottom = -9.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/Game config menus/Map selecton/VBoxContainer/HSplitContainer/MapSelection/HSplitContainer/Local/VBoxContainer"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("9_chcsm")
-text = "Local:"
-horizontal_alignment = 1
-
-[node name="Button" type="Button" parent="VBoxContainer/Game config menus/Map selecton/VBoxContainer/HSplitContainer/MapSelection/HSplitContainer/Local/VBoxContainer"]
-layout_mode = 2
-theme_type_variation = &"buttonDefault"
-text = "Random name of game that you can select"
-
 [node name="Online" type="Panel" parent="VBoxContainer/Game config menus/Map selecton/VBoxContainer/HSplitContainer/MapSelection/HSplitContainer"]
 layout_mode = 2
 
@@ -124,12 +114,6 @@ offset_right = -9.0
 offset_bottom = -9.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="Label" type="Label" parent="VBoxContainer/Game config menus/Map selecton/VBoxContainer/HSplitContainer/MapSelection/HSplitContainer/Online/VBoxContainer2"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("9_chcsm")
-text = "Online:"
-horizontal_alignment = 1
 
 [node name="descriptioin" type="Panel" parent="VBoxContainer/Game config menus/Map selecton/VBoxContainer/HSplitContainer"]
 layout_mode = 2
@@ -152,7 +136,6 @@ horizontal_alignment = 1
 [node name="description value" type="RichTextLabel" parent="VBoxContainer/Game config menus/Map selecton/VBoxContainer/HSplitContainer/descriptioin/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-text = "werqwrqwrqwrqwerqewrqwerwqerqwrwqrwqerwqrqqwrqwrwqrqwrwqrwqrewqrqwrwqr"
 horizontal_alignment = 1
 
 [node name="Route selection" type="Control" parent="VBoxContainer/Game config menus" node_paths=PackedStringArray("gameMenu", "layout", "description", "difficulty", "time", "ascent", "distance")]
@@ -167,7 +150,7 @@ script = ExtResource("7_siv7b")
 gameMenu = NodePath("../../..")
 layout = NodePath("Game mode stats/HSplitContainer/routes/VBoxContainer/route selection/HBoxContainer")
 simpleSelectionPrefab = ExtResource("2_e1e62")
-description = NodePath("Game mode stats/HSplitContainer/Layout/RichTextLabel")
+description = NodePath("Game mode stats/HSplitContainer/Description/RichTextLabel")
 difficulty = NodePath("Game mode stats/HSplitContainer/routes/VBoxContainer/Stats/HFlowContainer/dificulty")
 time = NodePath("Game mode stats/HSplitContainer/routes/VBoxContainer/Stats/HFlowContainer/time")
 ascent = NodePath("Game mode stats/HSplitContainer/routes/VBoxContainer/Stats/HFlowContainer/Ascent")
@@ -193,15 +176,8 @@ grow_vertical = 2
 split_offset = 1370
 drag_area_margin_begin = 65
 
-[node name="routes" type="Panel" parent="VBoxContainer/Game config menus/Route selection/Game mode stats/HSplitContainer" node_paths=PackedStringArray("layout", "difficulty", "time", "ascent", "distance")]
+[node name="routes" type="Panel" parent="VBoxContainer/Game config menus/Route selection/Game mode stats/HSplitContainer"]
 layout_mode = 2
-script = ExtResource("7_siv7b")
-layout = NodePath("VBoxContainer/route selection/HBoxContainer")
-simpleSelectionPrefab = ExtResource("2_e1e62")
-difficulty = NodePath("VBoxContainer/Stats/HFlowContainer/dificulty")
-time = NodePath("VBoxContainer/Stats/HFlowContainer/time")
-ascent = NodePath("VBoxContainer/Stats/HFlowContainer/Ascent")
-distance = NodePath("VBoxContainer/Stats/HFlowContainer/distance")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Game config menus/Route selection/Game mode stats/HSplitContainer/routes"]
 layout_mode = 1
@@ -265,16 +241,16 @@ theme_override_fonts/font = ExtResource("8_jlfx1")
 layout_mode = 2
 theme_override_fonts/font = ExtResource("8_jlfx1")
 
-[node name="Layout" type="VBoxContainer" parent="VBoxContainer/Game config menus/Route selection/Game mode stats/HSplitContainer"]
+[node name="Description" type="VBoxContainer" parent="VBoxContainer/Game config menus/Route selection/Game mode stats/HSplitContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/Game config menus/Route selection/Game mode stats/HSplitContainer/Layout"]
+[node name="Label" type="Label" parent="VBoxContainer/Game config menus/Route selection/Game mode stats/HSplitContainer/Description"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("9_chcsm")
 text = "Description:"
 horizontal_alignment = 1
 
-[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/Game config menus/Route selection/Game mode stats/HSplitContainer/Layout"]
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/Game config menus/Route selection/Game mode stats/HSplitContainer/Description"]
 layout_mode = 2
 bbcode_enabled = true
 fit_content = true

@@ -5,12 +5,8 @@ namespace ForForm.Map
 
     public partial class InitialMapsImporter : Node {
         [Export]
-        Menu.Game.MapSelectionMenu mapSelectionMenu;
-        private static readonly string[] possiblePaths =
-        {
-            "./InitialMaps/",
-            "./../InitialMaps/",
-        };
+        Menu.MenuMain menuMain;
+        private static readonly string[] possiblePaths = { "./InitialMaps/", "./../InitialMaps/" };
 
         // i don't use zip files because you can't see their contents inside git
         public override void _Ready() {
@@ -24,7 +20,7 @@ namespace ForForm.Map
                 }
             }
             CopyFolder(working_path, "user://Maps");
-            mapSelectionMenu.DisplayMaps();
+            menuMain.gameMenu.mapSelectionMenu.DisplayMaps();
             base._Ready();
         }
 

@@ -14,26 +14,25 @@ namespace ForForm.Map
         public Texture2D icon;
 
         [Export]
-        public GameConfig.GameMode gameMode;
-
-        [Export]
         public Route.Route[] routes;
 
         // Exporting
         static string BasePath(string name) => $"user://Maps/{name}/Map/";
 
         [Export]
-        public float speedScale;
+        public float speedScale,
+            dragCoefficient;
 
-        public override void _Process(double delta) {
-            if (Engine.IsEditorHint()) {
-                GameConfig.GameSettings.currentMap = this;
-            }
-            base._Process(delta);
-        }
+        //dragCoefficient, canEditBikeModels, bikeModels
+        [Export]
+        public bool canEditBikeModels;
+
+        [Export]
+        public Bike.BikeModel[] bikeModels;
 
         public void Save() {
             DirAccess.Open($"user://Maps/{name}").MakeDir("Map");
+            SaveBikes(name);
             string _basePath = BasePath(name);
 
             if (icon != null && icon.GetImage() != null)
@@ -43,6 +42,8 @@ namespace ForForm.Map
                 { "name", name },
                 { "speedScale", speedScale },
                 { "description", description },
+                { "dragCoefficient", dragCoefficient },
+                { "canEditBikeModels", canEditBikeModels },
             };
             var text = Json.Stringify(data, "\t");
 
@@ -67,7 +68,31 @@ namespace ForForm.Map
                 description = ((string)data["description"]),
                 icon = ImageTexture.CreateFromImage(Image.LoadFromFile(_basePath + "icon.png")),
                 speedScale = ((float)data["speedScale"]),
+                dragCoefficient = ((float)data["dragCoefficient"]),
+                canEditBikeModels = ((bool)data["canEditBikeModels"]),
+                bikeModels = LoadBikes(name),
             };
+        }
+
+        private void SaveBikes(string mapName) {
+            var dir = DirAccess.Open($"user://Maps/{mapName}");
+            dir.Remove("Bikes");
+            // clear old bike models so they don't interfere
+            dir.MakeDir("Bikes");
+            foreach (var bike in bikeModels) {
+                bike.Save(mapName);
+            }
+        }
+
+        private static Bike.BikeModel[] LoadBikes(string mapName) {
+            var bikeNames = DirAccess.GetDirectoriesAt($"user://Maps/{mapName}/Bikes/");
+            var output = new Bike.BikeModel[bikeNames.Length];
+            var i = 0;
+            foreach (var _bikeName in bikeNames) {
+                output[i] = Bike.BikeModel.Load(_bikeName, mapName);
+                i++;
+            }
+            return output;
         }
     }
 }

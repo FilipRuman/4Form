@@ -1,10 +1,10 @@
-namespace ForForm.Bike.UI
+namespace ForForm.Bike.HUD
 {
     using Godot;
 
-    public partial class TestingBikeUI : Node {
+    public partial class TestingBikeHUD : Node {
         [Export]
-        BikePhysics bikePhysics;
+        BikeHUDMain main;
 
         [Export]
         VSlider powerSlider;
@@ -16,8 +16,8 @@ namespace ForForm.Bike.UI
             powerLabel.Text = " ";
             powerSlider.ValueChanged += (_) =>
             {
-                bikePhysics.testingPower = (float)powerSlider.Value;
-                powerLabel.Text = $"Additional power:{(int)bikePhysics.testingPower}W";
+                main.bikePhysics.testingPower = (float)powerSlider.Value;
+                powerLabel.Text = $"Additional power:{(int)main.bikePhysics.testingPower}W";
             };
             base._Ready();
         }

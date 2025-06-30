@@ -10,7 +10,7 @@
 # [Example video of map creation]()
 ![image](https://github.com/user-attachments/assets/90f16e62-3171-4c9d-a4b6-db6b02824efc)
 # [Example video of training]()
-![Uploading image.png…]()
+![image](https://github.com/user-attachments/assets/66e4e7fc-4608-4d3a-8874-8fbb7ee20ccc)
 > [!Caution]
 > **This project is in really early stage of development**
 > It will change a lot in the future and **MOST** of the intended features are not *yet* implemented.

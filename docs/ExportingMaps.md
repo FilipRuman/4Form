@@ -11,12 +11,12 @@ If you have any problems please write bug report under the issues page
  0. place ``Map.cs`` at the root of the scene and add fill it's references
  1. place ``terrain3DTrueExport.gd`` script on node under terrain3D node and fill it's references (look at blank map scene)
  2. add ``res://addons/terrain_3d/tools/importer.gd`` script to terrain 3D node
- 3. add ``WholeMapExport.cs`` and ``RouteExport.cs`` and fill it's references (look at blank map scene)
+ 3. add ``WholeMapExport.cs``, ``Export3DScenes.cs`` and ``RouteExport.cs`` and fill it's references (look at blank map scene)
 ![image](https://github.com/user-attachments/assets/90eaa745-0f10-4f33-9519-bf34647eeadc)
 
 ### Final setup
  0. Make sure all routes are referenced by map script(root of the scene)
- 1. Ensure that all 3D models are under the node with ``WholeMapExport.cs``. not routes, terrain3D. only mesh instances (and lights)
+ 1. Ensure that all 3D models are under the node with ``Export3DScenes.cs``. not routes, terrain3D. only mesh instances (and lights)
 ![image](https://github.com/user-attachments/assets/296d6702-26c8-4691-ab2f-ceb1f6c1e906)
 ## Export
 > [!Warning]

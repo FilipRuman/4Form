@@ -2,16 +2,34 @@ namespace ForForm.Menu.Game
 {
     using Godot;
 
-[Tool]
     public partial class GameMenu : Control {
-        private const int V = 2;
+        [Export]
+        internal MenuMain menuMain;
+
+        // those refs are setup on _Ready() by those scripts, to make Godot editor less cluttered
+        public RouteMenu routeMenu;
+        public MapSelectionMenu mapSelectionMenu;
+        public BikeConfigurationMenu bikeConfigurationMenu;
+
         [Export]
         Control[] menus;
         uint currentMenuIndex = 0;
 
         [Export]
         Button next,
-            previous;
+            previous,
+            startGame;
+
+        internal void StartGame() {
+            menuMain.Visible = false;
+            menuMain.gameStarted = true;
+            menuMain.gameLoader.StartGame(
+                bikeConfigurationMenu.currentBikeModel,
+                menuMain.userConfigMenu.userConfig,
+                routeMenu.currentRoute,
+                mapSelectionMenu.currentMap
+            );
+        }
 
         public override void _Ready() {
             foreach (var menu in menus) {
@@ -22,6 +40,8 @@ namespace ForForm.Menu.Game
             next.Visible = false;
             previous.Visible = false;
             previous.Pressed += onPreviousMenu;
+
+            startGame.Pressed += StartGame;
             base._Ready();
         }
 
@@ -44,7 +64,7 @@ namespace ForForm.Menu.Game
         }
 
         public void OnMenuComplete(uint menuIndex) {
-            if (currentMenuIndex != menus.Length - 1 )
+            if (currentMenuIndex != menus.Length - 1)
                 next.Visible = true;
         }
     }

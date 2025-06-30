@@ -7,9 +7,10 @@
 [ext_resource type="PackedScene" uid="uid://djhl3foqkj4e2" path="res://demo/components/Tunnel.tscn" id="5_a6gdr"]
 [ext_resource type="Terrain3DAssets" uid="uid://dal3jhw6241qg" path="res://demo/data/assets.tres" id="6_ntdri"]
 [ext_resource type="Script" uid="uid://cu84pino7trdb" path="res://Map/Route/Route.cs" id="7_m4r2a"]
-[ext_resource type="Texture2D" uid="uid://d25i15onyxgff" path="res://icon.svg" id="8_pq3bi"]
-[ext_resource type="Script" uid="uid://db1v62mcs7w5y" path="res://Map/Route/TerrainFollowPath.cs" id="9_udkbk"]
-[ext_resource type="Texture2D" uid="uid://dhotn6jywb01t" path="res://assets/Short path printscreen.png" id="10_g58f4"]
+[ext_resource type="Texture2D" path="res://icon.svg" id="8_pq3bi"]
+[ext_resource type="Script" uid="uid://b4ry31x7y5wql" path="res://Map/Route/RouteCreationTool.cs" id="9_udkbk"]
+[ext_resource type="Texture2D" path="res://assets/Short path printscreen.png" id="10_g58f4"]
+
 
 [sub_resource type="Gradient" id="Gradient_vr1m7"]
 offsets = PackedFloat32Array(0.2, 1)

@@ -4,11 +4,22 @@ namespace ForForm.Menu
     using Tcp;
 
     public partial class MenuMain : Control {
+        [ExportGroup("Outside references")]
         [Export]
-        TcpParser tcpParser;
+        internal Map.WholeMapExport wholeMapExport;
 
         [Export]
-        PackedScene playerPrefab;
+        internal TcpParser tcpParser;
+
+        [Export]
+        internal Map.GameLoader gameLoader;
+
+        [ExportGroup("UI")]
+        [Export]
+        internal UserConfigMenu userConfigMenu;
+
+        [Export]
+        public Game.GameMenu gameMenu;
 
         [Export]
         TabBar tabBar;
@@ -17,17 +28,15 @@ namespace ForForm.Menu
         public MenuTabContent[] tabContents;
 
         [Export]
-        public Button startGameButton;
-
-        [Export]
         Control tabContentsLockScreen;
-[Export]
-Node3D terrain3D;
+
         [Export]
         RichTextLabel tabContentsLockScreenLabel;
 
         public override void _Process(double delta) {
             base._Process(delta);
+            if (Engine.IsEditorHint())
+                return;
             if (Input.IsActionJustPressed("ToggleMenu"))
                 Visible = !Visible;
         }
@@ -37,7 +46,7 @@ Node3D terrain3D;
             {
                 UpdateTabs();
             };
-            startGameButton.Pressed += StartGame;
+
             base._Ready();
         }
 
@@ -53,26 +62,14 @@ Node3D terrain3D;
             lastTab = tabBar.CurrentTab;
         }
 
+        public bool gameStarted;
+
         void HandleLockScreen(MenuTabContent content) {
-            bool gameStartedErr = content.gameCantBeStarted && GameConfig.GameSettings.gameStarted;
-            bool modeSelectedErr =
-                content.gameModeMustBeSelected && GameConfig.GameSettings.CurrentGameMode == null;
-            tabContentsLockScreen.Visible = gameStartedErr || modeSelectedErr;
-            tabContentsLockScreenLabel.Text =
-                (gameStartedErr ? "You can't edit contents of this page during active game \n" : "")
-                + (modeSelectedErr ? "You need to select game mode first." : "");
-        }
-// TODO: move this to better place
-        public void StartGame() {
-            Visible = false;
-            GameConfig.GameSettings.gameStarted = true;
-            var playerNode = playerPrefab.Instantiate();
-            tcpParser.bikePhysics = ((Bike.BikePhysics)playerNode);
-            terrain3D.Call(
-                "set_camera",
-                ((Bike.BikePhysics)playerNode).camera
+            bool gameStartedErr = content.gameCantBeStarted && gameStarted;
+            tabContentsLockScreen.Visible = gameStartedErr;
+            tabContentsLockScreenLabel.Text = (
+                gameStartedErr ? "You can't edit contents of this page during active game \n" : ""
             );
-            GameConfig.GameSettings.currentRoute.AddChild(playerNode);
         }
     }
 }

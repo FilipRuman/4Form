@@ -9,5 +9,5 @@ this project is split into 2 parts. I've done this because [btleplug](https://gi
 # 🗺️Map exporting:
 ![image](https://github.com/user-attachments/assets/ef2fc1b6-7703-4d45-818b-963d27532721)
 
-The main goal is SAFTEY so i don't use any tres files.
+The main goal is SAFETY so i don't use any tres files.
 Also this could be expanded further in the future to allow custom materials and other user content.

@@ -36,6 +36,8 @@ enabled=PackedStringArray("res://addons/terrain_3d/plugin.cfg")
 
 folder_colors={
 "res://Bike/": "purple",
+"res://GameConfig/": "gray",
+"res://Map/": "green",
 "res://Menu/": "yellow",
 "res://Menu/BikeConfig/": "blue",
 "res://Menu/DeviceConnection/": "green",
@@ -46,7 +48,7 @@ folder_colors={
 "res://assets/Material-LIB/": "yellow",
 "res://assets/Meslo/": "orange",
 "res://assets/gravel bike model/": "blue",
-"res://shaders/": "teal"
+"res://assets/trees/": "green"
 }
 
 [filesystem]
@@ -68,5 +70,7 @@ ToggleMenu={
 
 [rendering]
 
+textures/vram_compression/import_etc2_astc=true
+anti_aliasing/quality/msaa_2d=2
 anti_aliasing/quality/msaa_3d=3
 anti_aliasing/quality/screen_space_aa=1

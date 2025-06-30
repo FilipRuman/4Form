@@ -7,8 +7,6 @@ namespace ForForm.Menu
         [Export]
         LineEdit lineEdit;
 
-        // [Export]
-        // not used anywhere currently
         float min = 0,
             max = 0;
         bool alreadyDoneTextSetup = false;

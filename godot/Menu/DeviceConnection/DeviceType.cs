@@ -8,8 +8,9 @@ namespace ForForm.Menu.DeviceConnection
         public PeripheralDisplay display;
         public uint peripheralConnectedToIt;
 
+        /// needs to exactly match device type name that is specified in rust side tcp parser:
         [Export]
-        public string name;
+        public string bluetoothDeviceTypeName;
 
         [Export]
         public string glyphIcon;

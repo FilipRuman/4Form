@@ -10,7 +10,7 @@ namespace ForForm.Menu.DeviceConnection
         private Control peripheralsDisplaysLayout;
 
         [Export]
-        private Tcp.TcpParser tcpParser;
+        MenuMain menuMain;
 
         [Export]
         private PackedScene peripheralDisplayPrefab;
@@ -68,9 +68,9 @@ namespace ForForm.Menu.DeviceConnection
         }
 
         private void OnPeripheralSelection(uint index) {
-            var deviceTypeName = currentDeviceType.name;
+            var deviceTypeName = currentDeviceType.bluetoothDeviceTypeName;
 
-            tcpParser.SendPeripheralConnectionRequest(index, deviceTypeName);
+            menuMain.tcpParser.SendPeripheralConnectionRequest(index, deviceTypeName);
         }
 
         public void OnPeripheralConnection(string deviceTypeName, uint index) {
@@ -78,7 +78,7 @@ namespace ForForm.Menu.DeviceConnection
             var matchingDeviceType = currentDeviceType;
             // switch or dictionary would be faster but this  is cleaner
             foreach (var _deviceType in deviceTypes) {
-                if (_deviceType.name != deviceTypeName)
+                if (_deviceType.bluetoothDeviceTypeName != deviceTypeName)
                     continue;
                 matchingDeviceType = _deviceType;
                 glyph = _deviceType.glyphIcon;

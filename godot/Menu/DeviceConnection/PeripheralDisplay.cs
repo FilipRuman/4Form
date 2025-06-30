@@ -2,7 +2,7 @@ namespace ForForm.Menu.DeviceConnection
 {
     using System;
     using Godot;
-[Tool]
+
     public partial class PeripheralDisplay : Button {
         [Export]
         public Label icon;
@@ -16,7 +16,7 @@ namespace ForForm.Menu.DeviceConnection
         }
 
         public void Highlight(bool highlight) {
-             ThemeVariants.SetForButton(highlight,this as Button);
+            ThemeVariants.SetForButton(highlight, this as Button);
         }
 
         public override void _Pressed() {

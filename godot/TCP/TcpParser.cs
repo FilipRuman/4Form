@@ -13,17 +13,24 @@ namespace ForForm.Tcp
         RegEx standardIndexNameRegex = new RegEx();
         RegEx trainerDataRegex = new RegEx();
 
+        RegEx heartRateDataRegex = new RegEx();
+
         public override void _Ready() {
             trainerDataRegex.Compile(
                 """power:(?<power>\d*);cadence:(?<cadence>\d*);rotation:(?<rotation>\d*);"""
             );
+            heartRateDataRegex.Compile("""hr:(?<hr>\d*);""");
             standardIndexNameRegex.Compile("""\|(?<name>.*)\|\[(?<index>.*)\]""");
             base._Ready();
         }
 
+        [Export]
+        bool debugTCPData;
+
         public void ParseTcpDataString(string data) {
             // c# switch statements are UGLY compered to rust...
-            GD.Print($"ParseTcpDataString '{data}'");
+            if (debugTCPData)
+                GD.Print($"ParseTcpDataString '{data}'");
             switch (data[0])
             {
                 case 't':
@@ -32,9 +39,13 @@ namespace ForForm.Tcp
                     if (bikePhysics == null)
                         return;
                     var regexOutput = trainerDataRegex.Search(data[1..data.Length]);
-                    bikePhysics.input.currentPower = uint.Parse(regexOutput.GetString("power"));
-                    bikePhysics.input.currentCadence = uint.Parse(regexOutput.GetString("cadence"));
-                    bikePhysics.input.wheelRotation = uint.Parse(regexOutput.GetString("rotation"));
+                    bikePhysics.input.currentWatts = uint.Parse(regexOutput.GetString("power"));
+                    bikePhysics.input.currentCadence_RPM = uint.Parse(
+                        regexOutput.GetString("cadence")
+                    );
+                    bikePhysics.input.wheelRotation_degS = uint.Parse(
+                        regexOutput.GetString("rotation")
+                    );
 
                     break;
                 }
@@ -54,6 +65,13 @@ namespace ForForm.Tcp
                         regexOutput.GetString("name"),
                         uint.Parse(regexOutput.GetString("index"))
                     );
+
+                    break;
+                }
+                case 'h':
+                {
+                    var regexOutput = heartRateDataRegex.Search(data[1..data.Length]);
+                    bikePhysics.input.heartRate = uint.Parse(regexOutput.GetString("hr"));
 
                     break;
                 }

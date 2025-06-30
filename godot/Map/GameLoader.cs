@@ -12,17 +12,23 @@ namespace ForForm.Map
         [Export]
         PackedScene playerPrefab;
 
-        public override void _Ready() {
-            Bike.BikeStats.userConfig = User.UserConfig.Load();
-            base._Ready();
-        }
+        public void StartGame(
+            Bike.BikeModel bikeModel,
+            Menu.UserConfig userConfig,
+            Route.Route route,
+            Map map
+        ) {
 
-        public void StartGame() {
-            GameSettings.gameStarted = true;
-            var playerNode = playerPrefab.Instantiate();
-            tcpParser.bikePhysics = ((Bike.BikePhysics)playerNode);
-            terrain3D.Call("set_camera", ((Bike.BikePhysics)playerNode).camera);
-            GameSettings.currentRoute.AddChild(playerNode);
+            var bikePhysics = (Bike.BikePhysics)playerPrefab.Instantiate();
+            bikePhysics.userMass_kg = userConfig.mass_kg;
+            bikePhysics.bikeModel = bikeModel;
+            bikePhysics.map = map;
+            bikePhysics.route = route;
+
+            tcpParser.bikePhysics = bikePhysics;
+            terrain3D.Call("set_camera", bikePhysics.camera);
+            route.AddChild(bikePhysics);
+
             // terrain 3D is disabled before so it doesn't send irrelevant errors
             terrain3D.ProcessMode = ProcessModeEnum.Inherit;
         }

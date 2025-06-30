@@ -21,17 +21,18 @@ namespace ForForm.Bike.HUD
 
         [Export]
         Gradient slopeGradient;
+        Route Route => main.bikePhysics.route;
 
         public override void _Ready() {
-            UpdateShader(GameSettings.currentRoute);
+            UpdateShader();
             UpdateLabels();
-
-            GameSettings.onCurrentRouteChanged += () =>
-            {
-                UpdateShader(GameSettings.currentRoute);
-                UpdateLabels();
-            };
             base._Ready();
+        }
+
+        // currently not used so when changing routes is implemented just call this to update climb chart nicely
+        public void OnRouteChanged() {
+            UpdateShader();
+            UpdateLabels();
         }
 
         public override void _Process(double delta) {
@@ -45,32 +46,29 @@ namespace ForForm.Bike.HUD
         }
 
         private void UpdateLabels() {
-            Route currentRoute = GameSettings.currentRoute;
-
-            minHeight.Text = $" {((int)(currentRoute.minHeight))}m";
-            maxHeight.Text = $" {((int)(currentRoute.maxHeight))}m";
-            distance.Text = $"{Math.Round(currentRoute.totalDistanceM / 1000f, 1)}km  ";
+            minHeight.Text = $" {((int)(Route.minHeight))}m";
+            maxHeight.Text = $" {((int)(Route.maxHeight))}m";
+            distance.Text = $"{Math.Round(Route.totalDistanceM / 1000f, 1)}km  ";
         }
 
         private void UpdatePlayerIndicatorPosition() {
-            Route currentRoute = GameSettings.currentRoute;
-            var xPercent = main.bikePhysics.Progress / currentRoute.Curve.GetBakedLength();
+            var xPercent = main.bikePhysics.Progress / Route.Curve.GetBakedLength();
 
-            var yPos = currentRoute.heightMapM[((int)(currentRoute.heightMapM.Length * xPercent))];
-            var yPercent = Mathf.InverseLerp(currentRoute.minHeight, currentRoute.maxHeight, yPos);
+            var yPos = Route.heightMap_m[((int)(Route.heightMap_m.Length * xPercent))];
+            var yPercent = Mathf.InverseLerp(Route.minHeight, Route.maxHeight, yPos);
 
             playerPositionIndicator.Position = new Vector2(xPercent, 1 - yPercent) * Size;
         }
 
-        private void UpdateShader(Route route) {
+        private void UpdateShader() {
             var material = ((ShaderMaterial)Material);
 
-            material.SetShaderParameter("points_count", route.slopeMap.Length);
-            material.SetShaderParameter("min_height", route.minHeight);
-            material.SetShaderParameter("max_height", route.maxHeight);
+            material.SetShaderParameter("points_count", Route.slopeMap.Length);
+            material.SetShaderParameter("min_height", Route.minHeight);
+            material.SetShaderParameter("max_height", Route.maxHeight);
 
-            material.SetShaderParameter("slope_map", route.slopeMap);
-            material.SetShaderParameter("height_map", route.heightMapM);
+            material.SetShaderParameter("slope_map", Route.slopeMap);
+            material.SetShaderParameter("height_map", Route.heightMap_m);
         }
     }
 }

@@ -8,19 +8,20 @@ namespace ForForm.Map.Route
     [Tool, Icon("res://Script icons/publish.png")]
     public partial class RouteExport : Node3D {
         string RouteSpecificBasePath(string routeName) =>
-            $"user://Maps/{Map.name}/Routes/{routeName}/";
+            $"user://maps/{map.name}/Routes/{routeName}/";
 
-        string AllRoutesPath => $"user://Maps/{Map.name}/Routes/";
+        string AllRoutesPath => $"user://maps/{map.name}/Routes/";
 
         public Menu.MenuMain menuMain;
 
-        Map Map => GameSettings.currentMap;
+        Map map;
 
-        public void ExportRoutes() {
-            DirAccess.Open($"user://Maps/{Map.name}").MakeDir("Routes");
+        public void ExportRoutes(Map _map) {
+            map = _map;
+            DirAccess.Open($"user://maps/{map.name}").MakeDir("Routes");
 
-            foreach (var route in Map.routes) {
-                DirAccess.Open($"user://Maps/{Map.name}/Routes").MakeDir(route.name);
+            foreach (var route in map.routes) {
+                DirAccess.Open($"user://maps/{map.name}/Routes").MakeDir(route.name);
                 string _basePath = RouteSpecificBasePath(route.name);
 
                 if (route.icon != null)
@@ -36,7 +37,7 @@ namespace ForForm.Map.Route
                     { "ascent", route.ascentM },
                     { "descent", route.descentM },
                     { "slopeMap", GD.VarToStr(route.slopeMap) },
-                    { "heightMap", GD.VarToStr(route.heightMapM) },
+                    { "heightMap", GD.VarToStr(route.heightMap_m) },
                     { "maxHeight", route.maxHeight },
                     { "minHeight", route.minHeight },
                     // curve 3D data
@@ -59,7 +60,9 @@ namespace ForForm.Map.Route
         [Export]
         PackedScene routePrefab;
 
-        public void ImportRoutes() {
+        public void ImportRoutes(Map _map) {
+            map = _map;
+
             Miscs.ClearChildren(this);
             var routeDirs = DirAccess.GetDirectoriesAt(AllRoutesPath);
             var routeArray = new Route[routeDirs.Length];
@@ -93,7 +96,7 @@ namespace ForForm.Map.Route
                 route.totalDistanceM = ((float)data["totalDistance"]);
                 route.ascentM = ((float)data["ascent"]);
                 route.descentM = ((float)data["descent"]);
-                route.heightMapM = GD.StrToVar(data["heightMap"].ToString()).AsFloat32Array();
+                route.heightMap_m = GD.StrToVar(data["heightMap"].ToString()).AsFloat32Array();
                 route.slopeMap = GD.StrToVar(data["slopeMap"].ToString()).AsFloat32Array();
 
                 // curve 3D data
@@ -107,7 +110,7 @@ namespace ForForm.Map.Route
 
                 i++;
             }
-            Map.routes = routeArray;
+            map.routes = routeArray;
         }
 
         // Idk. i can't get the standard way to work so i did this:

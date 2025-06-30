@@ -20,11 +20,13 @@ namespace ForForm.Menu.Game
         [Export]
         Control bikeModelLayout;
         Dictionary<BikeModel, SimpleSelectionUI> bikeModelSelections = new();
+        public BikeModel currentBikeModel;
+        Map.Map map;
 
         public void SetupBikeModels() {
             Miscs.ClearChildren(bikeModelLayout);
             bikeModelSelections.Clear();
-            foreach (var bikeModel in GameSettings.CurrentGameMode.bikeModels) {
+            foreach (var bikeModel in map.bikeModels) {
                 var script = bikeModelSelectionPrefab.Instantiate() as SimpleSelectionUI;
                 bikeModelLayout.AddChild(script);
                 bikeModelSelections.Add(bikeModel, script);
@@ -35,70 +37,69 @@ namespace ForForm.Menu.Game
                     () =>
                     {
                         gameMenu.OnMenuComplete(2);
-                        if (bikeModel == BikeStats.bikeModel)
+                        if (bikeModel == currentBikeModel)
                             return;
                         OnBikeModelSelected(bikeModel);
                     }
                 );
-                ThemeVariants.SetForButton(bikeModel == BikeStats.bikeModel, script);
+                ThemeVariants.SetForButton(bikeModel == currentBikeModel, script);
             }
         }
 
         public void OnBikeModelSelected(BikeModel bikeModel) {
             ThemeVariants.SetForButton(true, bikeModelSelections[bikeModel]);
-            if (BikeStats.bikeModel != null && bikeModelSelections.ContainsKey(BikeStats.bikeModel))
-                ThemeVariants.SetForButton(false, bikeModelSelections[BikeStats.bikeModel]);
-            BikeStats.bikeModel = bikeModel;
+            if (currentBikeModel != null && bikeModelSelections.ContainsKey(currentBikeModel))
+                ThemeVariants.SetForButton(false, bikeModelSelections[currentBikeModel]);
+            currentBikeModel = bikeModel;
             SetupBikeStatsUI();
         }
 
         public void SetupBikeStatsUI() {
-            if (BikeStats.bikeModel == null)
+            if (currentBikeModel == null)
                 return;
-            var editable = GameSettings.CurrentGameMode.canEditBikeModels;
+            var editable = map.canEditBikeModels;
             bikeMass.Setup(
-                BikeStats.bikeModel.mass_kg,
+                currentBikeModel.mass_kg,
                 (f) =>
                 {
-                    BikeStats.bikeModel.mass_kg = f;
+                    currentBikeModel.mass_kg = f;
                 },
                 editable
             );
             wheelFrictionCoefficient.Setup(
-                BikeStats.bikeModel.wheelFrictionCoefficient,
+                currentBikeModel.wheelFrictionCoefficient,
                 (f) =>
                 {
-                    BikeStats.bikeModel.wheelFrictionCoefficient = f;
+                    currentBikeModel.wheelFrictionCoefficient = f;
                 },
                 editable
             );
             bikeWheelRadius.Setup(
-                BikeStats.bikeModel.wheelRadius_m,
+                currentBikeModel.wheelRadius_m,
                 (f) =>
                 {
-                    BikeStats.bikeModel.wheelRadius_m = f;
+                    currentBikeModel.wheelRadius_m = f;
                 },
                 editable
             );
             bikeFrontalArea.Setup(
-                BikeStats.bikeModel.frontalArea_m,
+                currentBikeModel.frontalArea_m,
                 (f) =>
                 {
-                    BikeStats.bikeModel.frontalArea_m = f;
+                    currentBikeModel.frontalArea_m = f;
                 },
                 editable
             );
         }
 
-        public void OnCurrentGameModeChanged() {
-            BikeStats.dragCoefficient = GameSettings.CurrentGameMode.dragCoefficient;
-            BikeStats.frontalArea_m = GameSettings.CurrentGameMode.userDrag;
+        public void OnNewMap(Map.Map _map) {
+            map = _map;
             SetupBikeModels();
             SetupBikeStatsUI();
         }
 
         public override void _Ready() {
-            GameSettings.onCurrentGameModeChanged += OnCurrentGameModeChanged;
+            gameMenu.bikeConfigurationMenu = this;
             base._Ready();
         }
     }

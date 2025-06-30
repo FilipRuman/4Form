@@ -38,7 +38,7 @@ namespace ForForm.Map.Route
         public float[] slopeMap; // %
 
         [Export]
-        public float[] heightMapM;
+        public float[] heightMap_m;
 
         [Export]
         public float minHeight,
@@ -48,27 +48,25 @@ namespace ForForm.Map.Route
         // Connections to other routes
 
 
-        public void CalculateRouteStats() {
-            if (GameSettings.currentMap == null)
-                GD.PrintErr("you need to set map before using CalculateRouteStats() ");
-            if (GameSettings.currentMap.gameMode == null)
-                GD.PrintErr("you need to set game mode before using CalculateRouteStats() ");
-            if (GameSettings.currentMap.gameMode.bikeModels[0] == null)
+        public void CalculateRouteStats(Map map) {
+            if (map.bikeModels[0] == null) {
                 GD.PrintErr(
                     "you need to set at least 1 bike model before using CalculateRouteStats() "
                 );
+                return;
+            }
 
-            float wheelBase = GameSettings.currentMap.gameMode.bikeModels[0].modelsWheelBase_m;
+            float wheelBase = map.bikeModels[0].modelsWheelBase_m;
             ascentM = 0;
             descentM = 0;
 
             var points = Curve.GetBakedPoints();
-            totalDistanceM = Curve.GetBakedLength() / GameSettings.currentMap.speedScale;
+            totalDistanceM = Curve.GetBakedLength() / map.speedScale;
 
             int pointsLen = points.Length;
 
             slopeMap = new float[pointsLen];
-            heightMapM = new float[pointsLen];
+            heightMap_m = new float[pointsLen];
 
             minHeight = float.MaxValue;
             maxHeight = float.MinValue;
@@ -89,12 +87,12 @@ namespace ForForm.Map.Route
 
                 minHeight = Mathf.Min(minHeight, _point.Y);
                 maxHeight = Mathf.Max(maxHeight, _point.Y);
-                heightMapM[i] = _point.Y;
+                heightMap_m[i] = _point.Y;
                 slopeMap[i] = slope;
             }
 
-            ascentM /= GameSettings.currentMap.speedScale;
-            descentM /= GameSettings.currentMap.speedScale;
+            ascentM /= map.speedScale;
+            descentM /= map.speedScale;
         }
     }
 }

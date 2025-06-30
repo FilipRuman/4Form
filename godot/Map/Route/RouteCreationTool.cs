@@ -23,24 +23,33 @@ namespace ForForm.Map.Route
         bool run;
 
         [Export]
-        float refreshRateSec = .3f;
+        float refreshRate_s = .3f;
 
         [Export]
         float pathHighlightPointSize = 1;
 
         [Export]
         public bool highlightPaths;
+
+        [Export]
+        Map map;
         float refreshRateTimer = 0;
 
         public override void _Process(double delta) {
             if (!Engine.IsEditorHint() || !run)
                 return;
-            if (refreshRateTimer < refreshRateSec) {
+            if (refreshRateTimer < refreshRate_s) {
                 refreshRateTimer += (float)delta;
+                return;
             }
             refreshRateTimer = 0;
             RunTerrainFollow();
-            route.CalculateRouteStats();
+            if (map == null) {
+                GD.PrintErr("you need to set map before using CalculateRouteStats() ");
+                refreshRateTimer = -5;
+                return;
+            }
+            route.CalculateRouteStats(map);
 
             if (highlightPaths)
                 HighlightOutputPathPoints();
@@ -55,7 +64,8 @@ namespace ForForm.Map.Route
                     point,
                     pathHighlightPointSize,
                     Colors.Magenta,
-                    refreshRateSec
+                    // +.01 so they don't flicker
+                    refreshRate_s + .01f
                 );
             }
 
@@ -71,7 +81,7 @@ namespace ForForm.Map.Route
                     pathHighlightPointSize,
                     // Shows slope by color specified in the gradient
                     slopeColorGradient.Sample(slope01),
-                    refreshRateSec
+                    refreshRate_s + .01f
                 );
             }
         }

@@ -6,11 +6,10 @@ namespace ForForm.Menu.Game
         [Export]
         internal MenuMain menuMain;
 
-        [Export]
+        // those refs are setup on _Ready() by those scripts, to make Godot editor less cluttered
         public RouteMenu routeMenu;
-
-        [Export]
         public MapSelectionMenu mapSelectionMenu;
+        public BikeConfigurationMenu bikeConfigurationMenu;
 
         [Export]
         Control[] menus;
@@ -20,6 +19,17 @@ namespace ForForm.Menu.Game
         Button next,
             previous,
             startGame;
+
+        internal void StartGame() {
+            menuMain.Visible = false;
+            menuMain.gameStarted = true;
+            menuMain.gameLoader.StartGame(
+                bikeConfigurationMenu.currentBikeModel,
+                menuMain.userConfigMenu.userConfig,
+                routeMenu.currentRoute,
+                mapSelectionMenu.currentMap
+            );
+        }
 
         public override void _Ready() {
             foreach (var menu in menus) {
@@ -31,7 +41,7 @@ namespace ForForm.Menu.Game
             previous.Visible = false;
             previous.Pressed += onPreviousMenu;
 
-            startGame.Pressed += menuMain.StartGame;
+            startGame.Pressed += StartGame;
             base._Ready();
         }
 

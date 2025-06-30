@@ -1,6 +1,7 @@
 namespace ForForm.Menu.Game
 {
     using Godot;
+    using Map;
 
     public partial class MapSelectionMenu : Control {
         [Export]
@@ -12,12 +13,10 @@ namespace ForForm.Menu.Game
 
         [Export]
         GameMenu gameMenu;
+        internal Map currentMap;
 
         public override void _Ready() {
-            GameSettings.onCurrentGameModeChanged += () =>
-            {
-                description.Text = GameSettings.currentMap.description;
-            };
+            gameMenu.mapSelectionMenu = this;
             Miscs.ClearChildren(localLayout);
             Miscs.ClearChildren(onlineLayout);
             description.Text = "";
@@ -30,7 +29,7 @@ namespace ForForm.Menu.Game
             OnlineMaps();
         }
 
-        Button lastMapSelected;
+        Button lastMapButtonSelected;
 
         private void LocalMaps() {
             if (DirAccess.Open("user://Maps/") == null)
@@ -41,15 +40,19 @@ namespace ForForm.Menu.Game
 
                 button.Pressed += () =>
                 {
-                    if (lastMapSelected != null)
-                        ThemeVariants.SetForButton(false, lastMapSelected);
-                    lastMapSelected = button;
+                    if (lastMapButtonSelected != null)
+                        ThemeVariants.SetForButton(false, lastMapButtonSelected);
 
+                    currentMap = gameMenu.menuMain.wholeMapExport.Import(mapName);
+
+                    lastMapButtonSelected = button;
                     ThemeVariants.SetForButton(true, button);
-                    gameMenu.menuMain.wholeMapExport.Import(mapName);
+                    description.Text = currentMap.description;
+
                     gameMenu.OnMenuComplete(menuIndex: 0);
 
-                    gameMenu.routeMenu.Setup(GameSettings.currentMap.routes);
+                    gameMenu.bikeConfigurationMenu.OnNewMap(currentMap);
+                    gameMenu.routeMenu.Setup(currentMap.routes);
                 };
 
                 ThemeVariants.SetForButton(false, button);

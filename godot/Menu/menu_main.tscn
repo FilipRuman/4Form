@@ -34,7 +34,7 @@
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_kgf20"]
 
-[node name="menu main" type="Control" node_paths=PackedStringArray("gameMenu", "tabBar", "tabContents", "tabContentsLockScreen", "tabContentsLockScreenLabel")]
+[node name="menu main" type="Control" node_paths=PackedStringArray("userConfigMenu", "gameMenu", "tabBar", "tabContents", "tabContentsLockScreen", "tabContentsLockScreenLabel")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -42,6 +42,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_pqpoy")
+userConfigMenu = NodePath("Panel/contents/UserConfig/User config menu")
 gameMenu = NodePath("Panel/contents/Game/Game config")
 tabBar = NodePath("Panel/tabs/TabBar")
 tabContents = [NodePath("Panel/contents/device connection"), NodePath("Panel/contents/UserConfig"), NodePath("Panel/contents/Game")]
@@ -105,7 +106,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="device connection" type="Control" parent="Panel/contents"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

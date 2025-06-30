@@ -12,9 +12,12 @@ namespace ForForm.Menu
         internal TcpParser tcpParser;
 
         [Export]
-        Map.GameLoader gameLoader;
+        internal Map.GameLoader gameLoader;
 
         [ExportGroup("UI")]
+        [Export]
+        internal UserConfigMenu userConfigMenu;
+
         [Export]
         public Game.GameMenu gameMenu;
 
@@ -47,11 +50,6 @@ namespace ForForm.Menu
             base._Ready();
         }
 
-        internal void StartGame() {
-            Visible = false;
-            gameLoader.StartGame();
-        }
-
         int lastTab = 0;
 
         public void UpdateTabs() {
@@ -64,14 +62,14 @@ namespace ForForm.Menu
             lastTab = tabBar.CurrentTab;
         }
 
+        public bool gameStarted;
+
         void HandleLockScreen(MenuTabContent content) {
-            bool gameStartedErr = content.gameCantBeStarted && GameSettings.gameStarted;
-            bool modeSelectedErr =
-                content.gameModeMustBeSelected && GameSettings.CurrentGameMode == null;
-            tabContentsLockScreen.Visible = gameStartedErr || modeSelectedErr;
-            tabContentsLockScreenLabel.Text =
-                (gameStartedErr ? "You can't edit contents of this page during active game \n" : "")
-                + (modeSelectedErr ? "You need to select game mode first." : "");
+            bool gameStartedErr = content.gameCantBeStarted && gameStarted;
+            tabContentsLockScreen.Visible = gameStartedErr;
+            tabContentsLockScreenLabel.Text = (
+                gameStartedErr ? "You can't edit contents of this page during active game \n" : ""
+            );
         }
     }
 }

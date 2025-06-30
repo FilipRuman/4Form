@@ -9,6 +9,9 @@ namespace ForForm.Map
         Route.RouteExport routeExport;
 
         [Export]
+        Export3DScenes export3DScenes;
+
+        [Export]
         Node terrain3DTrueExport;
 
         [Export]
@@ -42,35 +45,17 @@ namespace ForForm.Map
 
         /// Call this to import ALL components of map like:
         /// map, game mode, 3D scene, terrain 3D, routes
-        public void Import(string mapName) {
+        public Map Import(string mapName) {
             map.name = mapName;
 
-            GameSettings.currentMap = Map.Load(mapName);
+            map = Map.Load(mapName);
 
-            GameSettings.currentMap.gameMode = GameMode.Load(mapName);
-            GameSettings.SetCurrentGameMode(GameSettings.currentMap.gameMode);
             Miscs.ClearChildren(this);
-            ImportScene();
-            routeExport.ImportRoutes();
+            export3DScenes.ImportScene(map);
+            routeExport.ImportRoutes(map);
 
             terrain3DTrueExport.Call("run_import");
-        }
-
-        public void ImportScene() {
-            var gltfDocumentLoad = new GltfDocument();
-            var gltfStateLoad = new GltfState();
-            var error = gltfDocumentLoad.AppendFromFile(SceneBasePath + "Scene.glb", gltfStateLoad);
-
-            if (error == Error.Ok) {
-                var gltfSceneRootNode = gltfDocumentLoad.GenerateScene(gltfStateLoad);
-                var d = gltfSceneRootNode as Node3D;
-                AddChild(d);
-                d.Owner = Owner;
-
-                d.Visible = true;
-            } else {
-                GD.PrintErr($"Couldn't load glTF scene (error code: {error}).");
-            }
+            return map;
         }
 
         /// Call this to export ALL components of map like:
@@ -81,22 +66,10 @@ namespace ForForm.Map
             DirAccess.Open($"user://Maps/{map.name}/").MakeDir("Scene");
 
             map.Save();
-            map.gameMode.Save(map.name);
 
             terrain3DTrueExport.Call("run_export");
-            ExportScene();
-            routeExport.ExportRoutes();
-        }
-
-        string SceneBasePath => $"user://Maps/{map.name}/Scene/";
-
-        public void ExportScene() {
-            DirAccess.Open(SceneBasePath).Remove("textures");
-            var gltfDocumentSave = new GltfDocument();
-            var gltfStateSave = new GltfState();
-            gltfDocumentSave.AppendFromScene(this, gltfStateSave);
-
-            gltfDocumentSave.WriteToFilesystem(gltfStateSave, SceneBasePath + "Scene.glb");
+            export3DScenes.ExportScene(map);
+            routeExport.ExportRoutes(map);
         }
     }
 }

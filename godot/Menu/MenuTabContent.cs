@@ -5,9 +5,6 @@ namespace ForForm.Menu
     public partial class MenuTabContent : Control {
         [ExportGroup("lock screen settings")]
         [Export]
-        public bool gameModeMustBeSelected;
-
-        [Export]
         public bool gameCantBeStarted;
     }
 }

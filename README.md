@@ -32,7 +32,7 @@
 >
 > ``libdbus-sys = {version = "0.2.5", features = ["vendored"]}``
 ### 3. open project in Godot
-### 4. set your editor's font to nerdfont, so you can easily see glyphs: 
+### 4. set your editor's font to nerdfont, so you can easyly see glyphs: 
 open: Editor>Editor Settings>Interface>Editor>
 
 Turn on the advance settings.

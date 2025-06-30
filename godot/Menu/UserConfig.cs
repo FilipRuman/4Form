@@ -1,9 +1,9 @@
-namespace ForForm.User
+namespace ForForm.Menu
 {
     using System.Collections.Generic;
     using Godot;
 
-    public partial class UserConfig : Resource {
+    public  class UserConfig  {
         [Export]
         public string name = "";
 
@@ -41,3 +41,4 @@ namespace ForForm.User
         }
     }
 }
+

@@ -9,23 +9,25 @@ namespace ForForm.Menu
 
         [Export]
         Button icon;
+        public UserConfig userConfig;
 
         public override void _Ready() {
+            userConfig = UserConfig.Load();
             name.SetupStr(
-                Bike.BikeStats.userConfig.name,
+                userConfig.name,
                 (text) =>
                 {
-                    Bike.BikeStats.userConfig.name = text;
-                    Bike.BikeStats.userConfig.Save();
+                    userConfig.name = text;
+                    userConfig.Save();
                 },
                 editable: true
             );
             mass.Setup(
-                Bike.BikeStats.userConfig.mass_kg,
+                userConfig.mass_kg,
                 (num) =>
                 {
-                    Bike.BikeStats.userConfig.mass_kg = num;
-                    Bike.BikeStats.userConfig.Save();
+                    userConfig.mass_kg = num;
+                    userConfig.Save();
                 },
                 editable: true
             );

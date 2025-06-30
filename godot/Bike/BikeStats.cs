@@ -2,7 +2,6 @@ namespace ForForm.Bike
 {
     public static class BikeStats {
         public static BikeModel bikeModel;
-        public static User.UserConfig userConfig;
 
         public static float drag => dragCoefficient * (frontalArea_m + bikeModel.frontalArea_m);
         public static float dragCoefficient;

@@ -7,7 +7,10 @@
 # 🧱[Architecture of the project](./ARCHITECTURE.md)
 # 📖[Documentation](./docs/Contents.md)
 # 🤝[Contribution guide](./CONTRIBUTING.md) 
-# Example Vid: TODO
+# [Example video of map creation]()
+![image](https://github.com/user-attachments/assets/90f16e62-3171-4c9d-a4b6-db6b02824efc)
+# [Example video of training]()
+![Uploading image.png…]()
 > [!Caution]
 > **This project is in really early stage of development**
 > It will change a lot in the future and **MOST** of the intended features are not *yet* implemented.

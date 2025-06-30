@@ -1,0 +1,8 @@
+{
+	"frontalArea": 0.5,
+	"mass": 9.0,
+	"modelsWhealBase": 5.0,
+	"name": "gravel",
+	"wheelFrictionCoefficient": 0.0,
+	"wheelRadius": 0.25
+}

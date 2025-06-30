@@ -1,0 +1,7 @@
+{
+	"canEditBikeModels": false,
+	"description": "CLIMB",
+	"dragCoefficient": 0.699999988079071,
+	"name": "demo climb",
+	"speedScale": 4.0
+}

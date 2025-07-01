@@ -2,6 +2,8 @@
   <img src="https://github.com/user-attachments/assets/b077f39c-11fc-4e06-9594-d069614ca01b" alt="logo" width="500">  
 </p>
 
+![image](https://github.com/user-attachments/assets/f4ea9c51-41ff-47aa-a5f3-eb4e1be1cefb)
+
 # 4Form
 ## Community driven, [open source](https://github.com/FilipRuman/4Form/blob/main/LICENSE) bike trainer app.
 # 🧱[Architecture of the project](./ARCHITECTURE.md)

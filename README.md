@@ -2,12 +2,17 @@
   <img src="https://github.com/user-attachments/assets/b077f39c-11fc-4e06-9594-d069614ca01b" alt="logo" width="500">  
 </p>
 
+![image](https://github.com/user-attachments/assets/f4ea9c51-41ff-47aa-a5f3-eb4e1be1cefb)
+
 # 4Form
 ## Community driven, [open source](https://github.com/FilipRuman/4Form/blob/main/LICENSE) bike trainer app.
 # 🧱[Architecture of the project](./ARCHITECTURE.md)
 # 📖[Documentation](./docs/Contents.md)
 # 🤝[Contribution guide](./CONTRIBUTING.md) 
-# Example Vid: TODO
+# [Example video of map creation](https://www.youtube.com/watch?v=njTN-yooJoo)
+![image](https://github.com/user-attachments/assets/90f16e62-3171-4c9d-a4b6-db6b02824efc)
+# [Example video of training](https://www.youtube.com/watch?v=t2lAXXAaJoI)
+![image](https://github.com/user-attachments/assets/66e4e7fc-4608-4d3a-8874-8fbb7ee20ccc)
 > [!Caution]
 > **This project is in really early stage of development**
 > It will change a lot in the future and **MOST** of the intended features are not *yet* implemented.
@@ -64,4 +69,4 @@ Turn on the advance settings.
  - [ ] safe custom scripts in users content
 
 ### [For progress tracking use development project](https://github.com/users/FilipRuman/projects/6/views/3) 
-
+# Contact email: 4formproject@gmail.com

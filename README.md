@@ -9,9 +9,9 @@
 # 🧱[Architecture of the project](./ARCHITECTURE.md)
 # 📖[Documentation](./docs/Contents.md)
 # 🤝[Contribution guide](./CONTRIBUTING.md) 
-# [Example video of map creation]()
+# [Example video of map creation](https://www.youtube.com/watch?v=njTN-yooJoo)
 ![image](https://github.com/user-attachments/assets/90f16e62-3171-4c9d-a4b6-db6b02824efc)
-# [Example video of training]()
+# [Example video of training](https://www.youtube.com/watch?v=t2lAXXAaJoI)
 ![image](https://github.com/user-attachments/assets/66e4e7fc-4608-4d3a-8874-8fbb7ee20ccc)
 > [!Caution]
 > **This project is in really early stage of development**

@@ -12,7 +12,7 @@ namespace ForForm.Menu.Game
         public BikeConfigurationMenu bikeConfigurationMenu;
 
         [Export]
-        Control[] menus;
+        Animations.UIAnimationPlayer[] menus;
         uint currentMenuIndex = 0;
 
         [Export]
@@ -32,10 +32,6 @@ namespace ForForm.Menu.Game
         }
 
         public override void _Ready() {
-            foreach (var menu in menus) {
-                menu.Visible = false;
-            }
-            menus[0].Visible = true;
             next.Pressed += OnNextMenu;
             next.Visible = false;
             previous.Visible = false;
@@ -48,18 +44,18 @@ namespace ForForm.Menu.Game
         private void OnNextMenu() {
             previous.Visible = true;
             next.Visible = false;
-            menus[currentMenuIndex].Visible = false;
-            menus[currentMenuIndex + 1].Visible = true;
+            menus[currentMenuIndex].RunInReverse();
+            menus[currentMenuIndex + 1].Run();
             currentMenuIndex++;
         }
 
         private void onPreviousMenu() {
             next.Visible = false;
-            if (currentMenuIndex == 0)
+            if (currentMenuIndex == 1)
                 previous.Visible = false;
 
-            menus[currentMenuIndex].Visible = false;
-            menus[currentMenuIndex - 1].Visible = true;
+            menus[currentMenuIndex].RunInReverse();
+            menus[currentMenuIndex - 1].Run();
             currentMenuIndex--;
         }
 

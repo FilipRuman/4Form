@@ -1,14 +1,37 @@
-[gd_scene load_steps=10 format=3 uid="uid://xhe2bn86m8s0"]
+[gd_scene load_steps=15 format=3 uid="uid://xhe2bn86m8s0"]
 
 [ext_resource type="Script" uid="uid://cmtqinhhxaplm" path="res://Menu/Game/GameMenu.cs" id="1_3n1nv"]
 [ext_resource type="Script" uid="uid://dnlm8elws8d6k" path="res://Menu/Game/MapSelectionMenu.cs" id="2_11pwh"]
 [ext_resource type="PackedScene" uid="uid://qpe4q7ownweu" path="res://Menu/simple_selection_menu.tscn" id="2_e1e62"]
+[ext_resource type="Script" uid="uid://cfnscp01cdp3c" path="res://Menu/Animations/UIAnimationPlayer.cs" id="4_or55t"]
+[ext_resource type="Script" uid="uid://cn4u4uximsgg" path="res://Menu/Animations/SwipeAnimation.cs" id="5_e1e62"]
 [ext_resource type="Theme" uid="uid://regixqqcydb8" path="res://theme.tres" id="6_bt2k0"]
 [ext_resource type="Script" uid="uid://d3nvnghxn0jg5" path="res://Menu/Game/RouteMenu.cs" id="7_siv7b"]
 [ext_resource type="FontFile" uid="uid://befjt7bkyinos" path="res://assets/Meslo/MesloLGLNerdFont-Bold.ttf" id="8_jlfx1"]
 [ext_resource type="Script" uid="uid://cijiek0ybe20l" path="res://Menu/Game/BikeConfigurationMenu.cs" id="8_or55t"]
 [ext_resource type="FontFile" uid="uid://cfse7jemxeexd" path="res://assets/Meslo/MesloLGLDZNerdFont-Bold.ttf" id="9_chcsm"]
 [ext_resource type="Script" uid="uid://0bd4icrprif5" path="res://Menu/PropertyEdit.cs" id="11_xwyxq"]
+
+[sub_resource type="Curve" id="Curve_or55t"]
+_limits = [0.0, 1.0, 0.0, 0.460746]
+_data = [Vector2(0, 0), 0.0, 6.15813, 0, 0, Vector2(0.460746, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Resource" id="Resource_lbo6y"]
+script = ExtResource("5_e1e62")
+targetPosition = Vector2(0, 0)
+startPosition = Vector2(-1963.23, 0)
+hideAtTheEnd = false
+animationCurve = SubResource("Curve_or55t")
+metadata/_custom_type_script = "uid://cn4u4uximsgg"
+
+[sub_resource type="Resource" id="Resource_or55t"]
+script = ExtResource("5_e1e62")
+targetPosition = Vector2(1963.23, 0)
+startPosition = Vector2(0, 0)
+hideAtTheEnd = true
+animationCurve = SubResource("Curve_or55t")
+metadata/_custom_type_script = "uid://cn4u4uximsgg"
 
 [node name="Game menu" type="Control" node_paths=PackedStringArray("menus", "next", "previous", "startGame")]
 layout_mode = 3
@@ -18,7 +41,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_3n1nv")
-menus = [NodePath("VBoxContainer/Game config menus/Map selecton"), NodePath("VBoxContainer/Game config menus/Route selection"), NodePath("VBoxContainer/Game config menus/Bike selection"), NodePath("VBoxContainer/Game config menus/Load game")]
+menus = [NodePath("VBoxContainer/Game config menus/Map selecton/Map menu animation"), NodePath("VBoxContainer/Game config menus/Route selection/Route menu animation2"), NodePath("VBoxContainer/Game config menus/Bike selection/Bike menu animation3"), NodePath("VBoxContainer/Game config menus/Load game/Load menu animation3")]
 next = NodePath("VBoxContainer/Menu movement/right")
 previous = NodePath("VBoxContainer/Menu movement/left")
 startGame = NodePath("VBoxContainer/Game config menus/Load game/Button")
@@ -32,6 +55,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Game config menus" type="Panel" parent="VBoxContainer"]
+clip_contents = true
 layout_mode = 2
 size_flags_vertical = 3
 theme_type_variation = &"midPanel"
@@ -137,6 +161,15 @@ horizontal_alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 horizontal_alignment = 1
+
+[node name="Map menu animation" type="Control" parent="VBoxContainer/Game config menus/Map selecton" node_paths=PackedStringArray("target")]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("4_or55t")
+animation = SubResource("Resource_lbo6y")
+reverseAnimation = SubResource("Resource_or55t")
+target = NodePath("..")
 
 [node name="Route selection" type="Control" parent="VBoxContainer/Game config menus" node_paths=PackedStringArray("gameMenu", "layout", "description", "difficulty", "time", "ascent", "distance")]
 visible = false
@@ -256,6 +289,16 @@ bbcode_enabled = true
 fit_content = true
 context_menu_enabled = true
 horizontal_alignment = 1
+
+[node name="Route menu animation2" type="Control" parent="VBoxContainer/Game config menus/Route selection" node_paths=PackedStringArray("target")]
+anchors_preset = 0
+offset_left = -1979.28
+offset_right = -1939.28
+offset_bottom = 40.0
+script = ExtResource("4_or55t")
+animation = SubResource("Resource_lbo6y")
+reverseAnimation = SubResource("Resource_or55t")
+target = NodePath("..")
 
 [node name="Bike selection" type="Control" parent="VBoxContainer/Game config menus" node_paths=PackedStringArray("bikeMass", "wheelFrictionCoefficient", "bikeWheelRadius", "bikeFrontalArea", "gameMenu", "bikeModelLayout")]
 visible = false
@@ -404,6 +447,16 @@ size_flags_horizontal = 3
 placeholder_text = "enter value:"
 virtual_keyboard_type = 2
 
+[node name="Bike menu animation3" type="Control" parent="VBoxContainer/Game config menus/Bike selection" node_paths=PackedStringArray("target")]
+anchors_preset = 0
+offset_left = -1979.28
+offset_right = -1939.28
+offset_bottom = 40.0
+script = ExtResource("4_or55t")
+animation = SubResource("Resource_lbo6y")
+reverseAnimation = SubResource("Resource_or55t")
+target = NodePath("..")
+
 [node name="Load game" type="Control" parent="VBoxContainer/Game config menus"]
 visible = false
 layout_mode = 1
@@ -429,6 +482,17 @@ theme_type_variation = &"buttonHighlight"
 theme_override_fonts/font = ExtResource("9_chcsm")
 theme_override_font_sizes/font_size = 50
 text = "Start game!"
+
+[node name="Load menu animation3" type="Control" parent="VBoxContainer/Game config menus/Load game" node_paths=PackedStringArray("target")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -1979.28
+offset_right = -1939.28
+offset_bottom = 40.0
+script = ExtResource("4_or55t")
+animation = SubResource("Resource_lbo6y")
+reverseAnimation = SubResource("Resource_or55t")
+target = NodePath("..")
 
 [node name="Menu movement" type="HBoxContainer" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 80)

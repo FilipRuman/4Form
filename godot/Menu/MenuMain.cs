@@ -33,12 +33,19 @@ namespace ForForm.Menu
         [Export]
         RichTextLabel tabContentsLockScreenLabel;
 
+        [Export]
+        Animations.UIAnimationPlayer animationPlayer;
+
         public override void _Process(double delta) {
             base._Process(delta);
             if (Engine.IsEditorHint())
                 return;
-            if (Input.IsActionJustPressed("ToggleMenu"))
-                Visible = !Visible;
+            if (Input.IsActionJustPressed("ToggleMenu")) {
+                if (Visible) {
+                    animationPlayer.RunInReverse();
+                } else
+                    animationPlayer.Run();
+            }
         }
 
         public override void _Ready() {
@@ -55,9 +62,9 @@ namespace ForForm.Menu
         public void UpdateTabs() {
             if (lastTab == tabBar.CurrentTab)
                 return;
-            tabContents[lastTab].Visible = false;
+            tabContents[lastTab].animationPlayer.RunInReverse();
             MenuTabContent currentTab = tabContents[tabBar.CurrentTab];
-            currentTab.Visible = true;
+            currentTab.animationPlayer.Run();
             HandleLockScreen(currentTab);
             lastTab = tabBar.CurrentTab;
         }

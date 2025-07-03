@@ -13,11 +13,34 @@
 ![image](https://github.com/user-attachments/assets/90f16e62-3171-4c9d-a4b6-db6b02824efc)
 # [Example video of training](https://www.youtube.com/watch?v=t2lAXXAaJoI)
 ![image](https://github.com/user-attachments/assets/66e4e7fc-4608-4d3a-8874-8fbb7ee20ccc)
+### this project aims to provide good user experience with clear ui, easy to use tools and great documentation alongside **SAFETY first design** .
+# 🔭 Overview
+4Form allows users to create interesting training in the exact way they like by allowing community to create:
+ * maps
+ * routes 
+ * equipment
+ * game modes
+ * competitions
+
+
+# **Base** Of this project will be free and open source **forever**.
+
+# ✅Features
+### Implemented
+ * **easy to use tools for routes creation** - create routes using path3D and custom tool makes it smoothly follow terrain.
+ * **integration with [terrain3D](https://github.com/TokisanGames/Terrain3D)** - allows easy creation of great looking maps. 
+ * **multi-platform** - windows 11 && 10, mac, and *****linux***(most distros if you do some tinkering)
+ 
+### Future plans
+ - [ ] steam release
+ - [ ] multiplayer with steam and steam workshop to download maps
+ - [ ] safe custom scripts in users content
 > [!Caution]
 > **This project is in really early stage of development**
 > It will change a lot in the future and **MOST** of the intended features are not *yet* implemented.
 > 
 > it's not production ready. But I need contributes for further development.
+
 ##  ⭐ If you think this project sounds interesting and you might use it in the future when it's production ready. Then please give this repo a star, it helps a lot.
 # 🛠️ Installation
 ## If you want to test it out, just download [the latest release](https://github.com/FilipRuman/4Form/releases) for your platform
@@ -45,28 +68,6 @@ Turn on the advance settings.
 * Main Font Bold: assets/Meslo/MesloLGLDZNerdFont-Bold.ttf
 * Code Font: assets/Meslo/MesloLGLDZNerdFont-Regular.ttf
 ### You are ready to run it!
-# 🔭 Overview
-4Form allows users to create interesting training in the exact way they like by allowing community to create:
- * maps
- * routes 
- * equipment
- * game modes
- * competitions
-
-### this project aims to provide good user experience with clear ui, easy to use tools and great documentation alongside **SAFETY first design** .
-
-# **Base** Of this project will be free and open source **forever**.
-
-# ✅Features
-### Implemented
- * **easy to use tools for routes creation** - create routes using path3D and custom tool makes it smoothly follow terrain.
- * **integration with [terrain3D](https://github.com/TokisanGames/Terrain3D)** - allows easy creation of great looking maps. 
- * **multi-platform** - windows 11 && 10, mac, and *****linux***(most distros if you do some tinkering)
- 
-### Future plans
- - [ ] steam release
- - [ ] multiplayer with steam and steam workshop to download maps
- - [ ] safe custom scripts in users content
 
 ### [For progress tracking use development project](https://github.com/users/FilipRuman/projects/6/views/3) 
 # Contact email: 4formproject@gmail.com

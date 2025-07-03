@@ -2,36 +2,18 @@
   <img src="https://github.com/user-attachments/assets/b077f39c-11fc-4e06-9594-d069614ca01b" alt="logo" width="500">  
 </p>
 
+![image](https://github.com/user-attachments/assets/f4ea9c51-41ff-47aa-a5f3-eb4e1be1cefb)
+
 # 4Form
 ## Community driven, [open source](https://github.com/FilipRuman/4Form/blob/main/LICENSE) bike trainer app.
 # 🧱[Architecture of the project](./ARCHITECTURE.md)
 # 📖[Documentation](./docs/Contents.md)
 # 🤝[Contribution guide](./CONTRIBUTING.md) 
-# Example Vid: TODO
-> [!Caution]
-> **This project is in really early stage of development**
-> It will change a lot in the future and **MOST** of the intended features are not *yet* implemented.
-> 
-> it's not production ready. But I need contributes for further development.
-##  ⭐ If you think this project sounds interesting, you might use it in the future when it's production ready, Please give this repo a star, it helps a lot.
-# 🛠️ Installation
-## If you want to test it out, just download [the latest release](https://github.com/FilipRuman/4Form/releases) for your platform
-## Setup for development:
-### 0.a [Install rust](https://www.rust-lang.org/learn/get-started) 
-### 0.b [Install latest Godot with .Net support](https://godotengine.org/download/)
-### 1. clone this repo with sub-modules:
-``git clone --recurse-submodules https://github.com/FilipRuman/4Form``
-``git switch dev``
-### 2. make sure that you have latest build of ble-handler
-``cd 4Form/subomdules/4Form-BluetoothHandler``
-``cargo build``
-### 3. open project in Godot
-### 4. set your editor's font to nerdfont, so you can easily see glyphs: 
-open: Editor>Editor Settings>Interface>Editor>
-* Main Font: assets/Meslo/MesloLGLDZNerdFont-Regular.ttf
-* Main Font Bold: assets/Meslo/MesloLGLDZNerdFont-Bold.ttf
-* Code Font: assets/Meslo/MesloLGLDZNerdFont-Regular.ttf
-### You are ready to run it!
+# [Example video of map creation](https://www.youtube.com/watch?v=njTN-yooJoo)
+![image](https://github.com/user-attachments/assets/90f16e62-3171-4c9d-a4b6-db6b02824efc)
+# [Example video of training](https://www.youtube.com/watch?v=t2lAXXAaJoI)
+![image](https://github.com/user-attachments/assets/66e4e7fc-4608-4d3a-8874-8fbb7ee20ccc)
+### This project aims to provide a good user experience with clear ui, easy to use tools, and great documentation alongside **SAFETY first design** .
 # 🔭 Overview
 4Form allows users to create interesting training in the exact way they like by allowing community to create:
  * maps
@@ -40,20 +22,54 @@ open: Editor>Editor Settings>Interface>Editor>
  * game modes
  * competitions
 
-### this project aims to provide good user experience with clear ui, easy to use tools and great documentation alongside **SAFETY first design** .
-
-# **Base** Of this project will be free and open source **forever**.
+# **Base** of this project will be free and open source **forever**.
 
 # ✅Features
 ### Implemented
  * **easy to use tools for routes creation** - create routes using path3D and custom tool makes it smoothly follow terrain.
  * **integration with [terrain3D](https://github.com/TokisanGames/Terrain3D)** - allows easy creation of great looking maps. 
- * **multi-platform** - windows 11 && 10??, mac, and *****linux***(most distros if you do some tinkering)
+ * **multi-platform** - windows 11 && 10, mac, and *****linux*** (most distros if you do some tinkering)
  
 ### Future plans
- - [ ] steam release
- - [ ] multiplayer with steam and steam workshop to download maps
+ - [ ] Steam release
+ - [ ] multiplayer with Steam and Steam workshop to download maps
  - [ ] safe custom scripts in users content
+> [!Caution]
+> **This project is in really early stage of development**
+> It will change a lot in the future and **MOST** of the intended features are not *yet* implemented.
+> 
+> It's not production ready, but I need contributors for further development.
+
+##  ⭐ If you think this project sounds interesting and you might use it in the future when it's production ready. Then please give this repo a star, it helps a lot.
+# 🛠️ Installation
+## If you want to test it out, just download [the latest release](https://github.com/FilipRuman/4Form/releases) for your platform
+## Setup for development:
+### 0.a [Install rust](https://www.rust-lang.org/learn/get-started) 
+### 0.b [Install latest Godot with .Net support](https://godotengine.org/download/)
+### 1. Clone this repo with sub-modules:
+```
+git clone --recurse-submodules https://github.com/FilipRuman/4Form
+git switch dev
+```
+### 2. Make sure that you have latest build of ble-handler
+```
+cd 4Form/subomdules/4Form-BluetoothHandler
+cargo build
+```
+
+> [!TIP]
+>  If you have problem with building your project because of d-bus you can add this to cargo.toml under dependencies:
+>
+> ``libdbus-sys = {version = "0.2.5", features = ["vendored"]}``
+### 3. Open project in Godot
+### 4. Set your editor's font to nerdfont, so you can easyly see glyphs: 
+open: Editor>Editor Settings>Interface>Editor>
+
+Turn on the advance settings.
+* Main Font: assets/Meslo/MesloLGLDZNerdFont-Regular.ttf
+* Main Font Bold: assets/Meslo/MesloLGLDZNerdFont-Bold.ttf
+* Code Font: assets/Meslo/MesloLGLDZNerdFont-Regular.ttf
+### You are ready to run it!
 
 ### [For progress tracking use development project](https://github.com/users/FilipRuman/projects/6/views/3) 
-
+# Contact email: 4formproject@gmail.com

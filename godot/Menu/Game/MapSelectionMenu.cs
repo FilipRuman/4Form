@@ -37,6 +37,7 @@ namespace ForForm.Menu.Game
             var maps = DirAccess.Open("user://Maps/").GetDirectories();
             foreach (var mapName in maps) {
                 var button = new Button() { Text = mapName };
+                button.AddThemeColorOverride("font_color", Color.Color8(255, 255, 255, 255));
 
                 button.Pressed += () =>
                 {

@@ -48,7 +48,8 @@ namespace ForForm.Bike.HUD
         private void UpdateLabels() {
             minHeight.Text = $" {((int)(Route.minHeight))}m";
             maxHeight.Text = $" {((int)(Route.maxHeight))}m";
-            distance.Text = $"{Math.Round(Route.totalDistanceM / 1000f, 1)}km  ";
+            distance.Text =
+                $"{Math.Round(main.bikePhysics.Progress / 1000f, 1)}/{Math.Round(Route.totalDistanceM / 1000f, 1)}km  ";
         }
 
         private void UpdatePlayerIndicatorPosition() {

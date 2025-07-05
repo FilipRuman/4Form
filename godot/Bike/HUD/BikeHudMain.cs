@@ -14,17 +14,48 @@ namespace ForForm.Bike.HUD
         [ExportGroup("UI")]
         [Export]
         Label cadence,
+            cadenceAvr,
             power,
+            powerAvr,
             speed,
+            speedAvr,
             heartRate,
+            heartRateAvr,
+            workoutLength,
+            totalDescent,
+            caloriesBurnt,
+            totalAscent,
             fps;
 
-        public override void _Process(double delta) {
-            cadence.Text = $"{bikeInput.currentCadence_RPM}rpm cadence ";
+        public Workout.Workout workout = new();
 
-            speed.Text = $"{(int)bikePhysics.speed_kmH}km/h speed󰓅 ";
-            power.Text = $"{bikeInput.currentWatts}w power󱐋";
-            heartRate.Text = $"{bikeInput.heartRate}bpm HR ";
+        public override void _Process(double delta) {
+            workout.Update(
+                (float)delta,
+                bikeInput.currentWatts,
+                bikeInput.heartRate,
+                bikePhysics.speed_kmH,
+                bikeInput.currentCadence_RPM,
+                bikePhysics.GlobalPosition.Y
+            );
+
+            workoutLength.Text = $"{(int)workout.totalTime_s / 60}";
+            totalDescent.Text = $"{(int)workout.totalDescent}";
+            totalAscent.Text = $"{(int)workout.totalAscent}";
+            caloriesBurnt.Text = $"{(int)workout.caloriesBurnt}󰆘";
+
+            cadence.Text = $" {bikeInput.currentCadence_RPM}";
+            cadenceAvr.Text = $"{workout.averageCadence}";
+
+            speed.Text = $"{(int)bikePhysics.speed_kmH}󰓅";
+            speedAvr.Text = $"{(int)workout.averageSpeed_kmH}";
+
+            power.Text = $"󱐋 {bikeInput.currentWatts}";
+            powerAvr.Text = $"{(int)workout.averageWatts}";
+
+            heartRate.Text = $"{bikeInput.heartRate}";
+            heartRateAvr.Text = $"{workout.averageHeartRate}";
+
             fps.Text = $"FPS: {Engine.GetFramesPerSecond()}";
             base._Process(delta);
         }

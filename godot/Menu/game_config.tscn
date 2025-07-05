@@ -87,8 +87,7 @@ grow_vertical = 2
 
 [node name="Label" type="Label" parent="VBoxContainer/Game config menus/Map selecton/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("9_chcsm")
-theme_override_font_sizes/font_size = 22
+theme_type_variation = &"H2Label"
 text = "Select Map:"
 horizontal_alignment = 1
 
@@ -153,7 +152,7 @@ grow_vertical = 2
 
 [node name="Label" type="Label" parent="VBoxContainer/Game config menus/Map selecton/VBoxContainer/HSplitContainer/descriptioin/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("9_chcsm")
+theme_type_variation = &"H3Label"
 text = "Description:"
 horizontal_alignment = 1
 
@@ -222,6 +221,7 @@ grow_vertical = 2
 
 [node name="Label" type="Label" parent="VBoxContainer/Game config menus/Route selection/Game mode stats/HSplitContainer/routes/VBoxContainer"]
 layout_mode = 2
+theme_type_variation = &"H3Label"
 theme_override_fonts/font = ExtResource("8_jlfx1")
 text = "Routes:"
 horizontal_alignment = 1
@@ -260,18 +260,22 @@ alignment = 1
 
 [node name="dificulty" type="Label" parent="VBoxContainer/Game config menus/Route selection/Game mode stats/HSplitContainer/routes/VBoxContainer/Stats/HFlowContainer"]
 layout_mode = 2
+theme_type_variation = &"H4Label"
 theme_override_fonts/font = ExtResource("8_jlfx1")
 
 [node name="time" type="Label" parent="VBoxContainer/Game config menus/Route selection/Game mode stats/HSplitContainer/routes/VBoxContainer/Stats/HFlowContainer"]
 layout_mode = 2
+theme_type_variation = &"H4Label"
 theme_override_fonts/font = ExtResource("8_jlfx1")
 
 [node name="Ascent" type="Label" parent="VBoxContainer/Game config menus/Route selection/Game mode stats/HSplitContainer/routes/VBoxContainer/Stats/HFlowContainer"]
 layout_mode = 2
+theme_type_variation = &"H4Label"
 theme_override_fonts/font = ExtResource("8_jlfx1")
 
 [node name="distance" type="Label" parent="VBoxContainer/Game config menus/Route selection/Game mode stats/HSplitContainer/routes/VBoxContainer/Stats/HFlowContainer"]
 layout_mode = 2
+theme_type_variation = &"H4Label"
 theme_override_fonts/font = ExtResource("8_jlfx1")
 
 [node name="Description" type="VBoxContainer" parent="VBoxContainer/Game config menus/Route selection/Game mode stats/HSplitContainer"]
@@ -279,6 +283,7 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="VBoxContainer/Game config menus/Route selection/Game mode stats/HSplitContainer/Description"]
 layout_mode = 2
+theme_type_variation = &"H3Label"
 theme_override_fonts/font = ExtResource("9_chcsm")
 text = "Description:"
 horizontal_alignment = 1
@@ -350,6 +355,7 @@ theme = ExtResource("6_bt2k0")
 
 [node name="Label" type="Label" parent="VBoxContainer/Game config menus/Bike selection/Bike config/layout"]
 layout_mode = 2
+theme_type_variation = &"H3Label"
 text = "Bike config:"
 horizontal_alignment = 1
 
@@ -383,7 +389,7 @@ grow_vertical = 2
 
 [node name="Label" type="Label" parent="VBoxContainer/Game config menus/Bike selection/Bike config/layout/Bike model stats/Layout"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("9_chcsm")
+theme_type_variation = &"H3Label"
 text = "Test  bike model name"
 horizontal_alignment = 1
 
@@ -394,11 +400,13 @@ lineEdit = NodePath("LineEdit")
 
 [node name="Label" type="Label" parent="VBoxContainer/Game config menus/Bike selection/Bike config/layout/Bike model stats/Layout/mass"]
 layout_mode = 2
+theme_type_variation = &"H4Label"
 text = " 󰖡 Mass: "
 
 [node name="LineEdit" type="LineEdit" parent="VBoxContainer/Game config menus/Bike selection/Bike config/layout/Bike model stats/Layout/mass"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_type_variation = &"H4Edit"
 placeholder_text = "enter value:"
 virtual_keyboard_type = 2
 
@@ -409,11 +417,13 @@ lineEdit = NodePath("LineEdit")
 
 [node name="Label" type="Label" parent="VBoxContainer/Game config menus/Bike selection/Bike config/layout/Bike model stats/Layout/wheel friction"]
 layout_mode = 2
+theme_type_variation = &"H4Label"
 text = " 󱥔 Wheel friction: "
 
 [node name="LineEdit" type="LineEdit" parent="VBoxContainer/Game config menus/Bike selection/Bike config/layout/Bike model stats/Layout/wheel friction"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_type_variation = &"H4Edit"
 placeholder_text = "enter value:"
 virtual_keyboard_type = 2
 
@@ -424,11 +434,13 @@ lineEdit = NodePath("LineEdit")
 
 [node name="Label" type="Label" parent="VBoxContainer/Game config menus/Bike selection/Bike config/layout/Bike model stats/Layout/wheel radious"]
 layout_mode = 2
+theme_type_variation = &"H4Label"
 text = " 󰐙 Wheel radious: "
 
 [node name="LineEdit" type="LineEdit" parent="VBoxContainer/Game config menus/Bike selection/Bike config/layout/Bike model stats/Layout/wheel radious"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_type_variation = &"H4Edit"
 placeholder_text = "enter value:"
 virtual_keyboard_type = 2
 
@@ -439,11 +451,13 @@ lineEdit = NodePath("LineEdit")
 
 [node name="Label" type="Label" parent="VBoxContainer/Game config menus/Bike selection/Bike config/layout/Bike model stats/Layout/drag"]
 layout_mode = 2
+theme_type_variation = &"H4Label"
 text = " 󱄟 Drag: "
 
 [node name="LineEdit" type="LineEdit" parent="VBoxContainer/Game config menus/Bike selection/Bike config/layout/Bike model stats/Layout/drag"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_type_variation = &"H4Edit"
 placeholder_text = "enter value:"
 virtual_keyboard_type = 2
 

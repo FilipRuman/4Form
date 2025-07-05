@@ -1,5 +1,6 @@
-[gd_resource type="Theme" load_steps=22 format=3 uid="uid://regixqqcydb8"]
+[gd_resource type="Theme" load_steps=23 format=3 uid="uid://regixqqcydb8"]
 
+[ext_resource type="FontFile" uid="uid://b4wql15yvr6qj" path="res://assets/Meslo/MesloLGLNerdFontPropo-Bold.ttf" id="1_cjfk0"]
 [ext_resource type="FontFile" uid="uid://cjv70l87rkx5t" path="res://assets/Meslo/MesloLGLDZNerdFont-Regular.ttf" id="1_e1x85"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e1x85"]
@@ -187,6 +188,30 @@ corner_detail = 6
 
 [resource]
 default_font = ExtResource("1_e1x85")
+H1Edit/base_type = &"LineEdit"
+H1Edit/font_sizes/font_size = 32
+H1Edit/fonts/font = ExtResource("1_cjfk0")
+H1Label/base_type = &"Label"
+H1Label/font_sizes/font_size = 32
+H1Label/fonts/font = ExtResource("1_cjfk0")
+H2Edit/base_type = &"LineEdit"
+H2Edit/font_sizes/font_size = 27
+H2Edit/fonts/font = ExtResource("1_cjfk0")
+H2Label/base_type = &"Label"
+H2Label/font_sizes/font_size = 27
+H2Label/fonts/font = ExtResource("1_cjfk0")
+H3Edit/base_type = &"LineEdit"
+H3Edit/font_sizes/font_size = 22
+H3Edit/fonts/font = ExtResource("1_cjfk0")
+H3Label/base_type = &"Label"
+H3Label/font_sizes/font_size = 22
+H3Label/fonts/font = ExtResource("1_cjfk0")
+H4Edit/base_type = &"LineEdit"
+H4Edit/font_sizes/font_size = 18
+H4Label/base_type = &"Label"
+H4Label/font_sizes/font_size = 18
+H5Label/base_type = &"Label"
+H5Label/font_sizes/font_size = 14
 Panel/styles/panel = SubResource("StyleBoxFlat_e1x85")
 TabBar/styles/button_highlight = null
 TabBar/styles/button_pressed = null

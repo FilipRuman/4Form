@@ -1,10 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://pgeuqedr7i1i"]
+[gd_scene load_steps=14 format=3 uid="uid://pgeuqedr7i1i"]
 
 [ext_resource type="Script" uid="uid://dm56mi273fr4s" path="res://Bike/HUD/BikeHUDMain.cs" id="1_2jrfd"]
 [ext_resource type="Theme" uid="uid://regixqqcydb8" path="res://theme.tres" id="2_mf6jh"]
-[ext_resource type="FontFile" uid="uid://cfse7jemxeexd" path="res://assets/Meslo/MesloLGLDZNerdFont-Bold.ttf" id="3_gcj2r"]
 [ext_resource type="Script" uid="uid://bny4ims1objmv" path="res://Bike/HUD/TestingBikeHUD.cs" id="4_scrhx"]
-[ext_resource type="FontFile" uid="uid://befjt7bkyinos" path="res://assets/Meslo/MesloLGLNerdFont-Bold.ttf" id="5_mf6jh"]
 [ext_resource type="Shader" uid="uid://bbs3j8xh0emhp" path="res://Bike/ClimbChart.gdshader" id="5_tjljn"]
 [ext_resource type="Script" uid="uid://dbqsim7qc0ymx" path="res://Bike/HUD/ClimbChart.cs" id="6_dnlm1"]
 
@@ -62,8 +60,8 @@ fps = NodePath("FPS")
 [node name="FPS" type="Label" parent="."]
 offset_right = 116.0
 offset_bottom = 28.0
+theme_type_variation = &"H2Label"
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 20
 text = "FPS:"
 
 [node name="main stats" type="Panel" parent="."]
@@ -107,9 +105,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "Watts"
 mouse_filter = 1
+theme_type_variation = &"H1Label"
 theme_override_colors/font_color = Color(0.960784, 0.560784, 0, 1)
-theme_override_fonts/font = ExtResource("3_gcj2r")
-theme_override_font_sizes/font_size = 27
 text = "0󱐋 "
 horizontal_alignment = 2
 
@@ -127,6 +124,7 @@ grow_horizontal = 0
 grow_vertical = 0
 tooltip_text = "Average"
 mouse_filter = 1
+theme_type_variation = &"H4Label"
 theme_override_colors/font_color = Color(0.960784, 0.560784, 0, 1)
 text = "120"
 
@@ -141,9 +139,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "Heart rate bpm"
 mouse_filter = 1
+theme_type_variation = &"H1Label"
 theme_override_colors/font_color = Color(0.86959, 0.14237, 0.137062, 1)
-theme_override_fonts/font = ExtResource("3_gcj2r")
-theme_override_font_sizes/font_size = 27
 text = "0 "
 
 [node name="avr" type="Label" parent="main stats/Main stats layout2/Heart rate"]
@@ -157,6 +154,7 @@ offset_bottom = 14.0
 grow_vertical = 0
 tooltip_text = "Average"
 mouse_filter = 1
+theme_type_variation = &"H4Label"
 theme_override_colors/font_color = Color(0.870588, 0.141176, 0.137255, 1)
 text = "120"
 
@@ -170,8 +168,8 @@ layout_mode = 2
 tooltip_text = "cadence rpm
 "
 mouse_filter = 1
+theme_type_variation = &"H3Label"
 theme_override_colors/font_color = Color(0, 0.913725, 0, 1)
-theme_override_font_sizes/font_size = 20
 text = "0 "
 
 [node name="avr" type="Label" parent="main stats/Main stats layout2/Cadence"]
@@ -189,6 +187,7 @@ grow_horizontal = 0
 grow_vertical = 0
 tooltip_text = "Average"
 mouse_filter = 1
+theme_type_variation = &"H4Label"
 theme_override_colors/font_color = Color(0, 0.905882, 0, 1)
 text = "120"
 
@@ -201,8 +200,8 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_6whun")
 layout_mode = 2
 tooltip_text = "speed km/h"
 mouse_filter = 1
+theme_type_variation = &"H3Label"
 theme_override_colors/font_color = Color(0.119761, 0.443755, 1, 1)
-theme_override_font_sizes/font_size = 20
 text = "0󰓅 "
 
 [node name="avr" type="Label" parent="main stats/Main stats layout2/Speed"]
@@ -213,6 +212,7 @@ offset_right = 11.0
 offset_bottom = 44.0
 tooltip_text = "Average"
 mouse_filter = 1
+theme_type_variation = &"H4Label"
 theme_override_colors/font_color = Color(0.117647, 0.415686, 0.929412, 1)
 text = "120"
 
@@ -283,32 +283,28 @@ alignment = 1
 [node name="totalDescent" type="Label" parent="workout stat/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 6
-theme_override_fonts/font = ExtResource("5_mf6jh")
-theme_override_font_sizes/font_size = 29
+theme_type_variation = &"H2Label"
 text = "100"
 horizontal_alignment = 1
 
 [node name="totalAscent" type="Label" parent="workout stat/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 6
-theme_override_fonts/font = ExtResource("5_mf6jh")
-theme_override_font_sizes/font_size = 29
+theme_type_variation = &"H2Label"
 text = "200"
 horizontal_alignment = 1
 
 [node name="caloriesBurnt" type="Label" parent="workout stat/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 6
-theme_override_fonts/font = ExtResource("5_mf6jh")
-theme_override_font_sizes/font_size = 29
+theme_type_variation = &"H2Label"
 text = "1300󰆘"
 horizontal_alignment = 1
 
 [node name="workoutLength" type="Label" parent="workout stat/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 6
-theme_override_fonts/font = ExtResource("5_mf6jh")
-theme_override_font_sizes/font_size = 29
+theme_type_variation = &"H2Label"
 text = "120"
 horizontal_alignment = 1
 
@@ -376,6 +372,7 @@ offset_top = -25.0
 offset_right = 2.0
 offset_bottom = 7.0
 grow_horizontal = 0
+theme_type_variation = &"H3Label"
 theme_override_font_sizes/font_size = 20
 text = "100.9%slope "
 horizontal_alignment = 2
@@ -387,6 +384,7 @@ offset_top = -25.0
 offset_right = 109.0
 tooltip_text = "max height on route:"
 mouse_filter = 0
+theme_type_variation = &"H3Label"
 text = " 10000000m"
 
 [node name="min height" type="Label" parent="climbing ui/climb chart"]
@@ -401,6 +399,7 @@ offset_bottom = 21.0
 grow_vertical = 0
 tooltip_text = "min height on route:"
 mouse_filter = 0
+theme_type_variation = &"H3Label"
 text = " 10000000m"
 
 [node name="distance" type="Label" parent="climbing ui/climb chart"]
@@ -418,5 +417,6 @@ grow_horizontal = 0
 grow_vertical = 0
 tooltip_text = "distance done/route length:"
 mouse_filter = 0
+theme_type_variation = &"H3Label"
 text = "20/2000km  "
 horizontal_alignment = 2

@@ -17,6 +17,12 @@ namespace ForForm.Menu
 
         [ExportGroup("UI")]
         [Export]
+        public TextureRect backgroundImage;
+
+        [Export]
+        Texture2D[] backgroundTexturesPool;
+
+        [Export]
         public DeviceConnection.PeripheralsMenu peripheralsMenu;
 
         [Export]
@@ -57,7 +63,7 @@ namespace ForForm.Menu
         }
 
         public void SetupOnGameQuit(Workout.Workout workout) {
-quitGameButton.Visible = true;
+            quitGameButton.Visible = true;
             quitGameButton.Pressed += () =>
             {
                 GD.Print("quitGame");
@@ -69,7 +75,12 @@ quitGameButton.Visible = true;
         }
 
         public override void _Ready() {
-quitGameButton.Visible = false;
+            var rng = new RandomNumberGenerator();
+            backgroundImage.Texture = backgroundTexturesPool[
+                rng.RandiRange(0, backgroundTexturesPool.Length - 1)
+            ];
+
+            quitGameButton.Visible = false;
             Visible = true;
 
             tabBar.TabChanged += (_) =>

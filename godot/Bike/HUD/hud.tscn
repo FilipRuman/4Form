@@ -1,6 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://pgeuqedr7i1i"]
+[gd_scene load_steps=15 format=3 uid="uid://pgeuqedr7i1i"]
 
 [ext_resource type="Script" uid="uid://dm56mi273fr4s" path="res://Bike/HUD/BikeHUDMain.cs" id="1_2jrfd"]
+[ext_resource type="Material" uid="uid://b6am5f5c8uce5" path="res://Bike/HUD/UIBlurMaterial.tres" id="2_2jrfd"]
 [ext_resource type="Theme" uid="uid://regixqqcydb8" path="res://theme.tres" id="2_mf6jh"]
 [ext_resource type="Script" uid="uid://bny4ims1objmv" path="res://Bike/HUD/TestingBikeHUD.cs" id="4_scrhx"]
 [ext_resource type="Shader" uid="uid://bbs3j8xh0emhp" path="res://Bike/ClimbChart.gdshader" id="5_tjljn"]
@@ -65,6 +66,7 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "FPS:"
 
 [node name="main stats" type="Panel" parent="."]
+material = ExtResource("2_2jrfd")
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -217,6 +219,7 @@ theme_override_colors/font_color = Color(0.117647, 0.415686, 0.929412, 1)
 text = "120"
 
 [node name="Testing" type="Panel" parent="." node_paths=PackedStringArray("main", "powerSlider", "powerLabel")]
+material = ExtResource("2_2jrfd")
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -261,6 +264,7 @@ layout_mode = 2
 text = "Additional power: 2137w"
 
 [node name="workout stat" type="Panel" parent="."]
+material = ExtResource("2_2jrfd")
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
@@ -309,6 +313,7 @@ text = "120"
 horizontal_alignment = 1
 
 [node name="climbing ui" type="Panel" parent="."]
+material = ExtResource("2_2jrfd")
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0

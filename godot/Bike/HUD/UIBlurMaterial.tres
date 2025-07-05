@@ -7,3 +7,6 @@ shader = ExtResource("1_pdvqj")
 shader_parameter/blur_amount = 1.761
 shader_parameter/mix_amount = 0.488
 shader_parameter/color_over = Color(0.187176, 0.187176, 0.187176, 1)
+shader_parameter/r_displacement = Vector2(10.735, 0)
+shader_parameter/g_displacement = Vector2(9.305, -8.265)
+shader_parameter/b_displacement = Vector2(-26.175, 7.525)

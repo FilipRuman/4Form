@@ -1,10 +1,15 @@
-[gd_scene load_steps=31 format=3 uid="uid://dnsjumx1dj3o7"]
+[gd_scene load_steps=36 format=3 uid="uid://dnsjumx1dj3o7"]
 
 [ext_resource type="Script" uid="uid://basdgtr0ivql5" path="res://Menu/MenuMain.cs" id="1_pqpoy"]
+[ext_resource type="Texture2D" uid="uid://kf1ko1dh8rql" path="res://menu background images/demo climb fog.png" id="2_nxyy8"]
 [ext_resource type="Theme" uid="uid://regixqqcydb8" path="res://theme.tres" id="3_fk81q"]
+[ext_resource type="Texture2D" uid="uid://dx5n6qo866rf7" path="res://menu background images/demo tutorial fog.png" id="3_px0ll"]
+[ext_resource type="Texture2D" uid="uid://bo2mbvbaldcp" path="res://menu background images/demo tutorial n1 .png" id="4_gjaq1"]
 [ext_resource type="Script" uid="uid://b0iuc2y03g3ee" path="res://Menu/MenuTabContent.cs" id="4_tcn24"]
 [ext_resource type="Script" uid="uid://cninou2cus8fu" path="res://Menu/DeviceConnection/PeripheralsMenu.cs" id="5_e117p"]
+[ext_resource type="Texture2D" uid="uid://d3tu7rke3c323" path="res://menu background images/demo tutorial n2 .png" id="5_m3b06"]
 [ext_resource type="PackedScene" uid="uid://b3prul5dd2nbn" path="res://Menu/DeviceConnection/peripherial_display.tscn" id="6_bexj6"]
+[ext_resource type="Material" uid="uid://b6am5f5c8uce5" path="res://Bike/HUD/UIBlurMaterial.tres" id="6_m3b06"]
 [ext_resource type="Script" uid="uid://d3apq1nnkijj3" path="res://Menu/DeviceConnection/DeviceType.cs" id="7_lqkny"]
 [ext_resource type="PackedScene" uid="uid://xhe2bn86m8s0" path="res://Menu/game_config.tscn" id="8_iq3lu"]
 [ext_resource type="Script" uid="uid://erdnmfehrmhp" path="res://Menu/UserConfigMenu.cs" id="8_kgf20"]
@@ -75,13 +80,13 @@ animationCurve = SubResource("Curve_rpha4")
 metadata/_custom_type_script = "uid://cn4u4uximsgg"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nxyy8"]
-bg_color = Color(0.870588, 0.141176, 0.137255, 1)
+bg_color = Color(0.87, 0.1392, 0.1392, 0.529412)
 corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[node name="menu main" type="Control" node_paths=PackedStringArray("peripheralsMenu", "userConfigMenu", "gameMenu", "tabBar", "tabContents", "tabContentsLockScreen", "tabContentsLockScreenLabel", "quitGameButton", "animationPlayer")]
+[node name="menu main" type="Control" node_paths=PackedStringArray("backgroundImage", "peripheralsMenu", "userConfigMenu", "gameMenu", "tabBar", "tabContents", "tabContentsLockScreen", "tabContentsLockScreenLabel", "quitGameButton", "animationPlayer")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -89,17 +94,31 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_pqpoy")
+backgroundImage = NodePath("Background image")
+backgroundTexturesPool = Array[Texture2D]([ExtResource("2_nxyy8"), ExtResource("3_px0ll"), ExtResource("4_gjaq1"), ExtResource("5_m3b06")])
 peripheralsMenu = NodePath("Panel/contents/device connection/PeripherialsMenu")
 userConfigMenu = NodePath("Panel/contents/UserConfig/User config menu")
 gameMenu = NodePath("Panel/contents/Game/Game config")
-tabBar = NodePath("Panel/tabs/TabBar")
+tabBar = NodePath("Panel/TabBar")
 tabContents = [NodePath("Panel/contents/device connection"), NodePath("Panel/contents/UserConfig"), NodePath("Panel/contents/Game")]
 tabContentsLockScreen = NodePath("Panel/contents/Lock screen")
 tabContentsLockScreenLabel = NodePath("Panel/contents/Lock screen/RichTextLabel")
 quitGameButton = NodePath("quit game button")
 animationPlayer = NodePath("Animation player")
 
+[node name="Background image" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_nxyy8")
+expand_mode = 1
+stretch_mode = 6
+
 [node name="Panel" type="Panel" parent="."]
+material = ExtResource("6_m3b06")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -113,26 +132,15 @@ grow_vertical = 2
 pivot_offset = Vector2(550, 300)
 theme = ExtResource("3_fk81q")
 
-[node name="tabs" type="Panel" parent="Panel"]
+[node name="TabBar" type="TabBar" parent="Panel"]
 layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 39.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -238.5
+offset_right = 238.5
+offset_bottom = 33.0
 grow_horizontal = 2
-theme = ExtResource("3_fk81q")
-theme_type_variation = &"lightPanel"
-
-[node name="TabBar" type="TabBar" parent="Panel/tabs"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 2.0
-offset_top = 5.0
-offset_right = -2.0
-offset_bottom = -5.0
-grow_horizontal = 2
-grow_vertical = 2
 theme = ExtResource("3_fk81q")
 current_tab = 0
 tab_alignment = 1

@@ -5,12 +5,13 @@
 [ext_resource type="Script" uid="uid://bqdo3og8xp122" path="res://Bike/BikeInput.cs" id="6_4ial8"]
 [ext_resource type="PackedScene" uid="uid://dcyashkyaw7d6" path="res://assets/gravel bike model/road_bike.fbx" id="9_lxdhe"]
 
-[node name="BikePhysics" type="PathFollow3D" node_paths=PackedStringArray("camera", "input")]
+[node name="BikePhysics" type="PathFollow3D" node_paths=PackedStringArray("camera", "input", "hudMain")]
 transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
 progress = 26.05
 script = ExtResource("1_k7cyb")
 camera = NodePath("Camera3D")
 input = NodePath("BikeInput")
+hudMain = NodePath("Hud")
 gravity_mS2 = 9.82
 
 [node name="Bike path" type="Node" parent="."]

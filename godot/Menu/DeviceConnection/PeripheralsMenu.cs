@@ -10,7 +10,7 @@ namespace ForForm.Menu.DeviceConnection
         private Control peripheralsDisplaysLayout;
 
         [Export]
-        MenuMain menuMain;
+        public MenuMain menuMain;
 
         [Export]
         private PackedScene peripheralDisplayPrefab;
@@ -18,6 +18,7 @@ namespace ForForm.Menu.DeviceConnection
 
         [Export]
         private DeviceType[] deviceTypes;
+
 
         // I have to use dictionary for this because unknowns are skipped
         private Dictionary<uint, PeripheralDisplay> peripheralDisplaysIndexesDictionary = new();

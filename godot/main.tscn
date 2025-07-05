@@ -116,10 +116,10 @@ gameLoader = NodePath("../../Game loader")
 script = ExtResource("1_ig7tw")
 tcpParser = NodePath("TcpParser")
 
-[node name="TcpParser" type="Node" parent="Tcp" node_paths=PackedStringArray("tcp", "peripheralsMenu")]
+[node name="TcpParser" type="Node" parent="Tcp" node_paths=PackedStringArray("tcp", "menuMain")]
 script = ExtResource("2_1bvp3")
 tcp = NodePath("..")
-peripheralsMenu = NodePath("../../CanvasLayer/menu main/Panel/contents/device connection/PeripherialsMenu")
+menuMain = NodePath("../../CanvasLayer/menu main")
 
 [node name="Blank map" parent="." instance=ExtResource("4_1bvp3")]
 name = "demo climb"

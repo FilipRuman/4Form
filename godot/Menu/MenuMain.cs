@@ -1,5 +1,6 @@
 namespace ForForm.Menu
 {
+    using System;
     using Godot;
     using Tcp;
 
@@ -15,6 +16,9 @@ namespace ForForm.Menu
         internal Map.GameLoader gameLoader;
 
         [ExportGroup("UI")]
+        [Export]
+        public DeviceConnection.PeripheralsMenu peripheralsMenu;
+
         [Export]
         internal UserConfigMenu userConfigMenu;
 
@@ -34,12 +38,16 @@ namespace ForForm.Menu
         RichTextLabel tabContentsLockScreenLabel;
 
         [Export]
+        Button quitGameButton;
+
+        [Export]
         Animations.UIAnimationPlayer animationPlayer;
 
         public override void _Process(double delta) {
             base._Process(delta);
             if (Engine.IsEditorHint())
                 return;
+
             if (Input.IsActionJustPressed("ToggleMenu")) {
                 if (Visible) {
                     animationPlayer.RunInReverse();
@@ -48,7 +56,22 @@ namespace ForForm.Menu
             }
         }
 
+        public void SetupOnGameQuit(Workout.Workout workout) {
+quitGameButton.Visible = true;
+            quitGameButton.Pressed += () =>
+            {
+                GD.Print("quitGame");
+                workout.Save();
+                tcpParser.tcp.rustProcess.Kill();
+
+                GetTree().Quit();
+            };
+        }
+
         public override void _Ready() {
+quitGameButton.Visible = false;
+            Visible = true;
+
             tabBar.TabChanged += (_) =>
             {
                 UpdateTabs();

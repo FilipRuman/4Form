@@ -19,6 +19,9 @@ namespace ForForm.Bike
         public BikeInput input;
 
         [Export]
+        public HUD.BikeHUDMain hudMain;
+
+        [Export]
         public float speed_mS; //m/s
         public float speed_kmH => speed_mS * 3.6f; // km/h
         public BikeModel bikeModel;

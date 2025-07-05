@@ -7,9 +7,9 @@ namespace ForForm.Workout
     public class Workout {
         public float totalTime_s;
 
-        public List<float> wattsList;
-        public List<float> speedsList;
-        public List<float> heartRatesList;
+        public List<float> wattsList = new();
+        public List<float> speedsList = new();
+        public List<float> heartRatesList = new();
 
         public float totalHeartRate;
         public float totalCadence;

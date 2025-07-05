@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://dnsjumx1dj3o7"]
+[gd_scene load_steps=31 format=3 uid="uid://dnsjumx1dj3o7"]
 
 [ext_resource type="Script" uid="uid://basdgtr0ivql5" path="res://Menu/MenuMain.cs" id="1_pqpoy"]
 [ext_resource type="Theme" uid="uid://regixqqcydb8" path="res://theme.tres" id="3_fk81q"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://0bd4icrprif5" path="res://Menu/PropertyEdit.cs" id="10_u54ij"]
 [ext_resource type="Script" uid="uid://cfnscp01cdp3c" path="res://Menu/Animations/UIAnimationPlayer.cs" id="10_xmmyl"]
 [ext_resource type="Script" uid="uid://cn4u4uximsgg" path="res://Menu/Animations/SwipeAnimation.cs" id="11_nxyy8"]
+[ext_resource type="FontFile" uid="uid://befjt7bkyinos" path="res://assets/Meslo/MesloLGLNerdFont-Bold.ttf" id="12_xmmyl"]
 
 [sub_resource type="Curve" id="Curve_rpha4"]
 _limits = [0.0, 1.0, 0.0, 0.460746]
@@ -73,7 +74,14 @@ hideAtTheEnd = true
 animationCurve = SubResource("Curve_rpha4")
 metadata/_custom_type_script = "uid://cn4u4uximsgg"
 
-[node name="menu main" type="Control" node_paths=PackedStringArray("userConfigMenu", "gameMenu", "tabBar", "tabContents", "tabContentsLockScreen", "tabContentsLockScreenLabel", "animationPlayer")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nxyy8"]
+bg_color = Color(0.870588, 0.141176, 0.137255, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="menu main" type="Control" node_paths=PackedStringArray("peripheralsMenu", "userConfigMenu", "gameMenu", "tabBar", "tabContents", "tabContentsLockScreen", "tabContentsLockScreenLabel", "quitGameButton", "animationPlayer")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -81,12 +89,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_pqpoy")
+peripheralsMenu = NodePath("Panel/contents/device connection/PeripherialsMenu")
 userConfigMenu = NodePath("Panel/contents/UserConfig/User config menu")
 gameMenu = NodePath("Panel/contents/Game/Game config")
 tabBar = NodePath("Panel/tabs/TabBar")
 tabContents = [NodePath("Panel/contents/device connection"), NodePath("Panel/contents/UserConfig"), NodePath("Panel/contents/Game")]
 tabContentsLockScreen = NodePath("Panel/contents/Lock screen")
 tabContentsLockScreenLabel = NodePath("Panel/contents/Lock screen/RichTextLabel")
+quitGameButton = NodePath("quit game button")
 animationPlayer = NodePath("Animation player")
 
 [node name="Panel" type="Panel" parent="."]
@@ -419,6 +429,24 @@ script = ExtResource("10_xmmyl")
 animation = SubResource("Resource_nxyy8")
 reverseAnimation = SubResource("Resource_px0ll")
 target = NodePath("..")
+
+[node name="quit game button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -98.0
+offset_top = -46.0
+offset_right = 98.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(1.00571, 1)
+theme_override_fonts/font = ExtResource("12_xmmyl")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_nxyy8")
+text = "Quit game"
 
 [editable path="Panel/contents/device connection/HSplitContainer/device types/VBoxContainer2/Smart bike trainer 󰂣"]
 [editable path="Panel/contents/device connection/HSplitContainer/device types/VBoxContainer2/heart rate tracker "]

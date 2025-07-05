@@ -5,17 +5,17 @@ namespace ForForm.Tcp
 
     public partial class TcpParser : Node {
         [Export]
-        Tcp tcp;
+        public Tcp tcp;
 
         [Export]
-        Menu.DeviceConnection.PeripheralsMenu peripheralsMenu;
+        Menu.MenuMain menuMain;
         public Bike.BikePhysics bikePhysics;
         RegEx standardIndexNameRegex = new RegEx();
         RegEx trainerDataRegex = new RegEx();
 
         RegEx heartRateDataRegex = new RegEx();
 
-        public override void _Ready() {
+        public void Setup() {
             trainerDataRegex.Compile(
                 """power:(?<power>\d*);cadence:(?<cadence>\d*);rotation:(?<rotation>\d*);"""
             );
@@ -52,7 +52,7 @@ namespace ForForm.Tcp
                 case 'i':
                 {
                     var regexOutput = standardIndexNameRegex.Search(data[1..data.Length]);
-                    peripheralsMenu.DisplayNewPeripheral(
+                    menuMain.peripheralsMenu.DisplayNewPeripheral(
                         regexOutput.GetString("name"),
                         uint.Parse(regexOutput.GetString("index"))
                     );
@@ -61,7 +61,7 @@ namespace ForForm.Tcp
                 case 'o':
                 {
                     var regexOutput = standardIndexNameRegex.Search(data[1..data.Length]);
-                    peripheralsMenu.OnPeripheralConnection(
+                    menuMain.peripheralsMenu.OnPeripheralConnection(
                         regexOutput.GetString("name"),
                         uint.Parse(regexOutput.GetString("index"))
                     );

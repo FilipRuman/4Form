@@ -2,7 +2,7 @@ namespace ForForm.Bike.HUD
 {
     using Godot;
 
-    public partial class BikeHUDMain : Node {
+    public partial class BikeHUDMain : CanvasLayer {
         //INFO:  I put all references in one script so there is less clutter in the godot editor
         //  Also it makes setting separate scenes for each segment of code easier
         [Export]
@@ -30,6 +30,9 @@ namespace ForForm.Bike.HUD
         public Workout.Workout workout = new();
 
         public override void _Process(double delta) {
+            if (Input.IsActionJustPressed("HideHUD")) {
+                Visible = !Visible;
+            }
             workout.Update(
                 (float)delta,
                 bikeInput.currentWatts,

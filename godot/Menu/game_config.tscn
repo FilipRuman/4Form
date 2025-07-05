@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://xhe2bn86m8s0"]
+[gd_scene load_steps=18 format=3 uid="uid://xhe2bn86m8s0"]
 
 [ext_resource type="Script" uid="uid://cmtqinhhxaplm" path="res://Menu/Game/GameMenu.cs" id="1_3n1nv"]
 [ext_resource type="Script" uid="uid://dnlm8elws8d6k" path="res://Menu/Game/MapSelectionMenu.cs" id="2_11pwh"]
@@ -11,6 +11,8 @@
 [ext_resource type="Script" uid="uid://cijiek0ybe20l" path="res://Menu/Game/BikeConfigurationMenu.cs" id="8_or55t"]
 [ext_resource type="FontFile" uid="uid://cfse7jemxeexd" path="res://assets/Meslo/MesloLGLDZNerdFont-Bold.ttf" id="9_chcsm"]
 [ext_resource type="Script" uid="uid://0bd4icrprif5" path="res://Menu/PropertyEdit.cs" id="11_xwyxq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_or55t"]
 
 [sub_resource type="Curve" id="Curve_or55t"]
 _limits = [0.0, 1.0, 0.0, 0.460746]
@@ -32,6 +34,10 @@ startPosition = Vector2(0, 0)
 hideAtTheEnd = true
 animationCurve = SubResource("Curve_or55t")
 metadata/_custom_type_script = "uid://cn4u4uximsgg"
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e1e62"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lbo6y"]
 
 [node name="Game menu" type="Control" node_paths=PackedStringArray("menus", "next", "previous", "startGame")]
 layout_mode = 3
@@ -59,6 +65,7 @@ clip_contents = true
 layout_mode = 2
 size_flags_vertical = 3
 theme_type_variation = &"midPanel"
+theme_override_styles/panel = SubResource("StyleBoxEmpty_or55t")
 
 [node name="Map selecton" type="Control" parent="VBoxContainer/Game config menus" node_paths=PackedStringArray("localLayout", "onlineLayout", "description", "gameMenu")]
 layout_mode = 1
@@ -110,6 +117,7 @@ split_offset = 485
 
 [node name="Local" type="Panel" parent="VBoxContainer/Game config menus/Map selecton/VBoxContainer/HSplitContainer/MapSelection/HSplitContainer"]
 layout_mode = 2
+theme_type_variation = &"lightborderPanel"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Game config menus/Map selecton/VBoxContainer/HSplitContainer/MapSelection/HSplitContainer/Local"]
 layout_mode = 1
@@ -125,6 +133,7 @@ grow_vertical = 2
 
 [node name="Online" type="Panel" parent="VBoxContainer/Game config menus/Map selecton/VBoxContainer/HSplitContainer/MapSelection/HSplitContainer"]
 layout_mode = 2
+theme_type_variation = &"lightborderPanel"
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/Game config menus/Map selecton/VBoxContainer/HSplitContainer/MapSelection/HSplitContainer/Online"]
 layout_mode = 1
@@ -140,7 +149,7 @@ grow_vertical = 2
 
 [node name="descriptioin" type="Panel" parent="VBoxContainer/Game config menus/Map selecton/VBoxContainer/HSplitContainer"]
 layout_mode = 2
-theme_type_variation = &"lightPanel"
+theme_type_variation = &"borderPanel"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Game config menus/Map selecton/VBoxContainer/HSplitContainer/descriptioin"]
 layout_mode = 1
@@ -197,6 +206,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
 theme_type_variation = &"lightPanel"
+theme_override_styles/panel = SubResource("StyleBoxEmpty_e1e62")
 
 [node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer/Game config menus/Route selection/Game mode stats"]
 layout_mode = 1
@@ -210,6 +220,7 @@ drag_area_margin_begin = 65
 
 [node name="routes" type="Panel" parent="VBoxContainer/Game config menus/Route selection/Game mode stats/HSplitContainer"]
 layout_mode = 2
+theme_type_variation = &"lightPanel"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Game config menus/Route selection/Game mode stats/HSplitContainer/routes"]
 layout_mode = 1
@@ -241,7 +252,7 @@ alignment = 1
 [node name="Stats" type="Panel" parent="VBoxContainer/Game config menus/Route selection/Game mode stats/HSplitContainer/routes/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_type_variation = &"midPanel"
+theme_type_variation = &"borderPanel"
 
 [node name="HFlowContainer" type="HFlowContainer" parent="VBoxContainer/Game config menus/Route selection/Game mode stats/HSplitContainer/routes/VBoxContainer/Stats"]
 layout_mode = 1
@@ -314,33 +325,25 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("8_or55t")
-bikeMass = NodePath("Bike config/layout/Bike model stats/Layout/mass")
-wheelFrictionCoefficient = NodePath("Bike config/layout/Bike model stats/Layout/wheel friction")
-bikeWheelRadius = NodePath("Bike config/layout/Bike model stats/Layout/wheel radious")
-bikeFrontalArea = NodePath("Bike config/layout/Bike model stats/Layout/drag")
+bikeMass = NodePath("layout/Bike model stats/Layout/mass")
+wheelFrictionCoefficient = NodePath("layout/Bike model stats/Layout/wheel friction")
+bikeWheelRadius = NodePath("layout/Bike model stats/Layout/wheel radious")
+bikeFrontalArea = NodePath("layout/Bike model stats/Layout/drag")
 bikeModelSelectionPrefab = ExtResource("2_e1e62")
 gameMenu = NodePath("../../..")
-bikeModelLayout = NodePath("Bike config/layout/Model selection/HBoxContainer")
+bikeModelLayout = NodePath("layout/Model selection/HBoxContainer")
 
-[node name="background" type="Panel" parent="VBoxContainer/Game config menus/Bike selection"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_type_variation = &"lightborderPanel"
+[node name="Bike menu animation3" type="Control" parent="VBoxContainer/Game config menus/Bike selection" node_paths=PackedStringArray("target")]
+anchors_preset = 0
+offset_left = -1979.28
+offset_right = -1939.28
+offset_bottom = 40.0
+script = ExtResource("4_or55t")
+animation = SubResource("Resource_lbo6y")
+reverseAnimation = SubResource("Resource_or55t")
+target = NodePath("..")
 
-[node name="Bike config" type="Panel" parent="VBoxContainer/Game config menus/Bike selection"]
-clip_contents = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="layout" type="VBoxContainer" parent="VBoxContainer/Game config menus/Bike selection/Bike config"]
+[node name="layout" type="VBoxContainer" parent="VBoxContainer/Game config menus/Bike selection"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -353,29 +356,29 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("6_bt2k0")
 
-[node name="Label" type="Label" parent="VBoxContainer/Game config menus/Bike selection/Bike config/layout"]
+[node name="Label" type="Label" parent="VBoxContainer/Game config menus/Bike selection/layout"]
 layout_mode = 2
 theme_type_variation = &"H3Label"
 text = "Bike config:"
 horizontal_alignment = 1
 
-[node name="Model selection" type="ScrollContainer" parent="VBoxContainer/Game config menus/Bike selection/Bike config/layout"]
+[node name="Model selection" type="ScrollContainer" parent="VBoxContainer/Game config menus/Bike selection/layout"]
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 size_flags_stretch_ratio = 0.0
 follow_focus = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Game config menus/Bike selection/Bike config/layout/Model selection"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Game config menus/Bike selection/layout/Model selection"]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="Bike model stats" type="Panel" parent="VBoxContainer/Game config menus/Bike selection/Bike config/layout"]
+[node name="Bike model stats" type="Panel" parent="VBoxContainer/Game config menus/Bike selection/layout"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_type_variation = &"lightPanel"
+theme_type_variation = &"borderPanel"
 
-[node name="Layout" type="VBoxContainer" parent="VBoxContainer/Game config menus/Bike selection/Bike config/layout/Bike model stats"]
+[node name="Layout" type="VBoxContainer" parent="VBoxContainer/Game config menus/Bike selection/layout/Bike model stats"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -387,89 +390,79 @@ offset_bottom = -3.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/Game config menus/Bike selection/Bike config/layout/Bike model stats/Layout"]
+[node name="Label" type="Label" parent="VBoxContainer/Game config menus/Bike selection/layout/Bike model stats/Layout"]
 layout_mode = 2
 theme_type_variation = &"H3Label"
 text = "Test  bike model name"
 horizontal_alignment = 1
 
-[node name="mass" type="HBoxContainer" parent="VBoxContainer/Game config menus/Bike selection/Bike config/layout/Bike model stats/Layout" node_paths=PackedStringArray("lineEdit")]
+[node name="mass" type="HBoxContainer" parent="VBoxContainer/Game config menus/Bike selection/layout/Bike model stats/Layout" node_paths=PackedStringArray("lineEdit")]
 layout_mode = 2
 script = ExtResource("11_xwyxq")
 lineEdit = NodePath("LineEdit")
 
-[node name="Label" type="Label" parent="VBoxContainer/Game config menus/Bike selection/Bike config/layout/Bike model stats/Layout/mass"]
+[node name="Label" type="Label" parent="VBoxContainer/Game config menus/Bike selection/layout/Bike model stats/Layout/mass"]
 layout_mode = 2
 theme_type_variation = &"H4Label"
 text = " 󰖡 Mass: "
 
-[node name="LineEdit" type="LineEdit" parent="VBoxContainer/Game config menus/Bike selection/Bike config/layout/Bike model stats/Layout/mass"]
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer/Game config menus/Bike selection/layout/Bike model stats/Layout/mass"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"H4Edit"
 placeholder_text = "enter value:"
 virtual_keyboard_type = 2
 
-[node name="wheel friction" type="HBoxContainer" parent="VBoxContainer/Game config menus/Bike selection/Bike config/layout/Bike model stats/Layout" node_paths=PackedStringArray("lineEdit")]
+[node name="wheel friction" type="HBoxContainer" parent="VBoxContainer/Game config menus/Bike selection/layout/Bike model stats/Layout" node_paths=PackedStringArray("lineEdit")]
 layout_mode = 2
 script = ExtResource("11_xwyxq")
 lineEdit = NodePath("LineEdit")
 
-[node name="Label" type="Label" parent="VBoxContainer/Game config menus/Bike selection/Bike config/layout/Bike model stats/Layout/wheel friction"]
+[node name="Label" type="Label" parent="VBoxContainer/Game config menus/Bike selection/layout/Bike model stats/Layout/wheel friction"]
 layout_mode = 2
 theme_type_variation = &"H4Label"
 text = " 󱥔 Wheel friction: "
 
-[node name="LineEdit" type="LineEdit" parent="VBoxContainer/Game config menus/Bike selection/Bike config/layout/Bike model stats/Layout/wheel friction"]
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer/Game config menus/Bike selection/layout/Bike model stats/Layout/wheel friction"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"H4Edit"
 placeholder_text = "enter value:"
 virtual_keyboard_type = 2
 
-[node name="wheel radious" type="HBoxContainer" parent="VBoxContainer/Game config menus/Bike selection/Bike config/layout/Bike model stats/Layout" node_paths=PackedStringArray("lineEdit")]
+[node name="wheel radious" type="HBoxContainer" parent="VBoxContainer/Game config menus/Bike selection/layout/Bike model stats/Layout" node_paths=PackedStringArray("lineEdit")]
 layout_mode = 2
 script = ExtResource("11_xwyxq")
 lineEdit = NodePath("LineEdit")
 
-[node name="Label" type="Label" parent="VBoxContainer/Game config menus/Bike selection/Bike config/layout/Bike model stats/Layout/wheel radious"]
+[node name="Label" type="Label" parent="VBoxContainer/Game config menus/Bike selection/layout/Bike model stats/Layout/wheel radious"]
 layout_mode = 2
 theme_type_variation = &"H4Label"
 text = " 󰐙 Wheel radious: "
 
-[node name="LineEdit" type="LineEdit" parent="VBoxContainer/Game config menus/Bike selection/Bike config/layout/Bike model stats/Layout/wheel radious"]
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer/Game config menus/Bike selection/layout/Bike model stats/Layout/wheel radious"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"H4Edit"
 placeholder_text = "enter value:"
 virtual_keyboard_type = 2
 
-[node name="drag" type="HBoxContainer" parent="VBoxContainer/Game config menus/Bike selection/Bike config/layout/Bike model stats/Layout" node_paths=PackedStringArray("lineEdit")]
+[node name="drag" type="HBoxContainer" parent="VBoxContainer/Game config menus/Bike selection/layout/Bike model stats/Layout" node_paths=PackedStringArray("lineEdit")]
 layout_mode = 2
 script = ExtResource("11_xwyxq")
 lineEdit = NodePath("LineEdit")
 
-[node name="Label" type="Label" parent="VBoxContainer/Game config menus/Bike selection/Bike config/layout/Bike model stats/Layout/drag"]
+[node name="Label" type="Label" parent="VBoxContainer/Game config menus/Bike selection/layout/Bike model stats/Layout/drag"]
 layout_mode = 2
 theme_type_variation = &"H4Label"
 text = " 󱄟 Drag: "
 
-[node name="LineEdit" type="LineEdit" parent="VBoxContainer/Game config menus/Bike selection/Bike config/layout/Bike model stats/Layout/drag"]
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer/Game config menus/Bike selection/layout/Bike model stats/Layout/drag"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"H4Edit"
 placeholder_text = "enter value:"
 virtual_keyboard_type = 2
-
-[node name="Bike menu animation3" type="Control" parent="VBoxContainer/Game config menus/Bike selection" node_paths=PackedStringArray("target")]
-anchors_preset = 0
-offset_left = -1979.28
-offset_right = -1939.28
-offset_bottom = 40.0
-script = ExtResource("4_or55t")
-animation = SubResource("Resource_lbo6y")
-reverseAnimation = SubResource("Resource_or55t")
-target = NodePath("..")
 
 [node name="Load game" type="Control" parent="VBoxContainer/Game config menus"]
 visible = false
@@ -518,6 +511,9 @@ visible = false
 custom_minimum_size = Vector2(384.31, 0)
 layout_mode = 2
 theme_type_variation = &"buttonDefault"
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 50
 text = ""
 
@@ -525,6 +521,7 @@ text = ""
 custom_minimum_size = Vector2(418.505, 0)
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_lbo6y")
 
 [node name="right" type="Button" parent="VBoxContainer/Menu movement"]
 visible = false

@@ -206,6 +206,7 @@ theme_override_font_sizes/font_size = 20
 text = "0󰓅 "
 
 [node name="avr" type="Label" parent="main stats/Main stats layout2/Speed"]
+layout_mode = 0
 offset_left = -29.0
 offset_top = 19.0
 offset_right = 11.0

@@ -29,6 +29,7 @@ namespace ForForm.Tcp
             "./../subomdules/4Form-BluetoothHandler/target/debug/bluetooth_handler",
             "./../subomdules/4Form-BluetoothHandler/target/debug/bluetooth_handler.x86_64",
         };
+        public Process rustProcess;
 
         public override void _Ready() {
             var working_path = "";
@@ -46,13 +47,14 @@ namespace ForForm.Tcp
             }
             GD.Print($"working file path to rust Ble handler:{working_path}");
 
-            var rustProcess = new Process();
+            rustProcess = new Process();
             rustProcess.StartInfo.FileName = working_path;
             rustProcess.StartInfo.UseShellExecute = false;
             // for debugging
             rustProcess.StartInfo.CreateNoWindow = false;
 
             rustProcess.Start();
+            tcpParser.Setup();
 
             base._Ready();
         }

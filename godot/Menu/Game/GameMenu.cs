@@ -27,7 +27,8 @@ namespace ForForm.Menu.Game
                 bikeConfigurationMenu.currentBikeModel,
                 menuMain.userConfigMenu.userConfig,
                 routeMenu.currentRoute,
-                mapSelectionMenu.currentMap
+                mapSelectionMenu.currentMap,
+                menuMain
             );
         }
 

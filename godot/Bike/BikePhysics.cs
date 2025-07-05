@@ -23,6 +23,7 @@ namespace ForForm.Bike
         public float speed_kmH => speed_mS * 3.6f; // km/h
         public BikeModel bikeModel;
         public float userMass_kg;
+
         [Export]
         float gravity_mS2; //m/s^2
         public float testingPower = 0;
@@ -32,6 +33,7 @@ namespace ForForm.Bike
 
         public Map.Route.Route route;
         public Map.Map map;
+
         public float Acceleration_mS2() {
             float gravity_N = (userMass_kg + bikeModel.mass_kg) * gravity_mS2;
             float slopeGravityForce_N = gravity_N * Mathf.Sin(slope_rad); //the force that is pushing you forward from hills
@@ -60,17 +62,16 @@ namespace ForForm.Bike
             return totalForwardForce_N / (userMass_kg + bikeModel.mass_kg); // m/s^2 clamped to remove any weirdness
         }
 
-        public override void _Process(double delta) {
+        public override void _PhysicsProcess(double delta) {
             // so you don't roll backwards on hills when stopping pedaling
             speed_mS = Mathf.Max(speed_mS + Acceleration_mS2() * (float)delta, .001f);
 
             UpdatePath(delta);
-            base._Process(delta);
+            base._PhysicsProcess(delta);
         }
 
         private void UpdatePath(double delta) {
-            float currentProgress_m =
-                Progress + speed_mS * (float)delta * map.speedScale;
+            float currentProgress_m = Progress + speed_mS * (float)delta * map.speedScale;
             CalculateSlope(currentProgress_m);
 
             Progress = currentProgress_m;
@@ -93,8 +94,6 @@ namespace ForForm.Bike
 
         public float slope_percent; //%
         public float slope_rad;
-
-
 
         public override void _Ready() {
             Progress = route.startingPoint;

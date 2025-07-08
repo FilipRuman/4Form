@@ -29,6 +29,7 @@ namespace ForForm.Tcp
             "./../subomdules/4Form-BluetoothHandler/target/debug/bluetooth_handler",
             "./../subomdules/4Form-BluetoothHandler/target/debug/bluetooth_handler.x86_64",
         };
+        public Process rustProcess;
 
         public override void _Ready() {
             var working_path = "";
@@ -46,13 +47,14 @@ namespace ForForm.Tcp
             }
             GD.Print($"working file path to rust Ble handler:{working_path}");
 
-            var rustProcess = new Process();
+            rustProcess = new Process();
             rustProcess.StartInfo.FileName = working_path;
             rustProcess.StartInfo.UseShellExecute = false;
             // for debugging
             rustProcess.StartInfo.CreateNoWindow = false;
 
             rustProcess.Start();
+            tcpParser.Setup();
 
             base._Ready();
         }
@@ -72,8 +74,7 @@ namespace ForForm.Tcp
                 || readDataTask.Status == TaskStatus.RanToCompletion
                 || readDataTask.Status == TaskStatus.Faulted
             ) {
-                readDataTask?.Dispose();
-                readDataTask = ReadDataAsync();
+                ReadDataAsync();
             }
 
             base._Process(delta);
@@ -82,6 +83,7 @@ namespace ForForm.Tcp
         private async Task ReadDataAsync() {
             byte[] buffer = new byte[1024];
             int bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length);
+
             string data_raw = Encoding.UTF8.GetString(buffer, 0, bytesRead);
             var splittedData = data_raw.Split('\n');
             foreach (string data in splittedData) {

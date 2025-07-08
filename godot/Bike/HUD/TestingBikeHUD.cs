@@ -4,7 +4,7 @@ namespace ForForm.Bike.HUD
 
     public partial class TestingBikeHUD : Node {
         [Export]
-        BikeHUDMain main;
+        BikeHudMain main;
 
         [Export]
         VSlider powerSlider;

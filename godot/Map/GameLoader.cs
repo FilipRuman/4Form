@@ -1,5 +1,6 @@
 namespace ForForm.Map
 {
+    using System;
     using Godot;
 
     public partial class GameLoader : Node {
@@ -16,14 +17,19 @@ namespace ForForm.Map
             Bike.BikeModel bikeModel,
             Menu.UserConfig userConfig,
             Route.Route route,
-            Map map
+            Map map,
+            Menu.MenuMain menuMain
         ) {
-
             var bikePhysics = (Bike.BikePhysics)playerPrefab.Instantiate();
+
+            menuMain.backgroundImage.Visible = false;
+            menuMain.SetupOnGameQuitWithWorkout(bikePhysics.hudMain.workout);
+
             bikePhysics.userMass_kg = userConfig.mass_kg;
             bikePhysics.bikeModel = bikeModel;
             bikePhysics.map = map;
             bikePhysics.route = route;
+            bikePhysics.tcpParser = tcpParser;
 
             tcpParser.bikePhysics = bikePhysics;
             terrain3D.Call("set_camera", bikePhysics.camera);

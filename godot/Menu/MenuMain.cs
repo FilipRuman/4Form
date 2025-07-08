@@ -1,5 +1,6 @@
 namespace ForForm.Menu
 {
+    using System;
     using Godot;
     using Tcp;
 
@@ -15,6 +16,15 @@ namespace ForForm.Menu
         internal Map.GameLoader gameLoader;
 
         [ExportGroup("UI")]
+        [Export]
+        public TextureRect backgroundImage;
+
+        [Export]
+        Texture2D[] backgroundTexturesPool;
+
+        [Export]
+        public DeviceConnection.PeripheralsMenu peripheralsMenu;
+
         [Export]
         internal UserConfigMenu userConfigMenu;
 
@@ -33,15 +43,53 @@ namespace ForForm.Menu
         [Export]
         RichTextLabel tabContentsLockScreenLabel;
 
+        [Export]
+        Button quitGameButton;
+
+        [Export]
+        Animations.UIAnimationPlayer animationPlayer;
+
         public override void _Process(double delta) {
             base._Process(delta);
             if (Engine.IsEditorHint())
                 return;
-            if (Input.IsActionJustPressed("ToggleMenu"))
-                Visible = !Visible;
+
+            if (Input.IsActionJustPressed("ToggleMenu")) {
+                if (Visible) {
+                    animationPlayer.RunInReverse();
+                } else
+                    animationPlayer.Run();
+            }
+        }
+
+        private void InitialOnGameQuitWithoutWorkout() {
+            tcpParser.tcp.rustProcess.Kill();
+            GetTree().Quit();
+        }
+
+        public void SetupOnGameQuitWithWorkout(Workout.Workout workout) {
+            quitGameButton.Pressed -= InitialOnGameQuitWithoutWorkout;
+            quitGameButton.Pressed += () =>
+            {
+                GD.Print("quitGame & save workout");
+
+                workout.Save();
+                tcpParser.tcp.rustProcess.Kill();
+
+                GetTree().Quit();
+            };
         }
 
         public override void _Ready() {
+            quitGameButton.Pressed += InitialOnGameQuitWithoutWorkout;
+
+            var rng = new RandomNumberGenerator();
+            backgroundImage.Texture = backgroundTexturesPool[
+                rng.RandiRange(0, backgroundTexturesPool.Length - 1)
+            ];
+
+            Visible = true;
+
             tabBar.TabChanged += (_) =>
             {
                 UpdateTabs();
@@ -55,9 +103,9 @@ namespace ForForm.Menu
         public void UpdateTabs() {
             if (lastTab == tabBar.CurrentTab)
                 return;
-            tabContents[lastTab].Visible = false;
+            tabContents[lastTab].animationPlayer.RunInReverse();
             MenuTabContent currentTab = tabContents[tabBar.CurrentTab];
-            currentTab.Visible = true;
+            currentTab.animationPlayer.Run();
             HandleLockScreen(currentTab);
             lastTab = tabBar.CurrentTab;
         }

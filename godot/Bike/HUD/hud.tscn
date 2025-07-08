@@ -1,8 +1,8 @@
 [gd_scene load_steps=15 format=3 uid="uid://pgeuqedr7i1i"]
 
-[ext_resource type="Script" uid="uid://dm56mi273fr4s" path="res://Bike/HUD/BikeHUDMain.cs" id="1_2jrfd"]
+[ext_resource type="Script" uid="uid://dm56mi273fr4s" path="res://Bike/HUD/BikeHudMain.cs" id="1_2jrfd"]
+[ext_resource type="Material" uid="uid://b6am5f5c8uce5" path="res://Bike/HUD/UIBlurMaterial.tres" id="2_2jrfd"]
 [ext_resource type="Theme" uid="uid://regixqqcydb8" path="res://theme.tres" id="2_mf6jh"]
-[ext_resource type="FontFile" uid="uid://cfse7jemxeexd" path="res://assets/Meslo/MesloLGLDZNerdFont-Bold.ttf" id="3_gcj2r"]
 [ext_resource type="Script" uid="uid://bny4ims1objmv" path="res://Bike/HUD/TestingBikeHUD.cs" id="4_scrhx"]
 [ext_resource type="Shader" uid="uid://bbs3j8xh0emhp" path="res://Bike/ClimbChart.gdshader" id="5_tjljn"]
 [ext_resource type="Script" uid="uid://dbqsim7qc0ymx" path="res://Bike/HUD/ClimbChart.cs" id="6_dnlm1"]
@@ -42,28 +42,38 @@ shader_parameter/alpha_based_on_distance_from_line = SubResource("GradientTextur
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_2s7lo"]
 gradient = SubResource("Gradient_rie2u")
 
-[node name="HUD" type="CanvasLayer" node_paths=PackedStringArray("cadence", "power", "speed", "heartRate", "fps")]
+[node name="HUD" type="CanvasLayer" node_paths=PackedStringArray("cadence", "cadenceAvr", "power", "powerAvr", "speed", "speedAvr", "heartRate", "heartRateAvr", "workoutLength", "totalDescent", "caloriesBurnt", "totalAscent", "fps")]
 script = ExtResource("1_2jrfd")
 cadence = NodePath("main stats/Main stats layout2/Cadence")
+cadenceAvr = NodePath("main stats/Main stats layout2/Cadence/avr")
 power = NodePath("main stats/Main stats layout2/Power")
+powerAvr = NodePath("main stats/Main stats layout2/Power/avr")
 speed = NodePath("main stats/Main stats layout2/Speed")
+speedAvr = NodePath("main stats/Main stats layout2/Speed/avr")
 heartRate = NodePath("main stats/Main stats layout2/Heart rate")
+heartRateAvr = NodePath("main stats/Main stats layout2/Heart rate/avr")
+workoutLength = NodePath("workout stat/VBoxContainer/workoutLength")
+totalDescent = NodePath("workout stat/VBoxContainer/totalDescent")
+caloriesBurnt = NodePath("workout stat/VBoxContainer/caloriesBurnt")
+totalAscent = NodePath("workout stat/VBoxContainer/totalAscent")
 fps = NodePath("FPS")
 
 [node name="FPS" type="Label" parent="."]
 offset_right = 116.0
 offset_bottom = 28.0
+theme_type_variation = &"H2Label"
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 20
 text = "FPS:"
 
 [node name="main stats" type="Panel" parent="."]
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -82.0
-offset_right = 490.0
-grow_vertical = 0
+material = ExtResource("2_2jrfd")
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -132.0
+offset_right = 132.0
+offset_bottom = 101.0
+grow_horizontal = 2
 size_flags_horizontal = 3
 theme = ExtResource("2_mf6jh")
 
@@ -92,13 +102,33 @@ size_flags_horizontal = 3
 theme_override_styles/separator = SubResource("StyleBoxEmpty_6whun")
 
 [node name="Power" type="Label" parent="main stats/Main stats layout2"]
-custom_minimum_size = Vector2(114.25, 0)
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Watts"
+mouse_filter = 1
+theme_type_variation = &"H1Label"
 theme_override_colors/font_color = Color(0.960784, 0.560784, 0, 1)
-theme_override_fonts/font = ExtResource("3_gcj2r")
-theme_override_font_sizes/font_size = 27
-text = "151 power󱐋"
-horizontal_alignment = 1
+text = "0󱐋 "
+horizontal_alignment = 2
+
+[node name="avr" type="Label" parent="main stats/Main stats layout2/Power"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -12.0
+offset_bottom = 13.0
+grow_horizontal = 0
+grow_vertical = 0
+tooltip_text = "Average"
+mouse_filter = 1
+theme_type_variation = &"H4Label"
+theme_override_colors/font_color = Color(0.960784, 0.560784, 0, 1)
+text = "120"
 
 [node name="VSeparator2" type="VSeparator" parent="main stats/Main stats layout2"]
 layout_mode = 2
@@ -106,11 +136,29 @@ size_flags_horizontal = 3
 theme_override_styles/separator = SubResource("StyleBoxEmpty_6whun")
 
 [node name="Heart rate" type="Label" parent="main stats/Main stats layout2"]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Heart rate bpm"
+mouse_filter = 1
+theme_type_variation = &"H1Label"
 theme_override_colors/font_color = Color(0.86959, 0.14237, 0.137062, 1)
-theme_override_fonts/font = ExtResource("3_gcj2r")
-theme_override_font_sizes/font_size = 27
-text = "160bpm HR "
+text = "0 "
+
+[node name="avr" type="Label" parent="main stats/Main stats layout2/Heart rate"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -11.0
+offset_right = 40.0
+offset_bottom = 14.0
+grow_vertical = 0
+tooltip_text = "Average"
+mouse_filter = 1
+theme_type_variation = &"H4Label"
+theme_override_colors/font_color = Color(0.870588, 0.141176, 0.137255, 1)
+text = "120"
 
 [node name="VSeparator3" type="VSeparator" parent="main stats/Main stats layout2"]
 layout_mode = 2
@@ -119,9 +167,31 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_6whun")
 
 [node name="Cadence" type="Label" parent="main stats/Main stats layout2"]
 layout_mode = 2
+tooltip_text = "cadence rpm
+"
+mouse_filter = 1
+theme_type_variation = &"H3Label"
 theme_override_colors/font_color = Color(0, 0.913725, 0, 1)
-theme_override_font_sizes/font_size = 20
-text = "90rpm cadence "
+text = "0 "
+
+[node name="avr" type="Label" parent="main stats/Main stats layout2/Cadence"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -5.0
+offset_top = -12.0
+offset_right = 35.0
+offset_bottom = 13.0
+grow_horizontal = 0
+grow_vertical = 0
+tooltip_text = "Average"
+mouse_filter = 1
+theme_type_variation = &"H4Label"
+theme_override_colors/font_color = Color(0, 0.905882, 0, 1)
+text = "120"
 
 [node name="VSeparator" type="VSeparator" parent="main stats/Main stats layout2"]
 layout_mode = 2
@@ -130,11 +200,26 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_6whun")
 
 [node name="Speed" type="Label" parent="main stats/Main stats layout2"]
 layout_mode = 2
+tooltip_text = "speed km/h"
+mouse_filter = 1
+theme_type_variation = &"H3Label"
 theme_override_colors/font_color = Color(0.119761, 0.443755, 1, 1)
-theme_override_font_sizes/font_size = 20
-text = "20.1km/h speed󰓅 "
+text = "0󰓅 "
+
+[node name="avr" type="Label" parent="main stats/Main stats layout2/Speed"]
+layout_mode = 0
+offset_left = -29.0
+offset_top = 19.0
+offset_right = 11.0
+offset_bottom = 44.0
+tooltip_text = "Average"
+mouse_filter = 1
+theme_type_variation = &"H4Label"
+theme_override_colors/font_color = Color(0.117647, 0.415686, 0.929412, 1)
+text = "120"
 
 [node name="Testing" type="Panel" parent="." node_paths=PackedStringArray("main", "powerSlider", "powerLabel")]
+material = ExtResource("2_2jrfd")
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -178,7 +263,65 @@ rounded = true
 layout_mode = 2
 text = "Additional power: 2137w"
 
+[node name="workout stat" type="Panel" parent="."]
+material = ExtResource("2_2jrfd")
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -113.0
+offset_right = 161.0
+offset_bottom = 113.0
+grow_vertical = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_mf6jh")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="workout stat"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="totalDescent" type="Label" parent="workout stat/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+tooltip_text = "total descent in meters made during whole activity"
+mouse_filter = 1
+theme_type_variation = &"H2Label"
+text = "100"
+horizontal_alignment = 1
+
+[node name="totalAscent" type="Label" parent="workout stat/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+tooltip_text = "total ascent in meters made during whole activity"
+mouse_filter = 1
+theme_type_variation = &"H2Label"
+text = "200"
+horizontal_alignment = 1
+
+[node name="caloriesBurnt" type="Label" parent="workout stat/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+tooltip_text = "kcalories burnt during whole activity"
+mouse_filter = 1
+theme_type_variation = &"H2Label"
+text = "1300󰆘"
+horizontal_alignment = 1
+
+[node name="workoutLength" type="Label" parent="workout stat/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+tooltip_text = "total workout length in minutes"
+mouse_filter = 1
+theme_type_variation = &"H2Label"
+text = "120"
+horizontal_alignment = 1
+
 [node name="climbing ui" type="Panel" parent="."]
+material = ExtResource("2_2jrfd")
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -242,6 +385,7 @@ offset_top = -25.0
 offset_right = 2.0
 offset_bottom = 7.0
 grow_horizontal = 0
+theme_type_variation = &"H3Label"
 theme_override_font_sizes/font_size = 20
 text = "100.9%slope "
 horizontal_alignment = 2
@@ -253,6 +397,7 @@ offset_top = -25.0
 offset_right = 109.0
 tooltip_text = "max height on route:"
 mouse_filter = 0
+theme_type_variation = &"H3Label"
 text = " 10000000m"
 
 [node name="min height" type="Label" parent="climbing ui/climb chart"]
@@ -267,6 +412,7 @@ offset_bottom = 21.0
 grow_vertical = 0
 tooltip_text = "min height on route:"
 mouse_filter = 0
+theme_type_variation = &"H3Label"
 text = " 10000000m"
 
 [node name="distance" type="Label" parent="climbing ui/climb chart"]
@@ -282,7 +428,8 @@ offset_right = -2.0
 offset_bottom = 21.0
 grow_horizontal = 0
 grow_vertical = 0
-tooltip_text = "route length:"
+tooltip_text = "distance done/route length:"
 mouse_filter = 0
-text = "2000km  "
+theme_type_variation = &"H3Label"
+text = "20/2000km  "
 horizontal_alignment = 2

@@ -22,7 +22,7 @@ namespace ForForm.Workout
         public float averageWatts;
         public float caloriesBurnt;
         const float humanMetabolicEfficiency = .24f;
-        const float julesToCalories = 4.184f;
+        const float julesToCalories = 1f / 4184f;
 
         public float totalAscent;
         public float totalDescent;
@@ -65,7 +65,8 @@ namespace ForForm.Workout
             averageHeartRate = totalHeartRate / totalTime_s;
             averageSpeed_kmH = totalSpeed_kmH / totalTime_s;
             averageWatts = totalPower / totalTime_s;
-            caloriesBurnt = averageWatts * totalTime_s * humanMetabolicEfficiency * julesToCalories;
+
+            caloriesBurnt = averageWatts * totalTime_s * julesToCalories / humanMetabolicEfficiency;
         }
 
         public static Workout Load(string name) {

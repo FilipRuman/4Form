@@ -62,11 +62,17 @@ namespace ForForm.Menu
             }
         }
 
-        public void SetupOnGameQuit(Workout.Workout workout) {
-            quitGameButton.Visible = true;
+        private void InitialOnGameQuitWithoutWorkout() {
+            tcpParser.tcp.rustProcess.Kill();
+            GetTree().Quit();
+        }
+
+        public void SetupOnGameQuitWithWorkout(Workout.Workout workout) {
+            quitGameButton.Pressed -= InitialOnGameQuitWithoutWorkout;
             quitGameButton.Pressed += () =>
             {
-                GD.Print("quitGame");
+                GD.Print("quitGame & save workout");
+
                 workout.Save();
                 tcpParser.tcp.rustProcess.Kill();
 
@@ -75,12 +81,13 @@ namespace ForForm.Menu
         }
 
         public override void _Ready() {
+            quitGameButton.Pressed += InitialOnGameQuitWithoutWorkout;
+
             var rng = new RandomNumberGenerator();
             backgroundImage.Texture = backgroundTexturesPool[
                 rng.RandiRange(0, backgroundTexturesPool.Length - 1)
             ];
 
-            quitGameButton.Visible = false;
             Visible = true;
 
             tabBar.TabChanged += (_) =>

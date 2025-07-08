@@ -6,6 +6,7 @@
 
 # 4Form
 ## Community driven, [open source](https://github.com/FilipRuman/4Form/blob/main/LICENSE) bike trainer app.
+### 🦀 [Rust side repo](https://github.com/FilipRuman/4Form-BluetoothHandler)
 # 🧱[Architecture of the project](./ARCHITECTURE.md)
 # 📖[Documentation](./docs/Contents.md)
 # 🤝[Contribution guide](./CONTRIBUTING.md) 

@@ -45,10 +45,10 @@ namespace ForForm.Bike.HUD
             workoutLength.Text = $"{(int)workout.totalTime_s / 60}";
             totalDescent.Text = $"{(int)workout.totalDescent}";
             totalAscent.Text = $"{(int)workout.totalAscent}";
-            caloriesBurnt.Text = $"{(int)workout.caloriesBurnt}󰆘";
+            caloriesBurnt.Text = $"{(int)(workout.caloriesBurnt)}󰆘";
 
             cadence.Text = $" {bikeInput.currentCadence_RPM}";
-            cadenceAvr.Text = $"{workout.averageCadence}";
+            cadenceAvr.Text = $"{((int)workout.averageCadence)}";
 
             speed.Text = $"{(int)bikePhysics.speed_kmH}󰓅";
             speedAvr.Text = $"{(int)workout.averageSpeed_kmH}";
@@ -57,7 +57,7 @@ namespace ForForm.Bike.HUD
             powerAvr.Text = $"{(int)workout.averageWatts}";
 
             heartRate.Text = $"{bikeInput.heartRate}";
-            heartRateAvr.Text = $"{workout.averageHeartRate}";
+            heartRateAvr.Text = $"{((int)workout.averageHeartRate)}";
 
             fps.Text = $"FPS: {Engine.GetFramesPerSecond()}";
             base._Process(delta);

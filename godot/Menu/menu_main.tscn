@@ -235,6 +235,7 @@ visible = false
 [node name="heart rate device type" type="Node" parent="Panel/contents/device connection/HSplitContainer/device types/VBoxContainer2/heart rate tracker " node_paths=PackedStringArray("display")]
 script = ExtResource("7_lqkny")
 display = NodePath("..")
+bluetoothDeviceTypeName = "hr tracker"
 glyphIcon = " "
 
 [node name="other device type 󰤟" parent="Panel/contents/device connection/HSplitContainer/device types/VBoxContainer2" node_paths=PackedStringArray("icon") instance=ExtResource("6_bexj6")]

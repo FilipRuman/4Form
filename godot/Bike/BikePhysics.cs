@@ -12,6 +12,8 @@ namespace ForForm.Bike
     public partial class BikePhysics : PathFollow3D {
         // I put units after _ in camel case so: speed in km/h will be speed_(first word lowercase)km(second word Capitalize)H
         // so you know the unit at firs look and you don't make mistakes with them!
+        public Tcp.TcpParser tcpParser;
+
         [Export]
         public Camera3D camera;
 
@@ -19,7 +21,7 @@ namespace ForForm.Bike
         public BikeInput input;
 
         [Export]
-        public HUD.BikeHUDMain hudMain;
+        public HUD.BikeHudMain hudMain;
 
         [Export]
         public float speed_mS; //m/s
@@ -65,11 +67,26 @@ namespace ForForm.Bike
             return totalForwardForce_N / (userMass_kg + bikeModel.mass_kg); // m/s^2 clamped to remove any weirdness
         }
 
+        const float tpcSlopeSyncFrequency_s = .4f;
+        float tpcSlopeSyncTimer;
+
+        // bike trainers have big delay when setting slope, so If the slope angle is just for 1 frame really high it might result in high slope feeling on bumpy terrain
+        float totalSlope;
+        float AverageSlope => totalSlope / tpcSlopeSyncTimer;
+
         public override void _PhysicsProcess(double delta) {
             // so you don't roll backwards on hills when stopping pedaling
             speed_mS = Mathf.Max(speed_mS + Acceleration_mS2() * (float)delta, .001f);
 
             UpdatePath(delta);
+
+            tpcSlopeSyncTimer += (float)delta;
+            totalSlope += slope_percent * (float)delta;
+            if (tpcSlopeSyncTimer > tpcSlopeSyncFrequency_s) {
+                tcpParser.SendSlopeAngleSetRequest(AverageSlope);
+                tpcSlopeSyncTimer = 0;
+                totalSlope = 0;
+            }
             base._PhysicsProcess(delta);
         }
 

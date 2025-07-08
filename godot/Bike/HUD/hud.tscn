@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=3 uid="uid://pgeuqedr7i1i"]
 
-[ext_resource type="Script" uid="uid://dm56mi273fr4s" path="res://Bike/HUD/BikeHUDMain.cs" id="1_2jrfd"]
+[ext_resource type="Script" uid="uid://dm56mi273fr4s" path="res://Bike/HUD/BikeHudMain.cs" id="1_2jrfd"]
 [ext_resource type="Material" uid="uid://b6am5f5c8uce5" path="res://Bike/HUD/UIBlurMaterial.tres" id="2_2jrfd"]
 [ext_resource type="Theme" uid="uid://regixqqcydb8" path="res://theme.tres" id="2_mf6jh"]
 [ext_resource type="Script" uid="uid://bny4ims1objmv" path="res://Bike/HUD/TestingBikeHUD.cs" id="4_scrhx"]

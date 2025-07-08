@@ -56,17 +56,24 @@ namespace ForForm.Bike.HUD
             var xPercent = main.bikePhysics.Progress / Route.Curve.GetBakedLength();
 
             var yPos = Route.heightMap_m[((int)(Route.heightMap_m.Length * xPercent))];
-            var yPercent = Mathf.InverseLerp(Route.minHeight, Route.maxHeight, yPos);
+            var yPercent = Mathf.InverseLerp(
+                Route.minHeight - height_border_size,
+                Route.maxHeight + height_border_size,
+                yPos
+            );
 
             playerPositionIndicator.Position = new Vector2(xPercent, 1 - yPercent) * Size;
         }
+
+        // Added so the top and bottom of chart doesn't get clipped + smooths out chart of small maps with low elevation changes
+        const float height_border_size = 20;
 
         private void UpdateShader() {
             var material = ((ShaderMaterial)Material);
 
             material.SetShaderParameter("points_count", Route.slopeMap.Length);
-            material.SetShaderParameter("min_height", Route.minHeight);
-            material.SetShaderParameter("max_height", Route.maxHeight);
+            material.SetShaderParameter("min_height", Route.minHeight - height_border_size);
+            material.SetShaderParameter("max_height", Route.maxHeight + height_border_size);
 
             material.SetShaderParameter("slope_map", Route.slopeMap);
             material.SetShaderParameter("height_map", Route.heightMap_m);

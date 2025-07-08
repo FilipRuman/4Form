@@ -8,7 +8,7 @@ namespace ForForm.Bike.HUD
         const int ShaderResolution = 500;
 
         [Export]
-        BikeHUDMain main;
+        BikeHudMain main;
 
         [Export]
         Label minHeight,

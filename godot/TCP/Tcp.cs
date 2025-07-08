@@ -74,8 +74,7 @@ namespace ForForm.Tcp
                 || readDataTask.Status == TaskStatus.RanToCompletion
                 || readDataTask.Status == TaskStatus.Faulted
             ) {
-                readDataTask?.Dispose();
-                readDataTask = ReadDataAsync();
+                ReadDataAsync();
             }
 
             base._Process(delta);
@@ -84,6 +83,7 @@ namespace ForForm.Tcp
         private async Task ReadDataAsync() {
             byte[] buffer = new byte[1024];
             int bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length);
+
             string data_raw = Encoding.UTF8.GetString(buffer, 0, bytesRead);
             var splittedData = data_raw.Split('\n');
             foreach (string data in splittedData) {

@@ -24,10 +24,12 @@ namespace ForForm.Map
 
             menuMain.backgroundImage.Visible = false;
             menuMain.SetupOnGameQuit(bikePhysics.hudMain.workout);
+
             bikePhysics.userMass_kg = userConfig.mass_kg;
             bikePhysics.bikeModel = bikeModel;
             bikePhysics.map = map;
             bikePhysics.route = route;
+            bikePhysics.tcpParser = tcpParser;
 
             tcpParser.bikePhysics = bikePhysics;
             terrain3D.Call("set_camera", bikePhysics.camera);

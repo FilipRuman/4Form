@@ -78,6 +78,10 @@ namespace ForForm.Tcp
             }
         }
 
+        public void SendSlopeAngleSetRequest(float slope_percent) {
+            tcp.SendDataAsync($"s{(int)(slope_percent * 100)}");
+        }
+
         public void SendPeripheralConnectionRequest(uint index, string deviceTypeName) {
             tcp.SendDataAsync($"i|{deviceTypeName}|[{index}]");
         }

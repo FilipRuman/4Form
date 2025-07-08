@@ -287,6 +287,8 @@ alignment = 1
 [node name="totalDescent" type="Label" parent="workout stat/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 6
+tooltip_text = "total descent in meters made during whole activity"
+mouse_filter = 1
 theme_type_variation = &"H2Label"
 text = "100"
 horizontal_alignment = 1
@@ -294,6 +296,8 @@ horizontal_alignment = 1
 [node name="totalAscent" type="Label" parent="workout stat/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 6
+tooltip_text = "total ascent in meters made during whole activity"
+mouse_filter = 1
 theme_type_variation = &"H2Label"
 text = "200"
 horizontal_alignment = 1
@@ -301,6 +305,8 @@ horizontal_alignment = 1
 [node name="caloriesBurnt" type="Label" parent="workout stat/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 6
+tooltip_text = "kcalories burnt during whole activity"
+mouse_filter = 1
 theme_type_variation = &"H2Label"
 text = "1300󰆘"
 horizontal_alignment = 1
@@ -308,6 +314,8 @@ horizontal_alignment = 1
 [node name="workoutLength" type="Label" parent="workout stat/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 6
+tooltip_text = "total workout length in minutes"
+mouse_filter = 1
 theme_type_variation = &"H2Label"
 text = "120"
 horizontal_alignment = 1

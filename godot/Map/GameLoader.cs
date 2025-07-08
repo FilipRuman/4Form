@@ -23,7 +23,7 @@ namespace ForForm.Map
             var bikePhysics = (Bike.BikePhysics)playerPrefab.Instantiate();
 
             menuMain.backgroundImage.Visible = false;
-            menuMain.SetupOnGameQuit(bikePhysics.hudMain.workout);
+            menuMain.SetupOnGameQuitWithWorkout(bikePhysics.hudMain.workout);
 
             bikePhysics.userMass_kg = userConfig.mass_kg;
             bikePhysics.bikeModel = bikeModel;

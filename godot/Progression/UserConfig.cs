@@ -1,14 +1,16 @@
-namespace ForForm.Menu
+namespace ForForm.Progression
 {
     using System.Collections.Generic;
     using Godot;
 
-    public  class UserConfig  {
+    public class UserConfig {
         [Export]
         public string name = "";
 
+
         [Export]
         public float mass_kg;
+
         public const string Path = "user://UserConfig.json";
 
         public void Save() {
@@ -41,4 +43,3 @@ namespace ForForm.Menu
         }
     }
 }
-

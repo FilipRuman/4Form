@@ -27,7 +27,7 @@ namespace ForForm.Bike
         public float speed_mS; //m/s
         public float speed_kmH => speed_mS * 3.6f; // km/h
         public BikeModel bikeModel;
-        public float userMass_kg;
+        public float userMass_kg, userDrag;
 
         [Export]
         float gravity_mS2; //m/s^2

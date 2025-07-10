@@ -1,0 +1,68 @@
+[gd_scene load_steps=3 format=3 uid="uid://8egdp6ber86d"]
+
+[ext_resource type="Texture2D" uid="uid://di4h20cjqc6ly" path="res://assets/gravel bike model/icon.png" id="1_1y8fw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5lnfq"]
+bg_color = Color(0.678431, 0.0901961, 0.0901961, 1)
+border_color = Color(0.985192, 0.402184, 0.351792, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="Wearable selection" type="Panel"]
+custom_minimum_size = Vector2(259.745, 0)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = -2.745
+offset_bottom = 169.0
+grow_horizontal = 2
+texture = ExtResource("1_1y8fw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 0
+offset_top = 173.0
+offset_right = 258.0
+offset_bottom = 202.0
+tooltip_text = "wear(lower better :D)"
+theme_override_styles/fill = SubResource("StyleBoxFlat_5lnfq")
+value = 67.15
+
+[node name="FlowContainer" type="FlowContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 207.0
+offset_right = 0.255005
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="durability" type="Label" parent="FlowContainer"]
+custom_minimum_size = Vector2(112.8, 0)
+layout_mode = 2
+theme_type_variation = &"H3Label"
+text = "10 "
+horizontal_alignment = 1
+
+[node name="weight" type="Label" parent="FlowContainer"]
+custom_minimum_size = Vector2(112.8, 0)
+layout_mode = 2
+theme_type_variation = &"H3Label"
+text = "20 󰖡 "
+horizontal_alignment = 1
+
+[node name="drag" type="Label" parent="FlowContainer"]
+custom_minimum_size = Vector2(112.8, 0)
+layout_mode = 2
+theme_type_variation = &"H3Label"
+text = "10  "
+horizontal_alignment = 1

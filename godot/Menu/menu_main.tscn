@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://dnsjumx1dj3o7"]
+[gd_scene load_steps=37 format=3 uid="uid://dnsjumx1dj3o7"]
 
 [ext_resource type="Script" uid="uid://basdgtr0ivql5" path="res://Menu/MenuMain.cs" id="1_pqpoy"]
 [ext_resource type="Texture2D" uid="uid://kf1ko1dh8rql" path="res://menu background images/demo climb fog.png" id="2_nxyy8"]
@@ -17,6 +17,7 @@
 [ext_resource type="Script" uid="uid://cfnscp01cdp3c" path="res://Menu/Animations/UIAnimationPlayer.cs" id="10_xmmyl"]
 [ext_resource type="Script" uid="uid://cn4u4uximsgg" path="res://Menu/Animations/SwipeAnimation.cs" id="11_nxyy8"]
 [ext_resource type="FontFile" uid="uid://befjt7bkyinos" path="res://assets/Meslo/MesloLGLNerdFont-Bold.ttf" id="12_xmmyl"]
+[ext_resource type="PackedScene" uid="uid://8egdp6ber86d" path="res://Menu/wearable_selection.tscn" id="16_y6jaq"]
 
 [sub_resource type="Curve" id="Curve_rpha4"]
 _limits = [0.0, 1.0, 0.0, 0.460746]
@@ -165,6 +166,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="device connection" type="Control" parent="Panel/contents" node_paths=PackedStringArray("animationPlayer")]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -275,7 +277,6 @@ reverseAnimation = SubResource("Resource_xmmyl")
 target = NodePath("..")
 
 [node name="UserConfig" type="Control" parent="Panel/contents" node_paths=PackedStringArray("animationPlayer")]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -373,6 +374,106 @@ script = ExtResource("10_xmmyl")
 animation = SubResource("Resource_u54ij")
 reverseAnimation = SubResource("Resource_xmmyl")
 target = NodePath("..")
+
+[node name="Label" type="Label" parent="Panel/contents/UserConfig"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 25.0
+grow_horizontal = 0
+theme_type_variation = &"H1Label"
+theme_override_colors/font_color = Color(1, 0.623529, 0.109804, 1)
+text = "100  "
+horizontal_alignment = 2
+
+[node name="cloths selection" type="Panel" parent="Panel/contents/UserConfig"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"borderPanel"
+
+[node name="VSplitContainer" type="VSplitContainer" parent="Panel/contents/UserConfig/cloths selection"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 13
+split_offset = 285
+drag_area_highlight_in_editor = true
+
+[node name="Panel" type="Panel" parent="Panel/contents/UserConfig/cloths selection/VSplitContainer"]
+layout_mode = 2
+theme_type_variation = &"lightborderPanel"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Panel/contents/UserConfig/cloths selection/VSplitContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Wearable selection" parent="Panel/contents/UserConfig/cloths selection/VSplitContainer/Panel/HBoxContainer2" instance=ExtResource("16_y6jaq")]
+layout_mode = 2
+
+[node name="Buy new" type="Panel" parent="Panel/contents/UserConfig/cloths selection/VSplitContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/contents/UserConfig/cloths selection/VSplitContainer/Buy new"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Wearable selection" parent="Panel/contents/UserConfig/cloths selection/VSplitContainer/Buy new/HBoxContainer" instance=ExtResource("16_y6jaq")]
+layout_mode = 2
+
+[node name="Buy new title" type="Label" parent="Panel/contents/UserConfig/cloths selection/VSplitContainer/Buy new"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -47.0
+offset_top = -17.0
+offset_right = 46.0
+offset_bottom = 18.0
+grow_horizontal = 2
+size_flags_vertical = 0
+theme_type_variation = &"H3Label"
+text = "Buy new:"
+
+[node name="Title" type="Label" parent="Panel/contents/UserConfig/cloths selection"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -47.0
+offset_top = -36.0
+offset_right = 46.0
+offset_bottom = -1.0
+grow_horizontal = 2
+theme_type_variation = &"H3Label"
+text = "Cloths:"
 
 [node name="Game" type="Control" parent="Panel/contents" node_paths=PackedStringArray("animationPlayer")]
 visible = false

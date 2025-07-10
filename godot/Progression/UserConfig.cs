@@ -1,20 +1,56 @@
 namespace ForForm.Progression
 {
+    using System;
     using System.Collections.Generic;
     using Godot;
 
     public class UserConfig {
-        [Export]
         public string name = "";
 
+        public uint level,
+            money;
+        public float points;
 
-        [Export]
-        public float mass_kg;
+        public Godot.Collections.Dictionary<Wearable.Type, Wearable> outfit = new();
+
+        public float userMass_kg;
 
         public const string Path = "user://UserConfig.json";
 
+        public void GetTotalStats(
+            Curve statsChangeWithWearCurve,
+            out float totalMass_kg,
+            out float totalAirDrag
+        ) {
+            totalMass_kg = 0;
+            totalAirDrag = 0;
+            foreach (Wearable.Type wearableType in Enum.GetValues(typeof(Wearable.Type))) {
+                var wearable = outfit[wearableType];
+                if (wearable == null) {
+                    GD.PrintErr(
+                        $"there is no wearable of type{wearableType} in the outfit dictionary!"
+                    );
+                }
+                var statsModifier = statsChangeWithWearCurve.SampleBaked(wearable.wear);
+                totalAirDrag += wearable.airDrag * statsModifier;
+                totalMass_kg += wearable.mass_kg * statsModifier;
+            }
+
+            totalMass_kg += userMass_kg;
+        }
+
         public void Save() {
-            List<string> data = [name, mass_kg.ToString()];
+            Json.Stringify(outfit);
+
+            List<string> data =
+            [
+                name,
+                userMass_kg.ToString(),
+                level.ToString(),
+                points.ToString(),
+                money.ToString(),
+                Json.Stringify(outfit),
+            ];
             var text = Json.Stringify(data.ToArray(), "\t");
 
             var file = FileAccess.Open(Path, FileAccess.ModeFlags.Write);
@@ -36,10 +72,21 @@ namespace ForForm.Progression
                 userConfig.Save();
                 return userConfig;
             }
+            userConfig = new UserConfig() {
+                name = ((string)data[0]),
+                userMass_kg = ((float)data[1]),
 
-            userConfig.name = ((string)data[0]);
-            userConfig.mass_kg = ((float)data[1]);
+                level = ((uint)data[2]),
+                points = ((float)data[3]),
+                money = ((uint)data[4]),
+
+                outfit = (Godot.Collections.Dictionary<Wearable.Type, Wearable>)
+                    Json.ParseString((string)data[5]),
+            };
+
             return userConfig;
         }
+
+        public class HashMap { }
     }
 }

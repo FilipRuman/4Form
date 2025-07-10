@@ -9,6 +9,7 @@ namespace ForForm.Menu
         [Export]
         internal Map.WholeMapExport wholeMapExport;
 
+        [Export] internal Progression.ProgressionManager progressionManager;
         [Export]
         internal TcpParser tcpParser;
 

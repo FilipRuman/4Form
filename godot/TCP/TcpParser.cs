@@ -4,6 +4,7 @@ namespace ForForm.Tcp
     using Godot;
 
     public partial class TcpParser : Node {
+
         [Export]
         public Tcp tcp;
 

@@ -15,7 +15,7 @@ namespace ForForm.Map
 
         public void StartGame(
             Bike.BikeModel bikeModel,
-            Menu.UserConfig userConfig,
+            Progression.UserConfig userConfig,
             Route.Route route,
             Map map,
             Menu.MenuMain menuMain
@@ -25,7 +25,8 @@ namespace ForForm.Map
             menuMain.backgroundImage.Visible = false;
             menuMain.SetupOnGameQuitWithWorkout(bikePhysics.hudMain.workout);
 
-            bikePhysics.userMass_kg = userConfig.mass_kg;
+            bikePhysics.userMass_kg = userConfig.userMass_kg;
+            bikePhysics.userDrag = userConfig.TotalDrag();
             bikePhysics.bikeModel = bikeModel;
             bikePhysics.map = map;
             bikePhysics.route = route;

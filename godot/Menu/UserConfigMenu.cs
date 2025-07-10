@@ -9,30 +9,42 @@ namespace ForForm.Menu
 
         [Export]
         Button icon;
-        public UserConfig userConfig;
+
+        [Export]
+        MenuMain menuMain;
+        private Progression.UserConfig UserConfig => menuMain.progressionManager.userConfig;
+
+        [Export]
+        Slider pointsProgress;
 
         public override void _Ready() {
-            userConfig = UserConfig.Load();
+            SetupPointsProgressSlider();
             name.SetupStr(
-                userConfig.name,
+                UserConfig.name,
                 (text) =>
                 {
-                    userConfig.name = text;
-                    userConfig.Save();
+                    UserConfig.name = text;
+                    UserConfig.Save();
                 },
                 editable: true
             );
             mass.Setup(
-                userConfig.mass_kg,
+                UserConfig.userMass_kg,
                 (num) =>
                 {
-                    userConfig.mass_kg = num;
-                    userConfig.Save();
+                    UserConfig.userMass_kg = num;
+                    UserConfig.Save();
                 },
                 editable: true
             );
 
             base._Ready();
+
+            void SetupPointsProgressSlider() {
+                pointsProgress.MinValue = 0;
+                pointsProgress.MaxValue = 100;
+                pointsProgress.Value = menuMain.progressionManager.PointsPercentForNextLevel;
+            }
         }
     }
 }
